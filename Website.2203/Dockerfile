@@ -34,5 +34,5 @@ COPY --from=publish /app/publish/wwwroot .
 COPY Website.2203/nginx.conf /tmp/nginx.conf
 #RUN iconv -f ISO-8859-1 -t UTF-8 /tmp/nginx.conf -o /etc/nginx/nginx.conf
 #RUN iconv -f ISO-8859-1 -t UTF-8//TRANSLIT /tmp/nginx.conf -o /etc/nginx/nginx.conf
-RUN iconv -f ISO-8859-1 -t UTF-8 /tmp/nginx.conf > /etc/nginx/nginx.conf
+#RUN iconv -f ISO-8859-1 -t UTF-8 /tmp/nginx.conf > /etc/nginx/nginx.conf
 RUN rm /tmp/nginx.conf
