@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  2022-03-website:
+    image: ${DOCKER_REGISTRY-}website2203
+    build:
+      context: ../
+      dockerfile: Website.2203/Website.2203/Dockerfile
