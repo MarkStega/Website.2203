@@ -10,7 +10,6 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
 RUN apt-get update
 RUN apt-get install --no-install-recommends --yes python3
 RUN dotnet --info
-RUN dotnet workload install microsoft-net-sdk-blazorwebassembly-aot --skip-manifest-update
 RUN dotnet workload install wasm-tools
 
 WORKDIR /src
@@ -29,30 +28,11 @@ FROM build AS publish
 WORKDIR "/src"
 RUN dotnet publish "Website.2203/Website.2203.csproj" -c Release -o /app/publish
 
-#FROM base AS final
-#WORKDIR /app
-#COPY --from=publish /app/publish .
-#ENTRYPOINT ["dotnet", "Website.2203.dll"]
-#
 FROM nginx:alpine AS final
 WORKDIR /usr/share/nginx/html
 COPY --from=publish /app/publish/wwwroot .
-COPY Website.2203/nginx.conf /etc/nginx/nginx.conf
-
-
-
-
-#FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-#WORKDIR /src
-#COPY Website.2203/Website.2203.csproj .
-#RUN dotnet restore Website.2203.csproj
-#COPY . .
-#RUN dotnet build Website.2203.csproj -c Release -o /app/build
-#
-#FROM build AS publish
-#RUN dotnet publish Website.2203.csproj -c Release -o /app/publish
-#
-##FROM nginx:alpine AS final
-#WORKDIR /usr/share/nginx/html
-#COPY --from=publish /app/publish/wwwroot .
-#COPY Website.2203/nginx.conf /etc/nginx/nginx.conf
+COPY Website.2203/nginx.conf /tmp/nginx.conf
+#RUN iconv -f ISO-8859-1 -t UTF-8 /tmp/nginx.conf -o /etc/nginx/nginx.conf
+#RUN iconv -f ISO-8859-1 -t UTF-8//TRANSLIT /tmp/nginx.conf -o /etc/nginx/nginx.conf
+RUN iconv -f ISO-8859-1 -t UTF-8 /tmp/nginx.conf > /etc/nginx/nginx.conf
+RUN rm /tmp/nginx.conf
