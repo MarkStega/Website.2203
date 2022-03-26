@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -9,6 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Material.Blazor" Version="2.3.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.3" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.0" />
@@ -21,16 +22,16 @@
 	<ItemGroup>
 		<GeneralFiles Include="$(ProjectDir)WebAssets\General\*.*" />
 
-		<InputStaticAssetsStyles Include="**\*.scss;" Exclude="bin\**\*;node_modules\**\*;obj\**\*;wwwroot\**\*.*" />
+		<InputStaticAssetsStyles Include="**\*.scss;" Exclude="bin\**\*;node_modules\**\*;obj\**\*" />
 		<OutputStaticAssetsStyles Include="wwwroot\css\dioptra-dark.css;wwwroot\css\dioptra-dark.min.css;wwwroot\css\dioptra-light.min.css;wwwroot\css\dioptra-light.css" />
 
-		<InputStaticAssetsScripts Include="**\*.js;**\*.ts" Exclude="bin\**\*;node_modules\**\*;obj\**\*;wwwroot\**\*.*" />
+		<InputStaticAssetsScripts Include="**\*.js;**\*.ts" Exclude="bin\**\*;node_modules\**\*;obj\**\*" />
 		<OutputStaticAssetsScripts Include="wwwroot\js\dioptra.js;wwwroot\js\dioptra.min.js" />
 
-		<InputStaticAssetsImages Include="**\*.ico" Exclude="bin\**\*;node_modules\**\*;obj\**\*;wwwroot\**\*.*" />
+		<InputStaticAssetsImages Include="**\*.ico" Exclude="bin\**\*;node_modules\**\*;obj\**\*" />
 		<OutputStaticAssetsImages Include="wwwroot\images\favicon.ico" />
 
-		<InputAllStaticAssets Include="**\*.scss;WebAssets\**\*.js;**\*.ts" Exclude="bin\**\*;node_modules\**\*;obj\**\*;wwwroot\**\*.*" />
+		<InputAllStaticAssets Include="**\*.scss;WebAssets\**\*.js;**\*.ts" Exclude="bin\**\*;node_modules\**\*;obj\**\*" />
 
 		<OutputAllStaticAssets Include="wwwroot\css\dioptra-dark.css;wwwroot\css\dioptra-dark.min.css;wwwroot\css\dioptra-light.min.css;wwwroot\css\dioptra-light.css;wwwroot\js\dioptra.min.js;wwwroot\unbundled.min.js;wwwroot\js\dioptra.js\wwwroot\images\favicon.ico" />
 	</ItemGroup>
@@ -39,15 +40,11 @@
 		<None Include="tsconfig.json" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="wwwroot\css\" />
-	</ItemGroup>
-
 	<Target Name="PreBuildAssetCopy" Inputs="@(InputStaticAssetsImages)" Outputs="@(OutputStaticAssetsImages)" BeforeTargets="PreBuildEvent">
 
 		<Message Text="***** Pre Build Asset Copy" />
 
-		<RemoveDir Directories="$(ProjectDir)wwwroot\**" />
+		<RemoveDir Directories="$(ProjectDir)wwwroot" />
 
 		<Copy SourceFiles="@(GeneralFiles)" DestinationFolder="$(ProjectDir)wwwroot" />
 

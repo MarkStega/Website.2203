@@ -1,7 +1,7 @@
 {
-  "name": "vectis.appcore",
+  "name": "dioptra",
   "version": "0.0.0",
-  "description": "Node build steps for Vectis.AppCore",
+  "description": "Node build steps for the Dioptra website",
   "main": "server.js",
   "scripts": {
     "build-dark": "sass --update --no-color --unicode --style=expanded --load-path=node_modules --no-source-map WebAssets/Styles/DarkTheme.scss wwwroot/css/dioptra-dark.css",
