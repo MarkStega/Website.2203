@@ -1,0 +1,39 @@
+{
+  "name": "vectis.appcore",
+  "version": "0.0.0",
+  "description": "Node build steps for Vectis.AppCore",
+  "main": "server.js",
+  "scripts": {
+    "build-dark": "sass --update --no-color --unicode --style=expanded --load-path=node_modules --no-source-map WebAssets/Styles/DarkTheme.scss wwwroot/css/dioptra-dark.css",
+    "build-min-dark": "sass --update --no-color --unicode --style=compressed --load-path=node_modules --no-source-map WebAssets/Styles/DarkTheme.scss wwwroot/css/dioptra-dark.min.css",
+    "build-light": "sass --update --no-color --unicode --style=expanded --load-path=node_modules --no-source-map WebAssets/Styles/LightTheme.scss wwwroot/css/dioptra-light.css",
+    "build-min-light": "sass --update --no-color --unicode --style=compressed --load-path=node_modules --no-source-map WebAssets/Styles/LightTheme.scss wwwroot/css/dioptra-light.min.css",
+    "build-js": "terser wwwroot/js/temp.js --beautify --output wwwroot/js/dioptra.js",
+    "build-min-js": "terser wwwroot/js/temp.js --compress --mangle --ecma 2016 --output wwwroot/js/dioptra.min.js",
+    "build-scripts": "webpack --config webpack.config.js"
+  },
+  "keywords": [],
+  "author": "Dioptra",
+  "license": "SEE LICENSE IN ../LICENSE.md",
+  "devDependencies": {
+    "material-components-web": "12.0.0",
+    "@babel/cli": "7.14.8",
+    "@babel/core": "7.15.0",
+    "@babel/plugin-proposal-class-properties": "7.14.5",
+    "@babel/plugin-proposal-object-rest-spread": "7.14.7",
+    "@babel/plugin-syntax-dynamic-import": "7.8.3",
+    "@babel/plugin-transform-runtime": "7.15.0",
+    "@babel/preset-env": "7.15.0",
+    "@babel/preset-typescript": "7.15.0",
+    "babel-loader": "8.2.2",
+    "fork-ts-checker-webpack-plugin": "6.3.2",
+    "sass": "1.39.2",
+    "regexp": "1.0.0",
+    "source-map-loader": "3.0.0",
+    "terser": "5.7.2",
+    "ts-loader": "9.2.5",
+    "typescript": "4.4.1-rc",
+    "webpack": "5.51.1",
+    "webpack-cli": "4.8.0"
+  }
+}

@@ -1,21 +1,121 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
-	  <RunAOTCompilation>true</RunAOTCompilation>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+		<RunAOTCompilation>true</RunAOTCompilation>
+	</PropertyGroup>
 
-  <ItemGroup>
-	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.3" />
-	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.3" PrivateAssets="all" />
-	  <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.3" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
-  </ItemGroup>
+	<ItemGroup>
+		<ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+	</ItemGroup>
 
+	<ItemGroup>
+		<GeneralFiles Include="$(ProjectDir)WebAssets\General\*.*" />
+
+		<InputStaticAssetsStyles Include="**\*.scss;" Exclude="bin\**\*;node_modules\**\*;obj\**\*;wwwroot\**\*.*" />
+		<OutputStaticAssetsStyles Include="wwwroot\css\dioptra-dark.css;wwwroot\css\dioptra-dark.min.css;wwwroot\css\dioptra-light.min.css;wwwroot\css\dioptra-light.css" />
+
+		<InputStaticAssetsScripts Include="**\*.js;**\*.ts" Exclude="bin\**\*;node_modules\**\*;obj\**\*;wwwroot\**\*.*" />
+		<OutputStaticAssetsScripts Include="wwwroot\js\dioptra.js;wwwroot\js\dioptra.min.js" />
+
+		<InputStaticAssetsImages Include="**\*.ico" Exclude="bin\**\*;node_modules\**\*;obj\**\*;wwwroot\**\*.*" />
+		<OutputStaticAssetsImages Include="wwwroot\images\favicon.ico" />
+
+		<InputAllStaticAssets Include="**\*.scss;WebAssets\**\*.js;**\*.ts" Exclude="bin\**\*;node_modules\**\*;obj\**\*;wwwroot\**\*.*" />
+
+		<OutputAllStaticAssets Include="wwwroot\css\dioptra-dark.css;wwwroot\css\dioptra-dark.min.css;wwwroot\css\dioptra-light.min.css;wwwroot\css\dioptra-light.css;wwwroot\js\dioptra.min.js;wwwroot\unbundled.min.js;wwwroot\js\dioptra.js\wwwroot\images\favicon.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="tsconfig.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="wwwroot\css\" />
+	</ItemGroup>
+
+	<Target Name="PreBuildAssetCopy" Inputs="@(InputStaticAssetsImages)" Outputs="@(OutputStaticAssetsImages)" BeforeTargets="PreBuildEvent">
+
+		<Message Text="***** Pre Build Asset Copy" />
+
+		<RemoveDir Directories="$(ProjectDir)wwwroot\**" />
+
+		<Copy SourceFiles="@(GeneralFiles)" DestinationFolder="$(ProjectDir)wwwroot" />
+
+	</Target>
+
+	<Target Name="CheckIfNpmExists" Inputs="@(InputStaticAssetsScripts);@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsScripts);@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent">
+
+		<Message Text="***** npm install" />
+		<Exec Command="npm install" ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low" LogStandardErrorAsError="false" IgnoreExitCode="true">
+			<Output TaskParameter="ExitCode" PropertyName="NpmReturnCode" />
+		</Exec>
+		<Message Text="***** 'npm install' return code was $(NpmReturnCode) (0 indicates npm is available)" />
+
+	</Target>
+
+	<Target Name="ErrorOutput" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' != '0' ">
+
+		<Message Text="**********************************************************************************" />
+		<Message Text="**********************************************************************************" />
+		<Message Text="**********************************************************************************" />
+		<Message Text=" CSS and JS not built due to the lack of a proper development environment" />
+		<Message Text=" See https://material-blazor.com/docs/articles/DevelopmentEnvironment.html" />
+		<Message Text="**********************************************************************************" />
+		<Message Text="**********************************************************************************" />
+		<Message Text="**********************************************************************************" />
+
+	</Target>
+
+	<Target Name="BuildScripts" Inputs="@(InputStaticAssetsScripts)" Outputs="@(OutputStaticAssetsScripts)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">
+		<Message Importance="high" Text="***** MakeDir wwwroot (Scripts)" />
+		<MakeDir Directories="wwwroot" />
+
+		<Message Importance="high" Text="***** npm install" />
+		<Exec Command="npm install" />
+
+		<Message Importance="high" Text="***** npm run build-scripts" />
+		<Exec Command="npm run build-scripts" />
+
+		<Message Importance="high" Text="***** npm run build-js" />
+		<Exec Command="npm run build-js" />
+
+		<Message Importance="high" Text="***** npm run build-min-js" />
+		<Exec Command="npm run build-min-js" />
+
+		<Message Importance="high" Text="***** delete *temp.js" />
+		<ItemGroup>
+			<FilesToDelete Include="wwwroot/js/*temp.js" />
+		</ItemGroup>
+		<Delete Files="@(FilesToDelete)" />
+	</Target>
+
+	<Target Name="BuildStyles" Inputs="@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent" AfterTargets="BuildScripts" Condition=" '$(NpmReturnCode)' == '0' ">
+		<Message Importance="high" Text="***** mkdir wwwroot (Styles)" />
+		<MakeDir Directories="wwwroot" />
+
+		<Message Importance="high" Text="***** npm install" />
+		<Exec Command="npm install" />
+
+		<Message Importance="high" Text="***** npm run build-dark" />
+		<Exec Command="npm run build-dark" />
+
+		<Message Importance="high" Text="***** npm run build-min-dark" />
+		<Exec Command="npm run build-min-dark" />
+
+		<Message Importance="high" Text="***** npm run build-light" />
+		<Exec Command="npm run build-light" />
+
+		<Message Importance="high" Text="***** npm run build-min-light" />
+		<Exec Command="npm run build-min-light" />
+	</Target>
 </Project>

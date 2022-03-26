@@ -1,0 +1,95 @@
+﻿// stylelint-disable scss/dollar-variable-pattern
+
+@use "sass:color";
+
+@use "@material/theme" as theme with ( 
+    $primary: #1976d2, 
+    $secondary: #ffa000,
+    $background: #f8f8f8, 
+    $surface: white,
+);
+
+@use "Main";
+@use "../../Components/ActionCard";
+@use "@material/top-app-bar";
+@use "@material/elevation/mixins" as elevation-mixins;
+
+:root {
+    --dv-background-highlight: var(--mb-color-yellow-100);
+    --dv-traffic-green: var(--mb-color-green-500);
+    --dv-traffic-green-amber: var(--mb-color-lime-500);
+    --dv-traffic-amber: var(--mb-color-amber-500);
+    --dv-traffic-amber-red: var(--mb-color-orange-500);
+    --dv-traffic-red: var(--mb-color-red-500);
+    --dv-traffic-grey: var(--mb-color-grey-500);
+    --dv-traffic-unobtrusive-green: rgba(var(--mb-color-green-200-rgb), 1);
+    --dv-traffic-unobtrusive-green-amber: rgba(var(--mb-color-lime-200-rgb), 1);
+    --dv-traffic-unobtrusive-amber: rgba(var(--mb-color-amber-200-rgb), 1);
+    --dv-traffic-unobtrusive-amber-red: rgba(var(--mb-color-orange-200-rgb), 1);
+    --dv-traffic-unobtrusive-red: rgba(var(--mb-color-red-200-rgb), 1);
+    --dv-traffic-unobtrusive-grey: rgba(var(--mb-color-grey-200-rgb), 1);
+    --dv-on-traffic-green: white;
+    --dv-on-traffic-green-amber: white;
+    --dv-on-traffic-amber: white;
+    --dv-on-traffic-amber-red: white;
+    --dv-on-traffic-red: white;
+    --dv-on-traffic-grey: white;
+    --dv-deleted-color: rgba(var(--mb-color-red-700-rgb), 0.4);
+    --dv-loading-background: var(--mb-color-blue-grey-700);
+    --dv-search-highlight: var(--mb-color-yellow-300);
+    --dv-action-icon-red: var(--mb-color-red-500);
+    --dv-action-icon-on-red: var(--mb-color-on-red-500);
+    --dv-action-icon-pink: var(--mb-color-pink-500);
+    --dv-action-icon-on-pink: var(--mb-color-on-pink-500);
+    --dv-action-icon-purple: var(--mb-color-purple-500);
+    --dv-action-icon-on-purple: var(--mb-color-on-purple-500);
+    --dv-action-icon-deep-purple: var(--mb-color-deep-purple-500);
+    --dv-action-icon-on-deep-purple: var(--mb-color-on-deep-purple-500);
+    --dv-action-icon-indigo: var(--mb-color-indigo-500);
+    --dv-action-icon-on-indigo: var(--mb-color-on-indigo-500);
+    --dv-action-icon-blue: var(--mb-color-blue-500);
+    --dv-action-icon-on-blue: var(--mb-color-on-blue-500);
+    --dv-action-icon-light-blue: var(--mb-color-light-blue-500);
+    --dv-action-icon-on-light-blue: var(--mb-color-on-light-blue-500);
+    --dv-action-icon-cyan: var(--mb-color-cyan-500);
+    --dv-action-icon-on-cyan: var(--mb-color-on-cyan-500);
+    --dv-action-icon-teal: var(--mb-color-teal-500);
+    --dv-action-icon-on-teal: var(--mb-color-on-teal-500);
+    --dv-action-icon-green: var(--mb-color-green-500);
+    --dv-action-icon-on-green: var(--mb-color-on-green-500);
+    --dv-action-icon-light-green: var(--mb-color-light-green-500);
+    --dv-action-icon-on-light-green: var(--mb-color-on-light-green-500);
+    --dv-action-icon-lime: var(--mb-color-lime-500);
+    --dv-action-icon-on-lime: var(--mb-color-on-lime-500);
+    --dv-action-icon-yellow: var(--mb-color-yellow-500);
+    --dv-action-icon-on-yellow: var(--mb-color-on-yellow-500);
+    --dv-action-icon-amber: var(--mb-color-amber-500);
+    --dv-action-icon-on-amber: var(--mb-color-on-amber-500);
+    --dv-action-icon-orange: var(--mb-color-orange-500);
+    --dv-action-icon-on-orange: var(--mb-color-on-orange-500);
+    --dv-action-icon-deep-orange: var(--mb-color-deep-orange-500);
+    --dv-action-icon-on-deep-orange: var(--mb-color-on-deep-orange-500);
+    --dv-action-icon-brown: var(--mb-color-brown-500);
+    --dv-action-icon-on-brown: var(--mb-color-on-brown-500);
+    --dv-action-icon-grey: var(--mb-color-grey-500);
+    --dv-action-icon-on-grey: var(--mb-color-on-grey-500);
+    --dv-action-icon-blue-grey: var(--mb-color-blue-grey-500);
+    --dv-action-icon-on-blue-grey: var(--mb-color-on-blue-grey-500);
+    --dv-action-card-select-color: var(--mb-color-grey-700);
+    --dv-version-color-selected: var(--mb-color-red-500);
+    --dv-blade-border-color: rgba(0, 0, 0, 0.12);
+    --dv-version-graph-edge-color: var(--mb-color-grey-400);
+    --dv-version-graph-edge-color-reduced: var(--mb-color-grey-200);
+    --dv-version-graph-edge-color-clicked: var(--mdc-theme-primary);
+    --dv-version-graph-vertex-color-default: var(--mdc-theme-primary);
+    --dv-project-gantt-link-color: var(--mb-color-grey-400);
+    --dv-project-gantt-link-color-reduced: var(--mb-color-grey-200);
+    --dv-project-gantt-link-color-clicked: var(--mdc-theme-primary);
+    --dv-project-gantt-bar-color-default: var(--mdc-theme-secondary);
+}
+
+.mdc-top-app-bar {
+    @include top-app-bar.fill-color(#1565c0);
+    @include top-app-bar.ink-color(white);
+    @include elevation-mixins.elevation(4);
+}
