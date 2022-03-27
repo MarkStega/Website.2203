@@ -44,9 +44,9 @@
 
 		<Message Text="***** Pre Build Asset Copy" />
 
-		<RemoveDir Directories="$(ProjectDir)wwwroot" />
+		<RemoveDir Directories="$(ProjectDir)wwwroot/css;$(ProjectDir)wwwroot/js" />
 
-		<Copy SourceFiles="@(GeneralFiles)" DestinationFolder="$(ProjectDir)wwwroot" />
+		<!--<Copy SourceFiles="@(GeneralFiles)" DestinationFolder="$(ProjectDir)wwwroot" />-->
 
 	</Target>
 
