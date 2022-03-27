@@ -26,18 +26,6 @@
 		<OutputStaticAssetsStyles Include="wwwroot\css\dioptra-dark.css;wwwroot\css\dioptra-dark.min.css;wwwroot\css\dioptra-light.min.css;wwwroot\css\dioptra-light.css" />
 
 		<InputStaticAssetsScripts Include="**\*.ts" Exclude="bin\**\*;node_modules\**\*;obj\**\*" />
-
-		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\2.3.0\contentFiles\any\net6.0\wwwroot\material-components-web.css" />
-
-		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\2.3.0\contentFiles\any\net6.0\wwwroot\material-components-web.min.css" />
-
-		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\2.3.0\contentFiles\any\net6.0\wwwroot\material.blazor.css" />
-
-		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\2.3.0\contentFiles\any\net6.0\wwwroot\material.blazor.js" />
-
-		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\2.3.0\contentFiles\any\net6.0\wwwroot\material.blazor.min.css" />
-
-		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\2.3.0\contentFiles\any\net6.0\wwwroot\material.blazor.min.js" />
 		<OutputStaticAssetsScripts Include="wwwroot\js\dioptra.js;wwwroot\js\dioptra.min.js" />
 	</ItemGroup>
 
