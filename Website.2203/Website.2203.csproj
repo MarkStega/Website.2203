@@ -20,35 +20,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<GeneralFiles Include="$(ProjectDir)WebAssets\General\*.*" />
-
 		<InputStaticAssetsStyles Include="**\*.scss;" Exclude="bin\**\*;node_modules\**\*;obj\**\*" />
 		<OutputStaticAssetsStyles Include="wwwroot\css\dioptra-dark.css;wwwroot\css\dioptra-dark.min.css;wwwroot\css\dioptra-light.min.css;wwwroot\css\dioptra-light.css" />
 
-		<InputStaticAssetsScripts Include="**\*.js;**\*.ts" Exclude="bin\**\*;node_modules\**\*;obj\**\*" />
+		<InputStaticAssetsScripts Include="**\*.ts" Exclude="bin\**\*;node_modules\**\*;obj\**\*" />
 		<OutputStaticAssetsScripts Include="wwwroot\js\dioptra.js;wwwroot\js\dioptra.min.js" />
-
-		<InputStaticAssetsImages Include="**\*.ico" Exclude="bin\**\*;node_modules\**\*;obj\**\*" />
-		<OutputStaticAssetsImages Include="wwwroot\images\favicon.ico" />
-
-		<InputAllStaticAssets Include="**\*.scss;WebAssets\**\*.js;**\*.ts" Exclude="bin\**\*;node_modules\**\*;obj\**\*" />
-
-		<OutputAllStaticAssets Include="wwwroot\css\dioptra-dark.css;wwwroot\css\dioptra-dark.min.css;wwwroot\css\dioptra-light.min.css;wwwroot\css\dioptra-light.css;wwwroot\js\dioptra.min.js;wwwroot\unbundled.min.js;wwwroot\js\dioptra.js\wwwroot\images\favicon.ico" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="tsconfig.json" />
 	</ItemGroup>
-
-	<Target Name="PreBuildAssetCopy" Inputs="@(InputStaticAssetsImages)" Outputs="@(OutputStaticAssetsImages)" BeforeTargets="PreBuildEvent">
-
-		<Message Text="***** Pre Build Asset Copy" />
-
-		<RemoveDir Directories="$(ProjectDir)wwwroot/css;$(ProjectDir)wwwroot/js" />
-
-		<!--<Copy SourceFiles="@(GeneralFiles)" DestinationFolder="$(ProjectDir)wwwroot" />-->
-
-	</Target>
 
 	<Target Name="CheckIfNpmExists" Inputs="@(InputStaticAssetsScripts);@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsScripts);@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent">
 
@@ -74,8 +55,10 @@
 	</Target>
 
 	<Target Name="BuildScripts" Inputs="@(InputStaticAssetsScripts)" Outputs="@(OutputStaticAssetsScripts)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">
-		<Message Importance="high" Text="***** MakeDir wwwroot (Scripts)" />
-		<MakeDir Directories="wwwroot" />
+		<RemoveDir Directories="$(ProjectDir)wwwroot/js" />
+		
+		<!--<Message Importance="high" Text="***** MakeDir wwwroot (Scripts)" />
+		<MakeDir Directories="wwwroot" />-->
 
 		<Message Importance="high" Text="***** npm install" />
 		<Exec Command="npm install" />
@@ -97,8 +80,10 @@
 	</Target>
 
 	<Target Name="BuildStyles" Inputs="@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent" AfterTargets="BuildScripts" Condition=" '$(NpmReturnCode)' == '0' ">
-		<Message Importance="high" Text="***** mkdir wwwroot (Styles)" />
-		<MakeDir Directories="wwwroot" />
+		<RemoveDir Directories="$(ProjectDir)wwwroot/css" />
+
+		<!--<Message Importance="high" Text="***** mkdir wwwroot (Styles)" />
+		<MakeDir Directories="wwwroot" />-->
 
 		<Message Importance="high" Text="***** npm install" />
 		<Exec Command="npm install" />
