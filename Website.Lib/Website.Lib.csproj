@@ -1,61 +1,39 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
-		<RunAOTCompilation>true</RunAOTCompilation>
 	</PropertyGroup>
 
+
 	<ItemGroup>
-		<PackageReference Include="Material.Blazor" Version="2.3.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.3" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.3" PrivateAssets="all" />
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.0" />
+		<SupportedPlatform Include="browser" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<GeneralFiles Include="$(ProjectDir)WebAssets\*.*" />
-		
-		<!--<InputStaticAssetsStyles Include="**\*.scss;" Exclude="bin\**\*;node_modules\**\*;obj\**\*" />
+		<ImageFiles Include="$(ProjectDir)WebAssets\Images\*.*" />
+
+		<InputStaticAssetsStyles Include="**\*.scss;" Exclude="bin\**\*;node_modules\**\*;obj\**\*" />
 		<OutputStaticAssetsStyles Include="wwwroot\css\dioptra-dark.css;wwwroot\css\dioptra-dark.min.css;wwwroot\css\dioptra-light.min.css;wwwroot\css\dioptra-light.css" />
 
 		<InputStaticAssetsScripts Include="**\*.ts" Exclude="bin\**\*;node_modules\**\*;obj\**\*" />
-
-		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\2.3.0\contentFiles\any\net6.0\wwwroot\material-components-web.css" />
-
-		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\2.3.0\contentFiles\any\net6.0\wwwroot\material-components-web.min.css" />
-
-		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\2.3.0\contentFiles\any\net6.0\wwwroot\material.blazor.css" />
-
-		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\2.3.0\contentFiles\any\net6.0\wwwroot\material.blazor.js" />
-
-		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\2.3.0\contentFiles\any\net6.0\wwwroot\material.blazor.min.css" />
-
-		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\2.3.0\contentFiles\any\net6.0\wwwroot\material.blazor.min.js" />
-		<OutputStaticAssetsScripts Include="wwwroot\js\dioptra.js;wwwroot\js\dioptra.min.js" />-->
+		<OutputStaticAssetsScripts Include="wwwroot\js\dioptra.js;wwwroot\js\dioptra.min.js" />
 	</ItemGroup>
-
-	<!--<ItemGroup>
-		<None Include="tsconfig.json" />
-	</ItemGroup>-->
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Website.Lib\Website.Lib.csproj" />
+		<None Include="tsconfig.json" />
 	</ItemGroup>
 
-	<Target Name="GeneralWWWRoot" BeforeTargets="PreBuildEvent">
-		<Copy SourceFiles="@(GeneralFiles)" DestinationFolder="$(ProjectDir)wwwroot" />
-		
-		<WriteLinesToFile File="$(ProjectDir)wwwroot/service-worker.js" Lines="$([System.IO.File]::ReadAllText($(ProjectDir)wwwroot/service-worker.js).Replace('%%NOW%%',$([System.DateTime]::UtcNow.ToString('O'))))" Overwrite="true" Encoding="Unicode" />
+	<Target Name="ImagesWWWRoot" BeforeTargets="PreBuildEvent">
+		<Copy SourceFiles="@(ImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/images" />
 	</Target>
 
-	<!--<Target Name="CheckIfNpmExists" Inputs="@(InputStaticAssetsScripts);@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsScripts);@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent">
+	<Target Name="CheckIfNpmExists" Inputs="@(InputStaticAssetsScripts);@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsScripts);@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent">
 		<Message Text="***** npm install" />
 		<Exec Command="npm install" ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low" LogStandardErrorAsError="false" IgnoreExitCode="true">
 			<Output TaskParameter="ExitCode" PropertyName="NpmReturnCode" />
@@ -113,5 +91,6 @@
 
 		<Message Importance="high" Text="***** npm run build-min-light" />
 		<Exec Command="npm run build-min-light" />
-	</Target>-->
+	</Target>
+
 </Project>
