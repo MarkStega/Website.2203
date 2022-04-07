@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   website.webassembly:
-    image: ${DOCKER_REGISTRY-}website2203-webassembly
+    image: ${DOCKER_REGISTRY-}websitewebassembly
     build:
       context: ../
       dockerfile: Website.2203/Website.WebAssembly/Dockerfile

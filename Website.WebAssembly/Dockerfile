@@ -13,24 +13,24 @@ RUN dotnet --info
 RUN dotnet workload install wasm-tools
 
 WORKDIR /src
-COPY ["Website.2203/Website.Lib/Website.Lib.csproj", "Website.Lib/"]
-COPY ["Website.2203/Website.WebAssembly/Website.WebAssembly.csproj", "Website.WebAssembly/"]
-COPY ["Website.2203/Website.WebAssembly/NuGet.Config", "Website.WebAssembly/"]
+COPY ["Website.2203/Website.Lib/Website.Lib.csproj", "Website.2203/Website.Lib/"]
+COPY ["Website.2203/Website.WebAssembly/Website.WebAssembly.csproj", "Website.2203/Website.WebAssembly/"]
+COPY ["Website.2203/Website.WebAssembly/NuGet.Config", "Website.2203/Website.WebAssembly/"]
 
-RUN dotnet restore "/src/Website.WebAssembly" -s "https://api.nuget.org/v3/index.json"
+RUN dotnet restore "/src/Website.2203/Website.WebAssembly" -s "https://api.nuget.org/v3/index.json"
 
-RUN dotnet restore "Website.WebAssembly/Website.WebAssembly.csproj"
+RUN dotnet restore "Website.2203/Website.WebAssembly/Website.WebAssembly.csproj"
 
 COPY . .
-RUN dotnet build "Website.2203/Website.WebAssembly/Website.WebAssembly.csproj" -c Release -o /app/build
+WORKDIR "/src/Website.2203/Website.WebAssembly"
+RUN dotnet build "Website.WebAssembly.csproj" -c Release -o /app/build
 
 FROM build AS publish
-WORKDIR /src
-RUN dotnet publish "Website.2203/Website.WebAssembly/Website.WebAssembly.csproj" -c Release -o /app/publish
+WORKDIR "/src/Website.2203/Website.WebAssembly"
+RUN dotnet publish "Website.WebAssembly.csproj" -c Release -o /app/publish
 
 FROM nginx:alpine AS final
 WORKDIR /usr/share/nginx/html
 COPY --from=publish /app/publish/wwwroot .
-#COPY Website.WebAssembly/nginx.conf /tmp/nginx.conf
-#RUN rm /tmp/nginx.conf
-#
+COPY Website.2203/Website.WebAssembly/nginx.conf /tmp/nginx.conf
+RUN rm /tmp/nginx.conf
