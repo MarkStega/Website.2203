@@ -6,7 +6,7 @@
     <ProjectGuid>4f58c0a0-94c6-40c7-9288-6dcd33d8da72</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
-    <DockerServiceName>website2203</DockerServiceName>
+    <DockerServiceName>website.webassembly</DockerServiceName>
   </PropertyGroup>
   
   <ItemGroup>

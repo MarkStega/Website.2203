@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  2022-03-website:
+  website.webassembly:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
