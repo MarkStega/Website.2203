@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.Lib", "Website.Lib\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.BlazorWebAssembly", "Website.BlazorWebAssembly\Website.BlazorWebAssembly.csproj", "{318E048D-D184-4B80-8482-32244AD66EFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorServer", "BlazorServer\BlazorServer.csproj", "{99DEA7C6-D78A-4668-A089-1391DEF83351}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website.BlazorServer", "Website.BlazorServer\Website.BlazorServer.csproj", "{99DEA7C6-D78A-4668-A089-1391DEF83351}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
