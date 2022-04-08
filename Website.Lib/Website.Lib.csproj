@@ -12,6 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Material.Blazor" Version="2.3.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.3" />
 	</ItemGroup>
 
