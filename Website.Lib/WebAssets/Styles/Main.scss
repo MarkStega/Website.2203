@@ -1,5 +1,7 @@
 ﻿$fade-in-out: 20000ms;
 
+@use 'sass:map';
+
 @use "@material/shape" with (
     $small-component-radius: 12px,
     $medium-component-radius: 12px,
@@ -68,6 +70,7 @@
 
 @use "@material/elevation/mixins" as elevation-mixins;
 @use "@material/theme";
+@use "@material/layout-grid";
 
 @use "./material-components-web";
 
@@ -127,6 +130,30 @@ h1, h2, h3, h4, h5, h6, p {
 :root {
     --dw-scroll-color: var(--mdc-theme-primary);
     --dw-scroll-track-color: rgba(0, 0, 0, 0);
+}
+
+@media (max-width: map.get(layout-grid.$breakpoints, "tablet") - 1px) {
+    .dw-hidden-phone-down {
+        display: none;
+    }
+}
+
+@media (min-width: map.get(layout-grid.$breakpoints, "tablet")) {
+    .dw-hidden-tablet-up {
+        display: none;
+    }
+}
+
+@media (max-width: map.get(layout-grid.$breakpoints, "desktop") - 1px) {
+    .dw-hidden-tablet-down {
+        display: none;
+    }
+}
+
+@media (max-width: map.get(layout-grid.$breakpoints, "desktop")) {
+    .dw-hidden-desktop-up {
+        display: none;
+    }
 }
 
 .dw-loading {
