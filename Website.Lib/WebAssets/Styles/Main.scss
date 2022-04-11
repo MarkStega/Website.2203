@@ -128,26 +128,41 @@ h1, h2, h3, h4, h5, h6, p {
 
 @media (max-width: map.get(layout-grid.$breakpoints, "tablet") - 1px) {
     .dw-hidden-phone-down {
-        display: none;
+        display: none !important;
     }
 }
 
 @media (min-width: map.get(layout-grid.$breakpoints, "tablet")) {
     .dw-hidden-tablet-up {
-        display: none;
+        display: none !important;
     }
 }
 
 @media (max-width: map.get(layout-grid.$breakpoints, "desktop") - 1px) {
     .dw-hidden-tablet-down {
-        display: none;
+        display: none !important;
     }
 }
 
 @media (max-width: map.get(layout-grid.$breakpoints, "desktop")) {
     .dw-hidden-desktop-up {
-        display: none;
+        display: none !important;
     }
+}
+
+.dw-header-large {
+    display: inline-flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.dw-header-small {
+    display: inline-flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .dw-loading {

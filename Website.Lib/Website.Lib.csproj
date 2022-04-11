@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -23,8 +23,6 @@
 		<OutputStaticAssetsStyles Include="wwwroot\css\dioptra.min.css;wwwroot\css\dioptra.css" />
 
 		<InputStaticAssetsScripts Include="**\*.ts" Exclude="bin\**\*;node_modules\**\*;obj\**\*" />
-
-		<InputStaticAssetsStyles Remove="WebAssets\Styles\Theme.scss" />
 		<OutputStaticAssetsScripts Include="wwwroot\js\dioptra.js;wwwroot\js\dioptra.min.js" />
 	</ItemGroup>
 
