@@ -110,21 +110,15 @@ h1, h2, h3, h4, h5, h6, p {
     }
 }
 
-.main-content {
+.dw-main-content {
     overflow-x: hidden;
     overflow-y: auto;
     height: 100%;
 }
 
-.max-width-content {
+.dw-max-width-content {
     max-width: 1920px;
     margin: 0 auto;
-}
-
-.set-width-content {
-    margin: 0 auto;
-    overflow-y: visible;
-    width: 1020px;
 }
 
 :root {

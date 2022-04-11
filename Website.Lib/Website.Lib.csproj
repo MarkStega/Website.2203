@@ -20,9 +20,11 @@
 		<ImageFiles Include="$(ProjectDir)WebAssets\Images\*.*" />
 
 		<InputStaticAssetsStyles Include="**\*.scss;" Exclude="bin\**\*;node_modules\**\*;obj\**\*" />
-		<OutputStaticAssetsStyles Include="wwwroot\css\dioptra-dark.css;wwwroot\css\dioptra-dark.min.css;wwwroot\css\dioptra-light.min.css;wwwroot\css\dioptra-light.css" />
+		<OutputStaticAssetsStyles Include="wwwroot\css\dioptra.min.css;wwwroot\css\dioptra.css" />
 
 		<InputStaticAssetsScripts Include="**\*.ts" Exclude="bin\**\*;node_modules\**\*;obj\**\*" />
+
+		<InputStaticAssetsStyles Remove="WebAssets\Styles\Theme.scss" />
 		<OutputStaticAssetsScripts Include="wwwroot\js\dioptra.js;wwwroot\js\dioptra.min.js" />
 	</ItemGroup>
 
@@ -81,17 +83,11 @@
 		<Message Importance="high" Text="***** npm install" />
 		<Exec Command="npm install" />
 
-		<Message Importance="high" Text="***** npm run build-dark" />
-		<Exec Command="npm run build-dark" />
+		<Message Importance="high" Text="***** npm run build-theme" />
+		<Exec Command="npm run build-theme" />
 
-		<Message Importance="high" Text="***** npm run build-min-dark" />
-		<Exec Command="npm run build-min-dark" />
-
-		<Message Importance="high" Text="***** npm run build-light" />
-		<Exec Command="npm run build-light" />
-
-		<Message Importance="high" Text="***** npm run build-min-light" />
-		<Exec Command="npm run build-min-light" />
+		<Message Importance="high" Text="***** npm run build-min-theme" />
+		<Exec Command="npm run build-min-theme" />
 	</Target>
 
 </Project>

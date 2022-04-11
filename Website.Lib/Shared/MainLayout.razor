@@ -1,50 +1,7 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="mdc-drawer-app-content">
-    @*<main>
-        <article>
-            @Body
-        </article>
-    </main>*@
-
-    @*<MBTopAppBar Title="Material.Blazor"
-                 @onclick="@SideBarToggle"
-                 NavIcon="menu"
-                 ScrollTarget="#main-content"
-                 TopAppBarType="@MBTopAppBarType.Dense"
-                 class="app-bar mdc-top-app-bar--short-has-action-item mdc-elevation--z5">
-        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-            <MBIconButton @onclick="@OpenMenuAsync" Icon="more_vert" />
-            <div class="mdc-menu-surface--anchor">
-                <MBMenu @ref="@Menu">
-                    <MBMenuSelectionGroup @key="@Theme">
-                        <MBListItem Label="Material Default Theme" LeadingIcon="done" IsSelectedMenuItem="@(Theme == "material-default-theme")" @onclick="@(() => ThemeSetterAsync("material-default-theme"))" />
-                        <MBListItem Label="Light Square Theme" LeadingIcon="done" IsSelectedMenuItem="@(Theme == "light-square-theme")" @onclick="@(() => ThemeSetterAsync("light-square-theme"))" />
-                        <MBListItem Label="Dark Square Theme" LeadingIcon="done" IsSelectedMenuItem="@(Theme == "dark-square-theme")" @onclick="@(() => ThemeSetterAsync("dark-square-theme"))" />
-                        <MBListItem Label="Rounded Theme" LeadingIcon="done" IsSelectedMenuItem="@(Theme == "rounded-theme")" @onclick="@(() => ThemeSetterAsync("rounded-theme"))" />
-                        <MBListItem Label="Asymmetric Theme" LeadingIcon="done" IsSelectedMenuItem="@(Theme == "asymmetric-theme")" @onclick="@(() => ThemeSetterAsync("asymmetric-theme"))" />
-                    </MBMenuSelectionGroup>
-                </MBMenu>
-            </div>
-        </section>
-    </MBTopAppBar>*@
-
-    @*<MBBladeSet MainContentAdditionalCss="demo-blade-main-content"
-                BladesAdditionalCss="mdc-elevation--z3">
-        <PageContent>*@
-            <main class="main-content" id="main-content">
-                <div class="max-width-content">
-                    @*<CascadingValue Name="MaterialDocRef" Value="@materialDocRef" IsFixed="true">
-                        <div class="mdc-top-app-bar--dense-fixed-adjust">*@
-                            <div class="mdc-layout-grid">
-                                <div class="mdc-layout-grid__inner">
-                                    @Body
-                                </div>
-                            </div>
-                        @*</div>
-                    </CascadingValue>*@
-                </div>
-            </main>
-        @*</PageContent>
-    </MBBladeSet>*@
+    <main class="dw-main-content" id="main-content">
+        @Body
+    </main>
 </div>

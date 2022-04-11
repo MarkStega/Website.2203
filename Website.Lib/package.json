@@ -4,10 +4,8 @@
   "description": "Node build steps for the Dioptra website",
   "main": "server.js",
   "scripts": {
-    "build-dark": "sass --update --no-color --unicode --style=expanded --load-path=node_modules --no-source-map WebAssets/Styles/DarkTheme.scss wwwroot/css/dioptra-dark.css",
-    "build-min-dark": "sass --update --no-color --unicode --style=compressed --load-path=node_modules --no-source-map WebAssets/Styles/DarkTheme.scss wwwroot/css/dioptra-dark.min.css",
-    "build-light": "sass --update --no-color --unicode --style=expanded --load-path=node_modules --no-source-map WebAssets/Styles/LightTheme.scss wwwroot/css/dioptra-light.css",
-    "build-min-light": "sass --update --no-color --unicode --style=compressed --load-path=node_modules --no-source-map WebAssets/Styles/LightTheme.scss wwwroot/css/dioptra-light.min.css",
+    "build-theme": "sass --update --no-color --unicode --style=expanded --load-path=node_modules --no-source-map WebAssets/Styles/Theme.scss wwwroot/css/dioptra.css",
+    "build-min-theme": "sass --update --no-color --unicode --style=compressed --load-path=node_modules --no-source-map WebAssets/Styles/Theme.scss wwwroot/css/dioptra.min.css",
     "build-js": "terser wwwroot/js/temp.js --beautify --output wwwroot/js/dioptra.js",
     "build-min-js": "terser wwwroot/js/temp.js --compress --mangle --ecma 2016 --output wwwroot/js/dioptra.min.js",
     "build-scripts": "webpack --config webpack.config.js"
