@@ -11,19 +11,26 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Overpass:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <link href="_content/Material.Blazor/material.blazor.min.css" rel="stylesheet" />
     <link id="app-theme" href="_content/Website.Lib/css/dioptra-light.min.css" rel="stylesheet" />
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="_content/Website.Lib/images/icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="_content/Website.Lib/images/icon-192.png" />
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-173249047-3', {
+            cookie_flags: 'max-age=7200; samesite=none; secure'
+        });
+    </script>
 </head>
 
-<body class="mdc-typography">
+<body class="mdc-typography mv-custom-scrollbars">
     <div id="app">
         <div class="dw-loading">
             <svg width="200" height="200" viewBox="0 0 31.75 31.75">
