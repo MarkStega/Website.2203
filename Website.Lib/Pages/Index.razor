@@ -1,62 +1,107 @@
 ﻿@page "/"
 
-<div class="dw-dark">
+<div class="dw-section-regular">
     <div class="dw-max-width-content">
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell--span-12 dw-header-large dw-hidden-phone-down">
-                    <span style="min-width: 120px; margin-right: 36px;"><DioptraLogo Color="white" Height="120" /></span>
-                    <h1 class="mdc-typography--headline1">Dioptra Real Estate Investment Analytics</h1>
+                <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+                    <h1 class="mb-card__title mdc-typography--headline1">Who we are</h1>
+                    <p class="mb-card__title mdc-typography--body1">
+                        Dioptra is a startup developing sophisticated financial analytics for institutional real estate investors.
+                    </p>
                 </div>
 
-                <div class="mdc-layout-grid__cell--span-12 dw-header-small dw-hidden-tablet-up">
-                    <span style="min-width: 80px; margin-bottom: 6px;"><DioptraLogo Color="white" Height="80" /></span>
-                    <h1 class="mdc-typography--headline4">Dioptra Real Estate Investment Analytics</h1>
+                <div class="mdc-layout-grid__cell--span-4-phone dw-hidden-desktop-up dw-section-spacing"></div>
+
+                <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+                    <h1 class="mb-card__title mdc-typography--headline1">What we are doing</h1>
+                    <p class="mb-card__title mdc-typography--body1">
+                        Dioptra is a startup developing sophisticated financial analytics for institutional real estate investors.
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-@*<div>
+<div class="dw-section-condensed dw-amber">
     <div class="dw-max-width-content">
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4" style="background-color: lightgray;">
-                    <h1 class="mb-card__title mdc-typography--headline1">Headline 1</h1>
-                    <h2 class="mb-card__title mdc-typography--headline2">Headline 2</h2>
-                    <h3 class="mb-card__title mdc-typography--headline3">Headline 3</h3>
-                    <h4 class="mb-card__title mdc-typography--headline4">Headline 4</h4>
-                    <h5 class="mb-card__title mdc-typography--headline5">Headline 5</h5>
-                    <h6 class="mb-card__title mdc-typography--headline6">Headline 6</h6>
-                    <p class="mb-card__title mdc-typography--body1">Body 1</p>
-                    <p class="mb-card__title mdc-typography--body2">Body 2</p>
-                </div>
-
-                <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4" style="background-color: lightblue;">
-                    <h1 class="mb-card__title mdc-typography--headline1">Headline 1</h1>
-                    <h2 class="mb-card__title mdc-typography--headline2">Headline 2</h2>
-                    <h3 class="mb-card__title mdc-typography--headline3">Headline 3</h3>
-                    <h4 class="mb-card__title mdc-typography--headline4">Headline 4</h4>
-                    <h5 class="mb-card__title mdc-typography--headline5">Headline 5</h5>
-                    <h6 class="mb-card__title mdc-typography--headline6">Headline 6</h6>
-                    <p class="mb-card__title mdc-typography--body1">Body 1</p>
-                    <p class="mb-card__title mdc-typography--body2">Body 2</p>
-                </div>
-
-                <div class="mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2 dw-hidden-phone-down"></div>
-
-                <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4" style="background-color: lightsalmon;">
-                    <h1 class="mb-card__title mdc-typography--headline1">Headline 1</h1>
-                    <h2 class="mb-card__title mdc-typography--headline2">Headline 2</h2>
-                    <h3 class="mb-card__title mdc-typography--headline3">Headline 3</h3>
-                    <h4 class="mb-card__title mdc-typography--headline4">Headline 4</h4>
-                    <h5 class="mb-card__title mdc-typography--headline5">Headline 5</h5>
-                    <h6 class="mb-card__title mdc-typography--headline6">Headline 6</h6>
-                    <p class="mb-card__title mdc-typography--body1">Body 1</p>
-                    <p class="mb-card__title mdc-typography--body2">Body 2</p>
+                <div class="mdc-layout-grid__cell--span-12">
+                    <div class="dw-panel-container">
+                        <p class="mb-card__title mdc-typography--subtitle2">
+                            "Dioptra is is beyond class leading; it defines a new class of investment analytics. Dioptra drives our treasury loan book management
+                            and gives us an unparalleled insight into portfolio risk."
+                        </p>
+                        <p class="mb-card__title mdc-typography--subtitle1">
+                            CEO, Client
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>*@
+</div>
+
+<div class="dw-section-regular">
+    <div class="dw-max-width-content">
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4 dw-card-cell-span">
+                    <div class="dw-card-container">
+                        <MBCard class="mb-basic-with-header mb-ui-control"
+                                CardStyle="@MBCardStyle.Default">
+
+                            <PrimaryAction>
+                                <div class="mb-card__autostyled">
+                                    <div class="dv-action-card-content">
+                                        <h4 class="mb-card__title mdc-typography--headline4">Real Estate Investment Funds</h4>
+                                    </div>
+                                </div>
+                            </PrimaryAction>
+                        </MBCard>
+                    </div>
+                </div>
+
+                <div class="mdc-layout-grid__cell--span-12 dw-hidden-tablet-up dw-section-spacing"></div>
+                
+                <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4 dw-card-cell-span">
+                    <div class="dw-card-container">
+                        <MBCard class="mb-basic-with-header mb-ui-control"
+                                CardStyle="@MBCardStyle.Default">
+
+                            <PrimaryAction>
+                                <div class="mb-card__autostyled">
+                                    <div class="dv-action-card-content">
+                                        <h4 class="mb-card__title mdc-typography--headline4">Venture Capital Investors</h4>
+                                    </div>
+                                </div>
+                            </PrimaryAction>
+                        </MBCard>
+                    </div>
+                </div>
+
+                <div class="mdc-layout-grid__cell--span-12 dw-section-spacing"></div>
+                
+                <div class="mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2 dw-hidden-phone-down"></div>
+
+                <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4 dw-card-cell-span">
+                    <div class="dw-card-container">
+                        <MBCard class="mb-basic-with-header mb-ui-control"
+                                CardStyle="@MBCardStyle.Default">
+
+                            <PrimaryAction>
+                                <div class="mb-card__autostyled">
+                                    <div class="dv-action-card-content">
+                                        <h4 class="mb-card__title mdc-typography--headline4">Working for Dioptra</h4>
+                                    </div>
+                                </div>
+                            </PrimaryAction>
+                        </MBCard>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

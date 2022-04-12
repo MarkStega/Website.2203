@@ -117,8 +117,65 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .dw-max-width-content {
-    max-width: 1920px;
+    max-width: 1600px;
     margin: 0 auto;
+}
+
+.dw-panel-container {
+    max-width: 1020px;
+    margin: 0 auto;
+}
+
+.dw-section-condensed {
+    padding-top: 48px;
+    padding-bottom: 48px;
+
+    .dw-section-spacing {
+        height: 24px;
+    }
+}
+
+.dw-section-regular {
+    padding-top: 72px;
+    padding-bottom: 72px;
+    
+    .dw-section-spacing {
+        height: 48px;
+    }
+}
+
+.dw-card-container {
+    margin: 0 auto;
+    max-width: 500px;
+
+    & .mb-card__autostyled {
+        height: 280px;
+    }
+}
+
+.dw-footer {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+
+    & p {
+        margin: 6px 0;
+    }
+
+    &.dw-start, &.dw-center, &.dw-end {
+
+    }
+
+    @media (min-width: map.get(layout-grid.$breakpoints, "tablet")) {
+        &.dw-start {
+            justify-content: left;
+        }
+
+        &.dw-end {
+            justify-content: right;
+        }
+    }
 }
 
 :root {
@@ -132,19 +189,19 @@ h1, h2, h3, h4, h5, h6, p {
     }
 }
 
-@media (min-width: map.get(layout-grid.$breakpoints, "tablet")) {
-    .dw-hidden-tablet-up {
-        display: none !important;
-    }
-}
-
 @media (max-width: map.get(layout-grid.$breakpoints, "desktop") - 1px) {
     .dw-hidden-tablet-down {
         display: none !important;
     }
 }
 
-@media (max-width: map.get(layout-grid.$breakpoints, "desktop")) {
+@media (min-width: map.get(layout-grid.$breakpoints, "tablet")) {
+    .dw-hidden-tablet-up {
+        display: none !important;
+    }
+}
+
+@media (min-width: map.get(layout-grid.$breakpoints, "desktop")) {
     .dw-hidden-desktop-up {
         display: none !important;
     }

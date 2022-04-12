@@ -19,13 +19,23 @@
     @include elevation-mixins.elevation(4);
 }
 
-.dw-dark {
-    --mdc-theme-primary: #90caf9;
-    --mdc-theme-on-primary: black;
-    --mdc-theme-secondary: #ffcc80;
-    --mdc-theme-on-secondary: black;
-    --mdc-theme-background: #263238;
-    --mdc-theme-surface: #37474f;
+.dw-dark-grey {
+    --mdc-theme-primary: var(--mb-color-blue-200);
+    --mdc-theme-on-primary: var(--mb-color-on-blue-200);
+    --mdc-theme-secondary: var(--mb-color-orange-200);
+    --mdc-theme-on-secondary: var(--mb-color-on-orange-200);
+    --mdc-theme-background: var(--mb-color-blue-grey-700);
     background-color: var(--mdc-theme-background);
-    color: white;
+    color: var(--mb-color-on-blue-grey-700);
+}
+
+.dw-light-grey {
+    --mdc-theme-background: var(--mb-color-blue-grey-300);
+    background-color: var(--mdc-theme-background);
+    color: var(--mb-color-on-blue-grey-300);
+}
+
+.dw-amber {
+    --mdc-theme-background: var(--mb-color-amber-200);
+    background-color: var(--mdc-theme-background);
 }
