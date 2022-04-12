@@ -1,5 +1,7 @@
 ﻿namespace Website.Lib;
 
+using System.Text.Json;
+
 using System.ComponentModel.DataAnnotations;
 
 public class ContactData

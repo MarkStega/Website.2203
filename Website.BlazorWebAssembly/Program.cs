@@ -11,4 +11,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services.AddMBServices(loggingServiceConfiguration: Utilities.GetDefaultLoggingServiceConfiguration(), toastServiceConfiguration: Utilities.GetDefaultToastServiceConfiguration(), snackbarServiceConfiguration: Utilities.GetDefaultSnackbarServiceConfiguration());
 
+builder.Services.AddHttpClient();
+builder.Services.AddTransient<ITeamsNotificationService, TeamsNotificationService>();
+
 await builder.Build().RunAsync();

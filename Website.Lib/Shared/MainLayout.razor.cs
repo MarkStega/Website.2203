@@ -1,9 +1,12 @@
 ﻿using Material.Blazor;
+using Microsoft.AspNetCore.Components;
 
 namespace Website.Lib.Shared;
 
 public partial class MainLayout
 {
+    [Inject] private ITeamsNotificationService TeamsNotificationService { get; set; }
+
     private MBMenu Menu { get; set; } = new();
     private MBDialog ContactDialog { get; set; } = new();
     private ContactData Contact { get; set; } = new();
@@ -33,7 +36,7 @@ public partial class MainLayout
     private async Task ContactDialogSubmittedAsync()
     {
         await ContactDialog.HideAsync();
-        Console.WriteLine(Contact.ToString());
+        await TeamsNotificationService.SendNotification(Contact);
     }
 
 }
