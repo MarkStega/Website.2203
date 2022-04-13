@@ -1,7 +1,7 @@
-﻿using Material.Blazor;
-using Microsoft.AspNetCore.Components;
+﻿namespace Website.Lib.Shared;
 
-namespace Website.Lib.Shared;
+using Material.Blazor;
+using Microsoft.AspNetCore.Components;
 
 public partial class MainLayout
 {
@@ -11,15 +11,7 @@ public partial class MainLayout
     private MBDialog ContactDialog { get; set; } = new();
     private ContactData Contact { get; set; } = new();
 
-    private void SideBarToggle()
-    {
 
-    }
-
-    private void OpenMenuAsync()
-    {
-
-    }
 
     private async Task OpenContactDialogAsync()
     {

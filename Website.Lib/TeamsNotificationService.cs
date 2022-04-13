@@ -3,14 +3,39 @@
 using Microsoft.Extensions.Logging;
 using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 public class TeamsNotificationService : ITeamsNotificationService
 {
-    private const string _teamsNotifierClient = "TEAMS_NOTIFIER_CLIENT";
-    private const string _webhookUri = "https://blacklandcapital.webhook.office.com/webhookb2/6ccfaed1-7c02-440c-83f0-9265cf35b379@ef73a184-f1db-4f24-b406-e4f8f9633dfa/IncomingWebhook/b89fe29282274986b059a32b41fea397/34ba3a07-c6f6-4e3f-896d-148fb6c1765f";
+    private class MessageCard
+    {
+        public string Title { get; } = "Dioptra Website Contact Message";
+
+        public string Text { get; } = $"Received on {DateTime.Now:ddd dd-MM-yyyy HH:mm:ss}";
+        
+        public List<Section> Sections { get; set; } = new();
+    }
+
+    private class Section
+    {
+        public List<Fact> Facts { get; set; } = new();
+    }
+
+    private class Fact
+    {
+        public string Name { get; set; } = "";
+        
+        public string Value{ get; set; } = "";
+    }
+
+    private const string _messagingWebhook = "https://blacklandcapital.webhook.office.com/webhookb2/6ccfaed1-7c02-440c-83f0-9265cf35b379@ef73a184-f1db-4f24-b406-e4f8f9633dfa/IncomingWebhook/b89fe29282274986b059a32b41fea397/34ba3a07-c6f6-4e3f-896d-148fb6c1765f";
+    private static readonly JsonSerializerOptions _serializerOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        WriteIndented = false
+    };
 
     private readonly IHttpClientFactory _clientFactory;
     private readonly ILogger<TeamsNotificationService> _logger;
@@ -22,29 +47,45 @@ public class TeamsNotificationService : ITeamsNotificationService
     }
 
 
-    private HttpClient CreateClient()
-    {
-        var client = _clientFactory.CreateClient(_teamsNotifierClient);
-
-        client.DefaultRequestHeaders.Clear();
-        client.DefaultRequestHeaders.Accept.Clear();
-        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-        return client;
-    }
-
     public async Task SendNotification(ContactData contactData)
     {
         try
         {
-            var client = CreateClient();
-            var response = await client.PostAsJsonAsync(_webhookUri, contactData);
+            var client = new HttpClient();
 
-            _logger.LogInformation($"Sent contact message to Teams using {_webhookUri}; received this response: {response.StatusCode}", contactData, response.StatusCode);
+            MessageCard messageCard = new()
+            {
+                Sections = new()
+                {
+                    {
+                        new()
+                        {
+                            Facts = new()
+                            {
+                                new() { Name = "Name", Value = contactData.Name },
+                                new() { Name = "Email", Value = contactData.Email },
+                                new() { Name = "Phone", Value = contactData.Phone },
+                                new() { Name = "Message", Value = contactData.Message },
+                            }
+                        }
+                    }
+                }
+            };
+
+            var json = JsonSerializer.Serialize(messageCard, _serializerOptions);
+            
+            var response = await client.PostAsync(_messagingWebhook, new StringContent(json, Encoding.UTF8, "application/json")).ConfigureAwait(false);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new NotSupportedException($"Received failed result {response.StatusCode} when posting events to Microsoft Teams.");
+            }
+
+            _logger.LogInformation($"Sent contact message to Teams using {_messagingWebhook}; received this response: {response.StatusCode}", contactData, response.StatusCode);
         }
-        catch (Exception exc)
+        catch (Exception ex)
         {
-            _logger.LogError(exc, "Failed to send contact message to Teams", contactData);
+            _logger.LogError(ex, "Failed to send contact message to Teams", contactData);
         }
     }
 }
