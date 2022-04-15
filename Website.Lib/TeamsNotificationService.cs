@@ -37,12 +37,10 @@ public class TeamsNotificationService : ITeamsNotificationService
         WriteIndented = false
     };
 
-    private readonly IHttpClientFactory _clientFactory;
     private readonly ILogger<TeamsNotificationService> _logger;
 
-    public TeamsNotificationService(IHttpClientFactory clientFactory, ILogger<TeamsNotificationService> logger)
+    public TeamsNotificationService(ILogger<TeamsNotificationService> logger)
     {
-        _clientFactory = clientFactory;
         _logger = logger;
     }
 

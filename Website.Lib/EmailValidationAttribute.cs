@@ -1,10 +1,9 @@
-﻿namespace Website.Lib;
-
-using PhoneNumbers;
+﻿using PhoneNumbers;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
+namespace Website.Lib;
 public class EmailValidationAttribute : ValidationAttribute
 {
     protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
