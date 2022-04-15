@@ -24,9 +24,8 @@
 		<ImageFiles Include="$(ProjectDir)WebAssets\Images\*.*" />
 
 		<InputStaticAssetsStyles Include="**\*.scss;" Exclude="bin\**\*;node_modules\**\*;obj\**\*" />
-		<OutputStaticAssetsStyles Include="wwwroot\css\dioptra.min.css;wwwroot\css\dioptra.css" />
-
 		<InputStaticAssetsScripts Include="**\*.ts" Exclude="bin\**\*;node_modules\**\*;obj\**\*" />
+		<OutputStaticAssetsStyles Include="wwwroot\css\dioptra.css;wwwroot\css\dioptra.min.css" />
 		<OutputStaticAssetsScripts Include="wwwroot\js\dioptra.js;wwwroot\js\dioptra.min.js" />
 	</ItemGroup>
 
@@ -34,6 +33,12 @@
 		<None Include="tsconfig.json" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Content Remove="wwwroot\css\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="wwwroot\css\" />
+	</ItemGroup>
 	<Target Name="ImagesWWWRoot" BeforeTargets="PreBuildEvent">
 		<Copy SourceFiles="@(ImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/images" />
 	</Target>

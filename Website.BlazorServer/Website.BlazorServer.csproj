@@ -10,6 +10,7 @@
 		<DockerfileTag>website-2203-blazor-server</DockerfileTag>
 	</PropertyGroup>
 
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'BlazorServer' " />
 	<ItemGroup>
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.0" />
 		<PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />

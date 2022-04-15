@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.BlazorWebAssembly",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website.BlazorServer", "Website.BlazorServer\Website.BlazorServer.csproj", "{99DEA7C6-D78A-4668-A089-1391DEF83351}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4F58C0A0-94C6-40C7-9288-6DCD33D8DA72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{99DEA7C6-D78A-4668-A089-1391DEF83351}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99DEA7C6-D78A-4668-A089-1391DEF83351}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99DEA7C6-D78A-4668-A089-1391DEF83351}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F58C0A0-94C6-40C7-9288-6DCD33D8DA72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F58C0A0-94C6-40C7-9288-6DCD33D8DA72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F58C0A0-94C6-40C7-9288-6DCD33D8DA72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F58C0A0-94C6-40C7-9288-6DCD33D8DA72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

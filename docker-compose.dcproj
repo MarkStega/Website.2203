@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" Sdk="Microsoft.Docker.Sdk">
+<Project ToolsVersion="15.0" Sdk="Microsoft.Docker.Sdk" DefaultTargets="Build">
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
@@ -18,6 +18,6 @@
   </ItemGroup>
 
   <Target Name="CopyDockerIgnore" BeforeTargets="PreBuildEvent">
-    <Copy SourceFiles=".dockerignore" DestinationFolder=".."/>
+    <Copy SourceFiles=".dockerignore" DestinationFolder=".." />
   </Target>
 </Project>

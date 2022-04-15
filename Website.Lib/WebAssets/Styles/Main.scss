@@ -157,22 +157,25 @@ h1, h2, h3, h4, h5, h6, p {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    justify-content: center;
 
     & p {
         margin: 6px 0;
     }
 
-    &.dw-start, &.dw-center, &.dw-end {
+    &.dw-footer-icon, &.dw-footer-address {
+        justify-content: left;
+    }
 
+    &.dw-footer-contact {
+        justify-content: right;
     }
 
     @media (min-width: map.get(layout-grid.$breakpoints, "tablet")) {
-        &.dw-start {
-            justify-content: left;
+        &.dw-footer-contact {
+            justify-content: center;
         }
 
-        &.dw-end {
+        &.dw-footer-address {
             justify-content: right;
         }
     }
