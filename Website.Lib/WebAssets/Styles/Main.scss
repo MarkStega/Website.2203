@@ -114,6 +114,8 @@ h1, h2, h3, h4, h5, h6, p {
     overflow-x: hidden;
     overflow-y: auto;
     height: 100%;
+    display: grid;
+    grid-template-rows: 1fr auto;
 }
 
 .dw-max-width-content {
@@ -153,7 +155,16 @@ h1, h2, h3, h4, h5, h6, p {
     }
 }
 
+.dw-content {
+
+}
+
 .dw-footer {
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.dw-footer-element {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
