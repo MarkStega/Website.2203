@@ -33,12 +33,6 @@
 		<None Include="tsconfig.json" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Content Remove="wwwroot\css\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="wwwroot\css\" />
-	</ItemGroup>
 	<Target Name="ImagesWWWRoot" BeforeTargets="PreBuildEvent">
 		<Copy SourceFiles="@(ImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/images" />
 	</Target>

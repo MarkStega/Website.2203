@@ -111,11 +111,16 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .dw-main-content {
+    position: absolute;
+    top: 0;
+    left: 0;
     overflow-x: hidden;
     overflow-y: auto;
     height: 100%;
+    width: 100%;
     display: grid;
     grid-template-rows: 1fr auto;
+    z-index: 0;
 }
 
 .dw-max-width-content {
@@ -155,6 +160,13 @@ h1, h2, h3, h4, h5, h6, p {
     }
 }
 
+.dw-home {
+    position: absolute;
+    //top: 12px;
+    //left: 12px;
+    //z-index: 1;
+}
+
 .dw-content {
 
 }
@@ -180,16 +192,6 @@ h1, h2, h3, h4, h5, h6, p {
     &.dw-footer-contact {
         justify-content: right;
     }
-
-    @media (min-width: map.get(layout-grid.$breakpoints, "tablet")) {
-        &.dw-footer-contact {
-            justify-content: center;
-        }
-
-        &.dw-footer-address {
-            justify-content: right;
-        }
-    }
 }
 
 :root {
@@ -200,6 +202,15 @@ h1, h2, h3, h4, h5, h6, p {
 @media (max-width: map.get(layout-grid.$breakpoints, "tablet") - 1px) {
     .dw-hidden-phone-down {
         display: none !important;
+    }
+
+    .dw-home {
+        .mdc-fab {
+            height: 40px;
+            width: 40px;
+            margin-top: 12px;
+            margin-left: 12px;
+        }
     }
 }
 
@@ -212,6 +223,16 @@ h1, h2, h3, h4, h5, h6, p {
 @media (min-width: map.get(layout-grid.$breakpoints, "tablet")) {
     .dw-hidden-tablet-up {
         display: none !important;
+    }
+
+    .dw-footer-element {
+        &.dw-footer-contact {
+            justify-content: center;
+        }
+
+        &.dw-footer-address {
+            justify-content: right;
+        }
     }
 }
 

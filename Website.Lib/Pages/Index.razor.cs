@@ -1,13 +1,18 @@
-﻿namespace Website.Lib.Pages;
+﻿using Microsoft.AspNetCore.Components;
 
-using Material.Blazor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+namespace Website.Lib.Pages;
 public partial class Index
 {
+    [Inject] private NavigationManager NavigationManager { get; set; }
+
+    [CascadingParameter] private Action ShowHomeButton { get; set; }
+
+
+    private void WorkForUsClick()
+    {
+        NavigationManager.NavigateTo("/work-for-us");
+
+        ShowHomeButton();
+    }
 }
 
