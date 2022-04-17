@@ -6,7 +6,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
     <title>Dioptra</title>
     <base href="/" />
 
@@ -21,15 +22,13 @@
     <link rel="apple-touch-icon" sizes="512x512" href="_content/Website.Lib/images/icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="_content/Website.Lib/images/icon-192.png" />
 
-    <script>
-        window.dataLayer = window.dataLayer || [];
+    <script>window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
         gtag('config', 'UA-173249047-3', {
             cookie_flags: 'max-age=7200; samesite=none; secure'
-        });
-    </script>
+        });</script>
 
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
 </head>
@@ -37,19 +36,43 @@
     @RenderBody()
 
     <div id="blazor-error-ui">
-        <environment include="Staging,Production">
-            An error has occurred. This application may no longer respond until reloaded.
-        </environment>
-        <environment include="Development">
-            An unhandled exception has occurred. See browser dev tools for details.
-        </environment>
-        <a href="" class="reload">Reload</a>
-        <a class="dismiss">🗙</a>
+        <div id="reload-dialog" class="mdc-dialog">
+            <div id="reload-container" class="mdc-dialog__container">
+                <div class="mdc-dialog__surface"
+                     role="alertdialog"
+                     aria-modal="true"
+                     aria-labelledby="my-dialog-title"
+                     aria-describedby="my-dialog-content">
+                    <h2 class="mdc-dialog__title" id="my-dialog-title">
+                        Website Error
+                    </h2>
+                    <div class="mdc-dialog__content" id="my-dialog-content">
+                        <environment include="Staging,Production">
+                            Click the button to reload the website.
+                        </environment>
+                        <environment include="Development">
+                            An unhandled exception has occurred. See browser dev tools for details.
+                        </environment>
+                    </div>
+                    <div class="mdc-dialog__actions" tabindex="1">
+                        <button id="reload-button" type="button" class="mdc-button mdc-dialog__button mdc-button--raised" data-mdc-dialog-action="discard" onclick="location.reload()">
+                            <div class="mdc-button__ripple"></div>
+                            <span class="mdc-button__label">Reload</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="reload-scrim" class="mdc-dialog__scrim"></div>
+        </div>
     </div>
 
     <script src="_framework/blazor.server.js"></script>
     
     <script src="_content/Material.Blazor/material.blazor.min.js"></script>
-    <script src="_content/Website.Lib/js/dioptra.min.js"></script>
+    <script src="_content/Website.Lib/js/dioptra.js"></script>
+
+    <script>
+        Website.General.intantiateErrorDialog();
+    </script>
 </body>
 </html>

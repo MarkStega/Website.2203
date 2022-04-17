@@ -15,9 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.Lib", "Website.Lib\Website.Lib.csproj", "{8A95DD2F-E743-438F-8189-66449B8513A4}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.BlazorWebAssembly", "Website.BlazorWebAssembly\Website.BlazorWebAssembly.csproj", "{318E048D-D184-4B80-8482-32244AD66EFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website.Lib", "Website.Lib\Website.Lib.csproj", "{8A95DD2F-E743-438F-8189-66449B8513A4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website.BlazorServer", "Website.BlazorServer\Website.BlazorServer.csproj", "{99DEA7C6-D78A-4668-A089-1391DEF83351}"
 EndProject
@@ -33,10 +31,6 @@ Global
 		{8A95DD2F-E743-438F-8189-66449B8513A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A95DD2F-E743-438F-8189-66449B8513A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A95DD2F-E743-438F-8189-66449B8513A4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{318E048D-D184-4B80-8482-32244AD66EFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{318E048D-D184-4B80-8482-32244AD66EFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{318E048D-D184-4B80-8482-32244AD66EFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{318E048D-D184-4B80-8482-32244AD66EFB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{99DEA7C6-D78A-4668-A089-1391DEF83351}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{99DEA7C6-D78A-4668-A089-1391DEF83351}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99DEA7C6-D78A-4668-A089-1391DEF83351}.Release|Any CPU.ActiveCfg = Release|Any CPU

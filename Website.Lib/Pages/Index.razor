@@ -2,12 +2,19 @@
 
 @inherits ComponentBase
 
+
+<HeadContent>
+    <meta name="description" content="This is Dioptra">
+</HeadContent>
+
+<MBButton Label="Throw" @onclick="@(() => throw new Exception("Boo"))" />
+
 <div class="dw-section-regular">
     <div class="dw-max-width-content">
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-                    <h1 class="mb-card__title mdc-typography--headline1">Who we are</h1>
+                    <h2 class="mb-card__title mdc-typography--headline1">Who we are</h2>
                     <p class="mb-card__title mdc-typography--body1">
                         Dioptra is a startup developing sophisticated financial analytics for institutional real estate investors.
                     </p>
@@ -16,7 +23,7 @@
                 <div class="mdc-layout-grid__cell--span-4-phone dw-hidden-desktop-up dw-section-spacing"></div>
 
                 <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-                    <h1 class="mb-card__title mdc-typography--headline1">What we are doing</h1>
+                    <h2 class="mb-card__title mdc-typography--headline1">What we are doing</h2>
                     <p class="mb-card__title mdc-typography--body1">
                         Dioptra is a startup developing sophisticated financial analytics for institutional real estate investors.
                     </p>
@@ -58,7 +65,7 @@
                             <PrimaryAction>
                                 <div class="mb-card__autostyled">
                                     <div class="dv-action-card-content">
-                                        <h4 class="mb-card__title mdc-typography--headline4">Real Estate Investment Funds</h4>
+                                        <h3 class="mb-card__title mdc-typography--headline3">Real Estate Investment Funds</h3>
                                     </div>
                                 </div>
                             </PrimaryAction>
@@ -76,7 +83,7 @@
                             <PrimaryAction>
                                 <div class="mb-card__autostyled">
                                     <div class="dv-action-card-content">
-                                        <h4 class="mb-card__title mdc-typography--headline4">Venture Capital Investors</h4>
+                                        <h3 class="mb-card__title mdc-typography--headline3">Venture Capital Investors</h3>
                                     </div>
                                 </div>
                             </PrimaryAction>
@@ -97,7 +104,7 @@
                             <PrimaryAction>
                                 <div class="mb-card__autostyled">
                                     <div class="dv-action-card-content">
-                                        <h4 class="mb-card__title mdc-typography--headline4">Work for Dioptra</h4>
+                                        <h3 class="mb-card__title mdc-typography--headline3">Work for Dioptra</h3>
                                     </div>
                                 </div>
                             </PrimaryAction>

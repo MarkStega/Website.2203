@@ -1,4 +1,7 @@
-﻿export function setTheme(sheetName): void {
+﻿import { MDCRipple } from '@material/ripple';
+import { MDCDialog } from '@material/dialog';
+
+export function setTheme(sheetName): void {
     let elem = document.getElementById("app-theme");
 
     if (elem) {
@@ -21,4 +24,20 @@ export function downloadFile(fileUri): void {
     a.href = fileUri;
     a.click();
     a.remove();
+}
+
+export function intantiateErrorDialog(): void {
+    new MDCRipple(document.getElementById('reload-button')!);
+
+    var dialog = document.getElementById('reload-dialog')!;
+    var container = document.getElementById('reload-container')!;
+    var scrim = document.getElementById('reload-scrim')!;
+
+    var mdcDialog = new MDCDialog(dialog);
+    mdcDialog.escapeKeyAction = '';
+    mdcDialog.scrimClickAction = '';
+
+    dialog.style.display = 'flex';
+    container.style.opacity = '1';
+    scrim.style.opacity = '1';
 }
