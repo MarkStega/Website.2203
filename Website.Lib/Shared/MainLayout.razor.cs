@@ -40,12 +40,16 @@ public partial class MainLayout : LayoutComponentBase
         _ = InvokeAsync(StateHasChanged);
     }
 
-    private void ShowHomeButton()
+    private void ShowHomeButton(bool show)
     {
         _ = Task.Run(async () =>
         {
-            await Task.Delay(500);
-            HomeButtonExited = false;
+            if (show)
+            {
+                await Task.Delay(500);
+            }
+
+            HomeButtonExited = !show;
             await InvokeAsync(StateHasChanged).ConfigureAwait(false);
         });
     }
