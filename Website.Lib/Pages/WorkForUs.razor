@@ -1,2 +1,37 @@
 ﻿@page "/work-for-us"
 
+@inherits ComponentBase;
+
+
+<div>
+    <div class="dw-max-width-content">
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell--span-12">
+                    <MBCheckbox Label="Show Content" @bind-Value="@ShowStuff" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ShowStuff)
+{
+    for (int i = 0; i < 6; i++)
+    {
+        <div class="dw-section-regular">
+            <div class="dw-max-width-content">
+                <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+                        <div class="mdc-layout-grid__cell--span-12">
+                            <h1 class="mb-card__title mdc-typography--headline1">Who we are</h1>
+                            <p class="mb-card__title mdc-typography--body1">
+                                Dioptra is a startup developing sophisticated financial analytics for institutional real estate investors.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

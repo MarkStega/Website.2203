@@ -21,6 +21,10 @@
                 </div>
             </div>
 
+            <div class="dw-home">
+                <MBFloatingActionButton @ref="@HomeButton" Icon="home" Exited="@HomeButtonExited" @onclick="HomeClick" />
+            </div>
+
             @Body
         </div>
 
@@ -58,10 +62,6 @@
         </div>
     </main>
 </CascadingValue>
-
-<div class="dw-home">
-    <MBFloatingActionButton @ref="@HomeButton" Icon="home" Exited="@HomeButtonExited" @onclick="HomeClick" />
-</div>
 
 <MBDialog EscapeKeyAction=""
           @ref="@ContactDialog"
