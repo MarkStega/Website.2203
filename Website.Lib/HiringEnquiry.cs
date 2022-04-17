@@ -2,11 +2,13 @@
 using System.Text.Json;
 
 namespace Website.Lib;
-public class ContactData : IMessage
+public class HiringEnquiry : IMessage
 {
+    public enum RoleType { Analyst, Technologist, Other}
+
     private class MessageCard
     {
-        public string Title { get; } = "Dioptra Website Contact Message";
+        public string Title { get; } = "Dioptra Website Hiring Message";
 
         public string Text { get; } = $"Received on {DateTime.Now:ddd dd-MM-yyyy HH:mm:ss}";
 
@@ -38,7 +40,10 @@ public class ContactData : IMessage
     public string Phone { get; set; } = string.Empty;
 
     [Required]
-    public string Message { get; set; } = string.Empty;
+    public RoleType ProspectiveRole { get; set; }
+
+    [Required]
+    public string AboutMe { get; set; } = string.Empty;
 
 
     public string GetMessageCardJson(JsonSerializerOptions jsonSerializerOptions)
@@ -55,7 +60,8 @@ public class ContactData : IMessage
                             new() { Name = "Name", Value = Name },
                             new() { Name = "Email", Value = Email },
                             new() { Name = "Phone", Value = Phone },
-                            new() { Name = "Message", Value = Message },
+                            new() { Name = "PropspectiveRole", Value = ProspectiveRole.ToString() },
+                            new() { Name = "AboutMe", Value = AboutMe },
                         }
                     }
                 }

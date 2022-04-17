@@ -5,5 +5,5 @@ using System.Threading.Tasks;
 
 public interface ITeamsNotificationService
 {
-    Task SendNotification(ContactData contactData);
+    Task SendNotification(IMessage message);
 }
