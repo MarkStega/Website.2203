@@ -34,11 +34,18 @@
     <div class="dw-max-width-content">
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
-                @*<div class="mdc-layout-grid__cell--span-12">
+                <div class="mdc-layout-grid__cell--span-12">
                     <div class="dw-panel-container">
-                        <Carousel Data="@CarouselData" />
+                        <MBCarousel Context="item"
+                                    Items="@CarouselData"
+                                    RolloverInterval="3000">
+                            <Content>
+                                <div style="height: 300px; width: 100%; background-color: lightsalmon;">@item.HoldingText</div>
+                                <div><p class="mdc-typography--caption" style="text-align: center;">@item.Caption</p></div>
+                            </Content>
+                        </MBCarousel>
                     </div>
-                </div>*@
+                </div>
 
                 <div class="mdc-layout-grid__cell--span-4-phone dw-hidden-desktop-up dw-section-spacing"></div>
 

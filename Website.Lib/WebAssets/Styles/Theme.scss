@@ -36,6 +36,8 @@
 }
 
 .dw-amber {
+    --mdc-theme-surface: var(--mb-color-amber-200);
+    --mdc-theme-on-surface: var(--mb-color-on-amber-200);
     --mdc-theme-background: var(--mb-color-amber-200);
     background-color: var(--mdc-theme-background);
 }
