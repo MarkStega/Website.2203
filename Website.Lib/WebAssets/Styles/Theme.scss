@@ -9,6 +9,7 @@
     $surface: white,
 );
 
+@use "../Shared/Carousel.scss";
 @use "Main";
 @use "@material/top-app-bar";
 @use "@material/elevation/mixins" as elevation-mixins;
