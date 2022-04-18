@@ -14,7 +14,6 @@
   "author": "Dioptra",
   "license": "SEE LICENSE IN ../LICENSE.md",
   "devDependencies": {
-    "material-components-web": "12.0.0",
     "@babel/cli": "7.14.8",
     "@babel/core": "7.15.0",
     "@babel/plugin-proposal-class-properties": "7.14.5",
@@ -25,8 +24,9 @@
     "@babel/preset-typescript": "7.15.0",
     "babel-loader": "8.2.2",
     "fork-ts-checker-webpack-plugin": "6.3.2",
-    "sass": "1.39.2",
+    "material-components-web": "12.0.0",
     "regexp": "1.0.0",
+    "sass": "1.39.2",
     "source-map-loader": "3.0.0",
     "terser": "5.7.2",
     "ts-loader": "9.2.5",
