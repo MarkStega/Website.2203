@@ -3,10 +3,15 @@
 @inherits ComponentBase
 
 
-<MetaContent Title="Dioptra - real estate financial analytics"
-             Description="Dioptra provides sophisticated, banking grade financial analytics to institutional real estate investors."
-             OpenGraphImage=""
-             TwitterImage=""/>
+<HeadAndMetaContent Title="Dioptra - real estate financial analytics"
+                    Description="Dioptra provides sophisticated, banking grade financial analytics to institutional real estate investors."
+                    OpenGraphImage=""
+                    TwitterImage="">
+    @foreach (var item in CarouselData)
+    {
+        <link rel="preload" href="@item.Uri" as="image">
+    }
+</HeadAndMetaContent>
 
 
 <div class="dw-section-regular">

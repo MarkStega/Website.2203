@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Website.Lib.Shared;
-public partial class MetaContent : ComponentBase
+public partial class HeadAndMetaContent : ComponentBase
 {
     [Inject] private NavigationManager NavigationManager { get; set; }
 
@@ -11,6 +11,7 @@ public partial class MetaContent : ComponentBase
     [Parameter] public string OpenGraphImage { get; set; } = "";
     [Parameter] public string TwitterImage { get; set; } = "";
     [Parameter] public string Title { get; set; } = "";
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
 
     private RenderFragment Tags { get; set; }
