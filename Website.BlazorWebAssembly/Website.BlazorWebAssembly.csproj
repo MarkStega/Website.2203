@@ -7,7 +7,7 @@
 		<ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
 		<RunAOTCompilation>true</RunAOTCompilation>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-		<DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+		<DockerComposeProjectPath>..\docker-compose-blazor-webassembly.dcproj</DockerComposeProjectPath>
 		<DockerfileTag>website-2203-blazor-webassembly</DockerfileTag>
 	</PropertyGroup>
 

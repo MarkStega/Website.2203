@@ -6,7 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>e8d481c6-1573-488e-869a-9f45e93cacac</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-		<DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+		<DockerComposeProjectPath>..\docker-compose-blazor-server.dcproj</DockerComposeProjectPath>
 		<DockerfileTag>website-2203-blazor-server</DockerfileTag>
 	</PropertyGroup>
 
