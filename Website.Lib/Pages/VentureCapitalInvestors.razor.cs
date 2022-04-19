@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 using System.Linq;
 
 namespace Website.Lib.Pages;
-public partial class WorkForUs : ComponentBase
+public partial class VentureCapitalInvestors : ComponentBase
 {
     [Inject] private ITeamsNotificationService TeamsNotificationService { get; set; }
     [CascadingParameter] private Action<bool> ShowHomeButton { get; set; }

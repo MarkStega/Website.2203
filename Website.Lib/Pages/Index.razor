@@ -3,9 +3,11 @@
 @inherits ComponentBase
 
 
-<HeadContent>
-    <meta name="description" content="Dioptra provides sophisticated, banking grade financial analytics to institutional real estate investors.">
-</HeadContent>
+<MetaContent Title="Dioptra - real estate financial analytics"
+             Description="Dioptra provides sophisticated, banking grade financial analytics to institutional real estate investors."
+             OpenGraphImage=""
+             TwitterImage=""/>
+
 
 <div class="dw-section-regular">
     <div class="dw-max-width-content">
@@ -40,7 +42,8 @@
                                     Items="@CarouselData"
                                     RolloverInterval="3000">
                             <Content>
-                                <div style="height: 300px; width: 100%; background-color: lightsalmon;">@item.HoldingText</div>
+                                <img style="width: 100%;" src="@item.Uri">
+                                @*<div style="height: 300px; width: 100%; background-color: lightsalmon;">@item.Uri</div>*@
                                 <div><p class="mdc-typography--caption" style="text-align: center;">@item.Caption</p></div>
                             </Content>
                         </MBCarousel>
@@ -72,7 +75,8 @@
                 <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4 dw-card-cell-span">
                     <div class="dw-card-container">
                         <MBCard class="mb-basic-with-header mb-ui-control"
-                                CardStyle="@MBCardStyle.Default">
+                                CardStyle="@MBCardStyle.Default"
+                                @onclick="@RealEstateClientsClick" >
 
                             <PrimaryAction>
                                 <div class="mb-card__autostyled">
@@ -95,7 +99,8 @@
                 <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4 dw-card-cell-span">
                     <div class="dw-card-container">
                         <MBCard class="mb-basic-with-header mb-ui-control"
-                                CardStyle="@MBCardStyle.Default">
+                                CardStyle="@MBCardStyle.Default"
+                                @onclick="@VentureCapitalInvestorsClick" >
 
                             <PrimaryAction>
                                 <div class="mb-card__autostyled">

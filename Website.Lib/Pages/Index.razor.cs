@@ -6,7 +6,7 @@ public partial class Index : ComponentBase
 {
     private class CarouselDataType
     {
-        public string HoldingText { get; set; } = "";
+        public string Uri { get; set; } = "";
         public string Caption { get; set; } = "";
     }
 
@@ -18,11 +18,15 @@ public partial class Index : ComponentBase
 
     private static readonly CarouselDataType[] CarouselData = new CarouselDataType[]
     {
-        new() { HoldingText = "Panel 1", Caption = "Caption 1" },
-        new() { HoldingText = "Panel 2", Caption = "Caption 2" },
-        new() { HoldingText = "Panel 3", Caption = "Caption 3" },
-        new() { HoldingText = "Panel 4", Caption = "Caption 4" },
-        new() { HoldingText = "Panel 5", Caption = "Caption 5" },
+        new() { Uri = "_content/Website.Lib/images/01-main-screen.jpeg", Caption = "Dioptra's main screen layout" },
+        new() { Uri = "_content/Website.Lib/images/02-main-screen-search.jpeg", Caption = "Searching for a scheme that exibits high risk" },
+        new() { Uri = "_content/Website.Lib/images/03-march-costs-chart.jpeg", Caption = "Budget, actual and forecast development costs" },
+        new() { Uri = "_content/Website.Lib/images/04-march-accruals.jpeg", Caption = "Loan interest accruals" },
+        new() { Uri = "_content/Website.Lib/images/05-march-cost-summary.jpeg", Caption = "Summary of project costs" },
+        new() { Uri = "_content/Website.Lib/images/06-march-capital-flows.jpeg", Caption = "Chart of actual and forecast capital structure" },
+        new() { Uri = "_content/Website.Lib/images/07-march-land-reg.jpeg", Caption = "UK Land Registry query of sold unit prices" },
+        new() { Uri = "_content/Website.Lib/images/08-march-version-graph.jpeg", Caption = "Scheme data versioning" },
+        new() { Uri = "_content/Website.Lib/images/09-march-edit-budget-schedule.jpeg", Caption = "Editting a suite of cost budget schedules" },
     };
 
 
@@ -31,6 +35,18 @@ public partial class Index : ComponentBase
         base.OnInitialized();
 
         ShowHomeButton(false);
+    }
+
+
+    private void RealEstateClientsClick()
+    {
+        NavigationManager.NavigateTo("/real-estate-clients");
+    }
+
+
+    private void VentureCapitalInvestorsClick()
+    {
+        NavigationManager.NavigateTo("/venture-capital-investors");
     }
 
 
