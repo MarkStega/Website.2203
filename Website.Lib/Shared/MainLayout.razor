@@ -32,16 +32,13 @@
             <div class="dw-max-width-content">
                 <div class="mdc-layout-grid">
                     <div class="mdc-layout-grid__inner">
-                        <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-2-tablet dw-footer-element dw-footer-logo dw-hidden-phone-down">
+                        <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-1-phone dw-footer-element dw-footer-logo">
                             <span style="min-width: 80px; margin-right: 36px;"><DioptraLogo Color="white" Height="80" /></span>
-                        </div>
-
-                        <div class="mdc-layout-grid__cell--span-1-phone dw-footer-element dw-footer-logo dw-hidden-tablet-up">
-                            <span style="min-width: 60px; margin-bottom: 6px;"><DioptraLogo Color="white" Height="60" /></span>
                         </div>
 
                         <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-3-phone dw-footer-element dw-footer-contact">
                             <MBFloatingActionButton Type="@MBFloatingActionButtonType.ExtendedLeadingIcon" Icon="send" Label="Contact" @onclick="@OpenContactDialogAsync" />
+                            <a href="/terms-and-conditions" rel=" noopener">Terms and Conditions</a>
                         </div>
 
                         <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone dw-footer-element dw-footer-address">
