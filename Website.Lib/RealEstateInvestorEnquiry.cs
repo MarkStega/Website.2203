@@ -2,13 +2,11 @@
 using System.Text.Json;
 
 namespace Website.Lib;
-public class HiringEnquiry : IMessage
+public class RealEstateInvestorEnquiry : IMessage
 {
-    public enum RoleType { Analyst, Technologist, Other}
-
     private class MessageCard
     {
-        public string Title { get; } = "Dioptra Website Hiring Message";
+        public string Title { get; } = "Dioptra Website Real Estate Investor Enquiry";
 
         public string Text { get; } = $"Received on {DateTime.Now:ddd dd-MM-yyyy HH:mm:ss}";
 
@@ -40,10 +38,11 @@ public class HiringEnquiry : IMessage
     public string Phone { get; set; } = string.Empty;
 
     [Required]
-    public RoleType ProspectiveRole { get; set; }
-
+    public string CompanyName { get; set; } = string.Empty;
     [Required]
-    public string AboutMe { get; set; } = string.Empty;
+    public string Website { get; set; } = string.Empty;
+    [Required]
+    public string HowCanWeHelp { get; set; } = string.Empty;
 
 
     public string GetMessageCardJson(JsonSerializerOptions jsonSerializerOptions)
@@ -60,8 +59,9 @@ public class HiringEnquiry : IMessage
                             new() { Name = "Name", Value = Name },
                             new() { Name = "Email", Value = Email },
                             new() { Name = "Phone", Value = Phone },
-                            new() { Name = "PropspectiveRole", Value = ProspectiveRole.ToString() },
-                            new() { Name = "AboutMe", Value = AboutMe },
+                            new() { Name = "CompanyName", Value = CompanyName },
+                            new() { Name = "Website", Value = Website },
+                            new() { Name = "HowCanWeHelp", Value = HowCanWeHelp },
                         }
                     }
                 }

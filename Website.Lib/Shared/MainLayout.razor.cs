@@ -8,16 +8,15 @@ public partial class MainLayout : LayoutComponentBase
     [Inject] private ITeamsNotificationService TeamsNotificationService { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
 
-    private MBMenu Menu { get; set; } = new();
     private MBDialog ContactDialog { get; set; } = new();
     private MBFloatingActionButton HomeButton { get; set; }
     private bool HomeButtonExited { get; set; } = true;
-    private ContactData Contact { get; set; } = new();
+    private ContactMessage ContactMessage { get; set; } = new();
 
 
     private async Task OpenContactDialogAsync()
     {
-        Contact = new();
+        ContactMessage = new();
 
         await ContactDialog.ShowAsync();
     }
@@ -30,7 +29,7 @@ public partial class MainLayout : LayoutComponentBase
     private async Task ContactDialogSubmittedAsync()
     {
         await ContactDialog.HideAsync();
-        await TeamsNotificationService.SendNotification(Contact);
+        await TeamsNotificationService.SendNotification(ContactMessage);
     }
 
     private void HomeClick()

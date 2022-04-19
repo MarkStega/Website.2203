@@ -23,7 +23,7 @@
                         your potential. If you're interested to talk, please just get in touch and don't worry if you're unsure whether you fit precisely
                         what we are after. We value your diverse skills.
                     </p>
-                    <p style="text-align: right"><MBButton LeadingIcon="chat_bubble_outline" Label="Tell us about yourself" ButtonStyle="@MBButtonStyle.ContainedUnelevated" @onclick="@(() => OpenHiringDialogAsync())" /></p>
+                    <p style="text-align: right"><MBButton LeadingIcon="chat_bubble_outline" Label="Tell us about yourself" ButtonStyle="@MBButtonStyle.ContainedUnelevated" @onclick="@(() => OpenDialogAsync())" /></p>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
                         and stochastic mathematical proceses used in derivatives trading. This already gives our clients resolution on portfolio risks and opportunities
                         substantially beyond other real estate financial analytics systems' capability.
                     </p>
-                    <p style="text-align: right"><MBButton LeadingIcon="chat_bubble_outline" Label="Enquire about Analyst Roles" ButtonStyle="@MBButtonStyle.ContainedUnelevated" @onclick="@(() => OpenHiringDialogAsync(HiringEnquiry.RoleType.Analyst))" /></p>
+                    <p style="text-align: right"><MBButton LeadingIcon="chat_bubble_outline" Label="Enquire about Analyst Roles" ButtonStyle="@MBButtonStyle.ContainedUnelevated" @onclick="@(() => OpenDialogAsync(RecruitmentEnquiry.RoleType.Analyst))" /></p>
                 </div>
             </div>
         </div>
@@ -86,7 +86,7 @@
                         <a href="https://www.youtube.com/watch?v=yzLDvQ-bOw8" target="_blank">ASP.NET Community Standup</a> video stream in late 2020. As a designer you will deliver
                         best in class desgin to make Dioptra's UX as intuitive and fluid as possible.
                     </p>
-                    <p style="text-align: right"><MBButton LeadingIcon="chat_bubble_outline" Label="Enquire about Technologist Roles" ButtonStyle="@MBButtonStyle.ContainedUnelevated" @onclick="@(() => OpenHiringDialogAsync(HiringEnquiry.RoleType.Technologist))" /></p>
+                    <p style="text-align: right"><MBButton LeadingIcon="chat_bubble_outline" Label="Enquire about Technologist Roles" ButtonStyle="@MBButtonStyle.ContainedUnelevated" @onclick="@(() => OpenDialogAsync(RecruitmentEnquiry.RoleType.Technologist))" /></p>
                 </div>
             </div>
         </div>
@@ -94,37 +94,37 @@
 </div>
 
 <MBDialog EscapeKeyAction=""
-          @ref="@HiringDialog"
+          @ref="@RecruitmentEnquiryDialog"
           ScrimClickAction=""
           Title="@HiringDialogTitle">
     <Body>
-        <EditForm Model="@HiringEnquiry"
-                  OnValidSubmit="@HiringDialogSubmittedAsync">
+        <EditForm Model="@RecruitmentEnquiry"
+                  OnValidSubmit="@DialogSubmittedAsync">
 
             <DataAnnotationsValidator />
 
-            <MBTextField @bind-Value="@HiringEnquiry.Name"
+            <MBTextField @bind-Value="@RecruitmentEnquiry.Name"
                          Label="Name"
                          style="width: 100%; margin-top: 6px;"
                          TextInputStyle="@MBTextInputStyle.Outlined"
-                         ValidationMessageFor="@(() => HiringEnquiry.Name)" />
+                         ValidationMessageFor="@(() => RecruitmentEnquiry.Name)" />
 
 
-            <MBTextField @bind-Value="@HiringEnquiry.Email"
+            <MBTextField @bind-Value="@RecruitmentEnquiry.Email"
                          Label="Email"
                          style="width: 100%; margin-top: 6px;"
                          TextInputStyle="@MBTextInputStyle.Outlined"
-                         ValidationMessageFor="@(() => HiringEnquiry.Email)" />
+                         ValidationMessageFor="@(() => RecruitmentEnquiry.Email)" />
 
-            <MBTextField @bind-Value="@HiringEnquiry.Phone"
+            <MBTextField @bind-Value="@RecruitmentEnquiry.Phone"
                          Label="Phone Number"
                          style="width: 100%; margin-top: 6px;"
                          TextInputStyle="@MBTextInputStyle.Outlined"
-                         ValidationMessageFor="@(() => HiringEnquiry.Phone)" />
+                         ValidationMessageFor="@(() => RecruitmentEnquiry.Phone)" />
 
             @if (ShowProspectiveRole)
             {
-                <MBSelect @bind-Value="@HiringEnquiry.ProspectiveRole"
+                <MBSelect @bind-Value="@RecruitmentEnquiry.ProspectiveRole"
                           Items="@SelectElements"
                           ItemValidation="@MBItemValidation.NoSelection"
                           SelectInputStyle="@MBSelectInputStyle.Outlined"
@@ -132,12 +132,12 @@
                           style="width: 100%; margin-bottom: 16px;" />
             }
 
-            <MBTextArea @bind-Value="@HiringEnquiry.AboutMe"
+            <MBTextArea @bind-Value="@RecruitmentEnquiry.AboutMe"
                         Label="About Me"
                         Rows="5"
                         style="width: 100%; margin-top: 6px;"
                         TextInputStyle="@MBTextInputStyle.Outlined"
-                        ValidationMessageFor="@(() => HiringEnquiry.AboutMe)" />
+                        ValidationMessageFor="@(() => RecruitmentEnquiry.AboutMe)" />
 
             <div class="mdc-layout-grid__cell--span-12" style="text-align: right;">
                 <MBButton Label="Send"
@@ -146,7 +146,7 @@
                           type="submit" />
 
                 <MBButton Label="Cancel"
-                          @onclick="@CloseHiringDialogAsync"
+                          @onclick="@ClosegDialogAsync"
                           style="margin: 0.75em 0.25em 0.25em 0.25em;"
                           type="button" />
             </div>

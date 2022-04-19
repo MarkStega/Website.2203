@@ -68,35 +68,35 @@
           ScrimClickAction=""
           Title="Contact Dioptra">
     <Body>
-        <EditForm Model="@Contact"
+        <EditForm Model="@ContactMessage"
                   OnValidSubmit="@ContactDialogSubmittedAsync">
 
             <DataAnnotationsValidator />
 
-            <MBTextField @bind-Value="@Contact.Name"
+            <MBTextField @bind-Value="@ContactMessage.Name"
                          Label="Name"
                          style="width: 100%; margin-top: 6px;"
                          TextInputStyle="@MBTextInputStyle.Outlined"
-                         ValidationMessageFor="@(() => Contact.Name)" />
+                         ValidationMessageFor="@(() => ContactMessage.Name)" />
 
-            <MBTextField @bind-Value="@Contact.Email"
+            <MBTextField @bind-Value="@ContactMessage.Email"
                          Label="Email"
                          style="width: 100%; margin-top: 6px;"
                          TextInputStyle="@MBTextInputStyle.Outlined"
-                         ValidationMessageFor="@(() => Contact.Email)" />
+                         ValidationMessageFor="@(() => ContactMessage.Email)" />
 
-            <MBTextField @bind-Value="@Contact.Phone"
+            <MBTextField @bind-Value="@ContactMessage.Phone"
                          Label="Phone Number"
                          style="width: 100%; margin-top: 6px;"
                          TextInputStyle="@MBTextInputStyle.Outlined"
-                         ValidationMessageFor="@(() => Contact.Phone)" />
+                         ValidationMessageFor="@(() => ContactMessage.Phone)" />
 
-            <MBTextArea @bind-Value="@Contact.Message"
+            <MBTextArea @bind-Value="@ContactMessage.Message"
                         Label="Message"
                         Rows="5"
                         style="width: 100%; margin-top: 6px;"
                         TextInputStyle="@MBTextInputStyle.Outlined"
-                        ValidationMessageFor="@(() => Contact.Message)" />
+                        ValidationMessageFor="@(() => ContactMessage.Message)" />
 
             <div class="mdc-layout-grid__cell--span-12" style="text-align: right;">
                 <MBButton Label="Send"

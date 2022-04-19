@@ -19,25 +19,33 @@
     @include elevation-mixins.elevation(4);
 }
 
+:root {
+    --dw-hidden-color: var(--mdc-theme-on-surface);
+}
 .dw-dark-grey {
     --mdc-theme-primary: var(--mb-color-blue-200);
     --mdc-theme-on-primary: var(--mb-color-on-blue-200);
     --mdc-theme-secondary: var(--mb-color-orange-200);
     --mdc-theme-on-secondary: var(--mb-color-on-orange-200);
+    --mdc-theme-surface: var(--mb-color-blue-grey-700);
+    --mdc-theme-on-surface: var(--mb-color-on-blue-grey-700);
     --mdc-theme-background: var(--mb-color-blue-grey-700);
-    background-color: var(--mdc-theme-background);
-    color: var(--mb-color-on-blue-grey-700);
+    background-color: var(--mdc-theme-surface);
+    color: var(--mdc-theme-on-surface);
 }
 
 .dw-light-grey {
+    --mdc-theme-surface: var(--mb-color-blue-grey-300);
+    --mdc-theme-on-surface: var(--mb-color-on-blue-grey-300);
     --mdc-theme-background: var(--mb-color-blue-grey-300);
-    background-color: var(--mdc-theme-background);
-    color: var(--mb-color-on-blue-grey-300);
+    background-color: var(--mdc-theme-surface);
+    color: var(--mdc-theme-on-surface);
 }
 
 .dw-amber {
     --mdc-theme-surface: var(--mb-color-amber-200);
     --mdc-theme-on-surface: var(--mb-color-on-amber-200);
     --mdc-theme-background: var(--mb-color-amber-200);
-    background-color: var(--mdc-theme-background);
+    background-color: var(--mdc-theme-surface);
+    color: var(--mdc-theme-on-surface);
 }

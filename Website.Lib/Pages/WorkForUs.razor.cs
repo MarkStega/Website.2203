@@ -8,9 +8,9 @@ public partial class WorkForUs : ComponentBase
     [Inject] private ITeamsNotificationService TeamsNotificationService { get; set; }
     [CascadingParameter] private Action<bool> ShowHomeButton { get; set; }
 
-    private MBDialog HiringDialog { get; set; } = new();
-    private HiringEnquiry HiringEnquiry { get; set; } = new();
-    private List<MBSelectElement<HiringEnquiry.RoleType>> SelectElements { get; set; }
+    private MBDialog RecruitmentEnquiryDialog { get; set; } = new();
+    private RecruitmentEnquiry RecruitmentEnquiry { get; set; } = new();
+    private List<MBSelectElement<RecruitmentEnquiry.RoleType>> SelectElements { get; set; }
     private string HiringDialogTitle { get; set; } = "";
     private bool ShowProspectiveRole { get; set; } = false;
 
@@ -21,45 +21,45 @@ public partial class WorkForUs : ComponentBase
 
         ShowHomeButton(true);
 
-        SelectElements = Enum.GetValues<HiringEnquiry.RoleType>().Select(x => new MBSelectElement<HiringEnquiry.RoleType>() { SelectedValue = x, Label = x.ToString() }).ToList();
+        SelectElements = Enum.GetValues<RecruitmentEnquiry.RoleType>().Select(x => new MBSelectElement<RecruitmentEnquiry.RoleType>() { SelectedValue = x, Label = x.ToString() }).ToList();
     }
 
 
-    private async Task OpenHiringDialogAsync(HiringEnquiry.RoleType? prospectiveRole = null)
+    private async Task OpenDialogAsync(RecruitmentEnquiry.RoleType? prospectiveRole = null)
     {
-        HiringEnquiry = new();
+        RecruitmentEnquiry = new();
 
-        if (prospectiveRole == HiringEnquiry.RoleType.Analyst)
+        if (prospectiveRole == RecruitmentEnquiry.RoleType.Analyst)
         {
-            HiringEnquiry.ProspectiveRole = HiringEnquiry.RoleType.Analyst;
+            RecruitmentEnquiry.ProspectiveRole = RecruitmentEnquiry.RoleType.Analyst;
             HiringDialogTitle = "Analyst Role Enquiry";
             ShowProspectiveRole = false;
         }
-        else if (prospectiveRole == HiringEnquiry.RoleType.Technologist)
+        else if (prospectiveRole == RecruitmentEnquiry.RoleType.Technologist)
         {
-            HiringEnquiry.ProspectiveRole = HiringEnquiry.RoleType.Technologist;
+            RecruitmentEnquiry.ProspectiveRole = RecruitmentEnquiry.RoleType.Technologist;
             HiringDialogTitle = "Technologist Role Enquiry";
             ShowProspectiveRole = false;
         }
         else if (prospectiveRole == null)
         {
-            HiringEnquiry.ProspectiveRole = HiringEnquiry.RoleType.Analyst;
+            RecruitmentEnquiry.ProspectiveRole = RecruitmentEnquiry.RoleType.Analyst;
             HiringDialogTitle = "Recuritment Enquiry";
             ShowProspectiveRole = true;
         }
 
-        await HiringDialog.ShowAsync();
+        await RecruitmentEnquiryDialog.ShowAsync();
     }
 
-    private async Task CloseHiringDialogAsync()
+    private async Task ClosegDialogAsync()
     {
-        await HiringDialog.HideAsync();
+        await RecruitmentEnquiryDialog.HideAsync();
     }
 
-    private async Task HiringDialogSubmittedAsync()
+    private async Task DialogSubmittedAsync()
     {
-        await HiringDialog.HideAsync();
-        await TeamsNotificationService.SendNotification(HiringEnquiry);
+        await RecruitmentEnquiryDialog.HideAsync();
+        await TeamsNotificationService.SendNotification(RecruitmentEnquiry);
     }
 
 }
