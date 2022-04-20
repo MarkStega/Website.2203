@@ -1,0 +1,112 @@
+﻿@inherits LayoutComponentBase
+
+<CascadingValue Value="@ShowHomeButton">
+    <main class="mdc-drawer-app-content dw-main-content">
+        <div class="dw-content">
+            <div id="dw-main-top" class="dw-dark">
+                <div class="dw-max-width-content">
+                    <div class="mdc-layout-grid">
+                        <div class="mdc-layout-grid__inner">
+                            <div class="mdc-layout-grid__cell--span-12 dw-header-large dw-hidden-phone-down">
+                                <span style="min-width: 120px; margin-right: 36px;"><DioptraLogo Color="white" Height="120" /></span>
+                                <h1 class="mdc-typography--headline1">Dioptra Real Estate Investment Analytics</h1>
+                            </div>
+
+                            <div class="mdc-layout-grid__cell--span-12 dw-header-small dw-hidden-tablet-up">
+                                <span style="min-width: 80px; margin-bottom: 6px;"><DioptraLogo Color="white" Height="80" /></span>
+                                <h1 class="mdc-typography--headline4">Dioptra Real Estate Investment Analytics</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dw-home">
+                <MBFloatingActionButton @ref="@HomeButton" Icon="home" Exited="@HomeButtonExited" @onclick="HomeClick" />
+            </div>
+
+            @Body
+        </div>
+
+        <div class="dw-footer dw-dark">
+            <div class="dw-max-width-content">
+                <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+                        <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-1-phone dw-footer-element dw-footer-logo">
+                            <span style="min-width: 80px; margin-right: 36px;"><DioptraLogo Color="white" Height="80" /></span>
+                        </div>
+
+                        <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-3-phone dw-footer-element dw-footer-contact">
+                            <MBFloatingActionButton Type="@MBFloatingActionButtonType.ExtendedLeadingIcon" Icon="send" Label="Contact" @onclick="@OpenContactDialogAsync" />
+                            <a href="/terms-and-conditions#dw-main-top" rel=" noopener">Terms and Conditions</a>
+                        </div>
+
+                        <div class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone dw-footer-element dw-footer-address">
+                            <div>
+                                <p>© @DateTime.Today.ToString("yyyy") Dioptra Limited</p>
+                                <p>4 The Courtyard</p>
+                                <p>Holmstead Farm</p>
+                                <p>Staplefield Road</p>
+                                <p>Cuckfield</p>
+                                <p>West Sussex RH17 5JF</p>
+                                <p><em>Company Number: 13537855</em></p>
+                                <p><em>VAT Number: 407546495</em></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</CascadingValue>
+
+<MBDialog EscapeKeyAction=""
+          @ref="@ContactDialog"
+          ScrimClickAction=""
+          Title="Contact Dioptra">
+    <Body>
+        <EditForm Model="@ContactMessage"
+                  OnValidSubmit="@ContactDialogSubmittedAsync">
+
+            <DataAnnotationsValidator />
+
+            <MBTextField @bind-Value="@ContactMessage.Name"
+                         Label="Name"
+                         style="width: 100%; margin-top: 6px;"
+                         TextInputStyle="@MBTextInputStyle.Outlined"
+                         ValidationMessageFor="@(() => ContactMessage.Name)" />
+
+            <MBTextField @bind-Value="@ContactMessage.Email"
+                         Label="Email"
+                         style="width: 100%; margin-top: 6px;"
+                         TextInputStyle="@MBTextInputStyle.Outlined"
+                         ValidationMessageFor="@(() => ContactMessage.Email)" />
+
+            <MBTextField @bind-Value="@ContactMessage.Phone"
+                         Label="Phone Number"
+                         style="width: 100%; margin-top: 6px;"
+                         TextInputStyle="@MBTextInputStyle.Outlined"
+                         ValidationMessageFor="@(() => ContactMessage.Phone)" />
+
+            <MBTextArea @bind-Value="@ContactMessage.Message"
+                        Label="Message"
+                        Rows="5"
+                        style="width: 100%; margin-top: 6px;"
+                        TextInputStyle="@MBTextInputStyle.Outlined"
+                        ValidationMessageFor="@(() => ContactMessage.Message)" />
+
+            <div class="mdc-layout-grid__cell--span-12" style="text-align: right;">
+                <MBButton Label="Send"
+                          ButtonStyle="@MBButtonStyle.Outlined"
+                          style="margin: 0.75em 0.25em 0.25em 0.25em;"
+                          type="submit" />
+
+                <MBButton Label="Cancel"
+                          @onclick="@CloseContactDialogAsync"
+                          style="margin: 0.75em 0.25em 0.25em 0.25em;"
+                          type="button" />
+            </div>
+
+        </EditForm>
+    </Body>
+</MBDialog>

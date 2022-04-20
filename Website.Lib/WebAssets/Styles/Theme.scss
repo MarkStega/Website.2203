@@ -1,0 +1,63 @@
+﻿// stylelint-disable scss/dollar-variable-pattern
+
+@use "sass:color";
+
+$color-dark: #1A2238;
+$color-primary-on-dark: #9DAAF2;
+$color-primary-on-light: darken($color-primary-on-dark, 30%);
+$color-secondary-on-dark: #FF6A3D;
+$color-secondary-on-light: darken($color-secondary-on-dark, 30%);
+$color-accent: #F4DB7D;
+
+@use "@material/theme" as theme with ( 
+    $primary: $color-primary-on-dark, 
+    $secondary: $color-secondary-on-dark,
+    $background: white, 
+    $surface: white,
+);
+
+@use "Main";
+@use "@material/top-app-bar";
+@use "@material/elevation/mixins" as elevation-mixins;
+
+.mdc-top-app-bar {
+    @include top-app-bar.fill-color(#1565c0);
+    @include top-app-bar.ink-color(white);
+    @include elevation-mixins.elevation(4);
+}
+
+:root {
+    background-color: white;
+    color: $color-dark;
+    --mdc-theme-surface: white;
+    --mdc-theme-on-surface: #{$color-dark};
+    --dw-obscured-color: var(--mdc-color-grey-600);
+    --dw-color-primary-on-dark: #{$color-primary-on-dark};
+    --dw-color-on-primary-on-dark: #{$color-dark};
+    --dw-color-secondary-on-dark: #{$color-secondary-on-dark};
+    --dw-color-on-secondary-on-dark: white;
+    --dw-color-primary-on-light: #{$color-primary-on-light};
+    --dw-color-on-primary-on-light: white;
+    --dw-color-secondary-on-light: #{$color-secondary-on-light};
+    --dw-color-on-secondary-on-light: white;
+}
+
+.dw-dark {
+    --mdc-theme-surface: #{$color-dark};
+    --mdc-theme-on-surface: white;
+    --mdc-theme-background: #{$color-dark};
+    --mdc-theme-primary: #{$color-secondary-on-dark};
+    --mdc-theme-on-primary: white;
+    --mdc-theme-secondary: #{$color-primary-on-dark};
+    --mdc-theme-on-secondary: #{$color-dark};
+    background-color: $color-dark;
+    color: white;
+    --dw-obscured-color: var(--mdc-color-grey-300);
+}
+
+.dw-accent {
+    --mdc-theme-surface: #{$color-accent};
+    --mdc-theme-on-surface: #{$color-dark};
+    --mdc-theme-background: #{$color-accent};
+    background-color: $color-accent;
+}

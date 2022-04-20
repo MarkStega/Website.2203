@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+	<url>
+		<loc>https://dioptra.tech/</loc>
+		<lastmod>2020-04-20</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+		<loc>https://dioptra.tech/real-estate-clients/</loc>
+		<lastmod>2020-04-20</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+		<loc>https://dioptra.tech/venture-capital-investors/</loc>
+		<lastmod>2020-04-20</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+		<loc>https://dioptra.tech/work-for-us/</loc>
+		<lastmod>2020-04-20</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+		<loc>https://dioptra.tech/terms-and-conditions/</loc>
+		<lastmod>2020-04-20</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.1</priority>
+	</url>
+	<url>
+		<loc>https://dioptra.tech/privacy-policy/</loc>
+		<lastmod>2020-04-20</lastmod>
+		<changefreq>monthly</changefreq>
+		<priority>0.1</priority>
+	</url>
+</urlset>

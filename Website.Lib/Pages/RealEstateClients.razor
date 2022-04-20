@@ -1,0 +1,124 @@
+﻿@page "/real-estate-clients"
+
+@inherits ComponentBase;
+
+
+<HeadAndMetaContent Title="Real estate clients"
+                    Description="Dioptra offers new and unique financial analytics for real estate investment funds and lenders. Our inaugural product focuses on mezzanine development debt and we are working to broaden this out to cover the entire real estate investment and development space."
+                    OpenGraphImage=""
+                    TwitterImage="">
+</HeadAndMetaContent>
+
+
+<div class="dw-section-regular dw-accent">
+    <div class="dw-max-width-content">
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell--span-12">
+                    <h2 class="mb-card__title mdc-typography--headline1">You're a Real Estate Investment fund: it's about you</h2>
+                    <p class="mdc-typography--body1">
+                        Dioptra is building something new. Financial analytics unlike anything you've used before. Funds have always had to use a range
+                        of poorly conceived packages to perform asset and fund level financial analysis, all glued together by unreliable spreadsheets. We're
+                        here to change that.
+                    </p>
+                    <p style="text-align: right"><MBButton LeadingIcon="chat_bubble_outline" Label="Want to know more?" ButtonStyle="@MBButtonStyle.ContainedUnelevated" @onclick="@(() => OpenDialogAsync())" /></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dw-section-regular">
+    <div class="dw-max-width-content">
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell--span-12">
+                    <h2 class="mb-card__title mdc-typography--headline1">What Dioptra will do for you</h2>
+                    <p class="mdc-typography--body1">
+                        Dioptra is built using a capital markets/CMBS approach to financial analytics. Blending the detailed cashlfow analysis used by
+                        bond issuing vehicles with a risk management approach drawn from derivatives trading. Our current product is called Vectis and
+                        manages a mezzanine development loan portfolio. Vectis tracks the variance between actual construction spend and range of budgets
+                        to infer and forecast loan risk. Added to this yield curve analysis is used to forecast senior debt interest accrual and its impact on
+                        the mezzanine portfolio.
+                    </p>
+                    <p class="mdc-typography--body1">
+                        We will build our product suite out to embrace investment portfolios, as well as complex development products. As with Vectis, all data
+                        entered will be retained forever: Vectis maintains a full audit of who entered or changed what data, and when. Vectis is a Software as a Service
+                        product that runs in your browser, so your IT team have no infrastructure to manage. Vectis is easy to use and <strong><em>very, very fast</em></strong>.
+                        Complex scheme analysis is performed faster than you can blink your eyes and you will almost never notice data being loaded or calculations being
+                        performed unless they are broad ranging scenario analyses.
+                    </p>
+                    <p class="mdc-typography--body1">
+                        <strong><em>With Dioptra you will have a transformative ability to report on, examine risk and seek opportunities in your fund or development projects</em></strong>.
+                        All while reducing the load on your analyst teams who will no longer need to manage a mess of disparate systems and spreadsheets.
+                    </p>
+                    <p style="text-align: right"><MBButton LeadingIcon="chat_bubble_outline" Label="Want to know more?" ButtonStyle="@MBButtonStyle.ContainedUnelevated" @onclick="@(() => OpenDialogAsync())" /></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<MBDialog EscapeKeyAction=""
+          @ref="@Dialog"
+          ScrimClickAction=""
+          Title="@HiringDialogTitle">
+    <Body>
+        <EditForm Model="@RealEstateInvestorEnquiry"
+                  OnValidSubmit="@DialogSubmittedAsync">
+
+            <DataAnnotationsValidator />
+
+            <MBTextField @bind-Value="@RealEstateInvestorEnquiry.Name"
+                         Label="Name"
+                         style="width: 100%; margin-top: 6px;"
+                         TextInputStyle="@MBTextInputStyle.Outlined"
+                         ValidationMessageFor="@(() => RealEstateInvestorEnquiry.Name)" />
+
+
+            <MBTextField @bind-Value="@RealEstateInvestorEnquiry.Email"
+                         Label="Email"
+                         style="width: 100%; margin-top: 6px;"
+                         TextInputStyle="@MBTextInputStyle.Outlined"
+                         ValidationMessageFor="@(() => RealEstateInvestorEnquiry.Email)" />
+
+            <MBTextField @bind-Value="@RealEstateInvestorEnquiry.Phone"
+                         Label="Phone Number"
+                         style="width: 100%; margin-top: 6px;"
+                         TextInputStyle="@MBTextInputStyle.Outlined"
+                         ValidationMessageFor="@(() => RealEstateInvestorEnquiry.Phone)" />
+
+            <MBTextField @bind-Value="@RealEstateInvestorEnquiry.CompanyName"
+                         Label="Company Name"
+                         style="width: 100%; margin-top: 6px;"
+                         TextInputStyle="@MBTextInputStyle.Outlined"
+                         ValidationMessageFor="@(() => RealEstateInvestorEnquiry.CompanyName)" />
+
+            <MBTextField @bind-Value="@RealEstateInvestorEnquiry.Website"
+                         Label="Website"
+                         style="width: 100%; margin-top: 6px;"
+                         TextInputStyle="@MBTextInputStyle.Outlined"
+                         ValidationMessageFor="@(() => RealEstateInvestorEnquiry.Website)" />
+
+            <MBTextArea @bind-Value="@RealEstateInvestorEnquiry.HowCanWeHelp"
+                        Label="How can we help you?"
+                        Rows="5"
+                        style="width: 100%; margin-top: 6px;"
+                        TextInputStyle="@MBTextInputStyle.Outlined"
+                        ValidationMessageFor="@(() => RealEstateInvestorEnquiry.HowCanWeHelp)" />
+
+            <div class="mdc-layout-grid__cell--span-12" style="text-align: right;">
+                <MBButton Label="Send"
+                          ButtonStyle="@MBButtonStyle.Outlined"
+                          style="margin: 0.75em 0.25em 0.25em 0.25em;"
+                          type="submit" />
+
+                <MBButton Label="Cancel"
+                          @onclick="@CloseDialogAsync"
+                          style="margin: 0.75em 0.25em 0.25em 0.25em;"
+                          type="button" />
+            </div>
+
+        </EditForm>
+    </Body>
+</MBDialog>

@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>e8d481c6-1573-488e-869a-9f45e93cacac</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerComposeProjectPath>..\docker-compose-blazor-server.dcproj</DockerComposeProjectPath>
+		<DockerfileTag>website-2203-blazor-server</DockerfileTag>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'BlazorServer' " />
+	<ItemGroup>
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.0" />
+		<PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
+		<PackageReference Include="Serilog.Formatting.Compact" Version="1.1.1-dev-00944" />
+		<PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
+		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+		<PackageReference Include="Serilog.Sinks.MicrosoftTeams.Alternative" Version="1.2.15" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Website.Lib\Website.Lib.csproj" />
+	</ItemGroup>
+
+</Project>

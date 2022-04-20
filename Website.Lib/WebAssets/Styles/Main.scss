@@ -1,0 +1,450 @@
+﻿$fade-in-out: 20000ms;
+
+@use 'sass:map';
+
+@use "@material/shape" with (
+    $small-component-radius: 12px,
+    $medium-component-radius: 12px,
+    $large-component-radius: 12px,
+);
+
+@use "@material/typography" with ( 
+    $font-family: unquote("'Roboto', sans-serif"),
+
+    $styles-headline1: (
+        font-family: unquote("'Roboto Serif', sans-serif"),
+        font-weight: 700,
+        font-size: 36px,
+        line-height: normal,
+    ),
+
+    $styles-headline2: (
+        font-family: unquote("'Roboto Serif', sans-serif"),
+        font-weight: 700,
+        font-size: 32px,
+        line-height: normal,
+    ),
+
+    $styles-headline3: (
+        font-family: unquote("'Roboto Serif', sans-serif"),
+        font-weight: 600,
+        font-size: 28px,
+        line-height: normal,
+    ),
+
+    $styles-headline4: (
+        font-family: unquote("'Roboto Serif', sans-serif"),
+        font-weight: 600,
+        font-size: 24px,
+        line-height: normal,
+    ),
+
+    $styles-headline5: (
+        font-family: unquote("'Roboto Serif', sans-serif"),
+        font-weight: 600,
+        font-size: 22px,
+        line-height: normal,
+    ),
+
+    $styles-headline6: (
+        font-family: unquote("'Roboto Serif', sans-serif"),
+        font-weight: 600,
+        font-size: 20px,
+        line-height: normal,
+    ),
+
+    $styles-body1: (
+        font-family: unquote("'Roboto', sans-serif"),
+        font-weight: 400,
+        font-size: 16px,
+        line-height: normal,
+    ),
+
+    $styles-body2: (
+        font-family: unquote("'Roboto', sans-serif"),
+        font-weight: 400,
+        font-size: 14px,
+        line-height: normal,
+    ),
+);
+
+@use "@material/elevation/mixins" as elevation-mixins;
+@use "@material/theme";
+@use "@material/layout-grid";
+
+@use "./material-components-web";
+
+/*
+    App layout styling
+*/
+:root {
+}
+
+body {
+    height: 100vh;
+    margin: 0 !important;
+    color: theme.$on-surface;
+    background-color: theme.$background;
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        /* display: none; <- Crashes Chrome on hover */
+        -webkit-appearance: none;
+        margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield; /* Firefox */
+    }
+}
+
+app {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    &:focus {
+        outline: none;
+    }
+}
+
+.dw-main-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    z-index: 0;
+}
+
+.dw-max-width-content {
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.dw-panel-container {
+    max-width: 1020px;
+    margin: 0 auto;
+}
+
+.dw-section-condensed {
+    padding-top: 48px;
+    padding-bottom: 48px;
+
+    .dw-section-spacing {
+        height: 24px;
+    }
+}
+
+.dw-section-regular {
+    padding-top: 72px;
+    padding-bottom: 72px;
+    
+    .dw-section-spacing {
+        height: 48px;
+    }
+}
+
+.dw-card-container {
+    margin: 0 auto;
+    max-width: 500px;
+
+    & .mb-card__autostyled {
+        height: 280px;
+    }
+}
+
+.dw-home {
+    position: absolute;
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    height: 0px;
+    top: 0px;
+}
+
+.dw-content {
+    position: relative;
+}
+
+.dw-footer {
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.dw-footer-element {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: left;
+
+    & p {
+        margin: 6px 0;
+    }
+
+    &.dw-footer-logo {
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    &.dw-footer-contact {
+        justify-content: center;
+        align-items: flex-end;
+    }
+
+    &.dw-footer-address {
+        justify-content: left;
+        align-items: flex-start;
+    }
+
+    & a {
+        margin-top: 36px;
+    }
+}
+
+.dw-card-content {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    height: 100%;
+
+    & p {
+        margin: 0px;
+    }
+}
+
+.dw-more {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: end;
+    align-items: center;
+    color: var(--mdc-theme-secondary);
+}
+
+:root {
+    --dw-scroll-color: var(--mdc-theme-primary);
+    --dw-scroll-track-color: rgba(0, 0, 0, 0);
+}
+
+@media (max-width: map.get(layout-grid.$breakpoints, "tablet") - 1px) {
+    .mb-carousel__lower .mdc-touch-target-wrapper {
+        margin: 0 -6px;
+    }
+
+    .dw-hidden-phone-down {
+        display: none !important;
+    }
+
+    .dw-home {
+        .mdc-fab {
+            position: fixed;
+            height: 40px;
+            width: 40px;
+            margin-top: 12px;
+            margin-left: 12px;
+        }
+    }
+}
+
+@media (max-width: map.get(layout-grid.$breakpoints, "desktop") - 1px) {
+    .dw-hidden-tablet-down {
+        display: none !important;
+    }
+}
+
+@media (min-width: map.get(layout-grid.$breakpoints, "tablet")) {
+    .dw-hidden-tablet-up {
+        display: none !important;
+    }
+
+    .dw-home {
+        justify-content: center;
+        position: sticky;
+        top: 40px;
+
+        .mdc-fab {
+            position: sticky;
+            margin-top: -28px;
+            top: 12px;
+        }
+    }
+
+    .dw-footer-element {
+        &.dw-footer-contact {
+            //justify-content: center;
+            align-items: center;
+        }
+
+        &.dw-footer-address {
+            align-items: flex-end;
+        }
+    }
+}
+
+@media (min-width: map.get(layout-grid.$breakpoints, "desktop")) {
+    .dw-hidden-desktop-up {
+        display: none !important;
+    }
+}
+
+.dw-header-large {
+    display: inline-flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.dw-header-small {
+    display: inline-flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.dw-loading {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+
+    path {
+        fill: var(--mdc-theme-primary);
+        animation: dwLoadingAnimateHeart 1.2s infinite;
+        transform-origin: center center;
+    }
+
+    div {
+        color: var(--mdc-theme-primary);
+        margin-top: 36px;
+        font-style: italic;
+    }
+}
+
+@keyframes dwLoadingAnimateHeart {
+    // scale down and scale up faster in irregular intervals to get the throbbing effect
+    0% {
+        transform: scale(1);
+    }
+
+    8% {
+        transform: scale(1.03);
+    }
+
+    16% {
+        transform: scale(1.015);
+    }
+
+    24% {
+        transform: scale(1.05);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.dw-custom-scrollbars {
+    scrollbar-width: auto;
+    scrollbar-color: var(--dw-scroll-color) var(--dw-scroll-track-color);
+
+    ::-webkit-scrollbar,
+    ::-webkit-scrollbar-thumb {
+        width: 20px;
+        border-radius: 10px;
+        background-clip: padding-box;
+        border: 6px solid transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        box-shadow: inset 0 0 0 10px;
+        color: var(--dw-scroll-color);
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: rgba(0, 0, 0, 0);
+    }
+}
+
+.dw-custom-scrollbars * {
+    scrollbar-width: inherit;
+    scrollbar-color: inherit;
+}
+
+
+/*
+    Blazor Error UI
+*/
+#blazor-error-ui {
+    display: none;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+}
+
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+.dw-obscured {
+    color: var(--dw-obscured-color);
+    background-color: var(--dw-obscured-color);
+}
+
+.dw-link-card {
+    --mdc-theme-surface: var(--dw-color-primary-on-dark);
+    --mdc-theme-on-surface: var(--dw-color-on-primary-on-dark);
+    --mdc-theme-secondary: var(--dw-color-secondary-on-light);
+    --mdc-theme-on-secondary: var(--dw-color-on-secondary-on-light);
+}
+
+/*
+    Dynamic link underlining
+*/
+a:not(.mdc-deprecated-list-item):not(.mb-tooltip-anchor) {
+    position: relative;
+    box-shadow: inset 0 -2px 0 theme.$secondary;
+    display: inline-flex;
+    z-index: 1;
+    color: inherit;
+    text-decoration: none;
+    transition: 0.15s ease;
+}
+
+a:not(.mdc-deprecated-list-item):not(.mb-tooltip-anchor):hover {
+    box-shadow: none;
+    color: theme.$on-secondary;
+    text-decoration: none;
+}
+
+a:not(.mdc-deprecated-list-item):not(.mb-tooltip-anchor)::after {
+    content: "";
+    background: theme.$secondary;
+    position: absolute;
+    left: -2px;
+    bottom: 0;
+    width: calc(100% + 4px);
+    height: 0;
+    z-index: -1;
+    transition: 0.15s ease;
+}
+
+a:not(.mdc-deprecated-list-item):not(.mb-tooltip-anchor):hover:after {
+    height: 100%;
+}

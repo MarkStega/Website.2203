@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" Sdk="Microsoft.Docker.Sdk" DefaultTargets="Build">
+  <PropertyGroup Label="Globals">
+    <ProjectVersion>2.1</ProjectVersion>
+    <DockerTargetOS>Linux</DockerTargetOS>
+    <ProjectGuid>2fd8a9f4-405a-46e7-a5b0-bd7577919409</ProjectGuid>
+    <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
+    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
+    <DockerServiceName>website.webassembly</DockerServiceName>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="docker-compose-blazor-webassembly.override.yml">
+      <DependentUpon>docker-compose-blazor-webassembly.yml</DependentUpon>
+    </None>
+    <None Include="docker-compose-blazor-webassembly.yml" />
+    <None Include=".dockerignore" />
+  </ItemGroup>
+  <Target Name="CopyDockerIgnore" BeforeTargets="PreBuildEvent">
+    <Copy SourceFiles=".dockerignore" DestinationFolder=".." />
+  </Target>
+</Project>

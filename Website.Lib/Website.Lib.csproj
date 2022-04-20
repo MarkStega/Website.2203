@@ -1,0 +1,108 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="libphonenumber-csharp" Version="8.12.46" />
+		<PackageReference Include="Material.Blazor" Version="2.4.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.4" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ImageFiles Include="$(ProjectDir)WebAssets\Images\*.*" />
+		<Sitemap Include="$(ProjectDir)WebAssets\sitemap.xml" />
+
+		<InputStaticAssetsScripts Include="WebAssets\**\*.ts" />
+		<OutputStaticAssetsScripts Include="wwwroot\js\dioptra.js;wwwroot\js\dioptra.min.js" />
+		<Content Remove="@(OutputStaticAssetsScripts)" />
+		<Content Include="@(OutputStaticAssetsScripts)" />
+
+		<InputStaticAssetsStyles Include="WebAssets\**\*.scss;" />
+		<OutputStaticAssetsStyles Include="wwwroot\css\dioptra.css;wwwroot\css\dioptra.min.css" />
+		<Content Remove="@(OutputStaticAssetsStyles)" />
+		<Content Include="@(OutputStaticAssetsStyles)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<UpToDateCheckInput Include="@(InputStaticAssetsScripts)" Set="Scripts" />
+		<UpToDateCheckOutput Include="@(OutputStaticAssetsScripts)" Set="Scripts" />
+		<UpToDateCheckInput Include="@(InputStaticAssetsStyles)" Set="Styles" />
+		<UpToDateCheckOutput Include="@(OutputStaticAssetsStyles)" Set="Styles" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="tsconfig.json" />
+	</ItemGroup>
+
+	<Target Name="ImagesWWWRoot" BeforeTargets="PreBuildEvent">
+		<Copy SourceFiles="@(ImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/images" />
+		<Copy SourceFiles="@(Sitemap)" DestinationFolder="$(ProjectDir)wwwroot" />
+	</Target>
+
+	<Target Name="CheckIfNpmExists" Inputs="@(InputStaticAssetsScripts);@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsScripts);@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent">
+		<Message Text="***** npm install" />
+		<Exec Command="npm install" ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low" LogStandardErrorAsError="false" IgnoreExitCode="true">
+			<Output TaskParameter="ExitCode" PropertyName="NpmReturnCode" />
+		</Exec>
+		<Message Text="***** 'npm install' return code was $(NpmReturnCode) (0 indicates npm is available)" />
+	</Target>
+
+	<Target Name="ErrorOutput" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' != '0' ">
+		<Message Text="**********************************************************************************" />
+		<Message Text="**********************************************************************************" />
+		<Message Text="**********************************************************************************" />
+		<Message Text=" CSS and JS not built due to the lack of a proper development environment" />
+		<Message Text=" See https://material-blazor.com/docs/articles/DevelopmentEnvironment.html" />
+		<Message Text="**********************************************************************************" />
+		<Message Text="**********************************************************************************" />
+		<Message Text="**********************************************************************************" />
+	</Target>
+
+	<Target Name="BuildScripts" Inputs="@(InputStaticAssetsScripts)" Outputs="@(OutputStaticAssetsScripts)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">
+		<RemoveDir Directories="$(ProjectDir)wwwroot/js" />
+
+		<Message Importance="high" Text="***** npm install" />
+		<Exec Command="npm install" />
+
+		<Message Importance="high" Text="***** npm run build-scripts" />
+		<Exec Command="npm run build-scripts" />
+
+		<Message Importance="high" Text="***** npm run build-js" />
+		<Exec Command="npm run build-js" />
+
+		<Message Importance="high" Text="***** npm run build-min-js" />
+		<Exec Command="npm run build-min-js" />
+
+		<Message Importance="high" Text="***** delete *temp.js" />
+		<ItemGroup>
+			<FilesToDelete Include="wwwroot/js/*temp.js" />
+		</ItemGroup>
+		<Delete Files="@(FilesToDelete)" />
+	</Target>
+
+	<Target Name="BuildStyles" Inputs="@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">
+		<RemoveDir Directories="$(ProjectDir)wwwroot/css" />
+
+		<Message Importance="high" Text="***** npm install" />
+		<Exec Command="npm install" />
+
+		<Message Importance="high" Text="***** npm run build-theme" />
+		<Exec Command="npm run build-theme" />
+
+		<Message Importance="high" Text="***** npm run build-min-theme" />
+		<Exec Command="npm run build-min-theme" />
+	</Target>
+
+</Project>

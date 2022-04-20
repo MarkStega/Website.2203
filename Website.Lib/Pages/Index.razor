@@ -1,0 +1,155 @@
+﻿@page "/"
+
+@inherits ComponentBase
+
+
+<HeadAndMetaContent Title="Dioptra - real estate financial analytics"
+                    Description="Dioptra provides sophisticated, banking grade financial analytics to institutional real estate investors."
+                    OpenGraphImage=""
+                    TwitterImage="">
+    @foreach (var item in CarouselData)
+    {
+        <link rel="preload" href="@item.Uri" as="image">
+    }
+</HeadAndMetaContent>
+
+
+<div class="dw-section-regular">
+    <div class="dw-max-width-content">
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell--span-12">
+                    <h2 class="mdc-typography--headline1">About us</h2>
+                    <p class="mdc-typography--body1">
+                        Dioptra is an enterprise FinTech/PropTech startup developing sophisticated financial analytics for institutional real estate investors.
+                        Our first client is managing a complex mezzanine loan portfolio using our inaugural product. During 2022 we shall
+                        commence expanding this product to address a broad range of Commercial Real Estate investment analytics for institutional
+                        funds and developers across the globe.
+                    </p>
+                    <p class="mdc-typography--body1">
+                        Our products are delivered online as "Software as a Service". You just log into Dioptra from your browser and have access to rich
+                        analytics from any computer or tablet. We do this with a modern technology stack, maintain a full and permanent data audit trail and
+                        employ strong security measures, including conducting periodic pentration tests.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dw-section-condensed dw-accent">
+    <div class="dw-max-width-content">
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell--span-12">
+                    <div class="dw-panel-container">
+                        <h2 class="mdc-typography--headline1">Dioptra Vectis</h2>
+                        <MBCarousel Context="item"
+                                    Items="@CarouselData"
+                                    RolloverInterval="3000">
+                            <Content>
+                                <img style="width: 100%;" src="@item.Uri" alt="@item.Caption">
+                                <div><p class="mdc-typography--caption" style="text-align: center;">@item.Caption</p></div>
+                            </Content>
+                        </MBCarousel>
+                    </div>
+                </div>
+
+                <div class="mdc-layout-grid__cell--span-4-phone dw-hidden-desktop-up dw-section-spacing"></div>
+
+                <div class="mdc-layout-grid__cell--span-12">
+                    <div class="dw-panel-container">
+                        <p class="mb-card__title mdc-typography--subtitle2">
+                            "Dioptra is beyond class leading; it defines a new class of investment analytics. Dioptra drives our treasury loan book management
+                            and gives us an unparalleled insight into both individual loan and broad portfolio risks."
+                        </p>
+                        <p class="mb-card__title mdc-typography--subtitle1">
+                            CEO, <span class="dw-obscured">XXX Capital</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dw-section-regular">
+    <div class="dw-max-width-content">
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4 dw-card-cell-span">
+                    <div class="dw-card-container">
+                        <MBCard class="mb-basic-with-header mb-ui-control dw-link-card"
+                                CardStyle="@MBCardStyle.Default"
+                                @onclick="@RealEstateClientsClick" >
+
+                            <PrimaryAction>
+                                <div class="mb-card__autostyled">
+                                    <div class="dw-card-content">
+                                        <h3 class="mb-card__title mdc-typography--headline3">Real Estate Investment Funds</h3>
+                                        <p class="mdc-typography--subtitle1">
+                                            Find out about Dioptra's progress building a banking-grade investment analytics solution to monitor
+                                            both asset and fund level returns, plus forecast risk and opportunities.
+                                        </p>
+                                        <p class="mdc-typography--subtitle1 dw-more">more <MBIcon IconName="navigate_next" /></p>
+                                    </div>
+                                </div>
+                            </PrimaryAction>
+                        </MBCard>
+                    </div>
+                </div>
+
+                <div class="mdc-layout-grid__cell--span-12 dw-hidden-tablet-up dw-section-spacing"></div>
+                
+                <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4 dw-card-cell-span">
+                    <div class="dw-card-container">
+                        <MBCard class="mb-basic-with-header mb-ui-control dw-link-card"
+                                CardStyle="@MBCardStyle.Default"
+                                @onclick="@VentureCapitalInvestorsClick" >
+
+                            <PrimaryAction>
+                                <div class="mb-card__autostyled">
+                                    <div class="dw-card-content">
+                                        <h3 class="mb-card__title mdc-typography--headline3">Venture Capital Investors</h3>
+                                        <p class="mdc-typography--subtitle1">
+                                            Dioptra has bootstrapped to deploy a revenue generating product licenced to our first client, <span class="dw-obscured">XXX Capital</span>.
+                                            We are holding early talks with select VCs about a substantial seed round and we welcome further
+                                            proposals.
+                                        </p>
+                                        <p class="mdc-typography--subtitle1 dw-more">more <MBIcon IconName="navigate_next" /></p>
+                                    </div>
+                                </div>
+                            </PrimaryAction>
+                        </MBCard>
+                    </div>
+                </div>
+
+                <div class="mdc-layout-grid__cell--span-12 dw-section-spacing"></div>
+                
+                <div class="mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2 dw-hidden-phone-down"></div>
+
+                <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4 dw-card-cell-span">
+                    <div class="dw-card-container">
+                        <MBCard class="mb-basic-with-header mb-ui-control dw-link-card"
+                                CardStyle="@MBCardStyle.Default"
+                                @onclick="@WorkForUsClick" >
+
+                            <PrimaryAction>
+                                <div class="mb-card__autostyled">
+                                    <div class="dw-card-content">
+                                        <h3 class="mb-card__title mdc-typography--headline3">Work for Dioptra</h3>
+                                        <p class="mdc-typography--subtitle1">
+                                            Dioptra will soon be hiring technolgists and financial analysts to dramatcally
+                                            enhance its PropTech/FinTech enterprise SaaS product offering. 
+                                        </p>
+                                        <p class="mdc-typography--subtitle1 dw-more">more <MBIcon IconName="navigate_next" /></p>
+                                    </div>
+                                </div>
+                            </PrimaryAction>
+                        </MBCard>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
