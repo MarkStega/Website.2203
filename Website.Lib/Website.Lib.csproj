@@ -22,6 +22,7 @@
 
 	<ItemGroup>
 		<ImageFiles Include="$(ProjectDir)WebAssets\Images\*.*" />
+		<Sitemap Include="$(ProjectDir)WebAssets\sitemap.xml" />
 
 		<InputStaticAssetsScripts Include="WebAssets\**\*.ts" />
 		<OutputStaticAssetsScripts Include="wwwroot\js\dioptra.js;wwwroot\js\dioptra.min.js" />
@@ -47,6 +48,7 @@
 
 	<Target Name="ImagesWWWRoot" BeforeTargets="PreBuildEvent">
 		<Copy SourceFiles="@(ImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/images" />
+		<Copy SourceFiles="@(Sitemap)" DestinationFolder="$(ProjectDir)wwwroot" />
 	</Target>
 
 	<Target Name="CheckIfNpmExists" Inputs="@(InputStaticAssetsScripts);@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsScripts);@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent">

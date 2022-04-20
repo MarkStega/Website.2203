@@ -40,19 +40,19 @@ public partial class Index : ComponentBase
 
     private void RealEstateClientsClick()
     {
-        NavigationManager.NavigateTo("/real-estate-clients");
+        NavigationManager.NavigateTo("/real-estate-clients#dw-main-top");
     }
 
 
     private void VentureCapitalInvestorsClick()
     {
-        NavigationManager.NavigateTo("/venture-capital-investors");
+        NavigationManager.NavigateTo("/venture-capital-investors#dw-main-top");
     }
 
 
     private void WorkForUsClick()
     {
-        NavigationManager.NavigateTo("/work-for-us");
+        NavigationManager.NavigateTo("/work-for-us#dw-main-top");
     }
 }
 

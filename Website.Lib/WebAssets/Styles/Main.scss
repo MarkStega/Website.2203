@@ -224,7 +224,7 @@ h1, h2, h3, h4, h5, h6, p {
     flex-flow: row nowrap;
     justify-content: end;
     align-items: center;
-    color: var(--mdc-theme-primary);
+    color: var(--mdc-theme-secondary);
 }
 
 :root {
@@ -402,9 +402,16 @@ h1, h2, h3, h4, h5, h6, p {
     top: 0.5rem;
 }
 
-.dw-hidden {
-    color: var(--dw-hidden-color);
-    background-color: var(--dw-hidden-color);
+.dw-obscured {
+    color: var(--dw-obscured-color);
+    background-color: var(--dw-obscured-color);
+}
+
+.dw-link-card {
+    --mdc-theme-surface: var(--dw-color-primary-on-dark);
+    --mdc-theme-on-surface: var(--dw-color-on-primary-on-dark);
+    --mdc-theme-secondary: var(--dw-color-secondary-on-light);
+    --mdc-theme-on-secondary: var(--dw-color-on-secondary-on-light);
 }
 
 /*

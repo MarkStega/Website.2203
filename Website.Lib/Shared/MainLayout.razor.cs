@@ -2,11 +2,13 @@
 
 using Material.Blazor;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 public partial class MainLayout : LayoutComponentBase
 {
     [Inject] private ITeamsNotificationService TeamsNotificationService { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
+    [Inject] private IJSRuntime JSRuntime { get; set; }
 
     private MBDialog ContactDialog { get; set; } = new();
     private MBFloatingActionButton HomeButton { get; set; }
@@ -32,11 +34,12 @@ public partial class MainLayout : LayoutComponentBase
         await TeamsNotificationService.SendNotification(ContactMessage);
     }
 
-    private void HomeClick()
+    private async Task HomeClick()
     {
-        NavigationManager.NavigateTo("/");
+        NavigationManager.NavigateTo("/#dw-main-top");
+        await JSRuntime.InvokeVoidAsync("Website.General.scrollToTop").ConfigureAwait(false);
         HomeButtonExited = true;
-        _ = InvokeAsync(StateHasChanged);
+        await InvokeAsync(StateHasChanged).ConfigureAwait(false);
     }
 
     private void ShowHomeButton(bool show)
