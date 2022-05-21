@@ -10,147 +10,148 @@
 </HeadAndMetaContent>
 
 
-<div class="dw-section-regular">
-    <div class="dw-max-width-content">
-        <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell--span-12">
-                    <h2 class="mb-card__title mdc-typography--headline1">We're Recruiting Soon</h2>
-                    <p class="mdc-typography--body1">
-                        Dioptra will soon build a team to expand its SaaS real estate analytics product offering. We are searching
-                        for talented technologists and real estate/banking analysts. We are interested in the diverse skills that you can bring
-                        rather than focussing on specific prior knowledge. Our approach is that we like to mentor great candidates: it's all about
-                        your potential. If you're interested to talk, please just get in touch and don't worry if you're unsure whether you fit precisely
-                        what we are after. We value your diverse skills.
-                    </p>
-                    <p style="text-align: right"><MBButton LeadingIcon="chat_bubble_outline" Label="Tell us about yourself" ButtonStyle="@MBButtonStyle.ContainedUnelevated" @onclick="@(() => OpenDialogAsync())" /></p>
+<GeneralPageLayout @ref="@GeneralPageLayout" ColorClass="dw-green" >
+    <div class="dw-section-regular">
+        <div class="dw-max-width-content">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell--span-12">
+                        <h2 class="mb-card__title mdc-typography--headline1">We're Recruiting Soon</h2>
+                        <p class="mdc-typography--body1">
+                            Dioptra will soon build a team to expand its SaaS real estate analytics product offering. We need
+                            talented technologists and real estate/banking analysts. We are far more interested in the diverse skills that you can bring
+                            rather than focussing on specific prior experience. We like to mentor great candidates; it's all about
+                            your potential. Please get in touch if you want to know more.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="dw-section-regular dw-accent">
-    <div class="dw-max-width-content">
-        <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell--span-12">
-                    <h2 class="mb-card__title mdc-typography--headline1">Financial Analysts</h2>
-                    <p class="mdc-typography--body1">
-                        Real estate investment is complex business with a blizzard of detailed cashflow that drives returns at all levels of the capital
-                        structure. Dioptra's job is to manage this data, tracking detailed cashflow and producing penny-accurate capital structure and waterfall
-                        analysis. Additionally, Dioptra forecasts future performance arising from micro and macro economic factors.
-                    </p>
-                    <p class="mdc-typography--body1">
-                        On the micro front, Dioptra tracks variance between budgets and actually observed cashflow, which has a lot to say about future potential
-                        performance. From a macro economic perspective interest rates drive contractual debt interest due, and liquid traded yield curves spell out
-                        a central forecast of likely asset and loan performance. Interest rate options markets determine expected variance to this central forecast.
-                    </p>
-                    <p class="mdc-typography--body1">
-                        As an analyst at Dioptra, your role will be to disentangle this broad dataset by applying both traditional real estate cashflow analysis
-                        and stochastic mathematical proceses used in derivatives trading. This already gives our clients resolution on portfolio risks and opportunities
-                        substantially beyond other real estate financial analytics systems' capability.
-                    </p>
-                    <p style="text-align: right"><MBButton LeadingIcon="chat_bubble_outline" Label="Enquire about Analyst Roles" ButtonStyle="@MBButtonStyle.ContainedUnelevated" @onclick="@(() => OpenDialogAsync(RecruitmentEnquiry.RoleType.Analyst))" /></p>
+    <div class="dw-section-regular">
+        <div class="dw-max-width-content">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell--span-12">
+                        <h2 class="mb-card__title mdc-typography--headline1">Financial Analysts</h2>
+                        <p class="mdc-typography--body1">
+                            Real estate investment is complex business with a blizzard of detailed cashflow that drives returns at all levels of the capital
+                            structure. Our job is to manage this data, tracking detailed cashflow and producing penny-accurate capital structure and waterfall
+                            analysis. Additionally, we forecast future performance arising from micro and macro economic factors.
+                        </p>
+                        <p class="mdc-typography--body1">
+                            On the micro front, Dioptra tracks variance between budgets and actually observed cashflow, which has a lot to say about future potential
+                            performance. From a macro economic perspective interest rates drive contractual debt interest due, and liquid traded yield curves spell out
+                            a central forecast of likely asset and loan performance. Interest rate options markets determine expected variance to this central forecast.
+                        </p>
+                        <p class="mdc-typography--body1">
+                            As an analyst at Dioptra, your role will be to disentangle this broad dataset by applying both traditional real estate cashflow analysis
+                            and stochastic mathematics used in derivatives trading. This already gives our clients resolution on portfolio risks and opportunities
+                            far beyond other real estate financial analytics systems' capability.
+                        </p>
+                        <p style="text-align: right"><MBButton Label="Find out More" ButtonStyle="@MBButtonStyle.ContainedUnelevated" @onclick="@(() => OpenDialogAsync(RecruitmentEnquiry.RoleType.Analyst))" /></p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="dw-section-regular">
-    <div class="dw-max-width-content">
-        <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell--span-12">
-                    <h2 class="mb-card__title mdc-typography--headline1">Technologists</h2>
-                    <p class="mdc-typography--body1">
-                        We will hire <strong>programmers</strong>, <strong>data engineers</strong> and <strong>designers</strong> with a range of skills. Our stack is
-                        centred around ASP.NET and is hosted on Azure. We seek a broad range of skills among our technologists and you don't necessarily need to have these
-                        two core skills.
-                    </p>
-                    <p class="mdc-typography--body1">
-                        We are interested in engineering excellence. Dioptra performs rich data analysis in a very performant manner: most of a user's experience involves latency
-                        under 50ms. Dioptra feels as performant as a lightweight spreadsheet, despite turning around some heavy duty compute load. If you are a programmer you will
-                        further use all your skills to enhance this UX excellence despite every increasing workload and scale.
-                    </p>
-                    <p class="mdc-typography--body1">
-                        As a data engineer you will straddle the technology and analyst teams. Our innaugural product's data model already has almost 200 entities and this will grow substantially. To imagine the
-                        scale of the dataset, consider how Dioptra will model complex construction projects. Stand in front of a large building and start to look at all the materials
-                        used in its construction, from concrete, throught wood, to pipework, electrical conduits and even nuts and bolts. You will model the lot. For real estate occupied by tenants,
-                        consider the cashflow associated with a large retail mall: rent, utility costs, parking revenues, etc. Again this is a huge dataset.
-                    </p>
-                    <p class="mdc-typography--body1">
-                        Dioptra is committed to great design. Even at this stage we are one of the co-sponsors of <a href="https://material-blazor.com" target="_blank">Material.Blazor</a>,
-                        an open source library integrating Google's Material Design web implementation with ASP.NET Blazor. This was featured by Micrsoft in an
-                        <a href="https://www.youtube.com/watch?v=yzLDvQ-bOw8" target="_blank">ASP.NET Community Standup</a> video stream in late 2020. As a designer you will deliver
-                        best in class desgin to make Dioptra's UX as intuitive and fluid as possible.
-                    </p>
-                    <p style="text-align: right"><MBButton LeadingIcon="chat_bubble_outline" Label="Enquire about Technologist Roles" ButtonStyle="@MBButtonStyle.ContainedUnelevated" @onclick="@(() => OpenDialogAsync(RecruitmentEnquiry.RoleType.Technologist))" /></p>
+    <div class="dw-section-regular">
+        <div class="dw-max-width-content">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell--span-12">
+                        <h2 class="mb-card__title mdc-typography--headline1">Technologists</h2>
+                        <p class="mdc-typography--body1">
+                            We will hire <strong>programmers</strong>, <strong>data engineers</strong> and <strong>designers</strong> with a range of skills. Our stack is
+                            centred around ASP.NET and is hosted on Azure. We seek a broad range of skills among our technologists so you don't necessarily need previous
+                            experience in these two areas.
+                        </p>
+                        <p class="mdc-typography--body1">
+                            We care about engineering excellence. Dioptra performs rich data analysis in a very performant manner: most of a user's experience involves latency
+                            under 50ms. Dioptra feels as performant as a lightweight spreadsheet despite handling significant compute load. If you are a programmer you will
+                            use all your skills to enhance this UX excellence despite increasing computing requirement and scale.
+                        </p>
+                        <p class="mdc-typography--body1">
+                            As a data engineer you will straddle the technology and analysis teams. Our innaugural product's data model already has almost 200 entities and this will grow substantially. To imagine the
+                            scale of the dataset, consider two things that Dioptra will model. First complex construction projects. Stand in front of a large building and start to look at all the materials
+                            used in its construction, from concrete, throught wood, to pipework, electrical conduits and even nuts and bolts. You will model the lot. Second for real estate occupied by tenants,
+                            think about the cashflow associated with a large retail mall: rent, utility costs, parking revenues, etc. Again this is a huge dataset.
+                        </p>
+                        <p class="mdc-typography--body1">
+                            Dioptra is committed to great design and you can see screen shots of our first product Vectis on the main page. We are one of the co-sponsors of
+                            <a href="https://material-blazor.com" target="_blank">Material.Blazor</a>, an open source library integrating Google's Material Design web implementation with ASP.NET Blazor.
+                            This was featured by Microsoft in an <a href="https://www.youtube.com/watch?v=yzLDvQ-bOw8" target="_blank">ASP.NET Community Standup</a> video stream in late 2020. 
+                            As a designer you will deliver best in class desgin to make Dioptra's UX as intuitive and fluid as possible.
+                        </p>
+                        <p style="text-align: right"><MBButton Label="Find out More" ButtonStyle="@MBButtonStyle.ContainedUnelevated" @onclick="@(() => OpenDialogAsync(RecruitmentEnquiry.RoleType.Technologist))" /></p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<MBDialog EscapeKeyAction=""
-          @ref="@RecruitmentEnquiryDialog"
-          ScrimClickAction=""
-          Title="@HiringDialogTitle">
-    <Body>
-        <EditForm Model="@RecruitmentEnquiry"
-                  OnValidSubmit="@DialogSubmittedAsync">
+    <MBDialog EscapeKeyAction=""
+              @ref="@RecruitmentEnquiryDialog"
+              ScrimClickAction=""
+              Title="@HiringDialogTitle">
+        <Body>
+            <EditForm Model="@RecruitmentEnquiry"
+                      OnValidSubmit="@DialogSubmittedAsync">
 
-            <DataAnnotationsValidator />
+                <DataAnnotationsValidator />
 
-            <MBTextField @bind-Value="@RecruitmentEnquiry.Name"
-                         Label="Name"
-                         style="width: 100%; margin-top: 6px;"
-                         TextInputStyle="@MBTextInputStyle.Outlined"
-                         ValidationMessageFor="@(() => RecruitmentEnquiry.Name)" />
+                <MBTextField @bind-Value="@RecruitmentEnquiry.Name"
+                             Label="Name"
+                             style="width: 100%; margin-top: 6px;"
+                             TextInputStyle="@MBTextInputStyle.Outlined"
+                             ValidationMessageFor="@(() => RecruitmentEnquiry.Name)" />
 
 
-            <MBTextField @bind-Value="@RecruitmentEnquiry.Email"
-                         Label="Email"
-                         style="width: 100%; margin-top: 6px;"
-                         TextInputStyle="@MBTextInputStyle.Outlined"
-                         ValidationMessageFor="@(() => RecruitmentEnquiry.Email)" />
+                <MBTextField @bind-Value="@RecruitmentEnquiry.Email"
+                             Label="Email"
+                             style="width: 100%; margin-top: 6px;"
+                             TextInputStyle="@MBTextInputStyle.Outlined"
+                             ValidationMessageFor="@(() => RecruitmentEnquiry.Email)" />
 
-            <MBTextField @bind-Value="@RecruitmentEnquiry.Phone"
-                         Label="Phone Number"
-                         style="width: 100%; margin-top: 6px;"
-                         TextInputStyle="@MBTextInputStyle.Outlined"
-                         ValidationMessageFor="@(() => RecruitmentEnquiry.Phone)" />
+                <MBTextField @bind-Value="@RecruitmentEnquiry.Phone"
+                             Label="Phone Number"
+                             style="width: 100%; margin-top: 6px;"
+                             TextInputStyle="@MBTextInputStyle.Outlined"
+                             ValidationMessageFor="@(() => RecruitmentEnquiry.Phone)" />
 
-            @if (ShowProspectiveRole)
-            {
-                <MBSelect @bind-Value="@RecruitmentEnquiry.ProspectiveRole"
-                          Items="@SelectElements"
-                          ItemValidation="@MBItemValidation.NoSelection"
-                          SelectInputStyle="@MBSelectInputStyle.Outlined"
-                          Label="Your Prospective Role"
-                          style="width: 100%; margin-bottom: 16px;" />
-            }
+                @if (ShowProspectiveRole)
+                {
+                    <MBSelect @bind-Value="@RecruitmentEnquiry.ProspectiveRole"
+                              Items="@SelectElements"
+                              ItemValidation="@MBItemValidation.NoSelection"
+                              SelectInputStyle="@MBSelectInputStyle.Outlined"
+                              Label="Your Prospective Role"
+                              style="width: 100%; margin-bottom: 16px;" />
+                }
 
-            <MBTextArea @bind-Value="@RecruitmentEnquiry.AboutMe"
-                        Label="About Me"
-                        Rows="5"
-                        style="width: 100%; margin-top: 6px;"
-                        TextInputStyle="@MBTextInputStyle.Outlined"
-                        ValidationMessageFor="@(() => RecruitmentEnquiry.AboutMe)" />
+                <MBTextArea @bind-Value="@RecruitmentEnquiry.AboutMe"
+                            Label="About Me"
+                            Rows="5"
+                            style="width: 100%; margin-top: 6px;"
+                            TextInputStyle="@MBTextInputStyle.Outlined"
+                            ValidationMessageFor="@(() => RecruitmentEnquiry.AboutMe)" />
 
-            <div class="mdc-layout-grid__cell--span-12" style="text-align: right;">
-                <MBButton Label="Send"
-                          ButtonStyle="@MBButtonStyle.Outlined"
-                          style="margin: 0.75em 0.25em 0.25em 0.25em;"
-                          type="submit" />
+                <div class="mdc-layout-grid__cell--span-12" style="text-align: right;">
+                    <MBButton Label="Send"
+                              ButtonStyle="@MBButtonStyle.ContainedUnelevated"
+                              style="margin: 0.75em 0.25em 0.25em 0.25em;"
+                              type="submit" />
 
-                <MBButton Label="Cancel"
-                          @onclick="@ClosegDialogAsync"
-                          style="margin: 0.75em 0.25em 0.25em 0.25em;"
-                          type="button" />
-            </div>
+                    <MBButton Label="Cancel"
+                              ButtonStyle="@MBButtonStyle.Outlined"
+                              @onclick="@ClosegDialogAsync"
+                              style="margin: 0.75em 0.25em 0.25em 0.25em;"
+                              type="button" />
+                </div>
 
-        </EditForm>
-    </Body>
-</MBDialog>
+            </EditForm>
+        </Body>
+    </MBDialog>
+</GeneralPageLayout>

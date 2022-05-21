@@ -1,8 +1,8 @@
 ﻿version: '3.4'
 
 services:
-  website.blazorwebassembly:
-    image: ${docker_registry-}website-2203-blazor-webassembly
+  website.blazorwebassembly.server:
+    image: ${DOCKER_REGISTRY-}website-2203-blazor-webassembly
     build:
-      context: ../
-      dockerfile: Website.2203/Website.BlazorWebAssembly/Dockerfile
+      context: .
+      dockerfile: Website.BlazorWebAssembly/Server/Dockerfile

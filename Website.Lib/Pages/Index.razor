@@ -7,149 +7,229 @@
                     Description="Dioptra provides sophisticated, banking grade financial analytics to institutional real estate investors."
                     OpenGraphImage=""
                     TwitterImage="">
-    @foreach (var item in CarouselData)
+    @foreach (var item in CarouselImages)
     {
-        <link rel="preload" href="@item.Uri" as="image">
+        <link rel="prefetch" href="@item.Uri" as="image">
     }
+
+    @*@foreach (var item in SkylineImages)
+    {
+        <link rel="prefetch" href="@item.Uri" as="image">
+    }
+
+    @foreach (var item in ProgrammerImages)
+    {
+        <link rel="prefetch" href="@item.Uri" as="image">
+    }*@
 </HeadAndMetaContent>
 
-
-<div class="dw-section-regular">
-    <div class="dw-max-width-content">
-        <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell--span-12">
-                    <h2 class="mdc-typography--headline1">About us</h2>
-                    <p class="mdc-typography--body1">
-                        Dioptra is an enterprise FinTech/PropTech startup developing sophisticated financial analytics for institutional real estate investors.
-                        Our first client is managing a complex mezzanine loan portfolio using our inaugural product. During 2022 we shall
-                        commence expanding this product to address a broad range of Commercial Real Estate investment analytics for institutional
-                        funds and developers across the globe.
-                    </p>
-                    <p class="mdc-typography--body1">
-                        Our products are delivered online as "Software as a Service". You just log into Dioptra from your browser and have access to rich
-                        analytics from any computer or tablet. We do this with a modern technology stack, maintain a full and permanent data audit trail and
-                        employ strong security measures, including conducting periodic pentration tests.
-                    </p>
+<GeneralPageLayout @ref="@GeneralPageLayout" ColorClass="dw-green" >
+    <div class="dw-section-condensed dw-hero">
+        <div class="dw-max-width-content">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell--span-12">
+                        <div class="dw-panel-container dw-carousel-container">
+                            <MBCarousel Context="item"
+                                        Items="@CarouselImages"
+                                        RolloverInterval="4000">
+                                <Content>
+                                    <img src="@item.Uri" alt="@item.Caption">
+                                    <div><p class="mdc-typography--caption" style="text-align: center;">@item.Caption</p></div>
+                                </Content>
+                            </MBCarousel>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="dw-section-condensed dw-accent">
-    <div class="dw-max-width-content">
-        <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell--span-12">
-                    <div class="dw-panel-container">
-                        <h2 class="mdc-typography--headline1">Dioptra Vectis</h2>
-                        <MBCarousel Context="item"
-                                    Items="@CarouselData"
-                                    RolloverInterval="3000">
-                            <Content>
-                                <img style="width: 100%;" src="@item.Uri" alt="@item.Caption">
-                                <div><p class="mdc-typography--caption" style="text-align: center;">@item.Caption</p></div>
-                            </Content>
-                        </MBCarousel>
+    <div class="dw-section-condensed">
+        <div class="dw-max-width-content">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell--span-12 dw-tagline">
+                        <picture>
+                            <source media="(max-width: 1019px)" srcset="@SkylineImages[2].Uri" width="@SkylineImages[2].Width" height="@SkylineImages[2].Height">
+                            <source media="(min-width: 1020px) and (max-width: 1219px)" srcset="@SkylineImages[1].Uri" width="@SkylineImages[1].Width" height="@SkylineImages[1].Height">
+                            <source media="(min-width: 1220px)" srcset="@SkylineImages[0].Uri" width="@SkylineImages[0].Width" height="@SkylineImages[0].Height">
+                            <img src="@SkylineImages[0].Uri" alt="@SkylineImages[0].Caption">
+                        </picture>
+
+                        <div class="dw-picture-left">
+                            <p class="mdc-typography--headline4">Forward looking investment analytics for institutional real estate investors</p>
+                            <MBButton ButtonStyle="@MBButtonStyle.ContainedUnelevated" Label="Join the Waitlist" @onclick="@OpenDialogAsync" />
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="mdc-layout-grid__cell--span-4-phone dw-hidden-desktop-up dw-section-spacing"></div>
-
-                <div class="mdc-layout-grid__cell--span-12">
-                    <div class="dw-panel-container">
-                        <p class="mb-card__title mdc-typography--subtitle2">
-                            "Dioptra is beyond class leading; it defines a new class of investment analytics. Dioptra drives our treasury loan book management
-                            and gives us an unparalleled insight into both individual loan and broad portfolio risks."
+    <div class="dw-section-condensed">
+        <div class="dw-max-width-content">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell--span-4 dw-feature">
+                        <h2 class="mdc-typography--headline3">It's about fund equity</h2>
+                        <p class="mdc-typography--body1">
+                            We have a capital markets mindset, focusing on fund equity. To analyse equity performance and risk, we accurately model all cashflow and finance contracts.
+                            We bring this analysis not only to individual assets, but to the whole fund portfolio.
                         </p>
-                        <p class="mb-card__title mdc-typography--subtitle1">
-                            CEO, <span class="dw-obscured">XXX Capital</span>
+                    </div>
+
+                    <div class="mdc-layout-grid__cell--span-4 dw-feature">
+                        <h2 class="mdc-typography--headline3">What we'll do for you</h2>
+                        <p class="mdc-typography--body1">
+                            Dioptra will dramatically improve your treasury, reporting and scenario analysis processes. No more low quality legacy systems or error prone spreadsheets.
+                        </p>
+                    </div>
+
+                    <div class="mdc-layout-grid__cell--span-4 dw-feature">
+                        <h2 class="mdc-typography--headline3">Our first product is live</h2>
+                        <p class="mdc-typography--body1">
+                            We launched Dioptra Vectis in mid 2021, managing a mezzanine and stretch senior development loan portfolio for <a href="https://www.clearwellcapital.co.uk" target="_blank">Clearwell Capital</a>.
+                            Vectis forecasts how actual cashflow divergence from budget is likely to raise portfolio risk and impair individual loans. Shortly this will extend to interest rate yield curve derived risk forecasts.
+                        </p>
+                    </div>
+
+                    <div class="mdc-layout-grid__cell--span-4 dw-feature">
+                        <h2 class="mdc-typography--headline3">Exposing risk</h2>
+                        <p class="mdc-typography--body1">
+                            We transform <em>data</em> into <em>information</em> to deliver <em>insight</em>. Dioptra looks for signals embedded in your cashflow that imply risk.
+                            As we develop a full fund management suite, we will assess direct risk by analysing past and current cashflow along with interest rate yield curve and option pricing.
+                            Indirect risk can be assessed from inflation swap yield curves and credit default swaps.
+                        </p>
+                    </div>
+
+                    <div class="mdc-layout-grid__cell--span-4 dw-feature">
+                        <h2 class="mdc-typography--headline3">Revealing opportunity</h2>
+                        <p class="mdc-typography--body1">
+                            Our fund management suite will have advanced what-if capabilities so you can compare diverse asset management options. For instance comparing the 
+                            impact on fund equity of increasing CAPEX on a specific asset, versus divestment, versus doing nothing.
+                        </p>
+                    </div>
+
+                    <div class="mdc-layout-grid__cell--span-4 dw-feature">
+                        <h2 class="mdc-typography--headline3">Modern technology</h2>
+                        <p class="mdc-typography--body1">
+                            We run a modern technology platform with an intuitive user experience.
+                            Your users log in through a browser from any device and working from any location, always getting the same fast performance and high security.
                         </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="dw-section-regular">
-    <div class="dw-max-width-content">
-        <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4 dw-card-cell-span">
-                    <div class="dw-card-container">
-                        <MBCard class="mb-basic-with-header mb-ui-control dw-link-card"
-                                CardStyle="@MBCardStyle.Default"
-                                @onclick="@RealEstateClientsClick" >
-
-                            <PrimaryAction>
-                                <div class="mb-card__autostyled">
-                                    <div class="dw-card-content">
-                                        <h3 class="mb-card__title mdc-typography--headline3">Real Estate Investment Funds</h3>
-                                        <p class="mdc-typography--subtitle1">
-                                            Find out about Dioptra's progress building a banking-grade investment analytics solution to monitor
-                                            both asset and fund level returns, plus forecast risk and opportunities.
-                                        </p>
-                                        <p class="mdc-typography--subtitle1 dw-more">more <MBIcon IconName="navigate_next" /></p>
-                                    </div>
-                                </div>
-                            </PrimaryAction>
-                        </MBCard>
-                    </div>
-                </div>
-
-                <div class="mdc-layout-grid__cell--span-12 dw-hidden-tablet-up dw-section-spacing"></div>
-                
-                <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4 dw-card-cell-span">
-                    <div class="dw-card-container">
-                        <MBCard class="mb-basic-with-header mb-ui-control dw-link-card"
-                                CardStyle="@MBCardStyle.Default"
-                                @onclick="@VentureCapitalInvestorsClick" >
-
-                            <PrimaryAction>
-                                <div class="mb-card__autostyled">
-                                    <div class="dw-card-content">
-                                        <h3 class="mb-card__title mdc-typography--headline3">Venture Capital Investors</h3>
-                                        <p class="mdc-typography--subtitle1">
-                                            Dioptra has bootstrapped to deploy a revenue generating product licenced to our first client, <span class="dw-obscured">XXX Capital</span>.
-                                            We are holding early talks with select VCs about a substantial seed round and we welcome further
-                                            proposals.
-                                        </p>
-                                        <p class="mdc-typography--subtitle1 dw-more">more <MBIcon IconName="navigate_next" /></p>
-                                    </div>
-                                </div>
-                            </PrimaryAction>
-                        </MBCard>
-                    </div>
-                </div>
-
-                <div class="mdc-layout-grid__cell--span-12 dw-section-spacing"></div>
-                
-                <div class="mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2 dw-hidden-phone-down"></div>
-
-                <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4 dw-card-cell-span">
-                    <div class="dw-card-container">
-                        <MBCard class="mb-basic-with-header mb-ui-control dw-link-card"
-                                CardStyle="@MBCardStyle.Default"
-                                @onclick="@WorkForUsClick" >
-
-                            <PrimaryAction>
-                                <div class="mb-card__autostyled">
-                                    <div class="dw-card-content">
-                                        <h3 class="mb-card__title mdc-typography--headline3">Work for Dioptra</h3>
-                                        <p class="mdc-typography--subtitle1">
-                                            Dioptra will soon be hiring technolgists and financial analysts to dramatcally
-                                            enhance its PropTech/FinTech enterprise SaaS product offering. 
-                                        </p>
-                                        <p class="mdc-typography--subtitle1 dw-more">more <MBIcon IconName="navigate_next" /></p>
-                                    </div>
-                                </div>
-                            </PrimaryAction>
-                        </MBCard>
+    <div class="dw-section-condensed dw-accent-panel">
+        <div class="dw-max-width-content">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell--span-12">
+                        <div class="dw-panel-container">
+                            <QuoteIcon />
+                            <p class="mdc-typography--subtitle2 dw-quote">
+                                Dioptra Vectis drives our loan book management and gives us an unparalleled insight into both individual loan and broad portfolio risks. No other loan system or real estate analytics provider we have seen comes close.
+                                Dioptra Vectis is by far the best property loan management platform that we have come across.
+                            </p>
+                            <p class="mdc-typography--body1 dw-quoted">Ed Marley-Shaw, CEO <a href="https://www.clearwellcapital.co.uk" target="_blank">Clearwell Capital</a></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="dw-section-condensed">
+        <div class="dw-max-width-content">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell--span-12 dw-tagline">
+                        <div class="dw-picture-right">
+                            <p class="mdc-typography--headline4">Work for Dioptra</p>
+                            <p class="mdc-typography--body1">
+                                We will soon be hiring technologists and financial analysts to dramatcally
+                                enhance our PropTech/FinTech enterprise SaaS product offering. 
+                            </p>
+                            <MBButton ButtonStyle="@MBButtonStyle.ContainedUnelevated" Label="Find out More" @onclick="@WorkForUsClick" />
+                        </div>
+
+                        <picture>
+                            <source media="(max-width: 1019px)" srcset="@ProgrammerImages[2].Uri" width="@ProgrammerImages[2].Width" height="@ProgrammerImages[2].Height">
+                            <source media="(min-width: 1020px) and (max-width: 1219px)" srcset="@ProgrammerImages[1].Uri" width="@ProgrammerImages[1].Width" height="@ProgrammerImages[1].Height">
+                            <source media="(min-width: 1220px)" srcset="@ProgrammerImages[0].Uri" width="@ProgrammerImages[0].Width" height="@ProgrammerImages[0].Height">
+                            <img src="@ProgrammerImages[0].Uri" alt="@ProgrammerImages[0].Caption">
+                        </picture>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <MBDialog class="dw-dialog"
+              EscapeKeyAction=""
+              @ref="@Dialog"
+              ScrimClickAction=""
+              Title="Join the Client Waitlist">
+        <Body>
+            <EditForm Model="@RealEstateInvestorEnquiry"
+                      OnValidSubmit="@DialogSubmittedAsync">
+
+                <DataAnnotationsValidator />
+
+                <MBTextField @bind-Value="@RealEstateInvestorEnquiry.Name"
+                             Label="Name"
+                             style="width: 100%; margin-top: 6px;"
+                             TextInputStyle="@MBTextInputStyle.Outlined"
+                             ValidationMessageFor="@(() => RealEstateInvestorEnquiry.Name)" />
+
+
+                <MBTextField @bind-Value="@RealEstateInvestorEnquiry.Email"
+                             Label="Email"
+                             style="width: 100%; margin-top: 6px;"
+                             TextInputStyle="@MBTextInputStyle.Outlined"
+                             ValidationMessageFor="@(() => RealEstateInvestorEnquiry.Email)" />
+
+                <MBTextField @bind-Value="@RealEstateInvestorEnquiry.Phone"
+                             Label="Phone Number"
+                             style="width: 100%; margin-top: 6px;"
+                             TextInputStyle="@MBTextInputStyle.Outlined"
+                             ValidationMessageFor="@(() => RealEstateInvestorEnquiry.Phone)" />
+
+                <MBTextField @bind-Value="@RealEstateInvestorEnquiry.CompanyName"
+                             Label="Company Name"
+                             style="width: 100%; margin-top: 6px;"
+                             TextInputStyle="@MBTextInputStyle.Outlined"
+                             ValidationMessageFor="@(() => RealEstateInvestorEnquiry.CompanyName)" />
+
+                <MBTextField @bind-Value="@RealEstateInvestorEnquiry.Website"
+                             Label="Website"
+                             style="width: 100%; margin-top: 6px;"
+                             TextInputStyle="@MBTextInputStyle.Outlined"
+                             ValidationMessageFor="@(() => RealEstateInvestorEnquiry.Website)" />
+
+                <MBTextArea @bind-Value="@RealEstateInvestorEnquiry.HowCanWeHelp"
+                            Label="How can we help you?"
+                            Rows="5"
+                            style="width: 100%; margin-top: 6px;"
+                            TextInputStyle="@MBTextInputStyle.Outlined"
+                            ValidationMessageFor="@(() => RealEstateInvestorEnquiry.HowCanWeHelp)" />
+
+                <div class="mdc-layout-grid__cell--span-12" style="text-align: right;">
+                    <MBButton Label="Send"
+                              ButtonStyle="@MBButtonStyle.ContainedUnelevated"
+                              style="margin: 0.75em 0.25em 0.25em 0.25em;"
+                              type="submit" />
+
+                    <MBButton Label="Cancel"
+                              ButtonStyle="@MBButtonStyle.Outlined"
+                              @onclick="@CloseDialogAsync"
+                              style="margin: 0.75em 0.25em 0.25em 0.25em;"
+                              type="button" />
+                </div>
+            </EditForm>
+        </Body>
+    </MBDialog>
+</GeneralPageLayout>

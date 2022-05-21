@@ -1,8 +1,8 @@
-﻿version: '3.4'
+version: '3.4'
 
 services:
   website.blazorserver:
     image: ${DOCKER_REGISTRY-}website-2203-blazor-server
     build:
-      context: ../
-      dockerfile: Website.2203/Website.BlazorServer/Dockerfile
+      context: .
+      dockerfile: Website.BlazorServer/Dockerfile

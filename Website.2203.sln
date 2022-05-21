@@ -18,9 +18,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.BlazorServer", "Web
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose-blazor-server", "docker-compose-blazor-server.dcproj", "{4F58C0A0-94C6-40C7-9288-6DCD33D8DA72}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose-blazor-webassembly", "docker-compose-blazor-webassembly.dcproj", "{2FD8A9F4-405A-46E7-A5B0-BD7577919409}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.BlazorWebAssembly.Shared", "Website.BlazorWebAssembly\Shared\Website.BlazorWebAssembly.Shared.csproj", "{5C7BCDA3-B816-4113-B805-695C60F1F194}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.BlazorWebAssembly", "Website.BlazorWebAssembly\Website.BlazorWebAssembly.csproj", "{E01CFE3F-F850-4828-8D83-DDBEF325A404}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.BlazorWebAssembly.Server", "Website.BlazorWebAssembly\Server\Website.BlazorWebAssembly.Server.csproj", "{99B45E6A-AE65-4954-9FBA-13C16BE16992}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.BlazorWebAssembly.Client", "Website.BlazorWebAssembly\Client\Website.BlazorWebAssembly.Client.csproj", "{2118600B-6152-41BE-BD5C-A617713984C5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.ServerLib", "Website.ServerLib\Website.ServerLib.csproj", "{0F15257E-04C4-44D7-BB49-6358F7F2E6CB}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose-blazor-webassembly", "docker-compose-blazor-webassembly.dcproj", "{2FD8A9F4-405A-46E7-A5B0-BD7577919409}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,14 +46,26 @@ Global
 		{4F58C0A0-94C6-40C7-9288-6DCD33D8DA72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F58C0A0-94C6-40C7-9288-6DCD33D8DA72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F58C0A0-94C6-40C7-9288-6DCD33D8DA72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C7BCDA3-B816-4113-B805-695C60F1F194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C7BCDA3-B816-4113-B805-695C60F1F194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C7BCDA3-B816-4113-B805-695C60F1F194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C7BCDA3-B816-4113-B805-695C60F1F194}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99B45E6A-AE65-4954-9FBA-13C16BE16992}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99B45E6A-AE65-4954-9FBA-13C16BE16992}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99B45E6A-AE65-4954-9FBA-13C16BE16992}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99B45E6A-AE65-4954-9FBA-13C16BE16992}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2118600B-6152-41BE-BD5C-A617713984C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2118600B-6152-41BE-BD5C-A617713984C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2118600B-6152-41BE-BD5C-A617713984C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2118600B-6152-41BE-BD5C-A617713984C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F15257E-04C4-44D7-BB49-6358F7F2E6CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F15257E-04C4-44D7-BB49-6358F7F2E6CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F15257E-04C4-44D7-BB49-6358F7F2E6CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F15257E-04C4-44D7-BB49-6358F7F2E6CB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2FD8A9F4-405A-46E7-A5B0-BD7577919409}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2FD8A9F4-405A-46E7-A5B0-BD7577919409}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FD8A9F4-405A-46E7-A5B0-BD7577919409}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FD8A9F4-405A-46E7-A5B0-BD7577919409}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E01CFE3F-F850-4828-8D83-DDBEF325A404}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E01CFE3F-F850-4828-8D83-DDBEF325A404}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E01CFE3F-F850-4828-8D83-DDBEF325A404}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E01CFE3F-F850-4828-8D83-DDBEF325A404}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

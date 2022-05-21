@@ -1,6 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Components.Web
-@namespace BlazorServer.Pages
+@namespace BlazWebsite.BlazorServerorServer.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Website.Lib
+@inject NonceService NonceService
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,26 +16,27 @@
 
     <link rel="icon" type="image/x-icon" sizes="32x32" href="_content/Website.Lib/images/favicon.ico">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/zjb3qsk.css">
 
-    <link href="_content/Material.Blazor/material.blazor.min.css" rel="stylesheet" />
-    <link id="app-theme" href="_content/Website.Lib/css/dioptra.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="_content/Material.Blazor/material.blazor.min.css" />
+    <link rel="stylesheet" id="app-theme" href="_content/Website.Lib/css/dioptra.min.css" />
     <link rel="apple-touch-icon" sizes="512x512" href="_content/Website.Lib/images/icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="_content/Website.Lib/images/icon-192.png" />
 
-    <script>window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script nonce="@NonceService.NonceValue" async src="https://www.googletagmanager.com/gtag/js?id=UA-173249047-3"></script>
+    <script nonce="@NonceService.NonceValue">
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){window.dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'UA-173249047-3', {
-            cookie_flags: 'max-age=7200; samesite=none; secure'
-        });</script>
+        gtag('config', 'UA-173249047-3');
+    </script>
 
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
 </head>
-<body class="mdc-typography mv-custom-scrollbars">
+<body class="mdc-typography">
     @RenderBody()
 
     <div id="blazor-error-ui">
@@ -44,7 +48,7 @@
                      aria-labelledby="my-dialog-title"
                      aria-describedby="my-dialog-content">
                     <h2 class="mdc-dialog__title" id="my-dialog-title">
-                        Website Error
+                        <span class="material-icons-outlined">error</span> Website Error
                     </h2>
                     <div class="mdc-dialog__content" id="my-dialog-content">
                         <environment include="Staging,Production">
@@ -66,13 +70,8 @@
         </div>
     </div>
 
-    <script src="_framework/blazor.server.js"></script>
-    
-    <script src="_content/Material.Blazor/material.blazor.min.js"></script>
-    <script src="_content/Website.Lib/js/dioptra.js"></script>
-
-    <script>
-        Website.General.intantiateErrorDialog();
-    </script>
+    <script nonce="@NonceService.NonceValue" src="_framework/blazor.server.js"></script>
+    <script nonce="@NonceService.NonceValue" src="_content/Material.Blazor/material.blazor.min.js"></script>
+    <script nonce="@NonceService.NonceValue" src="_content/Website.Lib/js/dioptra.js"></script>
 </body>
 </html>

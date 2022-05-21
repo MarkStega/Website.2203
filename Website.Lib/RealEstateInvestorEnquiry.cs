@@ -6,7 +6,7 @@ public class RealEstateInvestorEnquiry : IMessage
 {
     private class MessageCard
     {
-        public string Title { get; } = "Dioptra Website Real Estate Investor Enquiry";
+        public string Title { get; } = "Dioptra Website Waitlist Enquiry";
 
         public string Text { get; } = $"Received on {DateTime.Now:ddd dd-MM-yyyy HH:mm:ss}";
 

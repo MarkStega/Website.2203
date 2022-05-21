@@ -1,13 +1,15 @@
 ﻿using Material.Blazor;
 using Microsoft.AspNetCore.Components;
-using System.Linq;
+using Website.Lib.Shared;
 
 namespace Website.Lib.Pages;
+[Sitemap(SitemapAttribute.ChangeFreqType.Weekly, 0.8)]
 public partial class WorkForUs : ComponentBase
 {
     [Inject] private ITeamsNotificationService TeamsNotificationService { get; set; }
-    [CascadingParameter] private Action<bool> ShowHomeButton { get; set; }
 
+
+    private GeneralPageLayout GeneralPageLayout { get; set; }
     private MBDialog RecruitmentEnquiryDialog { get; set; } = new();
     private RecruitmentEnquiry RecruitmentEnquiry { get; set; } = new();
     private List<MBSelectElement<RecruitmentEnquiry.RoleType>> SelectElements { get; set; }
@@ -19,9 +21,16 @@ public partial class WorkForUs : ComponentBase
     {
         base.OnInitialized();
 
-        ShowHomeButton(true);
-
         SelectElements = Enum.GetValues<RecruitmentEnquiry.RoleType>().Select(x => new MBSelectElement<RecruitmentEnquiry.RoleType>() { SelectedValue = x, Label = x.ToString() }).ToList();
+    }
+
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            GeneralPageLayout.ShowHomeButton(true);
+        }
     }
 
 

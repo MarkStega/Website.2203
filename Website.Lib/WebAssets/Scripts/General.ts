@@ -26,7 +26,7 @@ export function downloadFile(fileUri): void {
     a.remove();
 }
 
-export function intantiateErrorDialog(): void {
+export function instantiateErrorDialog(): void {
     new MDCRipple(document.getElementById('reload-button')!);
 
     var dialog = document.getElementById('reload-dialog')!;

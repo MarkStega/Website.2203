@@ -1,15 +1,18 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Website.Lib.Shared;
 
 namespace Website.Lib.Pages;
+[Sitemap(SitemapAttribute.ChangeFreqType.Monthly, 0.1)]
 public partial class TermsAndConditions : ComponentBase
 {
-    [CascadingParameter] private Action<bool> ShowHomeButton { get; set; }
+    private GeneralPageLayout GeneralPageLayout { get; set; }
 
 
-    protected override void OnInitialized()
+    protected override void OnAfterRender(bool firstRender)
     {
-        base.OnInitialized();
-
-        ShowHomeButton(true);
+        if (firstRender)
+        {
+            GeneralPageLayout.ShowHomeButton(true);
+        }
     }
 }

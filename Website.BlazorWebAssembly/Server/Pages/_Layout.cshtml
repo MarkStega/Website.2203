@@ -1,0 +1,79 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@namespace Website.BlazorWebAssembly.Server.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Website.BlazorWebAssembly.Client
+@using Website.Lib
+@inject NonceService NonceService
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+    <title>Dioptra</title>
+    <base href="/" />
+
+    <link rel="icon" type="image/x-icon" sizes="32x32" href="_content/Website.Lib/images/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://use.typekit.net/zjb3qsk.css">
+
+    <link rel="stylesheet" href="_content/Material.Blazor/material.blazor.min.css" />
+    <link rel="stylesheet" id="app-theme" href="_content/Website.Lib/css/dioptra.min.css" />
+    <link rel="apple-touch-icon" sizes="512x512" href="_content/Website.Lib/images/icon-512.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="_content/Website.Lib/images/icon-192.png" />
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script nonce="@NonceService.NonceValue" async src="https://www.googletagmanager.com/gtag/js?id=UA-173249047-3"></script>
+    <script nonce="@NonceService.NonceValue">
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){window.dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-173249047-3');
+    </script>
+
+    <component type="typeof(HeadOutlet)" render-mode="WebAssemblyPrerendered" />
+</head>
+<body class="mdc-typography">
+    @RenderBody()
+
+    <div id="blazor-error-ui">
+        <div id="reload-dialog" class="mdc-dialog">
+            <div id="reload-container" class="mdc-dialog__container">
+                <div class="mdc-dialog__surface"
+                     role="alertdialog"
+                     aria-modal="true"
+                     aria-labelledby="my-dialog-title"
+                     aria-describedby="my-dialog-content">
+                    <h2 class="mdc-dialog__title" id="my-dialog-title">
+                        <span class="material-icons-outlined">error</span> Website Error
+                    </h2>
+                    <div class="mdc-dialog__content" id="my-dialog-content">
+                        <environment include="Staging,Production">
+                            Click the button to reload the website.
+                        </environment>
+                        <environment include="Development">
+                            An unhandled exception has occurred. See browser dev tools for details.
+                        </environment>
+                    </div>
+                    <div class="mdc-dialog__actions" tabindex="1">
+                        <button id="reload-button" type="button" class="mdc-button mdc-dialog__button mdc-button--raised" data-mdc-dialog-action="discard" onclick="location.reload()">
+                            <div class="mdc-button__ripple"></div>
+                            <span class="mdc-button__label">Reload</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="reload-scrim" class="mdc-dialog__scrim"></div>
+        </div>
+    </div>
+
+    <script nonce="@NonceService.NonceValue" src="_framework/blazor.webassembly.js"></script>
+    <script nonce="@NonceService.NonceValue" src="_content/Material.Blazor/material.blazor.min.js"></script>
+    <script nonce="@NonceService.NonceValue" src="_content/Website.Lib/js/dioptra.js"></script>
+    <script nonce="@NonceService.NonceValue">navigator.serviceWorker.register('service-worker.js');</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Website.ServerLib": {
+      "commandName": "Project",
+      "hotReloadEnabled": false
+    }
+  }
+}

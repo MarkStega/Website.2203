@@ -6,23 +6,24 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
+	<ItemGroup>
+		<AssemblyAttribute Include="Website.Lib.BuildDateAttribute">
+			<_Parameter1>$([System.DateTime]::UtcNow.ToString("yyyy-MM-dd"))</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
 
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
 		<PackageReference Include="libphonenumber-csharp" Version="8.12.46" />
-		<PackageReference Include="Material.Blazor" Version="2.4.1" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.4" />
-		<PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+		<PackageReference Include="Material.Blazor" Version="3.0.0-preview.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ImageFiles Include="$(ProjectDir)WebAssets\Images\*.*" />
-		<Sitemap Include="$(ProjectDir)WebAssets\sitemap.xml" />
 
 		<InputStaticAssetsScripts Include="WebAssets\**\*.ts" />
 		<OutputStaticAssetsScripts Include="wwwroot\js\dioptra.js;wwwroot\js\dioptra.min.js" />
@@ -48,7 +49,6 @@
 
 	<Target Name="ImagesWWWRoot" BeforeTargets="PreBuildEvent">
 		<Copy SourceFiles="@(ImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/images" />
-		<Copy SourceFiles="@(Sitemap)" DestinationFolder="$(ProjectDir)wwwroot" />
 	</Target>
 
 	<Target Name="CheckIfNpmExists" Inputs="@(InputStaticAssetsScripts);@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsScripts);@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent">

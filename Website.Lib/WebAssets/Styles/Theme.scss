@@ -5,9 +5,25 @@
 $color-dark: #1A2238;
 $color-primary-on-dark: #9DAAF2;
 $color-primary-on-light: darken($color-primary-on-dark, 30%);
-$color-secondary-on-dark: #FF6A3D;
+$color-secondary-on-dark: #c44018;
 $color-secondary-on-light: darken($color-secondary-on-dark, 30%);
-$color-accent: #F4DB7D;
+
+
+$yellow-primary: #FFE77F;
+$yellow-on-primary: black;
+$yellow-secondary: #B3CDE3;
+$yellow-on-secondary: black;
+
+$green-primary: #845A99;
+$green-on-primary: white;
+$green-secondary: #CCE3DF;
+$green-on-secondary: black;
+
+$blue-primary: #B3CDE3;
+$blue-on-primary: black;
+$blue-secondary: #FFE77F;
+$blue-on-secondary: black;
+
 
 @use "@material/theme" as theme with ( 
     $primary: $color-primary-on-dark, 
@@ -31,7 +47,7 @@ $color-accent: #F4DB7D;
     color: $color-dark;
     --mdc-theme-surface: white;
     --mdc-theme-on-surface: #{$color-dark};
-    --dw-obscured-color: var(--mdc-color-grey-600);
+    --dw-obscured-color: var(--mb-color-grey-600);
     --dw-color-primary-on-dark: #{$color-primary-on-dark};
     --dw-color-on-primary-on-dark: #{$color-dark};
     --dw-color-secondary-on-dark: #{$color-secondary-on-dark};
@@ -41,6 +57,77 @@ $color-accent: #F4DB7D;
     --dw-color-secondary-on-light: #{$color-secondary-on-light};
     --dw-color-on-secondary-on-light: white;
 }
+
+.dw-yellow {
+    --mdc-theme-primary: #{$yellow-primary};
+    --mdc-theme-secondary: #{$yellow-secondary};
+    --mdc-theme-on-primary: #{$yellow-on-primary};
+    --mdc-theme-on-secondary: #{$yellow-on-secondary};
+
+    header > div:not(.dw-boundary-image), footer > div:not(.dw-boundary-image), .dw-accent-panel, &.dw-cookie-alert {
+        --mdc-theme-surface: #{$yellow-secondary};
+        --mdc-theme-background: #{$yellow-secondary};
+        background-color: $yellow-secondary;
+        --dw-obscured-color: var(--mdc-color-grey-300);
+    }
+
+    .mdc-fab {
+        --mdc-theme-secondary: #{$yellow-primary};
+        --mdc-theme-on-secondary: #{$yellow-on-primary};
+    }
+}
+
+.dw-yellow .dw-boundary-image > svg > g {
+    fill: $yellow-secondary;
+}
+
+.dw-green {
+    --mdc-theme-primary: #{$green-primary};
+    --mdc-theme-secondary: #{$green-secondary};
+    --mdc-theme-on-primary: #{$green-on-primary};
+    --mdc-theme-on-secondary: #{$green-on-secondary};
+
+    header > div:not(.dw-boundary-image), footer > div:not(.dw-boundary-image), .dw-accent-panel, &.dw-cookie-alert {
+        --mdc-theme-surface: #{$green-secondary};
+        --mdc-theme-background: #{$green-secondary};
+        background-color: $green-secondary;
+        --dw-obscured-color: var(--mdc-color-grey-300);
+    }
+
+    .mdc-fab {
+        --mdc-theme-secondary: #{$green-primary};
+        --mdc-theme-on-secondary: #{$green-on-primary};
+    }
+}
+
+.dw-green .dw-boundary-image > svg > g {
+    fill: $green-secondary;
+}
+
+.dw-blue {
+    --mdc-theme-primary: #{$blue-primary};
+    --mdc-theme-secondary: #{$blue-secondary};
+    --mdc-theme-on-primary: #{$blue-on-primary};
+    --mdc-theme-on-secondary: #{$blue-on-secondary};
+
+    header > div:not(.dw-boundary-image), footer > div:not(.dw-boundary-image), .dw-accent-panel, &.dw-cookie-alert {
+        --mdc-theme-surface: #{$blue-secondary};
+        --mdc-theme-background: #{$blue-secondary};
+        background-color: $blue-secondary;
+        --dw-obscured-color: var(--mdc-color-grey-300);
+    }
+
+    .mdc-fab {
+        --mdc-theme-secondary: #{$blue-primary};
+        --mdc-theme-on-secondary: #{$blue-on-primary};
+    }
+}
+
+.dw-blue .dw-boundary-image > svg > g {
+    fill: $blue-secondary;
+}
+
+
 
 .dw-dark {
     --mdc-theme-surface: #{$color-dark};
@@ -53,11 +140,4 @@ $color-accent: #F4DB7D;
     background-color: $color-dark;
     color: white;
     --dw-obscured-color: var(--mdc-color-grey-300);
-}
-
-.dw-accent {
-    --mdc-theme-surface: #{$color-accent};
-    --mdc-theme-on-surface: #{$color-dark};
-    --mdc-theme-background: #{$color-accent};
-    background-color: $color-accent;
 }

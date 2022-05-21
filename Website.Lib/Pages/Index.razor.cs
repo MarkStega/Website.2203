@@ -1,22 +1,33 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Material.Blazor;
+using Microsoft.AspNetCore.Components;
 using Website.Lib.Shared;
 
+
 namespace Website.Lib.Pages;
+[Sitemap(SitemapAttribute.ChangeFreqType.Weekly, 0.8)]
 public partial class Index : ComponentBase
 {
-    private class CarouselDataType
+    private class ImageData
     {
         public string Uri { get; set; } = "";
         public string Caption { get; set; } = "";
+        public string Width { get; set; } = "";
+        public string Height { get; set; } = "";
     }
 
 
     [Inject] private NavigationManager NavigationManager { get; set; }
+    [Inject] private ITeamsNotificationService TeamsNotificationService { get; set; }
 
-    [CascadingParameter] private Action<bool> ShowHomeButton { get; set; }
 
 
-    private static readonly CarouselDataType[] CarouselData = new CarouselDataType[]
+    private GeneralPageLayout GeneralPageLayout { get; set; }
+    private MBDialog Dialog { get; set; }
+    private RealEstateInvestorEnquiry RealEstateInvestorEnquiry { get; set; } = new();
+
+
+
+    private static readonly ImageData[] CarouselImages = new ImageData[]
     {
         new() { Uri = "_content/Website.Lib/images/01-main-screen.webp", Caption = "Dioptra's main screen layout" },
         new() { Uri = "_content/Website.Lib/images/02-main-screen-search.webp", Caption = "Scheme search" },
@@ -29,30 +40,54 @@ public partial class Index : ComponentBase
         new() { Uri = "_content/Website.Lib/images/09-march-edit-budget-schedule.webp", Caption = "Editting cost budget schedules" },
     };
 
-
-    protected override void OnInitialized()
+    private static readonly ImageData[] SkylineImages = new ImageData[]
     {
-        base.OnInitialized();
+        new() { Uri = "_content/Website.Lib/images/new-york-640.webp", Caption = "New York skyline", Width = "640px", Height = "420px" },
+        new() { Uri = "_content/Website.Lib/images/new-york-420.webp", Caption = "New York skyline", Width = "420px", Height = "420px" },
+        new() { Uri = "_content/Website.Lib/images/new-york-320.webp", Caption = "New York skyline", Width = "320px", Height = "420px" },
+    };
 
-        ShowHomeButton(false);
-    }
-
-
-    private void RealEstateClientsClick()
+    private static readonly ImageData[] ProgrammerImages = new ImageData[]
     {
-        NavigationManager.NavigateTo("/real-estate-clients#dw-main-top");
-    }
+        new() { Uri = "_content/Website.Lib/images/programmer-640.webp", Caption = "Programmer working at a desk", Width = "640px", Height = "420px" },
+        new() { Uri = "_content/Website.Lib/images/programmer-420.webp", Caption = "Programmer working at a desk", Width = "420px", Height = "420px" },
+        new() { Uri = "_content/Website.Lib/images/programmer-320.webp", Caption = "Programmer working at a desk", Width = "320px", Height = "420px" },
+    };
 
 
-    private void VentureCapitalInvestorsClick()
+    protected override void OnAfterRender(bool firstRender)
     {
-        NavigationManager.NavigateTo("/venture-capital-investors#dw-main-top");
+        if (firstRender)
+        {
+            GeneralPageLayout.ShowHomeButton(false);
+        }
     }
 
 
     private void WorkForUsClick()
     {
         NavigationManager.NavigateTo("/work-for-us#dw-main-top");
+    }
+
+
+    private async Task OpenDialogAsync()
+    {
+        RealEstateInvestorEnquiry = new();
+
+        await Dialog.ShowAsync();
+    }
+
+
+    private async Task CloseDialogAsync()
+    {
+        await Dialog.HideAsync();
+    }
+
+
+    private async Task DialogSubmittedAsync()
+    {
+        await Dialog.HideAsync();
+        await TeamsNotificationService.SendNotification(RealEstateInvestorEnquiry);
     }
 }
 

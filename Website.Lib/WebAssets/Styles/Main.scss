@@ -1,70 +1,82 @@
 ﻿$fade-in-out: 20000ms;
+$body-font: canada-type-gibson,Arial,Helvetica,sans-serif;
+$heading-font: apertura,Arial,Helvetica,sans-serif;
 
 @use 'sass:map';
 
 @use "@material/shape" with (
-    $small-component-radius: 12px,
-    $medium-component-radius: 12px,
-    $large-component-radius: 12px,
+    $small-component-radius: 0px,
+    $medium-component-radius: 0px,
+    $large-component-radius: 0px,
 );
 
 @use "@material/typography" with ( 
-    $font-family: unquote("'Roboto', sans-serif"),
+    $font-family: $body-font,
 
     $styles-headline1: (
-        font-family: unquote("'Roboto Serif', sans-serif"),
-        font-weight: 700,
+        font-family: $heading-font,
+        font-weight: 800,
         font-size: 36px,
+        font-style: normal,
         line-height: normal,
     ),
 
     $styles-headline2: (
-        font-family: unquote("'Roboto Serif', sans-serif"),
-        font-weight: 700,
+        font-family: $heading-font,
+        font-weight: 800,
         font-size: 32px,
+        font-style: normal,
         line-height: normal,
     ),
 
     $styles-headline3: (
-        font-family: unquote("'Roboto Serif', sans-serif"),
-        font-weight: 600,
+        font-family: $heading-font,
+        font-weight: 800,
         font-size: 28px,
+        font-style: normal,
         line-height: normal,
     ),
 
     $styles-headline4: (
-        font-family: unquote("'Roboto Serif', sans-serif"),
-        font-weight: 600,
+        font-family: $heading-font,
+        font-weight: 800,
         font-size: 24px,
+        font-style: normal,
         line-height: normal,
     ),
 
     $styles-headline5: (
-        font-family: unquote("'Roboto Serif', sans-serif"),
-        font-weight: 600,
+        font-family: $heading-font,
+        font-weight: 800,
         font-size: 22px,
+        font-style: normal,
         line-height: normal,
     ),
 
     $styles-headline6: (
-        font-family: unquote("'Roboto Serif', sans-serif"),
-        font-weight: 600,
+        font-family: $heading-font,
+        font-weight: 800,
         font-size: 20px,
+        font-style: normal,
         line-height: normal,
     ),
 
     $styles-body1: (
-        font-family: unquote("'Roboto', sans-serif"),
+        font-family: $body-font,
         font-weight: 400,
-        font-size: 16px,
-        line-height: normal,
+        font-size: 20px,
+        font-style: normal,
+        line-height: 1.6,
+        margin-bottom: 1.5rem,
     ),
 
     $styles-body2: (
-        font-family: unquote("'Roboto', sans-serif"),
+        font-family: $body-font,
         font-weight: 400,
-        font-size: 14px,
-        line-height: normal,
+        font-size: 16px,
+        font-style: normal,
+        line-height: 1.6,
+        margin-bottom: 1.5rem,
     ),
 );
 
@@ -78,7 +90,9 @@
     App layout styling
 */
 :root {
-}
+/*    --mdc-typography-body1-line-height: 1.2;
+    --mdc-typography-body2-line-height: 1.2;
+*/}
 
 body {
     height: 100vh;
@@ -127,18 +141,42 @@ h1, h2, h3, h4, h5, h6, p {
     max-width: 1600px;
     margin: 0 auto;
 }
-
+ 
 .dw-panel-container {
     max-width: 1020px;
     margin: 0 auto;
 }
 
-.dw-section-condensed {
-    padding-top: 48px;
-    padding-bottom: 48px;
+.dw-carousel-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    --mdc-theme-secondary: rgba(0, 0, 0, 0.54);
 
+
+    .mb-carousel {
+        width: 340px;
+
+        .mdc-fab {
+            --mdc-theme-secondary: white;
+            --mdc-theme-on-secondary: black;
+        }
+
+        img {
+            position: relative;
+            width: 100%;
+            height: 213px;
+        }
+    }
+}
+
+.dw-section-condensed {
     .dw-section-spacing {
         height: 24px;
+    }
+
+    &.dw-hero {
+        margin-top: -52px;
     }
 }
 
@@ -151,12 +189,37 @@ h1, h2, h3, h4, h5, h6, p {
     }
 }
 
+.dw-feature {
+    margin: 0px;
+}
+
+.dw-feature:first-of-type {
+    margin-top: 48px;
+}
+
+.dw-feature:last-of-type {
+    margin-bottom: 48px;
+}
+
+.dw-accent-panel {
+    padding-top: 48px;
+    padding-bottom: 48px;
+}
+
 .dw-card-container {
     margin: 0 auto;
     max-width: 500px;
 
     & .mb-card__autostyled {
         height: 280px;
+    }
+}
+
+ul.mdc-typography--body2 {
+    line-height: 1.2;
+
+    &>li {
+        margin-bottom: 8px;
     }
 }
 
@@ -167,6 +230,7 @@ h1, h2, h3, h4, h5, h6, p {
     width: 100%;
     height: 0px;
     top: 0px;
+    z-index: 2;
 }
 
 .dw-content {
@@ -201,10 +265,36 @@ h1, h2, h3, h4, h5, h6, p {
     &.dw-footer-address {
         justify-content: left;
         align-items: flex-start;
+
+        p {
+            line-height: 1.2;
+        }
     }
 
     & a {
         margin-top: 36px;
+    }
+}
+
+.dw-cookie-alert {
+    position: sticky;
+    top: 100vh;
+    width: 100%;
+}
+
+.dw-cookie-alert-content {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    & p {
+        margin: 0px;
+        font-size: var(--mdc-typography-body2-font-size);
+    }
+
+    & .mdc-button {
+        margin-left: 24px;
     }
 }
 
@@ -224,7 +314,51 @@ h1, h2, h3, h4, h5, h6, p {
     flex-flow: row nowrap;
     justify-content: end;
     align-items: center;
-    color: var(--mdc-theme-secondary);
+    color: var(--mdc-theme-primary);
+}
+
+.dw-tagline {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin: 48px 0;
+    text-align: center !important;
+
+    .mdc-typography--headline2, mdc-typography--headline4 {
+        margin-top: 0;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    div {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        max-width: 600px;
+        justify-content: center;
+    }
+
+    .mdc-button {
+        margin-bottom: 0;
+    }
+}
+
+.dw-boundary-image {
+    overflow: hidden;
+    z-index: -1;
+
+    svg {
+        display: block;
+    }
+}
+
+header .dw-boundary-image svg {
+    transform: rotate(180deg);
+    margin-top: -90px;
+}
+
+footer .dw-boundary-image svg {
+    margin-bottom: -90px;
 }
 
 :root {
@@ -232,9 +366,21 @@ h1, h2, h3, h4, h5, h6, p {
     --dw-scroll-track-color: rgba(0, 0, 0, 0);
 }
 
+.mb-carousel__upper {
+    overflow-x: visible;
+}
+
+.mb-carousel__lower {
+    width: 100vw !important;
+}
+
 @media (max-width: map.get(layout-grid.$breakpoints, "tablet") - 1px) {
-    .mb-carousel__lower .mdc-touch-target-wrapper {
-        margin: 0 -6px;
+    .mb-carousel__lower {
+        padding-top: 12px !important;
+
+        .mdc-touch-target-wrapper {
+            margin: 0 -6px;
+        }
     }
 
     .dw-hidden-phone-down {
@@ -250,6 +396,10 @@ h1, h2, h3, h4, h5, h6, p {
             margin-left: 12px;
         }
     }
+
+    .dw-tagline img {
+        display: none;
+    }
 }
 
 @media (max-width: map.get(layout-grid.$breakpoints, "desktop") - 1px) {
@@ -259,6 +409,10 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 @media (min-width: map.get(layout-grid.$breakpoints, "tablet")) {
+    .mb-carousel__lower {
+        padding-top: 24px !important;
+    }
+
     .dw-hidden-tablet-up {
         display: none !important;
     }
@@ -275,14 +429,82 @@ h1, h2, h3, h4, h5, h6, p {
         }
     }
 
+    .dw-section-condensed {
+        &.dw-hero {
+            margin-top: -72px;
+        }
+    }
+
+    .dw-feature {
+        margin: 48px 0px;
+    }
+
+    .dw-dialog {
+        .mdc-dialog__surface {
+            width: 480px;
+        }
+    }
+
     .dw-footer-element {
         &.dw-footer-contact {
-            //justify-content: center;
             align-items: center;
         }
 
         &.dw-footer-address {
             align-items: flex-end;
+        }
+    }
+
+    .dw-carousel-container {
+        .mb-carousel {
+            width: 400px;
+            
+            img {
+                height: 250px;
+            }
+        }
+    }
+
+    .dw-tagline {
+        div {
+            display: flex;
+            justify-content: center;
+
+            .mdc-button {
+                margin-top: 80px;
+            }
+        }
+
+        .dw-picture-left {
+            align-items: flex-end;
+            padding-left: 60px;
+
+            p {
+                text-align: right;
+            }
+        }
+
+        .dw-picture-right {
+            align-items: flex-start;
+            padding-right: 60px;
+
+            p {
+                text-align: left;
+            }
+        }
+    }
+
+    .dw-quote {
+        font-size: 32px !important;
+    }
+
+    .dw-quote-icon {
+        margin-left: -77px;
+    }
+
+    .dw-cookie-alert-content {
+        & p {
+            font-size: var(--mdc-typography-body1-font-size, 20px);
         }
     }
 }
@@ -291,6 +513,56 @@ h1, h2, h3, h4, h5, h6, p {
     .dw-hidden-desktop-up {
         display: none !important;
     }
+
+    .dw-carousel-container {
+        .mb-carousel {
+            width: 800px;
+
+            img {
+                height: 500px;
+            }
+        }
+    }
+}
+
+.dw-quote {
+    font-family: angie-sans, sans-serif;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.5;
+    margin-top: 0px;
+}
+
+.dw-quoted {
+    text-align: right;
+}
+
+.dw-quote-icon {
+    height: 40px;
+    overflow: visible;
+}
+
+.dw-quote-icon-fill {
+    fill: var(--mdc-theme-primary);
+}
+
+.dw-header {
+    display: inline-flex;
+    flex-flow: column nowrap;
+    width: 100%;
+
+    .dw-quote {
+        text-align: center !important;
+    }
+}
+
+.dw-title {
+    font-family: $heading-font;
+    font-weight: 800;
+    line-height: 1.0;
+    margin: 0px;
+    letter-spacing: 0.15rem;
 }
 
 .dw-header-large {
@@ -298,14 +570,31 @@ h1, h2, h3, h4, h5, h6, p {
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
+
+    .dw-title {
+        font-size: 48px;
+    }
+
+    span > svg {
+        margin-left: -28px;
+    }
 }
 
 .dw-header-small {
     display: inline-flex;
-    flex-flow: column nowrap;
-    justify-content: center;
+    padding: 0px 10px;
+    flex-flow: row nowrap;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
+
+    .dw-title {
+        font-size: 32px;
+    }
+
+    span > svg {
+        margin-left: -20px;
+    }
 }
 
 .dw-loading {
@@ -393,6 +682,16 @@ h1, h2, h3, h4, h5, h6, p {
     height: 100%;
     width: 100%;
     z-index: 1000;
+
+    & .mdc-dialog__title {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    & .material-icons-outlined {
+        margin-right: 18px;
+        color: var(--mdc-theme-error);
+    }
 }
 
 #blazor-error-ui .dismiss {
@@ -419,7 +718,7 @@ h1, h2, h3, h4, h5, h6, p {
 */
 a:not(.mdc-deprecated-list-item):not(.mb-tooltip-anchor) {
     position: relative;
-    box-shadow: inset 0 -2px 0 theme.$secondary;
+    box-shadow: inset 0 -4px 0 var(--mdc-theme-primary);
     display: inline-flex;
     z-index: 1;
     color: inherit;
@@ -429,13 +728,13 @@ a:not(.mdc-deprecated-list-item):not(.mb-tooltip-anchor) {
 
 a:not(.mdc-deprecated-list-item):not(.mb-tooltip-anchor):hover {
     box-shadow: none;
-    color: theme.$on-secondary;
+    color: var(--mdc-theme-on-primary);
     text-decoration: none;
 }
 
 a:not(.mdc-deprecated-list-item):not(.mb-tooltip-anchor)::after {
     content: "";
-    background: theme.$secondary;
+    background: var(--mdc-theme-primary);
     position: absolute;
     left: -2px;
     bottom: 0;

@@ -1,6 +1,6 @@
 # Ignore all root directories except for Material.Blazor and Vectis.*
-*
-!Website.2203
+#*
+#!Website.2203
 
 # ignore rules within allowed root directories
 **/.classpath

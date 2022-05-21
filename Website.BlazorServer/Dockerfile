@@ -7,14 +7,15 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Website.2203/Website.Lib/Website.Lib.csproj", "Website.2203/Website.Lib/"]
-COPY ["Website.2203/Website.BlazorServer/Website.BlazorServer.csproj", "Website.2203/Website.BlazorServer/"]
-COPY ["Website.2203/Website.BlazorServer/NuGet.Config", "Website.2203/Website.BlazorServer/"]
+COPY ["Website.Lib/Website.Lib.csproj", "Website.Lib/"]
 
-RUN dotnet restore "Website.2203/Website.BlazorServer/Website.BlazorServer.csproj"
+COPY ["Website.BlazorServer/Website.BlazorServer.csproj", "Website.BlazorServer/"]
+COPY ["Website.BlazorServer/NuGet.Config", "Website.BlazorServer/"]
+
+RUN dotnet restore "Website.BlazorServer/Website.BlazorServer.csproj"
 
 COPY . .
-WORKDIR "/src/Website.2203/Website.BlazorServer"
+WORKDIR "/src/Website.BlazorServer"
 RUN dotnet build "Website.BlazorServer.csproj" -c Release -o /app/build
 
 FROM build AS publish
