@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -24,6 +24,7 @@
 
 	<ItemGroup>
 		<ImageFiles Include="$(ProjectDir)WebAssets\Images\*.*" />
+		<PWAFiles Include="$(ProjectDir)WebAssets\PWA\*.*" />
 
 		<InputStaticAssetsScripts Include="WebAssets\**\*.ts" />
 		<OutputStaticAssetsScripts Include="wwwroot\js\dioptra.js;wwwroot\js\dioptra.min.js" />
@@ -47,8 +48,9 @@
 		<None Include="tsconfig.json" />
 	</ItemGroup>
 
-	<Target Name="ImagesWWWRoot" BeforeTargets="PreBuildEvent">
+	<Target Name="WWWRootFileCopy" BeforeTargets="PreBuildEvent">
 		<Copy SourceFiles="@(ImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/images" />
+		<Copy SourceFiles="@(PWAFiles)" DestinationFolder="$(ProjectDir)wwwroot/pwa" />
 	</Target>
 
 	<Target Name="CheckIfNpmExists" Inputs="@(InputStaticAssetsScripts);@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsScripts);@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent">
