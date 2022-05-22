@@ -13,7 +13,7 @@ public partial class DioptraLogo
     /// <summary>
     /// The logo's foreground color.
     /// </summary>
-    [Parameter] public string Color { get; set; } = "var(--mdc-theme-primary)";
+    [Parameter] public string Color { get; set; } = "var(--mdc-theme-on-surface)";
 
 
     /// <summary>
