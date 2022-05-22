@@ -2,27 +2,29 @@
 
 @use "sass:color";
 
+
+
 $color-dark: #1A2238;
-$color-primary-on-dark: #845A99;
+$color-primary-on-dark: #5A6099;
 $color-primary-on-light: darken($color-primary-on-dark, 30%);
 $color-secondary-on-dark: #FFD230;
 $color-secondary-on-light: darken($color-secondary-on-dark, 30%);
 
 
-$yellow-primary: #845A99;
+$yellow-primary: #5A6099;
 $yellow-on-primary: white;
 $yellow-secondary: #FFD230;
-$yellow-on-secondary: black;
+$yellow-on-secondary: $color-dark;
 
-$green-primary: #845A99;
+$green-primary: #5A6099;
 $green-on-primary: white;
 $green-secondary: #CCE3DF;
-$green-on-secondary: black;
+$green-on-secondary: $color-dark;
 
 $blue-primary: #B3CDE3;
-$blue-on-primary: black;
+$blue-on-primary: $color-dark;
 $blue-secondary: #FFE77F;
-$blue-on-secondary: black;
+$blue-on-secondary: $color-dark;
 
 
 @use "@material/theme" as theme with ( 
@@ -30,6 +32,7 @@ $blue-on-secondary: black;
     $secondary: $color-secondary-on-dark,
     $background: white, 
     $surface: white,
+    $on-surface: $color-dark,
 );
 
 @use "Main";
