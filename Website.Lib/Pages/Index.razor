@@ -9,7 +9,7 @@
                     TwitterImage="">
     @foreach (var item in CarouselImages)
     {
-        <link rel="prefetch" href="@item.Uri" as="image">
+        <link rel="@item.Rel" href="@item.Uri" as="image">
     }
 
     @*@foreach (var item in SkylineImages)
@@ -23,7 +23,7 @@
     }*@
 </HeadAndMetaContent>
 
-<GeneralPageLayout @ref="@GeneralPageLayout" ColorClass="dw-green" >
+<GeneralPageLayout @ref="@GeneralPageLayout" ColorClass="dw-yellow" >
     <div class="dw-section-condensed dw-hero">
         <div class="dw-max-width-content">
             <div class="mdc-layout-grid">
@@ -142,7 +142,7 @@
         </div>
     </div>
 
-    <div class="dw-section-condensed">
+    <div class="dw-section-regular">
         <div class="dw-max-width-content">
             <div class="mdc-layout-grid">
                 <div class="mdc-layout-grid__inner">

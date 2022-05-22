@@ -1,10 +1,10 @@
 {
-  "name": "Website.BlazorWebAssembly",
-  "short_name": "Website.BlazorWebAssembly",
+  "name": "Dioptra - Institutional Real Estate Investment Analytics",
+  "short_name": "Dioptra",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#03173d",
+  "theme_color": "#FFD230",
   "prefer_related_applications": false,
   "icons": [
     {
