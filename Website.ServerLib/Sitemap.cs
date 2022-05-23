@@ -9,10 +9,12 @@ public class Sitemap
     {
         var buildDate = Assembly.GetExecutingAssembly().GetCustomAttribute<BuildDateAttribute>()?.DateString ?? DateTime.UtcNow.ToString("yyyy-MM-dd");
 
-        await context.Response.WriteAsync("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
-        await context.Response.WriteAsync("<urlset xmlns=\"https://www.sitemaps.org/schemas/sitemap/0.9\">");
-        
-        var pages = Assembly.GetExecutingAssembly().ExportedTypes.Where(p => p.IsSubclassOf(typeof(ComponentBase)));
+        await context.Response.WriteAsync("<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n");
+        await context.Response.WriteAsync("<urlset xmlns=\"https://www.sitemaps.org/schemas/sitemap/0.9\">\n");
+
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+        var pages = Assembly.GetAssembly(typeof(Utilities)).ExportedTypes.Where(p => p.IsSubclassOf(typeof(ComponentBase)));
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
 
         foreach (var page in pages)
         {
@@ -23,13 +25,12 @@ public class Sitemap
             {
                 if (siteAttribute != null)
                 {
-                    await context.Response.WriteAsync($@"
-    <url>
-		<loc>https://{context.Request.Host}{routeAttribute.Template}</loc>
-		<lastmod>{buildDate}</lastmod>
-		<changefreq>{siteAttribute.ChangeFreq.ToString().ToLower()}</changefreq>
-		<priority>{siteAttribute.Priority:N1}</priority>
-	</url>");
+                    await context.Response.WriteAsync($@"  <url>
+    <loc>https://{context.Request.Host}{routeAttribute.Template}</loc>
+    <lastmod>{buildDate}</lastmod>
+    <changefreq>{siteAttribute.ChangeFreq.ToString().ToLower()}</changefreq>
+    <priority>{siteAttribute.Priority:N1}</priority>
+  </url>{"\n"}");
                 }
                 else
                 {
