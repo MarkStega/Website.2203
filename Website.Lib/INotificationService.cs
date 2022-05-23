@@ -2,7 +2,7 @@
 
 using System.Threading.Tasks;
 
-public interface ITeamsNotificationService
+public interface INotificationService
 {
     Task SendNotification(ContactMessage message);
     Task SendNotification(RecruitmentEnquiry message);

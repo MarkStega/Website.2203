@@ -1,6 +1,7 @@
 {
   "name": "Dioptra - Institutional Real Estate Investment Analytics",
   "short_name": "Dioptra",
+  "id": "/_content/Website.Lib/pwa/",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",

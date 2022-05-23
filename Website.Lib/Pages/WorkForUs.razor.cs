@@ -6,7 +6,7 @@ namespace Website.Lib.Pages;
 [Sitemap(SitemapAttribute.ChangeFreqType.Weekly, 0.8)]
 public partial class WorkForUs : ComponentBase
 {
-    [Inject] private ITeamsNotificationService TeamsNotificationService { get; set; }
+    [Inject] private INotificationService TeamsNotificationService { get; set; }
 
 
     private GeneralPageLayout GeneralPageLayout { get; set; }

@@ -37,13 +37,7 @@
 		<InputStaticAssetsStyles Include="WebAssets\**\*.scss;" />
 		<OutputStaticAssetsStyles Include="wwwroot\css\dioptra.css;wwwroot\css\dioptra.min.css" />
 		<Content Remove="@(OutputStaticAssetsStyles)" />
-		<None Remove="WebAssets\PWA\favicon-16x16.png" />
-		<None Remove="WebAssets\PWA\favicon-32x32.png" />
-		<PWAFiles Remove="WebAssets\PWA\favicon-16x16.png" />
-		<PWAFiles Remove="WebAssets\PWA\favicon-32x32.png" />
 		<Content Include="@(OutputStaticAssetsStyles)" />
-		<Content Include="WebAssets\PWA\favicon-16x16.png" />
-		<Content Include="WebAssets\PWA\favicon-32x32.png" />
 	</ItemGroup>
 
 	<ItemGroup>

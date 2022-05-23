@@ -29,7 +29,7 @@ builder.Services.AddHsts(options =>
 
 builder.Services.AddHttpClient();
 
-builder.Services.AddTransient<ITeamsNotificationService, TeamsNotificationService>();
+builder.Services.AddTransient<INotificationService, NotificationService>();
 
 builder.Services.AddScoped<NonceService>();
 

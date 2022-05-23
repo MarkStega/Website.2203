@@ -18,8 +18,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.BlazorServer", "Web
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose-blazor-server", "docker-compose-blazor-server.dcproj", "{4F58C0A0-94C6-40C7-9288-6DCD33D8DA72}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.BlazorWebAssembly.Shared", "Website.BlazorWebAssembly\Shared\Website.BlazorWebAssembly.Shared.csproj", "{5C7BCDA3-B816-4113-B805-695C60F1F194}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.BlazorWebAssembly.Server", "Website.BlazorWebAssembly\Server\Website.BlazorWebAssembly.Server.csproj", "{99B45E6A-AE65-4954-9FBA-13C16BE16992}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.BlazorWebAssembly.Client", "Website.BlazorWebAssembly\Client\Website.BlazorWebAssembly.Client.csproj", "{2118600B-6152-41BE-BD5C-A617713984C5}"
@@ -46,10 +44,6 @@ Global
 		{4F58C0A0-94C6-40C7-9288-6DCD33D8DA72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F58C0A0-94C6-40C7-9288-6DCD33D8DA72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F58C0A0-94C6-40C7-9288-6DCD33D8DA72}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5C7BCDA3-B816-4113-B805-695C60F1F194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C7BCDA3-B816-4113-B805-695C60F1F194}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C7BCDA3-B816-4113-B805-695C60F1F194}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C7BCDA3-B816-4113-B805-695C60F1F194}.Release|Any CPU.Build.0 = Release|Any CPU
 		{99B45E6A-AE65-4954-9FBA-13C16BE16992}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{99B45E6A-AE65-4954-9FBA-13C16BE16992}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99B45E6A-AE65-4954-9FBA-13C16BE16992}.Release|Any CPU.ActiveCfg = Release|Any CPU

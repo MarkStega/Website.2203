@@ -13,7 +13,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services.AddMBServices(loggingServiceConfiguration: Utilities.GetDefaultLoggingServiceConfiguration(), toastServiceConfiguration: Utilities.GetDefaultToastServiceConfiguration(), snackbarServiceConfiguration: Utilities.GetDefaultSnackbarServiceConfiguration());
 
-builder.Services.AddTransient<ITeamsNotificationService, TeamsNotificationService>();
+builder.Services.AddTransient<INotificationService, NotificationService>();
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {

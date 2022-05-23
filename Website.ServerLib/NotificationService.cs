@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-public class TeamsNotificationService : ITeamsNotificationService
+public class NotificationService : INotificationService
 {
     private const string _messagingWebhook = "https://blacklandcapital.webhook.office.com/webhookb2/6ccfaed1-7c02-440c-83f0-9265cf35b379@ef73a184-f1db-4f24-b406-e4f8f9633dfa/IncomingWebhook/b89fe29282274986b059a32b41fea397/34ba3a07-c6f6-4e3f-896d-148fb6c1765f";
     private static readonly JsonSerializerOptions _serializerOptions = new()
@@ -16,9 +16,9 @@ public class TeamsNotificationService : ITeamsNotificationService
         WriteIndented = false
     };
 
-    private readonly ILogger<TeamsNotificationService> _logger;
+    private readonly ILogger<NotificationService> _logger;
 
-    public TeamsNotificationService(ILogger<TeamsNotificationService> logger)
+    public NotificationService(ILogger<NotificationService> logger)
     {
         _logger = logger;
     }

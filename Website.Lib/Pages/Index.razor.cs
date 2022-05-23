@@ -19,7 +19,7 @@ public partial class Index : ComponentBase
 
 
     [Inject] private NavigationManager NavigationManager { get; set; }
-    [Inject] private ITeamsNotificationService TeamsNotificationService { get; set; }
+    [Inject] private INotificationService TeamsNotificationService { get; set; }
 
 
 

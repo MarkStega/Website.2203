@@ -6,7 +6,7 @@ namespace Website.Lib.Shared;
 
 public partial class GeneralPageLayout : ComponentBase
 {
-    [Inject] private ITeamsNotificationService TeamsNotificationService { get; set; }
+    [Inject] private INotificationService TeamsNotificationService { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
     [Inject] private IJSRuntime JSRuntime { get; set; }
 
