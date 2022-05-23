@@ -80,6 +80,13 @@
     <script nonce="@NonceService.NonceValue" src="_framework/blazor.webassembly.js"></script>
     <script nonce="@NonceService.NonceValue" src="_content/Material.Blazor/material.blazor.min.js"></script>
     <script nonce="@NonceService.NonceValue" src="_content/Website.Lib/js/dioptra.js"></script>
+    
     <script nonce="@NonceService.NonceValue">navigator.serviceWorker.register('service-worker.js');</script>
+
+    @*<script nonce="@NonceService.NonceValue" type="module">
+       import 'https://cdn.jsdelivr.net/npm/@@pwabuilder/pwaupdate';
+       const el = document.createElement('pwa-update');
+       document.body.appendChild(el);
+    </script>*@
 </body>
 </html>
