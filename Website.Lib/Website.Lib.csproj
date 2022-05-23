@@ -25,6 +25,9 @@
 	<ItemGroup>
 		<ImageFiles Include="$(ProjectDir)WebAssets\Images\*.*" />
 		<PWAFiles Include="$(ProjectDir)WebAssets\PWA\*.*" />
+		<AndroidImageFiles Include="$(ProjectDir)WebAssets\android-images\*.*" />
+		<IOSImageFiles Include="$(ProjectDir)WebAssets\ios-images\*.*" />
+		<Windows11ImageFiles Include="$(ProjectDir)WebAssets\windows11-images\*.*" />
 
 		<InputStaticAssetsScripts Include="WebAssets\**\*.ts" />
 		<OutputStaticAssetsScripts Include="wwwroot\js\dioptra.js;wwwroot\js\dioptra.min.js" />
@@ -34,7 +37,13 @@
 		<InputStaticAssetsStyles Include="WebAssets\**\*.scss;" />
 		<OutputStaticAssetsStyles Include="wwwroot\css\dioptra.css;wwwroot\css\dioptra.min.css" />
 		<Content Remove="@(OutputStaticAssetsStyles)" />
+		<None Remove="WebAssets\PWA\favicon-16x16.png" />
+		<None Remove="WebAssets\PWA\favicon-32x32.png" />
+		<PWAFiles Remove="WebAssets\PWA\favicon-16x16.png" />
+		<PWAFiles Remove="WebAssets\PWA\favicon-32x32.png" />
 		<Content Include="@(OutputStaticAssetsStyles)" />
+		<Content Include="WebAssets\PWA\favicon-16x16.png" />
+		<Content Include="WebAssets\PWA\favicon-32x32.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -51,6 +60,9 @@
 	<Target Name="WWWRootFileCopy" BeforeTargets="PreBuildEvent">
 		<Copy SourceFiles="@(ImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/images" />
 		<Copy SourceFiles="@(PWAFiles)" DestinationFolder="$(ProjectDir)wwwroot/pwa" />
+		<Copy SourceFiles="@(AndroidImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/android-images" />
+		<Copy SourceFiles="@(IOSImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/ios-images" />
+		<Copy SourceFiles="@(Windows11ImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/windows11-images" />
 	</Target>
 
 	<Target Name="CheckIfNpmExists" Inputs="@(InputStaticAssetsScripts);@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsScripts);@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent">
