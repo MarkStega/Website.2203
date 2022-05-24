@@ -47,7 +47,7 @@ builder.Services.Configure<StaticFileOptions>(options =>
     // Pentest fix
     options.OnPrepareResponse = ctx =>
     {
-        ctx.Context.Response.Headers.Add("Cache-Control", "no-cache, no-store, must-revalidate");
+        ctx.Context.Response.Headers.Add("Cache-Control", "public, max-age=86400");
         ctx.Context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
     };
 });
