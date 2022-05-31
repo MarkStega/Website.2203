@@ -29,7 +29,7 @@ builder.Services.AddHsts(options =>
 
 builder.Services.AddHttpClient();
 
-builder.Services.AddTransient<ITeamsNotificationService, TeamsNotificationService>();
+builder.Services.AddTransient<INotificationService, NotificationService>();
 
 builder.Services.AddScoped<NonceService>();
 
@@ -47,7 +47,7 @@ builder.Services.Configure<StaticFileOptions>(options =>
     // Pentest fix
     options.OnPrepareResponse = ctx =>
     {
-        ctx.Context.Response.Headers.Add("Cache-Control", "no-cache, no-store, must-revalidate");
+        ctx.Context.Response.Headers.Add("Cache-Control", "public, max-age=86400");
         ctx.Context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
     };
 });

@@ -2,7 +2,6 @@ using AspNetCoreRateLimit;
 using Blazored.LocalStorage;
 using Material.Blazor;
 using Microsoft.AspNetCore.CookiePolicy;
-using Microsoft.AspNetCore.ResponseCompression;
 using Serilog;
 using Serilog.Events;
 using Website.Lib;
@@ -10,15 +9,13 @@ using Website.Lib;
 const string _customTemplate = "{Timestamp: HH:mm:ss.fff}\t[{Level:u3}]\t{Message}{NewLine}{Exception}";
 const string _loggingWebhook = "https://blacklandcapital.webhook.office.com/webhookb2/6ccfaed1-7c02-440c-83f0-9265cf35b379@ef73a184-f1db-4f24-b406-e4f8f9633dfa/IncomingWebhook/18bed2df0852449aa5d92541255caade/34ba3a07-c6f6-4e3f-896d-148fb6c1765f";
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog();
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
-
+builder.Services.AddControllersWithViews();
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 
 builder.Services.AddMBServices(loggingServiceConfiguration: Utilities.GetDefaultLoggingServiceConfiguration(), toastServiceConfiguration: Utilities.GetDefaultToastServiceConfiguration(), snackbarServiceConfiguration: Utilities.GetDefaultSnackbarServiceConfiguration());
@@ -32,7 +29,7 @@ builder.Services.AddHsts(options =>
 
 builder.Services.AddHttpClient();
 
-builder.Services.AddTransient<ITeamsNotificationService, TeamsNotificationService>();
+builder.Services.AddTransient<INotificationService, NotificationService>();
 
 builder.Services.AddScoped<NonceService>();
 
@@ -50,7 +47,7 @@ builder.Services.Configure<StaticFileOptions>(options =>
     // Pentest fix
     options.OnPrepareResponse = ctx =>
     {
-        ctx.Context.Response.Headers.Add("Cache-Control", "no-cache, no-store, must-revalidate");
+        ctx.Context.Response.Headers.Add("Cache-Control", "public, max-age=86400");
         ctx.Context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
     };
 });

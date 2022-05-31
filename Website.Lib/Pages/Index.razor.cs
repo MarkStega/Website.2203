@@ -13,11 +13,13 @@ public partial class Index : ComponentBase
         public string Caption { get; set; } = "";
         public string Width { get; set; } = "";
         public string Height { get; set; } = "";
+        public bool Preload { get; set; } = false;
+        public string Rel => Preload ? "preload" : "prefetch";
     }
 
 
     [Inject] private NavigationManager NavigationManager { get; set; }
-    [Inject] private ITeamsNotificationService TeamsNotificationService { get; set; }
+    [Inject] private INotificationService TeamsNotificationService { get; set; }
 
 
 
@@ -29,7 +31,7 @@ public partial class Index : ComponentBase
 
     private static readonly ImageData[] CarouselImages = new ImageData[]
     {
-        new() { Uri = "_content/Website.Lib/images/01-main-screen.webp", Caption = "Dioptra's main screen layout" },
+        new() { Uri = "_content/Website.Lib/images/01-main-screen.webp", Caption = "Dioptra's main screen layout", Preload = true },
         new() { Uri = "_content/Website.Lib/images/02-main-screen-search.webp", Caption = "Scheme search" },
         new() { Uri = "_content/Website.Lib/images/03-march-costs-chart.webp", Caption = "Budget, actual and forecast development costs" },
         new() { Uri = "_content/Website.Lib/images/04-march-accruals.webp", Caption = "Loan interest accrual details" },

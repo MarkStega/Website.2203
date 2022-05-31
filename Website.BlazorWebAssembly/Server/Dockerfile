@@ -17,7 +17,6 @@ COPY ["Website.BlazorWebAssembly/Server/Website.BlazorWebAssembly.Server.csproj"
 COPY ["Website.BlazorWebAssembly/Server/NuGet.Config", "Website.BlazorWebAssembly/Server/"]
 
 COPY ["Website.BlazorWebAssembly/Client/Website.BlazorWebAssembly.Client.csproj", "Website.BlazorWebAssembly/Client/"]
-COPY ["Website.BlazorWebAssembly/Shared/Website.BlazorWebAssembly.Shared.csproj", "Website.BlazorWebAssembly/Shared/"]
 COPY ["Website.Lib/Website.Lib.csproj", "Website.Lib/"]
 COPY ["Website.ServerLib/Website.ServerLib.csproj", "Website.ServerLib/"]
 
