@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -32,6 +32,12 @@
 		<InputStaticAssetsScripts Include="WebAssets\**\*.ts" />
 		<OutputStaticAssetsScripts Include="wwwroot\js\dioptra.js;wwwroot\js\dioptra.min.js" />
 		<Content Remove="@(OutputStaticAssetsScripts)" />
+		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\3.0.0-preview.1\contentFiles\any\net6.0\wwwroot\material-components-web.css" />
+		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\3.0.0-preview.1\contentFiles\any\net6.0\wwwroot\material-components-web.min.css" />
+		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\3.0.0-preview.1\contentFiles\any\net6.0\wwwroot\material.blazor.css" />
+		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\3.0.0-preview.1\contentFiles\any\net6.0\wwwroot\material.blazor.js" />
+		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\3.0.0-preview.1\contentFiles\any\net6.0\wwwroot\material.blazor.min.css" />
+		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\3.0.0-preview.1\contentFiles\any\net6.0\wwwroot\material.blazor.min.js" />
 		<Content Include="@(OutputStaticAssetsScripts)" />
 
 		<InputStaticAssetsStyles Include="WebAssets\**\*.scss;" />
