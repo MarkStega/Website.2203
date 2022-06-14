@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -17,8 +17,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Blazor-Analytics" Version="3.11.0" />
 		<PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
-		<PackageReference Include="libphonenumber-csharp" Version="8.12.46" />
+		<PackageReference Include="libphonenumber-csharp" Version="8.12.50" />
 		<PackageReference Include="Material.Blazor" Version="3.0.0-preview.1" />
 	</ItemGroup>
 

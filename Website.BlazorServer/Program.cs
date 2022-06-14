@@ -1,4 +1,5 @@
 ﻿using AspNetCoreRateLimit;
+using Blazor.Analytics;
 using Blazored.LocalStorage;
 using Material.Blazor;
 using Microsoft.AspNetCore.CookiePolicy;
@@ -70,6 +71,8 @@ builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>()
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddBlazoredLocalStorage();
+
+builder.Services.AddGoogleAnalytics("G-V061TDSPDR");
 
 var app = builder.Build();
 
