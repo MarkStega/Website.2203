@@ -122,7 +122,7 @@ app.Use(async (context, next) =>
         "base-uri 'self'; " +
         "block-all-mixed-content; " +
         "child-src 'self' ; " +
-        $"connect-src 'self' wss://{baseDomain}:* www.google-analytics.com; " +
+        $"connect-src 'self' wss://{baseDomain}:* www.google-analytics.com region1.google-analytics.com; " +
         "default-src 'self'; " +
         "font-src use.typekit.net fonts.gstatic.com; " +
         "frame-ancestors 'none'; " +
@@ -135,7 +135,7 @@ app.Use(async (context, next) =>
         "object-src  data: 'unsafe-eval'; " +
         $"report-to https://{baseUri}/api/CspReporting/UriReport; " +
         $"report-uri https://{baseUri}/api/CspReporting/UriReport; " +
-        $"script-src {source} 'strict-dynamic' 'report-sample' 'unsafe-eval';" +
+        $"script-src {source} 'sha256-3b0LA1ZE3o1c1aNFfpkF0fkCBHXmfVFpWjGIve/v2XQ=' 'strict-dynamic' 'report-sample' 'unsafe-eval';" +
         "style-src 'self' 'unsafe-inline' 'report-sample' p.typekit.net use.typekit.net fonts.gstatic.com; " +
         "upgrade-insecure-requests; " +
         "worker-src 'self';";

@@ -6,6 +6,7 @@ using Website.BlazorWebAssembly.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Http;
+using Blazor.Analytics;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
@@ -25,5 +26,7 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 });
 
 builder.Services.AddBlazoredLocalStorage();
+
+builder.Services.AddGoogleAnalytics("G-V061TDSPDR");
 
 await builder.Build().RunAsync();
