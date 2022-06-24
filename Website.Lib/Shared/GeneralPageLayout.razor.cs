@@ -53,7 +53,7 @@ public partial class GeneralPageLayout : ComponentBase
 
     private async Task HomeClick()
     {
-        NavigationManager.NavigateTo("/#dw-main-top");
+        NavigationManager.NavigateTo("/");
         await JSRuntime.InvokeVoidAsync("Website.General.scrollToTop").ConfigureAwait(false);
         HomeButtonExited = true;
         await InvokeAsync(StateHasChanged).ConfigureAwait(false);

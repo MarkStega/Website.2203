@@ -1,6 +1,6 @@
 ﻿using AspNetCoreRateLimit;
-using Blazor.Analytics;
 using Blazored.LocalStorage;
+using GoogleAnalytics.Blazor;
 using Material.Blazor;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -91,7 +91,7 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddBlazoredLocalStorage();
 
-builder.Services.AddGoogleAnalytics("G-V061TDSPDR");
+builder.Services.AddGBService("G-V061TDSPDR");
 
 var app = builder.Build();
 

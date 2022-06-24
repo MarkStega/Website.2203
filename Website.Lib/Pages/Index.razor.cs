@@ -68,7 +68,7 @@ public partial class Index : ComponentBase
 
     private void WorkForUsClick()
     {
-        NavigationManager.NavigateTo("/work-for-us#dw-main-top");
+        NavigationManager.NavigateTo("/work-for-us");
     }
 
 

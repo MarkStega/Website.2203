@@ -31,16 +31,6 @@
 
     <link rel="manifest" href="manifest.json" />
 
-    @*<!-- Global site tag (gtag.js) - Google Analytics -->
-    <script nonce="@NonceService.NonceValue" async src="https://www.googletagmanager.com/gtag/js?id=G-V061TDSPDR"></script>
-    <script nonce="@NonceService.NonceValue">
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-V061TDSPDR');
-    </script>*@
-
     <component type="typeof(HeadOutlet)" render-mode="WebAssemblyPrerendered" />
 </head>
 <body class="mdc-typography">
@@ -78,7 +68,7 @@
     </div>
 
     <script nonce="@NonceService.NonceValue" src="_framework/blazor.webassembly.js"></script>
-    <script nonce="@NonceService.NonceValue" src="_content/Blazor-Analytics/blazor-analytics.js"></script>
+    <script nonce="@NonceService.NonceValue" src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js"></script>
     <script nonce="@NonceService.NonceValue" src="_content/Material.Blazor/material.blazor.min.js"></script>
     <script nonce="@NonceService.NonceValue" src="_content/Website.Lib/js/dioptra.js"></script>
     

@@ -1,6 +1,6 @@
 using AspNetCoreRateLimit;
-using Blazor.Analytics;
 using Blazored.LocalStorage;
+using GoogleAnalytics.Blazor;
 using Material.Blazor;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -91,7 +91,7 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddBlazoredLocalStorage();
 
-builder.Services.AddGoogleAnalytics("G-V061TDSPDR");
+builder.Services.AddGBService("G-V061TDSPDR");
 
 var app = builder.Build();
 
@@ -157,7 +157,7 @@ app.Use(async (context, next) =>
         "object-src  data: 'unsafe-eval'; " +
         $"report-to https://{baseUri}/api/CspReporting/UriReport; " +
         $"report-uri https://{baseUri}/api/CspReporting/UriReport; " +
-        $"script-src {source} 'sha256-3b0LA1ZE3o1c1aNFfpkF0fkCBHXmfVFpWjGIve/v2XQ=' 'strict-dynamic' 'report-sample' 'unsafe-eval';" +
+        $"script-src {source} 'self' 'sha256-3b0LA1ZE3o1c1aNFfpkF0fkCBHXmfVFpWjGIve/v2XQ=' 'strict-dynamic' 'report-sample' 'unsafe-eval';" +
         "style-src 'self' 'unsafe-inline' 'report-sample' p.typekit.net use.typekit.net fonts.gstatic.com; " +
         "upgrade-insecure-requests; " +
         "worker-src 'self';";

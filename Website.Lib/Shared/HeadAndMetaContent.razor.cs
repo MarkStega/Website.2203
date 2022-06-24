@@ -10,7 +10,7 @@ public partial class HeadAndMetaContent : ComponentBase
     [Parameter] public string Description { get; set; } = "";
     [Parameter] public string OpenGraphImage { get; set; } = "";
     [Parameter] public string TwitterImage { get; set; } = "";
-    [Parameter] public string Title { get; set; } = "";
+    [Parameter] public string PageTitle { get; set; } = "";
     [Parameter] public RenderFragment ChildContent { get; set; }
 
 
@@ -26,7 +26,7 @@ public partial class HeadAndMetaContent : ComponentBase
         {
             sequence = BuildMetaTag(builder, sequence, "description", Description);
 
-            sequence = BuildMetaTag(builder, sequence, "og:title", Title);
+            sequence = BuildMetaTag(builder, sequence, "og:title", PageTitle);
             sequence = BuildMetaTag(builder, sequence, "og:description", Description);
             sequence = BuildMetaTag(builder, sequence, "og:image", OpenGraphImage);
             sequence = BuildMetaTag(builder, sequence, "og:url", NavigationManager.Uri);
@@ -35,7 +35,7 @@ public partial class HeadAndMetaContent : ComponentBase
             sequence = BuildMetaTag(builder, sequence, "twitter:card", "summary");
             sequence = BuildMetaTag(builder, sequence, "twitter:site", "@DioptraIO");
             sequence = BuildMetaTag(builder, sequence, "twitter:creator", "@SimonZieglerUK");
-            sequence = BuildMetaTag(builder, sequence, "twitter:title", Title);
+            sequence = BuildMetaTag(builder, sequence, "twitter:title", PageTitle);
             sequence = BuildMetaTag(builder, sequence, "twitter:description", Description);
             sequence = BuildMetaTag(builder, sequence, "twitter:image", TwitterImage);
         });
