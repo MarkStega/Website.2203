@@ -91,16 +91,28 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddBlazoredLocalStorage();
 
-builder.Services.AddGBService("G-V061TDSPDR");
+builder.Services.AddGBService(
+    trackingId: "G-V061TDSPDR",
+    globalEventParams: new Dictionary<string, object>()
+    {
+        { Utilities.EventCategory, Utilities.DialogActions },
+        { Utilities.NonInteraction, true },
+    });
 
 var app = builder.Build();
 
 Log.Logger = new LoggerConfiguration()
+#if DEBUG
+    .MinimumLevel.Debug()
+#else
     .MinimumLevel.Information()
+#endif
     .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
     .MinimumLevel.Override("System", LogEventLevel.Warning)
+    .MinimumLevel.Override("GoogleAnalytics.Blazor", LogEventLevel.Debug)
     .Enrich.FromLogContext()
-    .WriteTo.Async(a => a.Console(outputTemplate: _customTemplate, restrictedToMinimumLevel: LogEventLevel.Information))
+    .WriteTo.Conditional(evt => builder.Environment.IsDevelopment(), wt => wt.Async(a => a.Console(outputTemplate: _customTemplate, restrictedToMinimumLevel: LogEventLevel.Debug)))
+    .WriteTo.Conditional(evt => !builder.Environment.IsDevelopment(), wt => wt.Async(a => a.Console(outputTemplate: _customTemplate, restrictedToMinimumLevel: LogEventLevel.Information)))
     .WriteTo.Conditional(evt => !app.Environment.IsDevelopment(), wt => wt.Async(a => a.MicrosoftTeams(outputTemplate: _customTemplate, webHookUri: _loggingWebhook, titleTemplate: "Dioptra Website", restrictedToMinimumLevel: LogEventLevel.Warning)))
     .WriteTo.Conditional(evt => app.Environment.IsDevelopment(), wt => wt.Async(a => a.File(outputTemplate: _customTemplate, path: Environment.GetEnvironmentVariable("LOCALAPPDATA") + "\\Dioptra Website\\blazor-server-app.log", restrictedToMinimumLevel: LogEventLevel.Debug, rollingInterval: RollingInterval.Day, retainedFileCountLimit: 7)))
     .CreateLogger();
@@ -151,7 +163,7 @@ app.Use(async (context, next) =>
         "object-src 'none'; " +
         $"report-to https://{baseUri}/api/CspReporting/UriReport; " +
         $"report-uri https://{baseUri}/api/CspReporting/UriReport; " +
-        $"script-src {source} 'report-sample';" +
+        $"script-src {source} 'report-sample' 'strict-dynamic';" +
         "style-src 'self' 'unsafe-inline' 'report-sample' p.typekit.net use.typekit.net fonts.gstatic.com; " +
         "upgrade-insecure-requests; " +
         "worker-src 'self';";

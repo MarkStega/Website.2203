@@ -1,4 +1,5 @@
-﻿using Material.Blazor;
+﻿using GoogleAnalytics.Blazor;
+using Material.Blazor;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
@@ -9,12 +10,12 @@ public partial class GeneralPageLayout : ComponentBase
     [Inject] private INotificationService TeamsNotificationService { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
     [Inject] private IJSRuntime JSRuntime { get; set; }
+    [Inject] private IGBAnalyticsManager AnalyticsManager { get; set; }
 
 
 
     [Parameter] public string ColorClass { get; set; }
     [Parameter] public RenderFragment ChildContent { get; set; }
-
 
 
     private MBDialog ContactDialog { get; set; } = new();
@@ -35,18 +36,22 @@ public partial class GeneralPageLayout : ComponentBase
     {
         ContactMessage = new();
 
+        await AnalyticsManager.TrackEvent(Utilities.DialogActions, "Open Contact Dialog");
+
         await ContactDialog.ShowAsync();
     }
 
     private async Task CloseContactDialogAsync()
     {
+        await AnalyticsManager.TrackEvent(Utilities.DialogActions, "Close Contact Dialog");
+        
         await ContactDialog.HideAsync();
     }
 
 
     private async Task ContactDialogSubmittedAsync()
     {
-        await ContactDialog.HideAsync();
+        await CloseContactDialogAsync();
         await TeamsNotificationService.SendNotification(ContactMessage);
     }
 

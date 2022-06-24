@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Http;
 using Serilog;
 using Serilog.Extensions.Logging;
+using Serilog.Events;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
@@ -30,15 +31,25 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 builder.Services.AddBlazoredLocalStorage();
 
 Log.Logger = new LoggerConfiguration()
+#if DEBUG
     .MinimumLevel.Debug()
-    //.MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-    //.MinimumLevel.Override("GoogleAnalytics.Blazor", LogEventLevel.Debug)
+#else
+    .MinimumLevel.Information()
+#endif
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+    .MinimumLevel.Override("GoogleAnalytics.Blazor", LogEventLevel.Debug)
     .Enrich.FromLogContext()
     .WriteTo.Async(a => a.BrowserConsole(outputTemplate: "{Timestamp:HH:mm:ss.fff}\t[{Level:u3}]\t{Message}{NewLine}{Exception}"))
     .CreateLogger();
 
 builder.Logging.AddProvider(new SerilogLoggerProvider());
 
-builder.Services.AddGBService("G-V061TDSPDR");
+builder.Services.AddGBService(
+    trackingId: "G-V061TDSPDR",
+    globalEventParams: new Dictionary<string, object>()
+    {
+        { Utilities.EventCategory, Utilities.DialogActions },
+        { Utilities.NonInteraction, true },
+    });
 
 await builder.Build().RunAsync();

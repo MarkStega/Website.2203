@@ -1,4 +1,5 @@
-﻿using Material.Blazor;
+﻿using GoogleAnalytics.Blazor;
+using Material.Blazor;
 using Microsoft.AspNetCore.Components;
 using Website.Lib.Shared;
 
@@ -7,6 +8,7 @@ namespace Website.Lib.Pages;
 public partial class WorkForUs : ComponentBase
 {
     [Inject] private INotificationService TeamsNotificationService { get; set; }
+    [Inject] private IGBAnalyticsManager AnalyticsManager { get; set; }
 
 
     private GeneralPageLayout GeneralPageLayout { get; set; }
@@ -57,17 +59,21 @@ public partial class WorkForUs : ComponentBase
             ShowProspectiveRole = true;
         }
 
+        await AnalyticsManager.TrackEvent(Utilities.DialogActions, "Open Recruitment Dialog");
+
         await RecruitmentEnquiryDialog.ShowAsync();
     }
 
     private async Task ClosegDialogAsync()
     {
+        await AnalyticsManager.TrackEvent(Utilities.DialogActions, "Close Recruitment Dialog");
+        
         await RecruitmentEnquiryDialog.HideAsync();
     }
 
     private async Task DialogSubmittedAsync()
     {
-        await RecruitmentEnquiryDialog.HideAsync();
+        await ClosegDialogAsync();
         await TeamsNotificationService.SendNotification(RecruitmentEnquiry);
     }
 
