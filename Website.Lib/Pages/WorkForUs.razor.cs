@@ -59,14 +59,14 @@ public partial class WorkForUs : ComponentBase
             ShowProspectiveRole = true;
         }
 
-        await AnalyticsManager.TrackEvent(Utilities.DialogActions, "Open Recruitment Dialog");
+        await AnalyticsManager.TrackEvent("Open Recruitment Dialog");
 
         await RecruitmentEnquiryDialog.ShowAsync();
     }
 
     private async Task ClosegDialogAsync()
     {
-        await AnalyticsManager.TrackEvent(Utilities.DialogActions, "Close Recruitment Dialog");
+        await AnalyticsManager.TrackEvent("Close Recruitment Dialog");
         
         await RecruitmentEnquiryDialog.HideAsync();
     }

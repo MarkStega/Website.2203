@@ -36,14 +36,14 @@ public partial class GeneralPageLayout : ComponentBase
     {
         ContactMessage = new();
 
-        await AnalyticsManager.TrackEvent(Utilities.DialogActions, "Open Contact Dialog");
+        await AnalyticsManager.TrackEvent("Open Contact Dialog");
 
         await ContactDialog.ShowAsync();
     }
 
     private async Task CloseContactDialogAsync()
     {
-        await AnalyticsManager.TrackEvent(Utilities.DialogActions, "Close Contact Dialog");
+        await AnalyticsManager.TrackEvent("Close Contact Dialog");
         
         await ContactDialog.HideAsync();
     }
