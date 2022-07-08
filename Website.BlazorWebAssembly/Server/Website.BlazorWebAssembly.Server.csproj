@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -20,5 +20,23 @@
 		<ProjectReference Include="..\..\Website.ServerLib\Website.ServerLib.csproj" />
 		<ProjectReference Include="..\Client\Website.BlazorWebAssembly.Client.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+		<FilesToHash Include="$(PublishDir)wwwroot\**\*.js" />
+		<HashFileOutput Include="$(PublishDir)hashes\scripts-src.txt" />
+	</ItemGroup>
+	
+	<Target Name="GetHash" AfterTargets="Publish">
+		<GetFileHash Files="@(FilesToHash)">
+			<Output
+				TaskParameter="Items"
+				ItemName="FilesWithHashes" />
+		</GetFileHash>
+
+		<WriteLinesToFile	File="@(HashFileOutput)"
+							Lines="@(FilesWithHashes->'%(FileHash)')"
+							Overwrite="true"
+							Encoding="Unicode"/>
+	</Target>
 
 </Project>

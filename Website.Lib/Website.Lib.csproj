@@ -120,12 +120,12 @@
 		<Exec Command="npm run build-min-theme" />
 	</Target>
 
-	<ItemGroup>
-		<FilesToHash Include="$(ProjectDir)wwwroot\**\*.js" />
-		<HashFileOutput Include="$(ProjectDir)hashes\hashes.csv" />
-	</ItemGroup>
+	<!--<ItemGroup>
+		<FilesToHash Include="$(PublishDir)_content\**\*.js" />
+		<HashFileOutput Include="$(PublishDir)hashes\scripts-src.txt" />
+	</ItemGroup>-->
 
-	<Target Name="GetHash" AfterTargets="BuildScripts">
+	<!--<Target Name="GetHash" AfterTargets="Publish">
 		<GetFileHash Files="@(FilesToHash)">
 			<Output
 				TaskParameter="Items"
@@ -133,9 +133,9 @@
 		</GetFileHash>
 
 		<WriteLinesToFile	File="@(HashFileOutput)"
-							Lines="@(FilesWithHashes->'%(Identity),%(FileHash)')"
+							Lines="@(FilesWithHashes->'%(FileHash)')"
 							Overwrite="true"
 							Encoding="Unicode"/>
-	</Target>
+	</Target>-->
 
 </Project>
