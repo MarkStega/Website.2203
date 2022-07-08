@@ -22,8 +22,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<FilesToHash Include="$(PublishDir)wwwroot\*.js" />
-		<HashFileOutput Include="$(PublishDir)hashes\scripts-src.txt" />
+		<FilesToHash Include="$(PublishDir)wwwroot\*.js;$(PublishDir)wwwroot\**\*.js;$(PublishDir)wwwroot\*.css;$(PublishDir)wwwroot\**\*.css;;$(PublishDir)wwwroot\*.json;$(PublishDir)wwwroot\**\*.json" />
+		<HashFileOutput Include="$(PublishDir)hashes\hashes.txt" />
 	</ItemGroup>
 	
 	<Target Name="GetHash" AfterTargets="Publish">
@@ -37,7 +37,7 @@
              Text="@(FilesWithHashes->'%(Identity): %(FileHash)')" />
 		
 		<WriteLinesToFile	File="@(HashFileOutput)"
-							Lines="@(FilesWithHashes->'%(FileHash)')"
+							Lines="@(FilesWithHashes->'%(Identity),%(FileHash)')"
 							Overwrite="true"
 							Encoding="Unicode"/>
 	</Target>
