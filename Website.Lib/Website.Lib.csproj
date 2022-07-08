@@ -132,13 +132,8 @@
 				ItemName="FilesWithHashes" />
 		</GetFileHash>
 
-		<PropertyGroup>
-			<In>"@(FilesWithHashes->'%(Identity),%(FileHash)')"</In>
-			<Out>$([System.Text.RegularExpressions.Regex]::Match($(In), `.*`))</Out>
-		</PropertyGroup>
-		<!--Lines="@(FilesWithHashes->'%(Identity),%(FileHash)')"-->
 		<WriteLinesToFile	File="@(HashFileOutput)"
-							Lines="@(Out)"
+							Lines="@(FilesWithHashes->'%(Identity),%(FileHash)')"
 							Overwrite="true"
 							Encoding="Unicode"/>
 	</Target>
