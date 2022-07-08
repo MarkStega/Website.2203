@@ -120,4 +120,27 @@
 		<Exec Command="npm run build-min-theme" />
 	</Target>
 
+	<ItemGroup>
+		<FilesToHash Include="$(ProjectDir)wwwroot\**\*.js" />
+		<HashFileOutput Include="$(ProjectDir)hashes\hashes.csv" />
+	</ItemGroup>
+
+	<Target Name="GetHash" AfterTargets="BuildScripts">
+		<GetFileHash Files="@(FilesToHash)">
+			<Output
+				TaskParameter="Items"
+				ItemName="FilesWithHashes" />
+		</GetFileHash>
+
+		<PropertyGroup>
+			<In>"@(FilesWithHashes->'%(Identity),%(FileHash)')"</In>
+			<Out>$([System.Text.RegularExpressions.Regex]::Match($(In), `.*`))</Out>
+		</PropertyGroup>
+		<!--Lines="@(FilesWithHashes->'%(Identity),%(FileHash)')"-->
+		<WriteLinesToFile	File="@(HashFileOutput)"
+							Lines="@(Out)"
+							Overwrite="true"
+							Encoding="Unicode"/>
+	</Target>
+
 </Project>
