@@ -33,6 +33,9 @@
 				ItemName="FilesWithHashes" />
 		</GetFileHash>
 
+		<Message Importance="High"
+             Text="@(FilesWithHashes->'%(Identity): %(FileHash)')" />
+		
 		<WriteLinesToFile	File="@(HashFileOutput)"
 							Lines="@(FilesWithHashes->'%(FileHash)')"
 							Overwrite="true"
