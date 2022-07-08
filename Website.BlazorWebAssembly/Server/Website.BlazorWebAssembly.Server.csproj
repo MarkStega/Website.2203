@@ -22,7 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<FilesToHash Include="$(PublishDir)wwwroot\*.js;$(PublishDir)wwwroot\**\*.js;$(PublishDir)wwwroot\*.css;$(PublishDir)wwwroot\**\*.css;;$(PublishDir)wwwroot\*.json;$(PublishDir)wwwroot\**\*.json" />
+		<FilesToHash Include="$(PublishDir)wwwroot\**\*.js;$(PublishDir)wwwroot\**\*.css;$(PublishDir)wwwroot\**\*.json" />
 		<HashFileOutput Include="$(PublishDir)hashes\hashes.txt" />
 	</ItemGroup>
 	
