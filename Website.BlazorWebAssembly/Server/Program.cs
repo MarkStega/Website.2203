@@ -51,7 +51,7 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddTransient<INotificationService, NotificationService>();
 
-builder.Services.AddScoped<NonceService>();
+builder.Services.AddScoped<ContentSecurityPolicyService>();
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
@@ -145,7 +145,7 @@ app.UseStaticFiles();
 // Pentest fix
 app.Use(async (context, next) =>
 {
-    var nonceValue = context.RequestServices.GetService<NonceService>()?.NonceValue ?? throw new Exception("Nonce service unavailable");
+    var nonceValue = context.RequestServices.GetService<ContentSecurityPolicyService>()?.NonceValue ?? throw new Exception("Nonce service unavailable");
 
     var source = (app.Environment.IsDevelopment() ? "'self' " : "") + $"'nonce-{nonceValue}'";
 
