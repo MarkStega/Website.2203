@@ -21,27 +21,9 @@
 		<ProjectReference Include="..\Client\Website.BlazorWebAssembly.Client.csproj" />
 	</ItemGroup>
 
-	<!--<ItemGroup>
+	<ItemGroup>
 		<FilesToHash Include="$(PublishDir)wwwroot\**\*.js;$(PublishDir)wwwroot\**\*.css;$(PublishDir)wwwroot\**\*.json" />
 		<HashFileOutput Include="$(PublishDir)hashes.csv" />
-		<TestFile Include="$(PublishDir)simon.txt" />
-	</ItemGroup>
-	
-	<Target Name="BuildHashes" AfterTargets="Build">
-		<GetFileHash Files="@(FilesToHash)">
-			<Output TaskParameter="Items" ItemName="FilesWithHashes" />
-		</GetFileHash>
-
-		<Message Importance="High" Text="@(FilesWithHashes->'%(Identity): %(FileHash)')" />
-		
-		<WriteLinesToFile File="@(HashFileOutput)" Lines="@(FilesWithHashes->'%(Identity),%(FileHash)')" Overwrite="true" Encoding="Unicode" />
-		<WriteLinesToFile File="@(TestFile)" Lines="Hello!!!!!!!!" Overwrite="true" Encoding="Unicode" />
-	</Target>-->
-	
-	<ItemGroup>
-		<FilesToHash Include="$(BuildPath)wwwroot\**\*.js;$(PublishDir)wwwroot\**\*.css;$(PublishDir)wwwroot\**\*.json" />
-		<HashFileOutput Include="$(BuildPath)hashes.csv" />
-		<TestFile Include="$(BuildPath)simon.txt" />
 	</ItemGroup>
 	
 	<Target Name="BuildHashes">
@@ -49,9 +31,6 @@
 			<Output TaskParameter="Items" ItemName="FilesWithHashes" />
 		</GetFileHash>
 
-		<Message Importance="High" Text="Hello!!!!!!!!!!!!" />
-		<Message Importance="High" Text="$(BuildPath)" />
-		<Message Importance="High" Text="@(FilesToHash)" />
 		<Message Importance="High" Text="@(FilesWithHashes->'%(Identity): %(FileHash)')" />
 		
 		<WriteLinesToFile File="@(HashFileOutput)" Lines="@(FilesWithHashes->'%(Identity),%(FileHash)')" Overwrite="true" Encoding="Unicode" />

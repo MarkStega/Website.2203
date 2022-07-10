@@ -28,7 +28,7 @@ RUN dotnet build "Website.BlazorWebAssembly.Server.csproj" -c Release -o /app/bu
 
 FROM build AS publish
 RUN dotnet publish "Website.BlazorWebAssembly.Server.csproj" -c Release -o /app/publish
-RUN dotnet msbuild -target:BuildHashes -property:BuildPath=.\app\ "Website.BlazorWebAssembly.Server.csproj"
+RUN dotnet msbuild -target:BuildHashes -property:PublishDir="\\app\\publish\\" "Website.BlazorWebAssembly.Server.csproj"
 #RUN touch simon.txt
 
 FROM base AS final
