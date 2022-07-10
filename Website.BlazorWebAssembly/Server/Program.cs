@@ -145,9 +145,11 @@ app.UseStaticFiles();
 // Pentest fix
 app.Use(async (context, next) =>
 {
-    var nonceValue = context.RequestServices.GetService<ContentSecurityPolicyService>()?.NonceValue ?? throw new Exception("Nonce service unavailable");
+    var cspService = context.RequestServices.GetService<ContentSecurityPolicyService>();
 
-    var source = (app.Environment.IsDevelopment() ? "'self' " : "") + $"'nonce-{nonceValue}'";
+    var nonceValue = cspService?.NonceValue ?? throw new Exception("Nonce service unavailable");
+
+    var scriptSrc = cspService.ScriptSrc + $" 'nonce-{nonceValue}'";
 
     var baseUri = context.Request.Host.ToString();
     var baseDomain = context.Request.Host.Host;
@@ -169,7 +171,7 @@ app.Use(async (context, next) =>
         "object-src  data: 'unsafe-eval'; " +
         $"report-to https://{baseUri}/api/CspReporting/UriReport; " +
         $"report-uri https://{baseUri}/api/CspReporting/UriReport; " +
-        $"script-src {source} 'self' 'sha256-3b0LA1ZE3o1c1aNFfpkF0fkCBHXmfVFpWjGIve/v2XQ=' 'strict-dynamic' 'report-sample' 'unsafe-eval';" +
+        $"script-src {scriptSrc} 'sha256-3b0LA1ZE3o1c1aNFfpkF0fkCBHXmfVFpWjGIve/v2XQ=' 'strict-dynamic' 'report-sample' 'unsafe-eval';" +
         "style-src 'self' 'unsafe-inline' 'report-sample' p.typekit.net use.typekit.net fonts.gstatic.com; " +
         "upgrade-insecure-requests; " +
         "worker-src 'self';";

@@ -26,7 +26,7 @@
 		<HashFileOutput Include="$(PublishDir)hashes.csv" />
 	</ItemGroup>
 	
-	<Target Name="BuildHashes">
+	<Target Name="BuildHashes" AfterTargets="Publish">
 		<GetFileHash Files="@(FilesToHash)">
 			<Output TaskParameter="Items" ItemName="FilesWithHashes" />
 		</GetFileHash>

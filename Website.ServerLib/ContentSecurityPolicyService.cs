@@ -14,6 +14,7 @@ public class ContentSecurityPolicyService
 
     public readonly string ScriptSrc = "'self'";
 
+
     public ContentSecurityPolicyService()
     {
         var bytes = new byte[32];
@@ -33,9 +34,20 @@ public class ContentSecurityPolicyService
 
         using StreamReader sr = new(hashesFilePath);
 
+        string str = "";
+
         while (sr.Peek() >= 0)
         {
-            Console.WriteLine(sr.ReadLine());
+            var csvSplit = (sr.ReadLine() ?? ",").Split(',');
+
+            var extension = csvSplit[0].Split('.')[^1].ToLower();
+
+            if (extension == "js")
+            {
+                str = str + $"'sha256-{csvSplit[1]}' ";
+            }
         }
+
+        ScriptSrc = str.Trim();
     }
 }
