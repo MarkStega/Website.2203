@@ -27,7 +27,7 @@
 	</ItemGroup>
 	
 	<Target Name="BuildHashes" AfterTargets="Publish">
-		<GetFileHash Files="@(FilesToHash)">
+		<GetFileHash Files="@(FilesToHash)" Algorithm="SHA256" HashEncoding="base64">
 			<Output TaskParameter="Items" ItemName="FilesWithHashes" />
 		</GetFileHash>
 

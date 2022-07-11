@@ -171,7 +171,7 @@ app.Use(async (context, next) =>
         "object-src  data: 'unsafe-eval'; " +
         $"report-to https://{baseUri}/api/CspReporting/UriReport; " +
         $"report-uri https://{baseUri}/api/CspReporting/UriReport; " +
-        $"script-src {scriptSrc} 'sha256-3b0LA1ZE3o1c1aNFfpkF0fkCBHXmfVFpWjGIve/v2XQ=' 'strict-dynamic' 'report-sample' 'unsafe-eval';" +
+        $"script-src {scriptSrc} 'sha256-3b0LA1ZE3o1c1aNFfpkF0fkCBHXmfVFpWjGIve/v2XQ=' 'sha256-NzVkNjk1MzgxYzk3Yzc2MzA1NjU2N2Q5MjM4ODBkM2FlNmM4Yjk4YjhjYmNlZTMyNTE0ODMyNGNmZDc1MDk0Mg==' 'strict-dynamic' 'report-sample' 'unsafe-eval';" +
         "style-src 'self' 'unsafe-inline' 'report-sample' p.typekit.net use.typekit.net fonts.gstatic.com; " +
         "upgrade-insecure-requests; " +
         "worker-src 'self';";

@@ -44,10 +44,32 @@ public class ContentSecurityPolicyService
 
             if (extension == "js")
             {
-                str = str + $"'sha256-{csvSplit[1]}' ";
+                str += $"'sha256-{csvSplit[1]}' ";
             }
         }
 
         ScriptSrc = str.Trim();
+    }
+
+
+    /// <summary>
+    /// Generates a single inline script with applied nonce.
+    /// </summary>
+    /// <param name="inlineScript"></param>
+    /// <returns></returns>
+    public string GenerateInlineScriptElement(string inlineScript)
+    {
+        return $"<script nonce=\"{NonceValue}\">{inlineScript}</script>";
+    }
+
+
+    /// <summary>
+    /// Generates a single inline script with applied nonce.
+    /// </summary>
+    /// <param name="inlineScript"></param>
+    /// <returns></returns>
+    public string GenerateInlineScriptElements(IEnumerable<string> inlineScripts)
+    {
+        return string.Concat(inlineScripts.Select(x => GenerateInlineScriptElement(x)));
     }
 }
