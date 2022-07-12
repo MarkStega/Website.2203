@@ -55,7 +55,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="website-tsconfig.json" />
+		<None Include="tsconfig.json" />
 	</ItemGroup>
 
 	<Target Name="WWWRootFileCopy" BeforeTargets="PreBuildEvent">

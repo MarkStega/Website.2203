@@ -1,6 +1,8 @@
 ﻿import { MDCRipple } from '@material/ripple';
 import { MDCDialog } from '@material/dialog';
 
+navigator.serviceWorker.register('service-worker.js');
+
 export function setTheme(sheetName): void {
     let elem = document.getElementById("app-theme");
 

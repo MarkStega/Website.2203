@@ -1,4 +1,5 @@
-﻿using Serilog;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace Website.Lib;
 
@@ -17,13 +18,19 @@ public class ContentSecurityPolicyService
     /// <summary>
     /// Part of the CSP <c>script-src</c> tag that encodes sha keys and nonce values.
     /// </summary>
-    public string ScriptSrcPart { get; private set; } = $"'self'";
+    public readonly string ScriptSrcPart  = "'self'";
 
 
     /// <summary>
     /// Part of the CSP <c>style-src</c> tag that encodes sha keys and nonce values.
     /// </summary>
-    public string StyleSrcPart { get; private set; } = $"'self'";
+    public readonly string StyleSrcPart = "'self'";
+
+
+    /// <summary>
+    /// The CSP is to be applied only if this is true.
+    /// </summary>
+    public readonly bool ApplyContentSecurityPolicy = true;
 
 
     // Delimiters are for Linux and Windows respectively.
@@ -32,7 +39,7 @@ public class ContentSecurityPolicyService
     private readonly Dictionary<string, string> _fileHashes = new();
 
 
-    public ContentSecurityPolicyService()
+    public ContentSecurityPolicyService(IWebHostEnvironment env)
     {
         var bytes = new byte[32];
 
@@ -71,6 +78,8 @@ public class ContentSecurityPolicyService
                 }
             }
         }
+
+        ApplyContentSecurityPolicy = File.Exists(hashesFilePath) || !env.IsDevelopment();
 
         ScriptSrcPart = ($"'nonce-{NonceValue}' " + scriptSrcPart).Trim();
         StyleSrcPart = ($"'nonce-{NonceValue}' " + styleSrcPart).Trim();
