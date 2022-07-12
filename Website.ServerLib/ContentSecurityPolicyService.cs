@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace Website.Lib;
 
@@ -26,10 +27,10 @@ public class ContentSecurityPolicyService
     public string StyleSrcPart { get; private set; } = $"'self'";
 
 
-    private Dictionary<string, string> fileHashes = new();
+    private readonly Dictionary<string, string> fileHashes = new();
 
 
-    public ContentSecurityPolicyService()
+    public ContentSecurityPolicyService(IWebHostEnvironment env)
     {
         var bytes = new byte[32];
 
@@ -68,12 +69,6 @@ public class ContentSecurityPolicyService
                 }
             }
         }
-
-        //var hexString1 = "C02FB30326075533737AF0B0DD216F1C8E231B9D69575F9BE6C437463D754062";
-        //var hexString2 = "c02fb30326075533737af0b0dd216f1c8e231b9d69575f9be6c437463d754062";
-        //var base64String = Convert.ToBase64String(Convert.FromHexString(hexString2));
-
-        //str += $"'sha256-{base64String}' 'sha256-wC+zAyYHVTNzevCw3SFvHI4jG51pV1+b5sQ3Rj11QGI=' ";
 
         ScriptSrcPart = ($"'nonce-{NonceValue}' " + scriptSrcPart).Trim();
         StyleSrcPart = ($"'nonce-{NonceValue}' " + styleSrcPart).Trim();
