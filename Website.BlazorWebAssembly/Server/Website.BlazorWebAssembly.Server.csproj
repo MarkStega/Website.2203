@@ -30,7 +30,8 @@
 	<Target Name="BuildHashes" AfterTargets="Publish">
 		<ItemGroup>
 			<FilesToHash Include="$(PublishDir)wwwroot\**\*.js;$(PublishDir)wwwroot\**\*.css;$(PublishDir)wwwroot\**\*.json" />
-			<HashFileOutput Include="$(PublishDir)hashes.csv" />
+			<ProjectHashFileOutput Include="$(MSBuildProjectDirectory)hashes.csv" />
+			<PublishHashFileOutput Include="$(PublishDir)hashes.csv" />
 		</ItemGroup>
 
 		<GetFileHash Files="@(FilesToHash)" Algorithm="SHA256" HashEncoding="base64">
@@ -39,7 +40,8 @@
 
 		<Message Importance="High" Text="@(FilesWithHashes->'%(Identity): %(FileHash)')" />
 
-		<WriteLinesToFile File="@(HashFileOutput)" Lines="@(FilesWithHashes->'%(Identity),%(FileHash)')" Overwrite="true" Encoding="Unicode" />
+		<WriteLinesToFile File="@(ProjectHashFileOutput)" Lines="@(FilesWithHashes->'%(Identity),%(FileHash)')" Overwrite="true" Encoding="Unicode" />
+		<WriteLinesToFile File="@(PublishHashFileOutput)" Lines="@(FilesWithHashes->'%(Identity),%(FileHash)')" Overwrite="true" Encoding="Unicode" />
 	</Target>
 
 </Project>
