@@ -143,57 +143,10 @@ app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
 // Pentest fix
-app.Use(async (context, next) =>
-{
-    var cspService = context.RequestServices.GetService<ContentSecurityPolicyService>();
-
-    var nonceValue = cspService?.NonceValue ?? throw new Exception("Nonce service unavailable");
-
-    var scriptSrc = cspService.ScriptSrc + $" 'nonce-{nonceValue}'";
-
-    var baseUri = context.Request.Host.ToString();
-    var baseDomain = context.Request.Host.Host;
-
-    var csp =
-        "base-uri 'self'; " +
-        "block-all-mixed-content; " +
-        "child-src 'self' ; " +
-        $"connect-src 'self' wss://{baseDomain}:* www.google-analytics.com region1.google-analytics.com; " +
-        "default-src 'self'; " +
-        "font-src use.typekit.net fonts.gstatic.com; " +
-        "frame-ancestors 'none'; " +
-        "frame-src 'self'; " +
-        "form-action 'none'; " +
-        "img-src 'self' www.google-analytics.com *.openstreetmap.org data: w3.org/svg/2000; " +
-        "manifest-src 'self'; " +
-        "media-src 'self'; " +
-        "prefetch-src 'self'; " +
-        "object-src  data: 'unsafe-eval'; " +
-        $"report-to https://{baseUri}/api/CspReporting/UriReport; " +
-        $"report-uri https://{baseUri}/api/CspReporting/UriReport; " +
-        $"script-src {scriptSrc} 'sha256-3b0LA1ZE3o1c1aNFfpkF0fkCBHXmfVFpWjGIve/v2XQ=' 'sha256-NzVkNjk1MzgxYzk3Yzc2MzA1NjU2N2Q5MjM4ODBkM2FlNmM4Yjk4YjhjYmNlZTMyNTE0ODMyNGNmZDc1MDk0Mg==' 'strict-dynamic' 'report-sample' 'unsafe-eval';" +
-        "style-src 'self' 'unsafe-inline' 'report-sample' p.typekit.net use.typekit.net fonts.gstatic.com; " +
-        "upgrade-insecure-requests; " +
-        "worker-src 'self';";
-
-    context.Response.Headers.Add("X-Frame-Options", "DENY");
-    context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
-    context.Response.Headers.Add("X-Xss-Protection", "1; mode=block");
-    context.Response.Headers.Add("X-ClientId", "dioptra");
-    context.Response.Headers.Add("Referrer-Policy", "no-referrer");
-    context.Response.Headers.Add("X-Permitted-Cross-Domain-Policies", "none");
-    context.Response.Headers.Add("Permissions-Policy", "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()");
-    context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000");
-
-#if !DEBUG
-    context.Response.Headers.Add("Content-Security-Policy", csp);
-#endif
-
-    await next();
-});
+app.UseContentSecurityPolicy();
 
 // Pentest fix
-app.UseMiddleware<NoCacheMiddleware>();
+app.UseNoCacheMiddleware();
 
 app.UseRouting();
 

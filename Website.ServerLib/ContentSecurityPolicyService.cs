@@ -12,7 +12,7 @@ public class ContentSecurityPolicyService
     public readonly string NonceValue = "";
 
 
-    public readonly string ScriptSrc = "'self'";
+    public string ScriptSrc { get; private set; } = $"'self' 'sha256-fnNG0/G8GHlV7f9ff635YtH7EkEjPvXQezHGl6JM8jAx='";
 
 
     public ContentSecurityPolicyService()
@@ -27,28 +27,26 @@ public class ContentSecurityPolicyService
 
         var hashesFilePath = AppContext.BaseDirectory + "hashes.csv";
 
-        if (!File.Exists(hashesFilePath))
-        {
-            return;
-        }
-
-        using StreamReader sr = new(hashesFilePath);
-
         string str = "";
 
-        while (sr.Peek() >= 0)
+        if (File.Exists(hashesFilePath))
         {
-            var csvSplit = (sr.ReadLine() ?? ",").Split(',');
+            using StreamReader sr = new(hashesFilePath);
 
-            var extension = csvSplit[0].Split('.')[^1].ToLower();
-
-            if (extension == "js")
+            while (sr.Peek() >= 0)
             {
-                str += $"'sha256-{csvSplit[1]}' ";
+                var csvSplit = (sr.ReadLine() ?? ",").Split(',');
+
+                var extension = csvSplit[0].Split('.')[^1].ToLower();
+
+                if (extension == "js")
+                {
+                    str += $"'sha256-{csvSplit[1]}' ";
+                }
             }
         }
 
-        ScriptSrc = str.Trim();
+        ScriptSrc = ($"'nonce-{NonceValue}' " + str).Trim();
     }
 
 
