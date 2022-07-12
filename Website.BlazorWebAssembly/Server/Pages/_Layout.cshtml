@@ -66,10 +66,10 @@
         </div>
     </div>
 
-    <script src="_framework/blazor.webassembly.js"></script>
-    <script src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js"></script>
-    <script src="_content/Material.Blazor/material.blazor.min.js"></script>
-    <script src="_content/Website.Lib/js/dioptra.js"></script>
+    <script src="_framework/blazor.webassembly.js" integrity="@CSPService.GetFileHashString("blazor.webassembly.js")"></script>
+    <script src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js" integrity="@CSPService.GetFileHashString("googleanalytics.blazor.js")"></script>
+    <script src="_content/Material.Blazor/material.blazor.min.js" integrity="@CSPService.GetFileHashString("material.blazor.min.js")"></script>
+    <script src="_content/Website.Lib/js/dioptra.js" integrity="@CSPService.GetFileHashString("dioptra.js")"></script>
 
     <script nonce="@CSPService.NonceValue">navigator.serviceWorker.register('service-worker.js');</script>
 </body>
