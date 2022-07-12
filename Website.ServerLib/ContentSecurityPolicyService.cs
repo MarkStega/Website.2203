@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+﻿using Serilog;
 
 namespace Website.Lib;
 
@@ -27,10 +26,13 @@ public class ContentSecurityPolicyService
     public string StyleSrcPart { get; private set; } = $"'self'";
 
 
-    private readonly Dictionary<string, string> fileHashes = new();
+    // Delimiters are for Linux and Windows respectively.
+    private static readonly char[] _pathDelimiters = { '/', '\\' };
+
+    private readonly Dictionary<string, string> _fileHashes = new();
 
 
-    public ContentSecurityPolicyService(IWebHostEnvironment env)
+    public ContentSecurityPolicyService()
     {
         var bytes = new byte[32];
 
@@ -45,7 +47,7 @@ public class ContentSecurityPolicyService
         string scriptSrcPart = "";
         string styleSrcPart = "";
 
-        if (File.Exists(hashesFilePath) && !fileHashes.Any())
+        if (File.Exists(hashesFilePath) && !_fileHashes.Any())
         {
             using StreamReader sr = new(hashesFilePath);
 
@@ -53,12 +55,12 @@ public class ContentSecurityPolicyService
             {
                 var csvSplit = (sr.ReadLine() ?? ",").Split(',');
 
-                var fileName = csvSplit[0].Split('\\')[^1];
+                var fileName = csvSplit[0].Split(_pathDelimiters)[^1];
                 var extension = csvSplit[0].Split('.')[^1].ToLower();
                 var hashString = $"sha256-{csvSplit[1]}";
 
-                fileHashes[fileName] = hashString;
-
+                _fileHashes[fileName] = hashString;
+                
                 if (extension == "js")
                 {
                     scriptSrcPart += $"'sha256-{csvSplit[1]}' ";
@@ -82,6 +84,11 @@ public class ContentSecurityPolicyService
     /// <returns></returns>
     public string GetFileHashString(string fileName)
     {
-        return fileHashes[fileName];
+        if (_fileHashes.TryGetValue(fileName, out var hash))
+        {
+            return hash;
+        }
+
+        return "";
     }
 }
