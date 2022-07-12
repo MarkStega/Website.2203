@@ -23,8 +23,8 @@ public class ContentSecurityPolicyMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
-        var cspService = context.RequestServices.GetService<ContentSecurityPolicyService>();
-        var webHostEnvironment = context.RequestServices.GetService<IWebHostEnvironment>();
+        var cspService = context.RequestServices.GetRequiredService<ContentSecurityPolicyService>();
+        var webHostEnvironment = context.RequestServices.GetRequiredService<IWebHostEnvironment>();
 
         var source = (webHostEnvironment.IsDevelopment() ? "'self' " : "") + $"'nonce-{cspService.NonceValue}'";
 
@@ -45,11 +45,11 @@ public class ContentSecurityPolicyMiddleware
             "manifest-src 'self'; " +
             "media-src 'self'; " +
             "prefetch-src 'self'; " +
-            "object-src  data: 'unsafe-eval'; " +
+            "object-src 'none'; " +
             $"report-to https://{baseUri}/api/CspReporting/UriReport; " +
             $"report-uri https://{baseUri}/api/CspReporting/UriReport; " +
             // The sha-256 hash relates to an inline script added by blazor's javascript
-            $"script-src {cspService.ScriptSrcPart} 'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=' 'strict-dynamic' 'report-sample' 'unsafe-eval' https://www.googletagmanager.com; " +
+            $"script-src {cspService.ScriptSrcPart} 'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=' 'strict-dynamic' 'report-sample' 'unsafe-eval' https://www.googletagmanager.com/; " +
             "style-src 'self' 'unsafe-inline' 'report-sample' p.typekit.net use.typekit.net fonts.googleapis.com fonts.gstatic.com; " +
             "upgrade-insecure-requests; " +
             "worker-src 'self';";
