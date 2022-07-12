@@ -21,6 +21,12 @@
 		<ProjectReference Include="..\Client\Website.BlazorWebAssembly.Client.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="hashes.csv">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 	<Target Name="BuildHashes" AfterTargets="Publish">
 		<ItemGroup>
 			<FilesToHash Include="$(PublishDir)wwwroot\**\*.js;$(PublishDir)wwwroot\**\*.css;$(PublishDir)wwwroot\**\*.json" />

@@ -1,4 +1,6 @@
-﻿namespace Website.Lib;
+﻿using Microsoft.AspNetCore.Hosting;
+
+namespace Website.Lib;
 
 /// <summary>
 /// Produces a nonce and manages static asset SHA hashes
@@ -12,10 +14,10 @@ public class ContentSecurityPolicyService
     public readonly string NonceValue = "";
 
 
-    public string ScriptSrc { get; private set; } = $"'self' 'sha256-fnNG0/G8GHlV7f9ff635YtH7EkEjPvXQezHGl6JM8jAx='";
+    public string ScriptSrc { get; private set; } = $"'self'";
 
 
-    public ContentSecurityPolicyService()
+    public ContentSecurityPolicyService(IWebHostEnvironment env)
     {
         var bytes = new byte[32];
 
@@ -45,29 +47,18 @@ public class ContentSecurityPolicyService
                 }
             }
         }
+#if DEBUG
+        else
+        {
+            var rootPath = env.WebRootPath;
+        }
+#endif
+
+        var hexString = "C02FB30326075533737AF0B0DD216F1C8E231B9D69575F9BE6C437463D754062";
+        var base64String = Convert.ToBase64String(Convert.FromHexString(hexString));
+
+        str += $"'sha256-{base64String}' ";
 
         ScriptSrc = ($"'nonce-{NonceValue}' " + str).Trim();
-    }
-
-
-    /// <summary>
-    /// Generates a single inline script with applied nonce.
-    /// </summary>
-    /// <param name="inlineScript"></param>
-    /// <returns></returns>
-    public string GenerateInlineScriptElement(string inlineScript)
-    {
-        return $"<script nonce=\"{NonceValue}\">{inlineScript}</script>";
-    }
-
-
-    /// <summary>
-    /// Generates a single inline script with applied nonce.
-    /// </summary>
-    /// <param name="inlineScript"></param>
-    /// <returns></returns>
-    public string GenerateInlineScriptElements(IEnumerable<string> inlineScripts)
-    {
-        return string.Concat(inlineScripts.Select(x => GenerateInlineScriptElement(x)));
     }
 }
