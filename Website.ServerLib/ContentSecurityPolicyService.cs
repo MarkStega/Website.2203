@@ -16,6 +16,12 @@ public class ContentSecurityPolicyService
 
 
     /// <summary>
+    /// Formatted nonce string.
+    /// </summary>
+    public string NonceString => $"'nonce-{NonceValue}'";
+
+
+    /// <summary>
     /// Part of the CSP <c>script-src</c> tag that encodes sha keys and nonce values.
     /// </summary>
     public readonly string ScriptSrcPart  = "'self'";
@@ -81,8 +87,8 @@ public class ContentSecurityPolicyService
 
         ApplyContentSecurityPolicy = File.Exists(hashesFilePath) || !env.IsDevelopment();
 
-        ScriptSrcPart = ($"'nonce-{NonceValue}' " + scriptSrcPart).Trim();
-        StyleSrcPart = ($"'nonce-{NonceValue}' " + styleSrcPart).Trim();
+        ScriptSrcPart = (NonceString + " " + scriptSrcPart).Trim();
+        StyleSrcPart = (NonceString + " " + styleSrcPart).Trim();
     }
 
 
