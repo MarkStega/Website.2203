@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace Website.Lib;
 
@@ -21,12 +21,10 @@ public class ContentSecurityPolicyMiddleware
         _next = next;
     }
 
-    public async Task InvokeAsync(HttpContext context)
+    public async Task InvokeAsync(HttpContext context, ContentSecurityPolicyService cspService, IWebHostEnvironment env)
     {
-        var cspService = context.RequestServices.GetRequiredService<ContentSecurityPolicyService>();
-        var webHostEnvironment = context.RequestServices.GetRequiredService<IWebHostEnvironment>();
-
-        var source = (webHostEnvironment.IsDevelopment() ? "'self' " : "") + $"'nonce-{cspService.NonceValue}'";
+        Log.Information($"'{context.Request.Path}', '{cspService.NonceValue}'");
+        var source = (env.IsDevelopment() ? "'self' " : "") + $"'nonce-{cspService.NonceValue}'";
 
         var baseUri = context.Request.Host.ToString();
         var baseDomain = context.Request.Host.Host;
