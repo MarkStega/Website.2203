@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.ResponseCompression;
 using Serilog;
 using Serilog.Events;
+using System.Globalization;
 using System.IO.Compression;
 using Website.Lib;
 
@@ -36,6 +37,8 @@ builder.Services.Configure<GzipCompressionProviderOptions>(options =>
     options.Level = CompressionLevel.SmallestSize;
 });
 #endregion
+
+builder.Services.AddResponseCaching();
 
 builder.Host.UseSerilog();
 
@@ -105,6 +108,11 @@ builder.Services.AddGBService(
         { Utilities.NonInteraction, true },
     });
 
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.AddServerHeader = false;
+});
+
 var app = builder.Build();
 
 Log.Logger = new LoggerConfiguration()
@@ -148,6 +156,17 @@ app.UseHttpsRedirection();
 app.UseBlazorFrameworkFiles();
 
 app.UseStaticFiles();
+
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path.HasValue && context.Request.Path.Value == "/_content/Material.Blazor/material.blazor.min.js")
+    {
+        Log.Error("Loading Material Blazor CSS");
+    }
+
+    // Call the next delegate/middleware in the pipeline.
+    await next(context);
+});
 
 // Pentest fix
 app.UseContentSecurityPolicy();
