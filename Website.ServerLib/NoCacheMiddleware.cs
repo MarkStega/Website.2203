@@ -23,17 +23,3 @@ public class NoCacheMiddleware
         await m_next.Invoke(httpContext);
     }
 }
-
-
-public static partial class MiddlewareExtensions
-{
-    /// <summary>
-    /// Middleware that pump primes the Vectis server, ensuring that it populates caches from the database. Place at the start of the middleware sequence.
-    /// </summary>
-    /// <param name="builder"></param>
-    /// <returns></returns>
-    public static IApplicationBuilder UseNoCacheMiddleware(this IApplicationBuilder builder)
-    {
-        return builder.UseMiddleware<NoCacheMiddleware>();
-    }
-}

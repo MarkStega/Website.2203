@@ -47,7 +47,7 @@ public class ContentSecurityPolicyMiddleware
             $"report-to https://{baseUri}/api/CspReporting/UriReport; " +
             $"report-uri https://{baseUri}/api/CspReporting/UriReport; " +
             // The sha-256 hash relates to an inline script added by blazor's javascript
-            $"script-src {cspService.ScriptSrcPart} 'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=' 'strict-dynamic' 'report-sample' 'unsafe-eval' https://www.googletagmanager.com/; " +
+            $"script-src {cspService.ScriptSrcPart} 'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=' 'strict-dynamic' 'report-sample' 'unsafe-eval' https://www.googletagmanager.com/gtag/js; " +
             "style-src 'self' 'unsafe-inline' 'report-sample' p.typekit.net use.typekit.net fonts.googleapis.com fonts.gstatic.com; " +
             "upgrade-insecure-requests; " +
             "worker-src 'self';";
@@ -67,19 +67,5 @@ public class ContentSecurityPolicyMiddleware
         }
 
         await _next(context);
-    }
-}
-
-
-public static partial class MiddlewareExtensions
-{
-    /// <summary>
-    /// Middleware that pump primes the Vectis server, ensuring that it populates caches from the database. Place at the start of the middleware sequence.
-    /// </summary>
-    /// <param name="builder"></param>
-    /// <returns></returns>
-    public static IApplicationBuilder UseContentSecurityPolicy(this IApplicationBuilder builder)
-    {
-        return builder.UseMiddleware<ContentSecurityPolicyMiddleware>();
     }
 }

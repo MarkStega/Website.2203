@@ -26,4 +26,8 @@
 		<ProjectReference Include="..\Website.Lib\Website.Lib.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Services\" />
+	</ItemGroup>
+
 </Project>
