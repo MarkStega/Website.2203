@@ -63,33 +63,33 @@
 		Omitted to avoid CRIME and BREACH attacks - https://docs.microsoft.com/en-us/aspnet/core/performance/response-compression?view=aspnetcore-6.0#compression-with-https
 		and secondarily no middleware presently serves precompressed assets
 	-->
-	<!--<Target Name="CustomGZipAndBrotliCompression" BeforeTargets="Publish">
+	<Target Name="CustomGZipAndBrotliCompression" AfterTargets="Publish">
 
-		--><!-- ************* THIS IS WHERE YOU CHOOSE WHAT TO COMPRESS *****************
-			you probably don't want to change anything else - just this ItemGroup 
-		--><!--
+		 <!--************* THIS IS WHERE YOU CHOOSE WHAT TO COMPRESS *****************
+			you probably don't want to change anything else - just this ItemGroup--> 
+		
 		<ItemGroup>
-			<MyStaticFiles Include="$(PublishDir)\\wwwroot\\**\\*.css"/>
-			<MyStaticFiles Include="$(PublishDir)\\wwwroot\\**\\*.js"/>
+			<MyStaticFiles Include="$(PublishDir)/wwwroot/**/*.css"/>
+			<MyStaticFiles Include="$(PublishDir)/wwwroot/**/*.js"/>
 		</ItemGroup>
 
-		--><!-- Call the BlazorWebAssembly Task GZipCompress and store the results in MyCompressedFiles --><!--
+		<!--Call the BlazorWebAssembly Task GZipCompress and store the results in MyCompressedFiles--> 
 		<GZipCompress FilesToCompress="@(MyStaticFiles)" OutputDirectory="$(IntermediateOutputPath)compress\">
 			<Output TaskParameter="CompressedFiles" ItemName="MyCompressedFiles" />
 		</GZipCompress>
 
-		--><!-- Call the BlazorWebAssembly Task BrotliCompress and store the results in MyCompressedFiles --><!--
+		<!--Call the BlazorWebAssembly Task BrotliCompress and store the results in MyCompressedFiles--> 
 		<BrotliCompress OutputDirectory="$(IntermediateOutputPath)compress\" FilesToCompress="@(MyStaticFiles)" ToolAssembly="$(_BlazorWebAssemblySdkToolAssembly)" ToolExe="$(_RazorSdkDotNetHostFileName)" ToolPath="$(_RazorSdkDotNetHostDirectory)">
 			<Output TaskParameter="CompressedFiles" ItemName="MyCompressedFiles" />
 		</BrotliCompress>
 
-		--><!-- Log out what we have done --><!--
+		<!--Log out what we have done--> 
 		<Message Importance="High" Text="======= Brotli/GZip Compression For @(MyCompressedFiles-&gt;Count()) Static Files =======" />
 		<Message Importance="High" Text=" Compressed: %(MyCompressedFiles.OriginalItemSpec)%(MyCompressedFiles.Extension)" />
 
-		--><!-- Rename/move the compressed files back to to the correct place/names as they have "hashed" names at this stage. --><!--
+		<!--Rename/move the compressed files back to to the correct place/names as they have "hashed" names at this stage.--> 
 		<Move SourceFiles="%(MyCompressedFiles.FullPath)" DestinationFiles="%(MyCompressedFiles.OriginalItemSpec)%(MyCompressedFiles.Extension)" />
 
-	</Target>-->
+	</Target>
 
 </Project>
