@@ -3,8 +3,7 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using Website.BlazorWebAssembly.Client
 @using Website.Lib
-@inject NonceService NonceService
-
+@inject ContentSecurityPolicyService CSPService
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,8 +18,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://use.typekit.net/zjb3qsk.css">
 
-    <link rel="stylesheet" href="_content/Material.Blazor/material.blazor.min.css" />
-    <link rel="stylesheet" id="app-theme" href="_content/Website.Lib/css/dioptra.min.css" />
+    <link rel="stylesheet" type="text/css" href="_content/Material.Blazor/material.blazor.min.css" integrity="@CSPService.GetFileHashString("material.blazor.min.css")" />
+    <link rel="stylesheet" type="text/css" id="app-theme" href="_content/Website.Lib/css/dioptra.min.css" integrity="@CSPService.GetFileHashString("dioptra.min.css")" />
 
     <link rel="icon" type="image/png" href="_content/Website.Lib/pwa/favicon-16x16.png" sizes="16x16">
     <link rel="icon" type="image/png" href="_content/Website.Lib/pwa/favicon-32x32.png" sizes="32x32">
@@ -67,17 +66,9 @@
         </div>
     </div>
 
-    <script nonce="@NonceService.NonceValue" src="_framework/blazor.webassembly.js"></script>
-    <script nonce="@NonceService.NonceValue" src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js"></script>
-    <script nonce="@NonceService.NonceValue" src="_content/Material.Blazor/material.blazor.min.js"></script>
-    <script nonce="@NonceService.NonceValue" src="_content/Website.Lib/js/dioptra.js"></script>
-    
-    <script nonce="@NonceService.NonceValue">navigator.serviceWorker.register('service-worker.js');</script>
-
-    @*<script nonce="@NonceService.NonceValue" type="module">
-       import 'https://cdn.jsdelivr.net/npm/@@pwabuilder/pwaupdate';
-       const el = document.createElement('pwa-update');
-       document.body.appendChild(el);
-    </script>*@
+    <script src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js" integrity="@CSPService.GetFileHashString("googleanalytics.blazor.js")"></script>
+    <script src="_content/Material.Blazor/material.blazor.min.js" integrity="@CSPService.GetFileHashString("material.blazor.min.js")"></script>
+    <script src="_content/Website.Lib/js/dioptra.min.js" integrity="@CSPService.GetFileHashString("dioptra.min.js")"></script>
+    <script src="_framework/blazor.webassembly.js" integrity="@CSPService.GetFileHashString("blazor.webassembly.js")"></script>
 </body>
 </html>

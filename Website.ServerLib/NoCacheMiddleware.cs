@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 
 namespace Website.Lib;
+
 public class NoCacheMiddleware
 {
     private readonly RequestDelegate m_next;

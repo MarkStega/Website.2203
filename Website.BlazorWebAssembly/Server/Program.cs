@@ -1,11 +1,13 @@
 using AspNetCoreRateLimit;
 using Blazored.LocalStorage;
+using CompressedStaticFiles;
 using GoogleAnalytics.Blazor;
 using Material.Blazor;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.ResponseCompression;
 using Serilog;
 using Serilog.Events;
+using System.Globalization;
 using System.IO.Compression;
 using Website.Lib;
 
@@ -14,6 +16,7 @@ const string _loggingWebhook = "https://blacklandcapital.webhook.office.com/webh
 
 var builder = WebApplication.CreateBuilder(args);
 
+#region Potentially omit to avoid CRIME and BREACH attacks
 builder.Services.AddResponseCompression(options =>
 {
     options.EnableForHttps = true;
@@ -21,6 +24,10 @@ builder.Services.AddResponseCompression(options =>
     options.Providers.Add<GzipCompressionProvider>();
 });
 
+// Performance test (performed in debug mode locally):
+// NoCompression - material.blazor.min.css takes circa 10 to 20 ms to download, 270 Kb - page load 95 to 210 ms - 3.2 MB transfered
+// Fastest - material.blazor.min.css takes circa 12 to 28 ms to download, 34.7 Kb - page load 250 to 270 ms - 2.2 MB transfered
+// SmallestSize & Optimal - material.blazor.min.css takes circa 500 to 800 ms to download, 16.2 Kb - page load 900 to 1100 ms (unacceptably slow) - 2.1 MB transfered
 builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
 {
     options.Level = CompressionLevel.Fastest;
@@ -30,6 +37,9 @@ builder.Services.Configure<GzipCompressionProviderOptions>(options =>
 {
     options.Level = CompressionLevel.SmallestSize;
 });
+#endregion
+
+builder.Services.AddResponseCaching();
 
 builder.Host.UseSerilog();
 
@@ -51,7 +61,7 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddTransient<INotificationService, NotificationService>();
 
-builder.Services.AddScoped<NonceService>();
+builder.Services.AddScoped<ContentSecurityPolicyService>();
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
@@ -99,6 +109,14 @@ builder.Services.AddGBService(
         { Utilities.NonInteraction, true },
     });
 
+// Pentest fix
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.AddServerHeader = false;
+});
+
+builder.Services.AddCompressedStaticFiles();
+
 var app = builder.Build();
 
 Log.Logger = new LoggerConfiguration()
@@ -130,6 +148,7 @@ else
     app.UseHsts();
 }
 
+// Potentially omit to avoid CRIME and BREACH attacks - https://docs.microsoft.com/en-us/aspnet/core/performance/response-compression?view=aspnetcore-6.0#compression-with-https
 app.UseResponseCompression();
 
 app.UseCookiePolicy();
@@ -140,58 +159,24 @@ app.UseHttpsRedirection();
 
 app.UseBlazorFrameworkFiles();
 
-app.UseStaticFiles();
+app.UseCompressedStaticFiles();
 
-// Pentest fix
 app.Use(async (context, next) =>
 {
-    var nonceValue = context.RequestServices.GetService<NonceService>()?.NonceValue ?? throw new Exception("Nonce service unavailable");
+    if (context.Request.Path.HasValue && context.Request.Path.Value == "/_content/Material.Blazor/material.blazor.min.js")
+    {
+        Log.Error("Loading Material Blazor CSS");
+    }
 
-    var source = (app.Environment.IsDevelopment() ? "'self' " : "") + $"'nonce-{nonceValue}'";
-
-    var baseUri = context.Request.Host.ToString();
-    var baseDomain = context.Request.Host.Host;
-
-    var csp =
-        "base-uri 'self'; " +
-        "block-all-mixed-content; " +
-        "child-src 'self' ; " +
-        $"connect-src 'self' wss://{baseDomain}:* www.google-analytics.com region1.google-analytics.com; " +
-        "default-src 'self'; " +
-        "font-src use.typekit.net fonts.gstatic.com; " +
-        "frame-ancestors 'none'; " +
-        "frame-src 'self'; " +
-        "form-action 'none'; " +
-        "img-src 'self' www.google-analytics.com *.openstreetmap.org data: w3.org/svg/2000; " +
-        "manifest-src 'self'; " +
-        "media-src 'self'; " +
-        "prefetch-src 'self'; " +
-        "object-src  data: 'unsafe-eval'; " +
-        $"report-to https://{baseUri}/api/CspReporting/UriReport; " +
-        $"report-uri https://{baseUri}/api/CspReporting/UriReport; " +
-        $"script-src {source} 'self' 'sha256-3b0LA1ZE3o1c1aNFfpkF0fkCBHXmfVFpWjGIve/v2XQ=' 'strict-dynamic' 'report-sample' 'unsafe-eval';" +
-        "style-src 'self' 'unsafe-inline' 'report-sample' p.typekit.net use.typekit.net fonts.gstatic.com; " +
-        "upgrade-insecure-requests; " +
-        "worker-src 'self';";
-
-    context.Response.Headers.Add("X-Frame-Options", "DENY");
-    context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
-    context.Response.Headers.Add("X-Xss-Protection", "1; mode=block");
-    context.Response.Headers.Add("X-ClientId", "dioptra");
-    context.Response.Headers.Add("Referrer-Policy", "no-referrer");
-    context.Response.Headers.Add("X-Permitted-Cross-Domain-Policies", "none");
-    context.Response.Headers.Add("Permissions-Policy", "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()");
-    context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000");
-
-#if !DEBUG
-    context.Response.Headers.Add("Content-Security-Policy", csp);
-#endif
-
-    await next();
+    // Call the next delegate/middleware in the pipeline.
+    await next(context);
 });
 
 // Pentest fix
-app.UseMiddleware<NoCacheMiddleware>();
+app.UseContentSecurityPolicy();
+
+// Pentest fix
+app.UseNoCacheMiddleware();
 
 app.UseRouting();
 
