@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.ResponseCompression;
 using Serilog;
 using Serilog.Events;
-using System.Globalization;
 using System.IO.Compression;
 using Website.Lib;
 

@@ -12,7 +12,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.6" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.7" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.16.1" />
 	</ItemGroup>
 
@@ -56,8 +56,8 @@
 	</PropertyGroup>
 	
 	<!-- The next two lines are Copyright (c) .NET Foundation. All rights reserved. -->
-	<UsingTask TaskName="Microsoft.NET.Sdk.BlazorWebAssembly.BrotliCompress" AssemblyFile="$(_BlazorWebAssemblySdkTasksAssembly)"/>
-	<UsingTask TaskName="Microsoft.NET.Sdk.BlazorWebAssembly.GzipCompress" AssemblyFile="$(_BlazorWebAssemblySdkTasksAssembly)"/>
+	<UsingTask TaskName="Microsoft.NET.Sdk.BlazorWebAssembly.BrotliCompress" AssemblyFile="$(_BlazorWebAssemblySdkTasksAssembly)" />
+	<UsingTask TaskName="Microsoft.NET.Sdk.BlazorWebAssembly.GzipCompress" AssemblyFile="$(_BlazorWebAssemblySdkTasksAssembly)" />
 
 	<!--
 		Omitted to avoid CRIME and BREACH attacks - https://docs.microsoft.com/en-us/aspnet/core/performance/response-compression?view=aspnetcore-6.0#compression-with-https
@@ -69,8 +69,8 @@
 			you probably don't want to change anything else - just this ItemGroup--> 
 		
 		<ItemGroup>
-			<MyStaticFiles Include="$(PublishDir)/wwwroot/**/*.css"/>
-			<MyStaticFiles Include="$(PublishDir)/wwwroot/**/*.js"/>
+			<MyStaticFiles Include="$(PublishDir)/wwwroot/**/*.css" />
+			<MyStaticFiles Include="$(PublishDir)/wwwroot/**/*.js" />
 		</ItemGroup>
 
 		<!--Call the BlazorWebAssembly Task GZipCompress and store the results in MyCompressedFiles--> 

@@ -19,7 +19,7 @@
 	<ItemGroup>
 		<PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
 		<PackageReference Include="GoogleAnalytics.Blazor" Version="1.0.0-preview.3" />
-		<PackageReference Include="libphonenumber-csharp" Version="8.12.50" />
+		<PackageReference Include="libphonenumber-csharp" Version="8.12.52" />
 		<PackageReference Include="Material.Blazor" Version="3.0.0-preview.2" />
 	</ItemGroup>
 
@@ -140,8 +140,8 @@
 	</PropertyGroup>
 
 	<!-- The next two lines are Copyright (c) .NET Foundation. All rights reserved. -->
-	<UsingTask TaskName="Microsoft.NET.Sdk.BlazorWebAssembly.BrotliCompress" AssemblyFile="$(_BlazorWebAssemblySdkTasksAssembly)"/>
-	<UsingTask TaskName="Microsoft.NET.Sdk.BlazorWebAssembly.GzipCompress" AssemblyFile="$(_BlazorWebAssemblySdkTasksAssembly)"/>
+	<UsingTask TaskName="Microsoft.NET.Sdk.BlazorWebAssembly.BrotliCompress" AssemblyFile="$(_BlazorWebAssemblySdkTasksAssembly)" />
+	<UsingTask TaskName="Microsoft.NET.Sdk.BlazorWebAssembly.GzipCompress" AssemblyFile="$(_BlazorWebAssemblySdkTasksAssembly)" />
 	
 	<!--
 		Omitted to avoid CRIME and BREACH attacks - https://docs.microsoft.com/en-us/aspnet/core/performance/response-compression?view=aspnetcore-6.0#compression-with-https
@@ -153,8 +153,8 @@
 			you probably don't want to change anything else - just this ItemGroup-->
 
 		<ItemGroup>
-			<MyStaticFiles Include="$(ProjectDir)/wwwroot/**/*.css"/>
-			<MyStaticFiles Include="$(ProjectDir)/wwwroot/**/*.js"/>
+			<MyStaticFiles Include="$(ProjectDir)/wwwroot/**/*.css" />
+			<MyStaticFiles Include="$(ProjectDir)/wwwroot/**/*.js" />
 		</ItemGroup>
 
 		<!--Call the BlazorWebAssembly Task GZipCompress and store the results in MyCompressedFiles-->
