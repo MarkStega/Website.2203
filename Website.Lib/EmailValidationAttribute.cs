@@ -6,13 +6,13 @@ using System.Text.RegularExpressions;
 namespace Website.Lib;
 public class EmailValidationAttribute : ValidationAttribute
 {
-    protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
+    protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
     {
         var phoneNumberUtil = PhoneNumberUtil.GetInstance();
 
-        if (!IsValidEmail((value ?? "").ToString()))
+        if (!IsValidEmail((value?.ToString() ?? "").ToString()))
         {
-            return new ValidationResult(ErrorMessage, new[] { validationContext.MemberName });
+            return new ValidationResult(ErrorMessage, new[] { validationContext.MemberName ?? "" });
         }
 
         return null;

@@ -6,22 +6,25 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NOWARNINGS="yes"
+RUN apt-get update
+RUN apt-get install --no-install-recommends --yes apt-utils npm
+
 WORKDIR /src
 COPY ["Website.Lib/Website.Lib.csproj", "Website.Lib/"]
+COPY ["Website.ServerLib/Website.ServerLib.csproj", "Website.ServerLib/"]
 
 COPY ["Website.BlazorServer/Website.BlazorServer.csproj", "Website.BlazorServer/"]
 COPY ["Website.BlazorServer/NuGet.Config", "Website.BlazorServer/"]
 
-RUN dotnet restore "Website.BlazorServer/Website.BlazorServer.csproj"
-
+RUN dotnet restore --disable-parallel "Website.BlazorServer/Website.BlazorServer.csproj"
 COPY . .
 WORKDIR "/src/Website.BlazorServer"
-RUN dotnet build "Website.BlazorServer.csproj" -c Release -o /app/build
-
-FROM build AS publish
 RUN dotnet publish "Website.BlazorServer.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "Website.BlazorServer.dll"]

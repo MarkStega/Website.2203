@@ -7,6 +7,7 @@ namespace Website.Lib.Pages;
 [Sitemap(SitemapAttribute.ChangeFreqType.Weekly, 0.8)]
 public partial class WorkForUs : ComponentBase
 {
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     [Inject] private INotificationService TeamsNotificationService { get; set; }
     [Inject] private IGBAnalyticsManager AnalyticsManager { get; set; }
 
@@ -17,6 +18,7 @@ public partial class WorkForUs : ComponentBase
     private List<MBSelectElement<RecruitmentEnquiry.RoleType>> SelectElements { get; set; }
     private string HiringDialogTitle { get; set; } = "";
     private bool ShowProspectiveRole { get; set; } = false;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 
     protected override void OnInitialized()

@@ -2,7 +2,7 @@
 @namespace Website.BlazorServer.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using Website.Lib
-@inject ContentSecurityPolicyService NonceService
+@inject ContentSecurityPolicyService CSPService
 
 
 <!DOCTYPE html>
@@ -18,8 +18,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://use.typekit.net/zjb3qsk.css">
 
-    <link rel="stylesheet" href="_content/Material.Blazor/material.blazor.min.css" />
-    <link rel="stylesheet" id="app-theme" href="_content/Website.Lib/css/dioptra.min.css" />
+    <link rel="stylesheet" href="_content/Material.Blazor/material.blazor.min.css" integrity="@CSPService.GetFileHashString("material.blazor.min.css")" />
+    <link rel="stylesheet" id="app-theme" href="_content/Website.Lib/css/dioptra.min.css" integrity="@CSPService.GetFileHashString("material.blazor.min.css")" />
 
     <link rel="icon" type="image/png" href="_content/Website.Lib/pwa/favicon-16x16.png" sizes="16x16">
     <link rel="icon" type="image/png" href="_content/Website.Lib/pwa/favicon-32x32.png" sizes="32x32">
@@ -64,9 +64,9 @@
         </div>
     </div>
 
-    <script nonce="@NonceService.NonceValue" src="_framework/blazor.server.js"></script>
-    <script nonce="@NonceService.NonceValue" src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js"></script>
-    <script nonce="@NonceService.NonceValue" src="_content/Material.Blazor/material.blazor.min.js"></script>
-    <script nonce="@NonceService.NonceValue" src="_content/Website.Lib/js/dioptra.js"></script>
+    <script src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js" integrity="@CSPService.GetFileHashString("googleanalytics.blazor.js")"></script>
+    <script src="_content/Material.Blazor/material.blazor.min.js" integrity="@CSPService.GetFileHashString("material.blazor.min.js")"></script>
+    <script src="_content/Website.Lib/js/dioptra.min.js" integrity="@CSPService.GetFileHashString("dioptra.min.js")"></script>
+    <script nonce="@CSPService.NonceValue" src="_framework/blazor.server.js"></script>
 </body>
 </html>

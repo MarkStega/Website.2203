@@ -18,6 +18,7 @@ public partial class Index : ComponentBase
     }
 
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     [Inject] private NavigationManager NavigationManager { get; set; }
     [Inject] private INotificationService TeamsNotificationService { get; set; }
 
@@ -26,6 +27,7 @@ public partial class Index : ComponentBase
     private GeneralPageLayout GeneralPageLayout { get; set; }
     private MBDialog Dialog { get; set; }
     private RealEstateInvestorEnquiry RealEstateInvestorEnquiry { get; set; } = new();
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 
 

@@ -29,20 +29,16 @@
 		<AndroidImageFiles Include="$(ProjectDir)WebAssets\android-images\*.*" />
 		<IOSImageFiles Include="$(ProjectDir)WebAssets\ios-images\*.*" />
 		<Windows11ImageFiles Include="$(ProjectDir)WebAssets\windows11-images\*.*" />
+	</ItemGroup>
 
-		<InputStaticAssetsScripts Include="WebAssets\**\*.ts" />
-		<OutputStaticAssetsScripts Include="wwwroot\js\dioptra.js;wwwroot\js\dioptra.min.js" />
+	<ItemGroup>
+		<InputStaticAssetsScripts Include="$(ProjectDir)WebAssets\**\*.ts" />
+		<OutputStaticAssetsScripts Include="$(ProjectDir)wwwroot\js\dioptra.js;wwwroot\js\dioptra.min.js" />
 		<Content Remove="@(OutputStaticAssetsScripts)" />
-		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\3.0.0-preview.1\contentFiles\any\net6.0\wwwroot\material-components-web.css" />
-		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\3.0.0-preview.1\contentFiles\any\net6.0\wwwroot\material-components-web.min.css" />
-		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\3.0.0-preview.1\contentFiles\any\net6.0\wwwroot\material.blazor.css" />
-		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\3.0.0-preview.1\contentFiles\any\net6.0\wwwroot\material.blazor.js" />
-		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\3.0.0-preview.1\contentFiles\any\net6.0\wwwroot\material.blazor.min.css" />
-		<Content Remove="C:\Users\SimonZiegler\.nuget\packages\material.blazor\3.0.0-preview.1\contentFiles\any\net6.0\wwwroot\material.blazor.min.js" />
 		<Content Include="@(OutputStaticAssetsScripts)" />
 
-		<InputStaticAssetsStyles Include="WebAssets\**\*.scss;" />
-		<OutputStaticAssetsStyles Include="wwwroot\css\dioptra.css;wwwroot\css\dioptra.min.css" />
+		<InputStaticAssetsStyles Include="$(ProjectDir)WebAssets\**\*.scss;" />
+		<OutputStaticAssetsStyles Include="$(ProjectDir)wwwroot\css\dioptra.css;wwwroot\css\dioptra.min.css" />
 		<Content Remove="@(OutputStaticAssetsStyles)" />
 		<Content Include="@(OutputStaticAssetsStyles)" />
 	</ItemGroup>
@@ -59,14 +55,17 @@
 	</ItemGroup>
 
 	<Target Name="WWWRootFileCopy" BeforeTargets="PreBuildEvent">
+		<Message Text="ProjectDir: $(ProjectDir)" Importance="high"/>
+		<Message Text="PublishDir: $(PublishDir)" Importance="high"/>
 		<Copy SourceFiles="@(ImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/images" />
 		<Copy SourceFiles="@(PWAFiles)" DestinationFolder="$(ProjectDir)wwwroot/pwa" />
 		<Copy SourceFiles="@(AndroidImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/android-images" />
 		<Copy SourceFiles="@(IOSImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/ios-images" />
 		<Copy SourceFiles="@(Windows11ImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/windows11-images" />
+		<Message Text="WWWRootFileCopy done" Importance="high"/>
 	</Target>
 
-	<Target Name="CheckIfNpmExists" Inputs="@(InputStaticAssetsScripts);@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsScripts);@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent">
+	<Target Name="CheckIfNpmExists" Inputs="@(InputStaticAssetsScripts);@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsScripts);@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent" AfterTargets="WWWRootFileCopy">
 		<Message Text="***** npm install" />
 		<Exec Command="npm install" ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low" LogStandardErrorAsError="false" IgnoreExitCode="true">
 			<Output TaskParameter="ExitCode" PropertyName="NpmReturnCode" />
@@ -85,7 +84,8 @@
 		<Message Text="**********************************************************************************" />
 	</Target>
 
-	<Target Name="BuildScripts" Inputs="@(InputStaticAssetsScripts)" Outputs="@(OutputStaticAssetsScripts)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">
+	<!--<Target Name="BuildScripts" Inputs="@(InputStaticAssetsScripts)" Outputs="@(OutputStaticAssetsScripts)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">-->
+	<Target Name="BuildScripts" BeforeTargets="PreBuildEvent" >
 		<RemoveDir Directories="$(ProjectDir)wwwroot/js" />
 
 		<Message Importance="high" Text="***** npm install" />
@@ -107,7 +107,8 @@
 		<Delete Files="@(FilesToDelete)" />
 	</Target>
 
-	<Target Name="BuildStyles" Inputs="@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">
+	<!--<Target Name="BuildStyles" Inputs="@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">-->
+	<Target Name="BuildStyles" BeforeTargets="PreBuildEvent" >
 		<RemoveDir Directories="$(ProjectDir)wwwroot/css" />
 
 		<Message Importance="high" Text="***** npm install" />
@@ -142,7 +143,7 @@
 	<!-- The next two lines are Copyright (c) .NET Foundation. All rights reserved. -->
 	<UsingTask TaskName="Microsoft.NET.Sdk.BlazorWebAssembly.BrotliCompress" AssemblyFile="$(_BlazorWebAssemblySdkTasksAssembly)" />
 	<UsingTask TaskName="Microsoft.NET.Sdk.BlazorWebAssembly.GzipCompress" AssemblyFile="$(_BlazorWebAssemblySdkTasksAssembly)" />
-	
+
 	<!--
 		Omitted to avoid CRIME and BREACH attacks - https://docs.microsoft.com/en-us/aspnet/core/performance/response-compression?view=aspnetcore-6.0#compression-with-https
 		and secondarily no middleware presently serves precompressed assets

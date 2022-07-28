@@ -7,6 +7,7 @@ namespace Website.Lib.Shared;
 
 public partial class GeneralPageLayout : ComponentBase
 {
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     [Inject] private INotificationService TeamsNotificationService { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
     [Inject] private IJSRuntime JSRuntime { get; set; }
@@ -16,6 +17,7 @@ public partial class GeneralPageLayout : ComponentBase
 
     [Parameter] public string ColorClass { get; set; }
     [Parameter] public RenderFragment ChildContent { get; set; }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 
     private MBDialog ContactDialog { get; set; } = new();

@@ -160,17 +160,6 @@ app.UseBlazorFrameworkFiles();
 
 app.UseCompressedStaticFiles();
 
-app.Use(async (context, next) =>
-{
-    if (context.Request.Path.HasValue && context.Request.Path.Value == "/_content/Material.Blazor/material.blazor.min.js")
-    {
-        Log.Error("Loading Material Blazor CSS");
-    }
-
-    // Call the next delegate/middleware in the pipeline.
-    await next(context);
-});
-
 // Pentest fix
 app.UseContentSecurityPolicy();
 
