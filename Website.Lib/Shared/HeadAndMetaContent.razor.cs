@@ -27,6 +27,8 @@ public partial class HeadAndMetaContent : ComponentBase
         Tags = new(builder =>
         {
             sequence = BuildMetaTag(builder, sequence, "description", Description);
+            sequence = BuildMetaTag(builder, sequence, "version", PackageInformation.Version);
+            sequence = BuildMetaTag(builder, sequence, "build_time", PackageInformation.BuildTimeString);
 
             sequence = BuildMetaTag(builder, sequence, "og:title", PageTitle);
             sequence = BuildMetaTag(builder, sequence, "og:description", Description);

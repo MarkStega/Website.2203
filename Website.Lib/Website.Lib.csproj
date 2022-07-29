@@ -2,8 +2,19 @@
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<Company>Dioptra Limited</Company>
+		<Version>0.0.0</Version>
+		<BuildTime>2022-01-01--13-00-00</BuildTime>
+		<RepositoryUrl>https://github.com/Dioptra/Website.2203</RepositoryUrl>
+		<PackageLicenseExpression>Commercial</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageReleaseNotes></PackageReleaseNotes>
+		<NeutralLanguage>en</NeutralLanguage>
+		<Copyright>© Dioptra Limited. All rights reserved.</Copyright>
+		<Product>Dioptra Website</Product>
+		<PackageTags>2022-01-01--13-00-00</PackageTags>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -21,6 +32,7 @@
 		<PackageReference Include="GoogleAnalytics.Blazor" Version="1.0.0-preview.3" />
 		<PackageReference Include="libphonenumber-csharp" Version="8.12.52" />
 		<PackageReference Include="Material.Blazor" Version="3.0.0-preview.9" />
+		<PackageReference Include="Microsoft.Build" Version="17.2.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -55,17 +67,15 @@
 	</ItemGroup>
 
 	<Target Name="WWWRootFileCopy" BeforeTargets="PreBuildEvent">
-		<Message Text="ProjectDir: $(ProjectDir)" Importance="high"/>
-		<Message Text="PublishDir: $(PublishDir)" Importance="high"/>
 		<Copy SourceFiles="@(ImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/images" />
 		<Copy SourceFiles="@(PWAFiles)" DestinationFolder="$(ProjectDir)wwwroot/pwa" />
 		<Copy SourceFiles="@(AndroidImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/android-images" />
 		<Copy SourceFiles="@(IOSImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/ios-images" />
 		<Copy SourceFiles="@(Windows11ImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/windows11-images" />
-		<Message Text="WWWRootFileCopy done" Importance="high"/>
 	</Target>
 
-	<Target Name="CheckIfNpmExists" Inputs="@(InputStaticAssetsScripts);@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsScripts);@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent" AfterTargets="WWWRootFileCopy">
+	<!--<Target Name="CheckIfNpmExists" Inputs="@(InputStaticAssetsScripts);@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsScripts);@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent" AfterTargets="WWWRootFileCopy">-->
+	<Target Name="CheckIfNpmExists" BeforeTargets="PreBuildEvent" AfterTargets="WWWRootFileCopy">
 		<Message Text="***** npm install" />
 		<Exec Command="npm install" ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low" LogStandardErrorAsError="false" IgnoreExitCode="true">
 			<Output TaskParameter="ExitCode" PropertyName="NpmReturnCode" />
@@ -85,7 +95,7 @@
 	</Target>
 
 	<!--<Target Name="BuildScripts" Inputs="@(InputStaticAssetsScripts)" Outputs="@(OutputStaticAssetsScripts)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">-->
-	<Target Name="BuildScripts" BeforeTargets="PreBuildEvent" >
+	<Target Name="BuildScripts" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">
 		<RemoveDir Directories="$(ProjectDir)wwwroot/js" />
 
 		<Message Importance="high" Text="***** npm install" />
@@ -107,8 +117,7 @@
 		<Delete Files="@(FilesToDelete)" />
 	</Target>
 
-	<!--<Target Name="BuildStyles" Inputs="@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">-->
-	<Target Name="BuildStyles" BeforeTargets="PreBuildEvent" >
+	<Target Name="BuildStyles" Inputs="@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">
 		<RemoveDir Directories="$(ProjectDir)wwwroot/css" />
 
 		<Message Importance="high" Text="***** npm install" />

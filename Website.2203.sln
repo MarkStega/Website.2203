@@ -6,14 +6,17 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{02091FAA-8500-45F7-9EC4-885D6138E2BB}"
 	ProjectSection(SolutionItems) = preProject
 		.dockerignore = .dockerignore
+		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		.github\ISSUE_TEMPLATE\bug_report.md = .github\ISSUE_TEMPLATE\bug_report.md
+		ctag.cmd = ctag.cmd
 		.github\dependabot.yml = .github\dependabot.yml
 		.github\workflows\GithubActionsRelease.yml = .github\workflows\GithubActionsRelease.yml
 		.github\workflows\GithubActionsWIP.yml = .github\workflows\GithubActionsWIP.yml
 		global.json = global.json
 		README.md = README.md
+		SuperClean.cmd = SuperClean.cmd
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.Lib", "Website.Lib\Website.Lib.csproj", "{8A95DD2F-E743-438F-8189-66449B8513A4}"
@@ -45,7 +48,6 @@ Global
 		{99DEA7C6-D78A-4668-A089-1391DEF83351}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99DEA7C6-D78A-4668-A089-1391DEF83351}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4F58C0A0-94C6-40C7-9288-6DCD33D8DA72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4F58C0A0-94C6-40C7-9288-6DCD33D8DA72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F58C0A0-94C6-40C7-9288-6DCD33D8DA72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99B45E6A-AE65-4954-9FBA-13C16BE16992}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{99B45E6A-AE65-4954-9FBA-13C16BE16992}.Debug|Any CPU.Build.0 = Debug|Any CPU
@@ -60,7 +62,6 @@ Global
 		{0F15257E-04C4-44D7-BB49-6358F7F2E6CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F15257E-04C4-44D7-BB49-6358F7F2E6CB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2FD8A9F4-405A-46E7-A5B0-BD7577919409}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2FD8A9F4-405A-46E7-A5B0-BD7577919409}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FD8A9F4-405A-46E7-A5B0-BD7577919409}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution

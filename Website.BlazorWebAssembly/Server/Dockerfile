@@ -7,6 +7,11 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 
+ARG version
+ARG build-time
+ENV VERSION $version
+ENV BUILD_TIME $build-time
+
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NOWARNINGS="yes"
 RUN apt-get update
@@ -23,14 +28,9 @@ COPY ["Website.Lib/Website.Lib.csproj", "Website.Lib/"]
 COPY ["Website.ServerLib/Website.ServerLib.csproj", "Website.ServerLib/"]
 
 RUN dotnet restore "Website.BlazorWebAssembly/Server/Website.BlazorWebAssembly.Server.csproj"
-
 COPY . .
 WORKDIR "/src/Website.BlazorWebAssembly/Server"
-RUN dotnet build "Website.BlazorWebAssembly.Server.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "Website.BlazorWebAssembly.Server.csproj" -c Release -o /app/publish
-#RUN dotnet msbuild -target:BuildHashes -property:PublishDir="\\app\\publish\\" "Website.BlazorWebAssembly.Server.csproj"
+RUN dotnet publish "Website.BlazorWebAssembly.Server.csproj" -c Release -o /app/publish -p:Version=$VERSION
 
 FROM base AS final
 WORKDIR /app
