@@ -4,8 +4,6 @@ on:
   push:
     tags:
       - '*' # Push events to matching *, i.e. 1.0, 20.15.10
-    branches:
-      - experimental-release-workflow
 
 
 
@@ -44,24 +42,17 @@ jobs:
     steps:
     - id: get
       run: |
-        echo "::set-output name=buildTime::$(date +'%Y-%m-%d--%H-%M-%S')"
-        echo "::set-output name=version::${GITHUB_REF/refs\/tags\//}"
         echo "::set-output name=suffix::$(date +'%Y-%m-%d--%H-%M-%S')--${GITHUB_REF/refs\/tags\//}"
     - id: show
       run: |
-        echo "Build Time: ${{ steps.get.outputs.buildTime }}"
-        echo "Version:    ${{ steps.get.outputs.version }}"
         echo "Suffix:     ${{ steps.get.outputs.suffix }}"
     outputs:
-      buildTime: ${{ steps.get.outputs.buildTime }}
-      version: ${{ steps.get.outputs.version }}
       suffix: ${{ steps.get.outputs.suffix }}
       
       
 
 ############################################################################################################
 # Build blazor server container
-# This is hard-skipped when we only want to perform a comparison (github.event_name != 'workflow_dispatch')
 ############################################################################################################
   build-blazor-server:
     name: Build Website.BlazorServer docker container
@@ -86,7 +77,7 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        docker build . --file ${{ env.blazorServerDockerFile }} --tag ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.blazorServerAppName }}:${{ needs.version.outputs.suffix }} --build-arg build-time=${{ needs.version.outputs.buildTime }} --build-arg version=${{ needs.version.outputs.version }}
+        docker build . --file ${{ env.blazorServerDockerFile }} --tag ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.blazorServerAppName }}:${{ needs.version.outputs.suffix }} --build-arg version=${{ needs.version.outputs.suffix }}
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.blazorServerAppName }}:${{ needs.version.outputs.suffix }}
 
     - name: 'Deploy to Azure Container Instances'
@@ -105,7 +96,6 @@ jobs:
 
 ############################################################################################################
 # Build blazor webassembly container
-# This is hard-skipped when we only want to perform a comparison (github.event_name != 'workflow_dispatch')
 ############################################################################################################
   build-blazor-webassembly:
     name: Build Website.BlazorWebAssembly docker container
@@ -130,7 +120,7 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        docker build . --file ${{ env.blazorWebAssemblyDockerFile }} --tag ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.blazorWebAssemblyAppName }}:${{ needs.version.outputs.suffix }} --build-arg build-time=${{ needs.version.outputs.buildTime }} --build-arg version=${{ needs.version.outputs.version }}
+        docker build . --file ${{ env.blazorWebAssemblyDockerFile }} --tag ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.blazorWebAssemblyAppName }}:${{ needs.version.outputs.suffix }} --build-arg version=${{ needs.version.outputs.suffix }}
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.blazorWebAssemblyAppName }}:${{ needs.version.outputs.suffix }}
 
     - name: 'Deploy to Azure Container Instances'

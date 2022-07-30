@@ -3,7 +3,7 @@
 [AttributeUsage(AttributeTargets.Class)]
 public class SitemapAttribute : Attribute
 {
-    public enum ChangeFreqType { always, Hourly, Daily, Weekly, Monthly, Yearly, Never };
+    public enum ChangeFreqType { Always, Hourly, Daily, Weekly, Monthly, Yearly, Never };
 
     public ChangeFreqType ChangeFreq = ChangeFreqType.Monthly;
     public double Priority = 0.5;

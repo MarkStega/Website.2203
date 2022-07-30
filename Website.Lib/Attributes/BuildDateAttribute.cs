@@ -1,4 +1,6 @@
 ﻿namespace Website.Lib;
+
+
 [AttributeUsage(AttributeTargets.Assembly)]
 public class BuildDateAttribute : Attribute
 {

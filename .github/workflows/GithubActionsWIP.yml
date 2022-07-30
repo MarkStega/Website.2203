@@ -27,24 +27,17 @@ jobs:
     steps:
     - id: get
       run: |
-        echo "::set-output name=buildTime::$(date +'%Y-%m-%d--%H-%M-%S')"
-        echo "::set-output name=version::${GITHUB_REF/refs\/tags\//}"
-        echo "::set-output name=suffix::$(date +'%Y-%m-%d--%H-%M-%S')--${GITHUB_REF/refs\/tags\//}"
+        echo "::set-output name=suffix::$(date +'%Y-%m-%d--%H-%M-%S')--0.0.0"
     - id: show
       run: |
-        echo "Build Time: ${{ steps.get.outputs.buildTime }}"
-        echo "Version:    ${{ steps.get.outputs.version }}"
         echo "Suffix:     ${{ steps.get.outputs.suffix }}"
     outputs:
-      buildTime: ${{ steps.get.outputs.buildTime }}
-      version: ${{ steps.get.outputs.version }}
       suffix: ${{ steps.get.outputs.suffix }}
       
       
 
 ############################################################################################################
 # Build blazor server container
-# This is hard-skipped when we only want to perform a comparison (github.event_name != 'workflow_dispatch')
 ############################################################################################################
   build-blazor-server:
     name: Build Website.BlazorServer docker container
@@ -58,19 +51,13 @@ jobs:
         persist-credentials: false
 
     - name: 'Build docker container'
-      uses: azure/docker-login@v1
-      with:
-        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
-    - run: |
-        docker build . --file ${{ env.blazorServerDockerFile }} --build-arg build-time=${{ needs.version.outputs.buildTime }} --build-arg version="1.2.3"
+      run: |
+        docker build . --file ${{ env.blazorServerDockerFile }} --build-arg version=${{ needs.version.outputs.suffix }}
       
 
 
 ############################################################################################################
 # Build blazor webassembly container
-# This is hard-skipped when we only want to perform a comparison (github.event_name != 'workflow_dispatch')
 ############################################################################################################
   build-blazor-webassembly:
     name: Build Website.BlazorWebAssembly docker container
@@ -84,11 +71,6 @@ jobs:
         persist-credentials: false
 
     - name: 'Build docker container'
-      uses: azure/docker-login@v1
-      with:
-        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
-    - run: |
-        docker build . --file ${{ env.blazorWebAssemblyDockerFile }} --build-arg build-time=${{ needs.version.outputs.buildTime }} --build-arg version="1.2.3"
+      run: |
+        docker build . --file ${{ env.blazorWebAssemblyDockerFile }} --build-arg version=${{ needs.version.outputs.suffix }}
         

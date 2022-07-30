@@ -5,8 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<Company>Dioptra Limited</Company>
-		<Version>0.0.0</Version>
-		<BuildTime>2022-01-01--13-00-00</BuildTime>
+		<Version>2022-01-01--13-00-00--0.0.0</Version>
 		<RepositoryUrl>https://github.com/Dioptra/Website.2203</RepositoryUrl>
 		<PackageLicenseExpression>Commercial</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
@@ -14,7 +13,6 @@
 		<NeutralLanguage>en</NeutralLanguage>
 		<Copyright>© Dioptra Limited. All rights reserved.</Copyright>
 		<Product>Dioptra Website</Product>
-		<PackageTags>2022-01-01--13-00-00</PackageTags>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -1,0 +1,1 @@
+Docker componse and DCPROJ files here are obsoleted by using GITHUB Actions to deploy.
