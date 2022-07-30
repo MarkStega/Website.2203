@@ -18,30 +18,10 @@ env:
 jobs:
 
 ############################################################################################################
-# Store the version information
-############################################################################################################
-  version:
-    name: Set version suffix
-    runs-on: ubuntu-latest
-
-    steps:
-    - id: get
-      run: |
-        echo "::set-output name=suffix::$(date +'%Y-%m-%d--%H-%M-%S')--0.0.0"
-    - id: show
-      run: |
-        echo "Suffix:     ${{ steps.get.outputs.suffix }}"
-    outputs:
-      suffix: ${{ steps.get.outputs.suffix }}
-      
-      
-
-############################################################################################################
 # Build blazor server container
 ############################################################################################################
   build-blazor-server:
     name: Build Website.BlazorServer docker container
-    needs: [version]
     runs-on: ubuntu-latest
 
     steps:
@@ -52,7 +32,7 @@ jobs:
 
     - name: 'Build docker container'
       run: |
-        docker build . --file ${{ env.blazorServerDockerFile }} --build-arg version=${{ needs.version.outputs.suffix }}
+        docker build . --file ${{ env.blazorServerDockerFile }}
       
 
 
@@ -61,7 +41,6 @@ jobs:
 ############################################################################################################
   build-blazor-webassembly:
     name: Build Website.BlazorWebAssembly docker container
-    needs: [version]
     runs-on: ubuntu-latest
 
     steps:
@@ -72,5 +51,5 @@ jobs:
 
     - name: 'Build docker container'
       run: |
-        docker build . --file ${{ env.blazorWebAssemblyDockerFile }} --build-arg version=${{ needs.version.outputs.suffix }}
+        docker build . --file ${{ env.blazorWebAssemblyDockerFile }}
         
