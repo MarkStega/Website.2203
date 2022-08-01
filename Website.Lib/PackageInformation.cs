@@ -30,10 +30,13 @@ public static class PackageInformation
 
         BuildTimeString = BuildTime.ToString("G");
 
-        var versionParts = GetParts(Version, ".");
-        MajorVersion = versionParts[0];
-        MinorVersion = versionParts[1];
-        Patch = versionParts[2];
+        if (Version.Contains('.'))
+        {
+            var versionParts = GetParts(Version, ".");
+            MajorVersion = versionParts[0];
+            MinorVersion = versionParts[1];
+            Patch = versionParts[2];
+        }
 
         var buildDateString = Assembly.GetExecutingAssembly().GetCustomAttribute<BuildDateAttribute>()?.DateString ?? "";
 
@@ -63,21 +66,21 @@ public static class PackageInformation
     /// SEMVER major version number
     /// </summary>
     /// <returns></returns>
-    public static readonly int MajorVersion;
+    public static readonly int MajorVersion = 0;
 
 
     /// <summary>
     /// SEMVER minor version number
     /// </summary>
     /// <returns></returns>
-    public static readonly int MinorVersion;
+    public static readonly int MinorVersion = 0;
 
 
     /// <summary>
     /// SEMVER patch number
     /// </summary>
     /// <returns></returns>
-    public static readonly int Patch;
+    public static readonly int Patch = 0;
 
 
     /// <summary>
