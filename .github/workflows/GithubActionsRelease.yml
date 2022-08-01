@@ -79,18 +79,6 @@ jobs:
     - run: |
         docker build . --file ${{ env.blazorServerDockerFile }} --tag ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.blazorServerAppName }}:${{ needs.version.outputs.suffix }} --build-arg version=${{ needs.version.outputs.suffix }}
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.blazorServerAppName }}:${{ needs.version.outputs.suffix }}
-
-    #- name: 'Deploy to Azure Container Instances'
-    #  uses: 'azure/aci-deploy@v1'
-    #  with:
-    #    resource-group: ${{ secrets.RESOURCE_GROUP }}
-    #    dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
-    #    image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.blazorServerAppName }}:${{ needs.version.outputs.suffix }}
-    #    registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-    #    registry-username: ${{ secrets.REGISTRY_USERNAME }}
-    #    registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-    #    name: ${{ env.registryName }}
-    #    location: ${{ env.registryLocation }}      
    
         
 
@@ -123,37 +111,25 @@ jobs:
         docker build . --file ${{ env.blazorWebAssemblyDockerFile }} --tag ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.blazorWebAssemblyAppName }}:${{ needs.version.outputs.suffix }} --build-arg version=${{ needs.version.outputs.suffix }}
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.blazorWebAssemblyAppName }}:${{ needs.version.outputs.suffix }}
 
-    #- name: 'Deploy to Azure Container Instances'
-    #  uses: 'azure/aci-deploy@v1'
-    #  with:
-    #    resource-group: ${{ secrets.RESOURCE_GROUP }}
-    #    dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
-    #    image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.blazorWebAssemblyAppName }}:${{ needs.version.outputs.suffix }}
-    #    registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-    #    registry-username: ${{ secrets.REGISTRY_USERNAME }}
-    #    registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-    #    name: ${{ env.registryName }}
-    #    location: ${{ env.registryLocation }}
-
 
 
 ############################################################################################################
 # Create release
 ############################################################################################################
-  #create-release:
-  #  name: Create release
-  #  needs: [build-blazor-server, build-blazor-webassembly, is-on-dioptra]
+  create-release:
+    name: Create release
+    needs: [build-blazor-server, build-blazor-webassembly, is-on-dioptra]
 
-  #  runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-  #  steps:
-  #  - name: Create Release
-  #    if: needs.branch.outputs.identifier != 'experimental-release-workflow' # this check is important to allow testing this workflow on a non-main branch without deploying to nuget: this critical action is not performed when not on main.
-  #    uses: actions/create-release@v1
-  #    env:
-  #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #    with:
-  #      tag_name: ${{needs.version.outputs.identifier}}
-  #      release_name: Release ${{needs.version.outputs.identifier}}
-  #      draft: false
-  #      prerelease: false
+    steps:
+    - name: Create Release
+      if: needs.branch.outputs.identifier != 'experimental-release-workflow' # this check is important to allow testing this workflow on a non-main branch without deploying to nuget: this critical action is not performed when not on main.
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{needs.version.outputs.identifier}}
+        release_name: Release ${{needs.version.outputs.identifier}}
+        draft: false
+        prerelease: false
