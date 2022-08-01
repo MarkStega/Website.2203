@@ -42,13 +42,14 @@ jobs:
     steps:
     - id: get
       run: |
-        echo "::set-output name=identifier::${GITHUB_REF/refs\/tags\//}"
+        echo "::set-output name=tag::${GITHUB_REF/refs\/tags\//}"
         echo "::set-output name=suffix::$(date +'%Y-%m-%d--%H-%M-%S')--${GITHUB_REF/refs\/tags\//}"
     - id: show
       run: |
-        echo "Identifier: ${{ steps.get.outputs.identifier }}"
+        echo "Tag:        ${{ steps.get.outputs.tag }}"
         echo "Suffix:     ${{ steps.get.outputs.suffix }}"
     outputs:
+      tag: ${{ steps.get.outputs.tag }}
       suffix: ${{ steps.get.outputs.suffix }}
       
       
@@ -131,7 +132,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ needs.version.outputs.identifier }}
-        release_name: Release ${{ needs.version.outputs.identifier }}
+        tag_name: ${{ needs.version.outputs.tag }}
+        release_name: Release ${{ needs.version.outputs.tag }}
         draft: false
         prerelease: false
