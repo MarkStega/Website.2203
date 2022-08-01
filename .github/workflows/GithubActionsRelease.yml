@@ -121,7 +121,7 @@ jobs:
 ############################################################################################################
   create-release:
     name: Create release
-    needs: [build-blazor-server, build-blazor-webassembly, is-on-dioptra]
+    needs: [version, build-blazor-server, build-blazor-webassembly, is-on-dioptra]
 
     runs-on: ubuntu-latest
 
