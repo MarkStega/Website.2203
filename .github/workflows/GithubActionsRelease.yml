@@ -58,7 +58,7 @@ jobs:
 # Build blazor server container
 ############################################################################################################
   build-blazor-server:
-    name: Build Website.BlazorServer docker container
+    name: Build BlazorServer docker container
     needs: [version, is-on-dioptra]
     runs-on: ubuntu-latest
 
@@ -89,7 +89,7 @@ jobs:
 # Build blazor webassembly container
 ############################################################################################################
   build-blazor-webassembly:
-    name: Build Website.BlazorWebAssembly docker container
+    name: Build BlazorWebAssembly docker container
     needs: [version, is-on-dioptra]
     runs-on: ubuntu-latest
 
@@ -126,11 +126,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Echo tag name
-      run: |
-        echo "Tag:        ${{ needs.version.outputs.tag }}"
-        echo "Suffix:     ${{ needs.version.outputs.suffix }}"
-
     - name: Create Release
       uses: actions/create-release@v1
       env:
