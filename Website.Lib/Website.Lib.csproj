@@ -34,21 +34,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ImageFiles Include="$(ProjectDir)WebAssets\Images\*.*" />
-		<PWAFiles Include="$(ProjectDir)WebAssets\PWA\*.*" />
-		<AndroidImageFiles Include="$(ProjectDir)WebAssets\android-images\*.*" />
-		<IOSImageFiles Include="$(ProjectDir)WebAssets\ios-images\*.*" />
-		<Windows11ImageFiles Include="$(ProjectDir)WebAssets\windows11-images\*.*" />
-	</ItemGroup>
+		<InputImageFiles Include="$(ProjectDir)WebAssets\Images\*.*" />
+		<InputPWAFiles Include="$(ProjectDir)WebAssets\PWA\*.*" />
+		<InputAndroidInputImageFiles Include="$(ProjectDir)WebAssets\android-images\*.*" />
+		<InputIOSInputImageFiles Include="$(ProjectDir)WebAssets\ios-images\*.*" />
+		<InputWindows11InputImageFiles Include="$(ProjectDir)WebAssets\windows11-images\*.*" />
 
-	<ItemGroup>
 		<InputStaticAssetsScripts Include="$(ProjectDir)WebAssets\**\*.ts" />
 		<OutputStaticAssetsScripts Include="$(ProjectDir)wwwroot\js\dioptra.js;wwwroot\js\dioptra.min.js" />
-		<Content Remove="@(OutputStaticAssetsScripts)" />
-		<Content Include="@(OutputStaticAssetsScripts)" />
 
 		<InputStaticAssetsStyles Include="$(ProjectDir)WebAssets\**\*.scss;" />
 		<OutputStaticAssetsStyles Include="$(ProjectDir)wwwroot\css\dioptra.css;wwwroot\css\dioptra.min.css" />
+		
+		<!-- Temporary fixes until .net7 when dynamically copied content automatically copies to output -->
+		<OutputImages Include="$(ProjectDir)wwwroot\**\*.*" />
+		<Content Remove="@(OutputImages)" />
+		<Content Include="@(OutputImages)" />
+		<Content Remove="@(OutputStaticAssetsScripts)" />
+		<Content Include="@(OutputStaticAssetsScripts)" />
 		<Content Remove="@(OutputStaticAssetsStyles)" />
 		<Content Include="@(OutputStaticAssetsStyles)" />
 	</ItemGroup>
@@ -64,12 +67,13 @@
 		<None Include="tsconfig.json" />
 	</ItemGroup>
 
+	<!-- Remove comments once migrated to .net7 and dynamically copied content automatically copies to output -->
 	<Target Name="WWWRootFileCopy" BeforeTargets="PreBuildEvent">
-		<Copy SourceFiles="@(ImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/images" />
-		<Copy SourceFiles="@(PWAFiles)" DestinationFolder="$(ProjectDir)wwwroot/pwa" />
-		<Copy SourceFiles="@(AndroidImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/android-images" />
-		<Copy SourceFiles="@(IOSImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/ios-images" />
-		<Copy SourceFiles="@(Windows11ImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/windows11-images" />
+		<!--<Copy SourceFiles="@(InputImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/images" />
+		<Copy SourceFiles="@(InputPWAFiles)" DestinationFolder="$(ProjectDir)wwwroot/pwa" />
+		<Copy SourceFiles="@(InputAndroidInputImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/android-images" />
+		<Copy SourceFiles="@(InputIOSInputImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/ios-images" />
+		<Copy SourceFiles="@(InputWindows11InputImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/windows11-images" />-->
 	</Target>
 
 	<!--<Target Name="CheckIfNpmExists" Inputs="@(InputStaticAssetsScripts);@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsScripts);@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent" AfterTargets="WWWRootFileCopy">-->
@@ -183,5 +187,20 @@
 		<Move SourceFiles="%(MyCompressedFiles.FullPath)" DestinationFiles="%(MyCompressedFiles.OriginalItemSpec)%(MyCompressedFiles.Extension)" />
 
 	</Target>
+
+	<!-- Remove comments to list wwwroot contents to diagnose content inclusion in GitHub Actions -->
+	<!--<Target Name="Tests" AfterTargets="CustomGZipAndBrotliCompression">
+
+		<Message Importance="High" Text="===========================================================================" />
+		<Message Importance="High" Text="===========================================================================" />
+		<Message Importance="High" Text="===========================================================================" />
+		<Message Importance="High" Text="====== List contents of wwwroot ===========================================" />
+		<Message Importance="High" Text="" />
+		<Exec Command="ls -altR $(ProjectDir)wwwroot" ContinueOnError="true" StandardOutputImportance="high" StandardErrorImportance="high" LogStandardErrorAsError="false" IgnoreExitCode="true" />
+		<Message Importance="High" Text="===========================================================================" />
+		<Message Importance="High" Text="===========================================================================" />
+		<Message Importance="High" Text="===========================================================================" />
+
+	</Target>-->
 
 </Project>
