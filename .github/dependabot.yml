@@ -9,9 +9,16 @@ updates:
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: monthly  
+      interval: "daily"  
+
+
+  - package-ecosystem: "npm"
+    directory: "/Website.Lib/Website.Lib"
+    schedule:
+      interval: "daily"
+
 
   - package-ecosystem: "nuget"
     directory: "/"
     schedule:
-      interval: monthly
+      interval: "daily"
