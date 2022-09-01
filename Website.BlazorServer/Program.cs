@@ -47,7 +47,12 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 
-builder.Services.AddMBServices(loggingServiceConfiguration: Utilities.GetDefaultLoggingServiceConfiguration(), toastServiceConfiguration: Utilities.GetDefaultToastServiceConfiguration(), snackbarServiceConfiguration: Utilities.GetDefaultSnackbarServiceConfiguration());
+builder.Services.AddMBServices(options =>
+{
+    options.LoggingServiceConfiguration = Utilities.GetDefaultLoggingServiceConfiguration();
+    options.ToastServiceConfiguration = Utilities.GetDefaultToastServiceConfiguration();
+    options.SnackbarServiceConfiguration = Utilities.GetDefaultSnackbarServiceConfiguration();
+});
 
 builder.Services.AddHsts(options =>
 {
@@ -100,13 +105,15 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddBlazoredLocalStorage();
 
-builder.Services.AddGBService(
-    trackingId: "G-V061TDSPDR",
-    globalEventParams: new Dictionary<string, object>()
+builder.Services.AddGBService(options =>
+{
+    options.TrackingId = "G-V061TDSPDR";
+    options.GlobalEventParams = new Dictionary<string, object>()
     {
         { Utilities.EventCategory, Utilities.DialogActions },
         { Utilities.NonInteraction, true },
-    });
+    };
+});
 
 // Pentest fix
 builder.WebHost.ConfigureKestrel(serverOptions =>
