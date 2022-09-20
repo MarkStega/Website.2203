@@ -69,7 +69,7 @@ public class ContentSecurityPolicyService
             {
                 var csvSplit = (sr.ReadLine() ?? ",").Split(',');
 
-                var path = csvSplit[0].Split("wwwroot\\")[^1];
+                var path = csvSplit[0].Split("wwwroot")[^1][1..];
                 var fileName = csvSplit[0].Split(_pathDelimiters)[^1];
                 var extension = csvSplit[0].Split('.')[^1].ToLower();
                 var hashString = $"sha256-{csvSplit[1]}";
