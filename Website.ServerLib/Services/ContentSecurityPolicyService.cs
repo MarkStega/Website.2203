@@ -57,8 +57,9 @@ public class ContentSecurityPolicyService
 
         var hashesFilePath = AppContext.BaseDirectory + "hashes.csv";
 
-        string scriptSrcPart = "";
-        string styleSrcPart = "";
+        string scriptSrcPathPart = "";
+        string scriptSrcHashesPart = "";
+        string styleSrcHashesPart = "";
 
         if (File.Exists(hashesFilePath) && !_fileHashes.Any())
         {
@@ -68,6 +69,7 @@ public class ContentSecurityPolicyService
             {
                 var csvSplit = (sr.ReadLine() ?? ",").Split(',');
 
+                var path = csvSplit[0].Split("wwwroot\\")[^1];
                 var fileName = csvSplit[0].Split(_pathDelimiters)[^1];
                 var extension = csvSplit[0].Split('.')[^1].ToLower();
                 var hashString = $"sha256-{csvSplit[1]}";
@@ -76,19 +78,20 @@ public class ContentSecurityPolicyService
                 
                 if (extension == "js")
                 {
-                    scriptSrcPart += $"'sha256-{csvSplit[1]}' ";
+                    scriptSrcPathPart += $"'{path}' ";
+                    scriptSrcHashesPart += $"'{hashString}' ";
                 }
                 else if (extension == "css")
                 {
-                    styleSrcPart += $"'sha256-{csvSplit[1]}' ";
+                    styleSrcHashesPart += $"'{hashString}' ";
                 }
             }
         }
 
         ApplyContentSecurityPolicy = File.Exists(hashesFilePath) || !env.IsDevelopment();
 
-        ScriptSrcPart = (NonceString + " " + scriptSrcPart).Trim();
-        StyleSrcPart = (NonceString + " " + styleSrcPart).Trim();
+        ScriptSrcPart = (NonceString + " " + scriptSrcPathPart + " " + scriptSrcHashesPart).Trim();
+        StyleSrcPart = (NonceString + " " + styleSrcHashesPart).Trim();
     }
 
 

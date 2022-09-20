@@ -51,6 +51,10 @@ public class ContentSecurityPolicyMiddleware
             "style-src 'self' 'unsafe-inline' 'report-sample' p.typekit.net use.typekit.net fonts.googleapis.com fonts.gstatic.com; " +
             "upgrade-insecure-requests; " +
             "worker-src 'self';";
+    //"_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js"
+    //"_content/Material.Blazor/material.blazor.min.js"
+    //"_content/Website.Lib/js/dioptra.min.js"
+    //"_framework/blazor.webassembly.js"
 
         context.Response.Headers.Add("X-Frame-Options", "DENY");
         context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
