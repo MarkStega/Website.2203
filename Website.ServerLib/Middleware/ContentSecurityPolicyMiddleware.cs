@@ -47,7 +47,7 @@ public class ContentSecurityPolicyMiddleware
             $"report-to https://{baseUri}/api/CspReporting/UriReport; " +
             $"report-uri https://{baseUri}/api/CspReporting/UriReport; " +
             // The sha-256 hash relates to an inline script added by blazor's javascript
-            $"script-src {cspService.ScriptSrcPart} 'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=' 'strict-dynamic' 'unsafe-inline' 'report-sample' https://www.googletagmanager.com/gtag/js; " +
+            $"script-src {cspService.ScriptSrcPart} 'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=' 'strict-dynamic' 'unsafe-inline' 'report-sample' 'unsafe-eval' https://www.googletagmanager.com/gtag/js; " +
             "style-src 'self' 'unsafe-inline' 'report-sample' p.typekit.net use.typekit.net fonts.googleapis.com fonts.gstatic.com; " +
             "upgrade-insecure-requests; " +
             "worker-src 'self';";
