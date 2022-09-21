@@ -78,7 +78,7 @@ public class ContentSecurityPolicyService
 
                 if (extension == "js")
                 {
-                    scriptSrcPathPart += $"'https://dioptra.tech/{path}' ";
+                    scriptSrcPathPart += $"https://dioptra.tech/{path} ";
                     scriptSrcHashesPart += $"'{hashString}' ";
                 }
                 else if (extension == "css")
