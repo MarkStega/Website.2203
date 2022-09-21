@@ -24,7 +24,7 @@ public class ContentSecurityPolicyService
     /// <summary>
     /// Part of the CSP <c>script-src</c> tag that encodes sha keys and nonce values.
     /// </summary>
-    public readonly string ScriptSrcPart  = "'self'";
+    public readonly string ScriptSrcPart = "'self'";
 
 
     /// <summary>
@@ -57,6 +57,7 @@ public class ContentSecurityPolicyService
 
         var hashesFilePath = AppContext.BaseDirectory + "hashes.csv";
 
+        string scriptSrcPathPart = "";
         string scriptSrcHashesPart = "";
         string styleSrcHashesPart = "";
 
@@ -68,14 +69,16 @@ public class ContentSecurityPolicyService
             {
                 var csvSplit = (sr.ReadLine() ?? ",").Split(',');
 
+                var path = csvSplit[0].Split("wwwroot")[^1][1..];
                 var fileName = csvSplit[0].Split(_pathDelimiters)[^1];
                 var extension = csvSplit[0].Split('.')[^1].ToLower();
                 var hashString = $"sha256-{csvSplit[1]}";
 
                 _fileHashes[fileName] = hashString;
-                
+
                 if (extension == "js")
                 {
+                    scriptSrcPathPart += $"'https://dioptra.tech/{path}' ";
                     scriptSrcHashesPart += $"'{hashString}' ";
                 }
                 else if (extension == "css")
@@ -87,7 +90,7 @@ public class ContentSecurityPolicyService
 
         ApplyContentSecurityPolicy = File.Exists(hashesFilePath) || !env.IsDevelopment();
 
-        ScriptSrcPart = (NonceString + " " + scriptSrcHashesPart).Trim();
+        ScriptSrcPart = (NonceString + " " + scriptSrcPathPart + " " + scriptSrcHashesPart).Trim();
         StyleSrcPart = (NonceString + " " + styleSrcHashesPart).Trim();
     }
 
