@@ -23,10 +23,12 @@ public class ContentSecurityPolicyMiddleware
 
     public async Task InvokeAsync(HttpContext context, ContentSecurityPolicyService cspService, IWebHostEnvironment env)
     {
-        Log.Information($"'{context.Request.Path}', '{cspService.NonceValue}'");
-        var source = (env.IsDevelopment() ? "'self' " : "") + $"'nonce-{cspService.NonceValue}'";
+        var cspValues = cspService.GetValues(context);
 
-        var baseUri = context.Request.Host.ToString();
+        Log.Information($"'{context.Request.Path}', '{cspValues.NonceValue}'");
+        var source = (env.IsDevelopment() ? "'self' " : "") + $"'nonce-{cspValues.NonceValue}'";
+
+        var baseUri = context.Request.Host.ToUriComponent();
         var baseDomain = context.Request.Host.Host;
 
         var csp =
@@ -47,14 +49,10 @@ public class ContentSecurityPolicyMiddleware
             $"report-to https://{baseUri}/api/CspReporting/UriReport; " +
             $"report-uri https://{baseUri}/api/CspReporting/UriReport; " +
             // The sha-256 hash relates to an inline script added by blazor's javascript
-            $"script-src {cspService.ScriptSrcPart} 'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=' 'strict-dynamic' 'unsafe-inline' 'report-sample' 'unsafe-eval' https://www.googletagmanager.com/gtag/js; " +
+            $"script-src {cspValues.ScriptSrcPart} 'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=' 'strict-dynamic' 'unsafe-inline' 'report-sample' 'unsafe-eval' https://www.googletagmanager.com/gtag/js; " +
             "style-src 'self' 'unsafe-inline' 'report-sample' p.typekit.net use.typekit.net fonts.googleapis.com fonts.gstatic.com; " +
             "upgrade-insecure-requests; " +
             "worker-src 'self';";
-    //"_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js"
-    //"_content/Material.Blazor/material.blazor.min.js"
-    //"_content/Website.Lib/js/dioptra.min.js"
-    //"_framework/blazor.webassembly.js"
 
         context.Response.Headers.Add("X-Frame-Options", "DENY");
         context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
@@ -65,7 +63,7 @@ public class ContentSecurityPolicyMiddleware
         context.Response.Headers.Add("Permissions-Policy", "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()");
         context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
 
-        if (cspService.ApplyContentSecurityPolicy)
+        if (cspValues.ApplyContentSecurityPolicy)
         {
             context.Response.Headers.Add("Content-Security-Policy", csp);
         }

@@ -69,6 +69,6 @@
     <script src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js" integrity="@CSPService.GetFileHashString("googleanalytics.blazor.js")"></script>
     <script src="_content/Material.Blazor/material.blazor.min.js" integrity="@CSPService.GetFileHashString("material.blazor.min.js")"></script>
     <script src="_content/Website.Lib/js/dioptra.min.js" integrity="@CSPService.GetFileHashString("dioptra.min.js")"></script>
-    <script nonce="@CSPService.NonceValue" src="_framework/blazor.server.js"></script>
+    <script nonce="@CSPService.GetValues(HttpContext).NonceValue" src="_framework/blazor.server.js"></script>
 </body>
 </html>
