@@ -27,4 +27,24 @@ The project makes use of all of the [Material.Blazor nuget packages](https://git
 - [GoogleAnalytics.Blazor](https://github.com/Material-Blazor/GoogleAnalytics.Blazor) gives access to Google Analytics for Blazor projects.
 - [HttpSecurity.AspNet](https://github.com/Material-Blazor/HttpSecurity.AspNet) manages HTTP security headers include Content Security Policies for ASP.NET projects.
 
-The project does not have detailed documentation, and you are encouraged to pick through the repo for inspriation.
+The project does not have detailed documentation, and you are welcome to pick through the repo for inspriation. We're open to answering questions or receving comments about
+the technology employed here, however don't expect a swift response.
+
+Enjoy!
+
+## Notes
+
+### Blazor Dual Mode
+
+The `Website.Server` project can be deployed as either a Server Hosted Blazor WebAssembly app or a Blazor Server app. This dual mode approach is switched by using either the 
+`DEBUG_WEBASSEMBLY` or the `DEBUG_SERVER` configurations, or likewise for release the `RELEASE_WEBASSEMBLY` or the `RELEASE_SERVER` configurations.
+
+### Security
+
+We aim to deploy this website with reasonably strong security, making use of HTTP headers, Content Security Policies and either integrity hashes or nonces for all linked
+styles and scripts. This stance is informed by recent penetration testing performed on Dioptra's commercial web app, Vectis.
+
+### Proprietary Information
+
+This is Dioptra's public facing website and expresses how Dioptra chooses to represent itself. All written and visual content is proprietary, subject to copyright and may
+not be reproduced. Images used by this website are subject to third party licensing and have been paid for by Dioptra.
