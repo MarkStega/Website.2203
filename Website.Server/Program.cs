@@ -71,6 +71,11 @@ builder.Services.AddHttpsSecurityHeaders(options =>
             .AddReportSample()
             .AddUnsafeEvalIf(() => PlatformDetermination.IsBlazorWebAssembly)
             .AddUri("https://www.googletagmanager.com/gtag/js")
+            .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js") // Required to work on Safari
+            .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/Material.Blazor/material.blazor.min.js") // Required to work on Safari
+            .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/Website.Lib/js/dioptra.min.js") // Required to work on Safari
+            .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/blazor.server.js", () => PlatformDetermination.IsBlazorServer) // Required to work on Safari
+            .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/blazor.webassembly.js", () => PlatformDetermination.IsBlazorWebAssembly) // Required to work on Safari
             .AddGeneratedHashValues(StaticFileExtension.JS))
     .AddStyleSrcCSP(o => o.AddSelf().AddUnsafeInline().AddReportSample().AddUri("https://p.typekit.net").AddUri("https://use.typekit.net").AddUri("https://fonts.googleapis.com").AddUri("https://fonts.gstatic.com"))
     .AddUpgradeInsecureRequestsCSP()
