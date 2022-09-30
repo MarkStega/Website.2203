@@ -49,7 +49,7 @@ builder.Services.AddHttpsSecurityHeaders(options =>
     .AddBaseUriCSP(o => o.AddSelf())
     .AddBlockAllMixedContentCSP()
     .AddChildSrcCSP(o => o.AddSelf())
-    .AddConnectSrcCSP(o => o.AddSelf().AddUri((baseUri, baseDomain) => $"wss://{baseDomain}:*").AddUri("www.google-analytics.com").AddUri("region1.google-analytics.com"))
+    .AddConnectSrcCSP(o => o.AddSelf().AddUri((baseUri, baseDomain) => $"wss://{baseDomain}:*").AddUri("www.googletagmanager.com").AddUri("www.google-analytics.com").AddUri("region1.google-analytics.com").AddUri("use.typekit.net").AddUri("fonts.googleapis.com").AddUri("fonts.gstatic.com"))
     .AddDefaultSrcCSP(o => o.AddSelf())
     .AddFontSrcCSP(o => o.AddUri("use.typekit.net").AddUri("fonts.googleapis.com").AddUri("fonts.gstatic.com"))
     .AddFrameAncestorsCSP(o => o.AddNone())
@@ -77,6 +77,7 @@ builder.Services.AddHttpsSecurityHeaders(options =>
     .AddWorkerSrcCSP(o => o.AddSelf())
 
     // Other headers
+    .AddAccessControlAllowOriginAll()
     // ref: <a href="http://stackoverflow.com/questions/49547/making-sure-a-web-page-is-not-cached-across-all-browsers">http://stackoverflow.com/questions/49547/making-sure-a-web-page-is-not-cached-across-all-browsers</a>
     .AddCacheControl("no-cache, public, max-age=86400")
     .AddExpires("0")
