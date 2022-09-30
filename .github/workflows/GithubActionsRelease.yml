@@ -59,7 +59,7 @@ jobs:
 ############################################################################################################
   build-blazor-server:
     name: Build BlazorServer
-    needs: [version, perform-deployment]
+    needs: [version, is-on-dioptra]
     runs-on: ubuntu-latest
 
     steps:
@@ -94,7 +94,7 @@ jobs:
 ############################################################################################################
   build-blazor-webassembly:
     name: Build BlazorWASM
-    needs: [version, perform-deployment]
+    needs: [version, is-on-dioptra]
     runs-on: ubuntu-latest
 
     steps:
