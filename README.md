@@ -32,6 +32,8 @@ the technology employed here, however don't expect a swift response.
 
 Enjoy!
 
+<br />
+
 ## Notes
 
 ### Blazor Dual Mode
