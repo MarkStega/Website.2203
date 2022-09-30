@@ -1,22 +1,47 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace Website.Lib.Shared;
+namespace Website.Lib;
+
+/// <summary>
+/// Page &lt;head&gt; content including meta data.
+/// </summary>
 public partial class HeadAndMetaContent : ComponentBase
 {
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-    [Inject] private NavigationManager NavigationManager { get; set; }
+    [Inject] private NavigationManager NavigationManager { get; set; } = default!;
 
 
+    /// <summary>
+    /// The page description.
+    /// </summary>
     [Parameter] public string Description { get; set; } = "";
+
+
+    /// <summary>
+    /// Optional open graph image.
+    /// </summary>
     [Parameter] public string OpenGraphImage { get; set; } = "";
+
+
+    /// <summary>
+    /// Optional twitter image.
+    /// </summary>
     [Parameter] public string TwitterImage { get; set; } = "";
+
+
+    /// <summary>
+    /// Page title.
+    /// </summary>
     [Parameter] public string PageTitle { get; set; } = "";
-    [Parameter] public RenderFragment ChildContent { get; set; }
 
 
-    private RenderFragment Tags { get; set; }
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+    /// <summary>
+    /// Optional child content.
+    /// </summary>
+    [Parameter] public RenderFragment ChildContent { get; set; } = default!;
+
+
+    private RenderFragment Tags { get; set; } = default!;
 
 
     protected override void OnParametersSet()

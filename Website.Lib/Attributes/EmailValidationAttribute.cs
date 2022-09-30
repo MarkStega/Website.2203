@@ -4,6 +4,11 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace Website.Lib;
+
+
+/// <summary>
+/// Validates correct email address formation.
+/// </summary>
 public class EmailValidationAttribute : ValidationAttribute
 {
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)

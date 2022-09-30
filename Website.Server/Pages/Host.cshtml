@@ -1,0 +1,91 @@
+﻿@page "/Host"
+@using Microsoft.AspNetCore.Components.Web
+@using HttpSecurity.AspNet
+@using Website.Lib
+@namespace Website.Server.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject IHttpSecurityService HttpSecurityService
+
+@{
+    RenderMode RenderMode = PlatformDetermination.IsBlazorServer ? RenderMode.ServerPrerendered : RenderMode.WebAssemblyPrerendered;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta name="theme-color" content="#FFD230" />
+
+    <title>Dioptra</title>
+    <base href="/" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://use.typekit.net/zjb3qsk.css">
+
+    <link rel="stylesheet" type="text/css" href="_content/Material.Blazor/material.blazor.min.css" integrity="@HttpSecurityService.GetFileHashString("material.blazor.min.css")" />
+    <link rel="stylesheet" type="text/css" id="app-theme" href="_content/Website.Lib/css/dioptra.min.css" integrity="@HttpSecurityService.GetFileHashString("dioptra.min.css")" />
+
+    <link rel="icon" type="image/png" href="_content/Website.Lib/pwa/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="_content/Website.Lib/pwa/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="_content/Website.Lib/pwa/favicon-96x96.png" sizes="96x96">
+
+    <link rel="apple-touch-icon" sizes="512x512" href="_content/Website.Lib/ios-images/512.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="_content/Website.Lib/ios-images/192.png" />
+
+@if (PlatformDetermination.IsBlazorServer)
+{
+    <link rel="manifest" href="manifest.json" />
+}
+
+    <component type="typeof(HeadOutlet)" render-mode="@RenderMode" />
+</head>
+<body class="mdc-typography">
+    <component type="typeof(App)" render-mode="@RenderMode" />
+
+    <div id="blazor-error-ui">
+        <div id="reload-dialog" class="mdc-dialog">
+            <div id="reload-container" class="mdc-dialog__container">
+                <div class="mdc-dialog__surface"
+                     role="alertdialog"
+                     aria-modal="true"
+                     aria-labelledby="my-dialog-title"
+                     aria-describedby="my-dialog-content">
+                    <h2 class="mdc-dialog__title" id="my-dialog-title">
+                        <span class="material-icons-outlined">error</span> Website Error
+                    </h2>
+                    <div class="mdc-dialog__content" id="my-dialog-content">
+                        <environment include="Staging,Production">
+                            Click the button to reload the website.
+                        </environment>
+                        <environment include="Development">
+                            An unhandled exception has occurred. See browser dev tools for details.
+                        </environment>
+                    </div>
+                    <div class="mdc-dialog__actions" tabindex="1">
+                        <button id="reload-button" type="button" class="mdc-button mdc-dialog__button mdc-button--raised" data-mdc-dialog-action="discard">
+                            <div class="mdc-button__ripple"></div>
+                            <span class="mdc-button__label">Reload</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="reload-scrim" class="mdc-dialog__scrim"></div>
+        </div>
+    </div>
+
+    <script src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js" integrity="@HttpSecurityService.GetFileHashString("googleanalytics.blazor.js")"></script>
+    <script src="_content/Material.Blazor/material.blazor.min.js" integrity="@HttpSecurityService.GetFileHashString("material.blazor.min.js")"></script>
+    <script src="_content/Website.Lib/js/dioptra.min.js" integrity="@HttpSecurityService.GetFileHashString("dioptra.min.js")"></script>
+
+    @if (PlatformDetermination.IsBlazorServer)
+    {
+        <script src="_framework/blazor.server.js" nonce="@HttpSecurityService.GetNonce()"></script>
+    }
+    else
+    {
+        <script src="_framework/blazor.webassembly.js" integrity="@HttpSecurityService.GetFileHashString("blazor.webassembly.js")"></script>
+    }
+
+</body>
+</html>

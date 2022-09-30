@@ -1,6 +1,8 @@
 ﻿@page "/terms-and-conditions"
 
-@inherits ComponentBase;
+@namespace Website.Lib
+
+@inherits ComponentBase
 
 
 <HeadAndMetaContent PageTitle="Terms & Conditions"
@@ -10,83 +12,81 @@
 </HeadAndMetaContent>
 
 
-<GeneralPageLayout @ref="@GeneralPageLayout" ColorClass="dw-yellow" >
-    <div class="dw-section-regular">
-        <div class="dw-max-width-content">
-            <div class="mdc-layout-grid">
-                <div class="mdc-layout-grid__inner">
-                    <div class="mdc-layout-grid__cell--span-12">
-                        <h2 class="mdc-typography--headline1">Website Terms and Conditions</h2>
-                        <p class="mdc-typography--body1">This page (together with the documents referred to on it) tells you the terms on which you may use https://dioptra.tech (“the Site”).</p>
-                        <p class="mdc-typography--body1">You should read these terms of use carefully before using the Site. If you do not agree to these terms of use please do not use the Site. By using the Site, you indicate that you accept these terms of use and that you agree to abide by them.</p>
+<div class="dw-section-regular">
+    <div class="dw-max-width-content">
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell--span-12">
+                    <h2 class="mdc-typography--headline1">Website Terms and Conditions</h2>
+                    <p class="mdc-typography--body1">This page (together with the documents referred to on it) tells you the terms on which you may use https://dioptra.tech (“the Site”).</p>
+                    <p class="mdc-typography--body1">You should read these terms of use carefully before using the Site. If you do not agree to these terms of use please do not use the Site. By using the Site, you indicate that you accept these terms of use and that you agree to abide by them.</p>
                     
-                        <h3 class="mdc-typography--headline3">Information about us</h3>
-                        <p class="mdc-typography--body1">The Site is a website operated by Dioptra Limited - a company registered in England and Wales with registered office at 4 The Courtyard, Holmstead Farm, Staplefield Road, Cuckfield, West Sussex RH17 5JF and Company Number 13537855 ("we", “us” or “our”).</p>
+                    <h3 class="mdc-typography--headline3">Information about us</h3>
+                    <p class="mdc-typography--body1">The Site is a website operated by Dioptra Limited - a company registered in England and Wales with registered office at 4 The Courtyard, Holmstead Farm, Staplefield Road, Cuckfield, West Sussex RH17 5JF and Company Number 13537855 ("we", “us” or “our”).</p>
                     
-                        <h3 class="mdc-typography--headline3">Accesing the Website</h3>
-                        <p class="mdc-typography--body1">You may access the Site but we reserve the right to withdraw or amend the service that we provide on the Site without notice. We may also suspend access to the Site or close it indefinitely at any time.</p>
-                        <p class="mdc-typography--body1">We will not be liable if for any reason the Site is unavailable at any time or for any period.</p>
-                        <p class="mdc-typography--body1">We may restrict access to the Site or some parts of it to users who have registered with us.</p>
-                        <p class="mdc-typography--body1">You must treat any password or user identification code that we provide to you as confidential and must not disclose it to anyone else.</p>
-                        <p class="mdc-typography--body1">When using the Site, you must comply with the provisions of our acceptable use policy below.</p>
+                    <h3 class="mdc-typography--headline3">Accesing the Website</h3>
+                    <p class="mdc-typography--body1">You may access the Site but we reserve the right to withdraw or amend the service that we provide on the Site without notice. We may also suspend access to the Site or close it indefinitely at any time.</p>
+                    <p class="mdc-typography--body1">We will not be liable if for any reason the Site is unavailable at any time or for any period.</p>
+                    <p class="mdc-typography--body1">We may restrict access to the Site or some parts of it to users who have registered with us.</p>
+                    <p class="mdc-typography--body1">You must treat any password or user identification code that we provide to you as confidential and must not disclose it to anyone else.</p>
+                    <p class="mdc-typography--body1">When using the Site, you must comply with the provisions of our acceptable use policy below.</p>
                     
-                        <h4 class="mdc-typography--headline4">1. Intellectual Property Rights</h4>
-                        <p class="mdc-typography--body1">We are the owner or the licensee of all intellectual property rights in the Site, and in the material published on it.</p>
-                        <p class="mdc-typography--body1">You must not use any part of the materials on the Site for commercial purposes without our prior written approval or that of our licensors.</p>
+                    <h4 class="mdc-typography--headline4">1. Intellectual Property Rights</h4>
+                    <p class="mdc-typography--body1">We are the owner or the licensee of all intellectual property rights in the Site, and in the material published on it.</p>
+                    <p class="mdc-typography--body1">You must not use any part of the materials on the Site for commercial purposes without our prior written approval or that of our licensors.</p>
                     
-                        <h4 class="mdc-typography--headline4">2. Reliance on Information Posted</h4>
-                        <p class="mdc-typography--body1">Commentary and other materials posted on the Site are not intended to amount to advice on which reliance should be placed. We disclaim all liability and responsibility arising from any reliance placed on such materials by any user of the Site, or by anyone who may be informed of any of its contents.<br><br>The material displayed on the Site is provided without any guarantees, conditions or warranties as to its accuracy and any of the material on the Site may be out of date at any given time. We are under no obligation to update the Site or its contents at any time.</p>
-                        <p class="mdc-typography--body1">Nothing in this agreement is intended to detract from your rights (if any) as a consumer.</p>
+                    <h4 class="mdc-typography--headline4">2. Reliance on Information Posted</h4>
+                    <p class="mdc-typography--body1">Commentary and other materials posted on the Site are not intended to amount to advice on which reliance should be placed. We disclaim all liability and responsibility arising from any reliance placed on such materials by any user of the Site, or by anyone who may be informed of any of its contents.<br><br>The material displayed on the Site is provided without any guarantees, conditions or warranties as to its accuracy and any of the material on the Site may be out of date at any given time. We are under no obligation to update the Site or its contents at any time.</p>
+                    <p class="mdc-typography--body1">Nothing in this agreement is intended to detract from your rights (if any) as a consumer.</p>
                     
-                        <h4 class="mdc-typography--headline4">3. Our Liability</h4>
-                        <p class="mdc-typography--body1">We shall have no liability for any loss of profits, anticipated savings, business opportunity, goodwill or loss of or damage to (including corruption) data (in each case whether direct or indirect) or any other indirect or consequential losses whether arising in contract, tort (including negligence) or otherwise incurred by any user in connection with the Site or in connection with the use, inability to use, or results of the use of the Site, any Site is linked to it and any materials posted on it.</p>
-                        <p class="mdc-typography--body1">We will not be liable for any loss or damage caused by a distributed denial-of-service attack, viruses or other technologically harmful material that may infect your computer equipment, computer programs, data or other proprietary material due to your use of the Site or to your downloading of any material posted on it, or on any Site linked to it.</p>
-                        <p class="mdc-typography--body1">Nothing in these terms shall limit or exclude any liability for death or personal injury caused by negligence, for fraud or fraudulent misrepresentation or for any other liability which cannot be properly excluded under English law.</p>
+                    <h4 class="mdc-typography--headline4">3. Our Liability</h4>
+                    <p class="mdc-typography--body1">We shall have no liability for any loss of profits, anticipated savings, business opportunity, goodwill or loss of or damage to (including corruption) data (in each case whether direct or indirect) or any other indirect or consequential losses whether arising in contract, tort (including negligence) or otherwise incurred by any user in connection with the Site or in connection with the use, inability to use, or results of the use of the Site, any Site is linked to it and any materials posted on it.</p>
+                    <p class="mdc-typography--body1">We will not be liable for any loss or damage caused by a distributed denial-of-service attack, viruses or other technologically harmful material that may infect your computer equipment, computer programs, data or other proprietary material due to your use of the Site or to your downloading of any material posted on it, or on any Site linked to it.</p>
+                    <p class="mdc-typography--body1">Nothing in these terms shall limit or exclude any liability for death or personal injury caused by negligence, for fraud or fraudulent misrepresentation or for any other liability which cannot be properly excluded under English law.</p>
                     
-                        <h4 class="mdc-typography--headline4">4. Information about you and your Visits to the Site</h4>
-                        <p class="mdc-typography--body1">We process information about you in accordance with our <a href="/privacy-policy">Privacy Policy</a>.</p>
-                        <p class="mdc-typography--body1">By using the Site, you consent to such processing and you warrant that all data provided by you is accurate.</p>
+                    <h4 class="mdc-typography--headline4">4. Information about you and your Visits to the Site</h4>
+                    <p class="mdc-typography--body1">We process information about you in accordance with our <a href="/privacy-policy">Privacy Policy</a>.</p>
+                    <p class="mdc-typography--body1">By using the Site, you consent to such processing and you warrant that all data provided by you is accurate.</p>
                     
-                        <h4 class="mdc-typography--headline4">5. Linking to the Site</h4>
-                        <p class="mdc-typography--body1">You may link to the Site’s home page, provided that you do so in a way that is fair and legal and does not damage our reputation or take advantage of it.</p>
-                        <p class="mdc-typography--body1">You must not link to the Site in any way which would suggest any form of association, approval or endorsement on our part where none exists.</p>
-                        <p class="mdc-typography--body1">The Site from which you are linking must comply in all respects with the standards set out in our acceptable use policy below.</p>
-                        <p class="mdc-typography--body1">You must not establish a link from any Site that is not owned by you. We reserve the right to withdraw linking permission without notice.</p>
+                    <h4 class="mdc-typography--headline4">5. Linking to the Site</h4>
+                    <p class="mdc-typography--body1">You may link to the Site’s home page, provided that you do so in a way that is fair and legal and does not damage our reputation or take advantage of it.</p>
+                    <p class="mdc-typography--body1">You must not link to the Site in any way which would suggest any form of association, approval or endorsement on our part where none exists.</p>
+                    <p class="mdc-typography--body1">The Site from which you are linking must comply in all respects with the standards set out in our acceptable use policy below.</p>
+                    <p class="mdc-typography--body1">You must not establish a link from any Site that is not owned by you. We reserve the right to withdraw linking permission without notice.</p>
                     
-                        <h4 class="mdc-typography--headline4">6. Links from the Site</h4>
-                        <p class="mdc-typography--body1">Where the Site contains links to websites and resources provided by third parties, these links are provided for your information only. We have no control over the contents of those websites or resources, and accept no responsibility for them or for any loss or damage that may arise from your use of them.</p>
+                    <h4 class="mdc-typography--headline4">6. Links from the Site</h4>
+                    <p class="mdc-typography--body1">Where the Site contains links to websites and resources provided by third parties, these links are provided for your information only. We have no control over the contents of those websites or resources, and accept no responsibility for them or for any loss or damage that may arise from your use of them.</p>
                     
-                        <h4 class="mdc-typography--headline4">7. Jurisdiction and Applicable Law</h4>
-                        <p class="mdc-typography--body1">These terms of use are subject to English Law and the Courts of England shall have jurisdiction over any claim arising from or in relation to them.</p>
+                    <h4 class="mdc-typography--headline4">7. Jurisdiction and Applicable Law</h4>
+                    <p class="mdc-typography--body1">These terms of use are subject to English Law and the Courts of England shall have jurisdiction over any claim arising from or in relation to them.</p>
                     
-                        <h4 class="mdc-typography--headline4">8. Amending the Terms of Use</h4>
-                        <p class="mdc-typography--body1">We may revise these terms of use at any time by amending this page. You should check this page from time to time to take notice of any changes that we made, as they are binding on you.</p>
-                        <p class="mdc-typography--body1">Some of the provisions contained in these terms of use may also be superseded by provisions or notices published elsewhere on the Site.</p>
+                    <h4 class="mdc-typography--headline4">8. Amending the Terms of Use</h4>
+                    <p class="mdc-typography--body1">We may revise these terms of use at any time by amending this page. You should check this page from time to time to take notice of any changes that we made, as they are binding on you.</p>
+                    <p class="mdc-typography--body1">Some of the provisions contained in these terms of use may also be superseded by provisions or notices published elsewhere on the Site.</p>
                     
-                        <h4 class="mdc-typography--headline4">9. Your Concerns</h4>
-                        <p class="mdc-typography--body1">If you have any concerns about material which appears on the Site, please contact <a href="mailto:info@dioptra.tech">info@dioptra.tech</a>.</p>
+                    <h4 class="mdc-typography--headline4">9. Your Concerns</h4>
+                    <p class="mdc-typography--body1">If you have any concerns about material which appears on the Site, please contact <a href="mailto:info@dioptra.tech">info@dioptra.tech</a>.</p>
                     
-                        <h3 class="mdc-typography--headline3">Acceptable Use Policy</h3>
-                        <p class="mdc-typography--body1">You must comply with this Acceptable Use Policy when accessing the Site.</p>
-                        <p class="mdc-typography--body1">You may use the Site for lawful purposes only.</p>
-                        <p class="mdc-typography--body1">You must not use the Site:</p>
-                        <ul class="mdc-typography--body1">
-                            <li>If your use breaches any applicable law or regulation whether local, national or international.</li>
-                            <li>If your use is unlawful or fraudulent.</li>
-                            <li>If your use harms, or could harm, minors in any way.</li>
-                            <li>To send spam materials to other people.</li>
-                            <li>To post any contributions which contain material which is defamatory, obscene, offensive, hateful, inflammatory, deceptive, is likely to harass, upset, embarrass or impersonate any person or which is sexually explicit, promotes violence or any form of discrimination on the basis of race, gender, religion, nationality, disability, sexual orientation, or age, or which infringes any third party intellectual property rights or other rights.</li>
-                            <li>To knowingly introduce or transmit viruses, trojans, worms, logic bombs or other material which is malicious or technologically harmful.</li>
-                        </ul>
+                    <h3 class="mdc-typography--headline3">Acceptable Use Policy</h3>
+                    <p class="mdc-typography--body1">You must comply with this Acceptable Use Policy when accessing the Site.</p>
+                    <p class="mdc-typography--body1">You may use the Site for lawful purposes only.</p>
+                    <p class="mdc-typography--body1">You must not use the Site:</p>
+                    <ul class="mdc-typography--body1">
+                        <li>If your use breaches any applicable law or regulation whether local, national or international.</li>
+                        <li>If your use is unlawful or fraudulent.</li>
+                        <li>If your use harms, or could harm, minors in any way.</li>
+                        <li>To send spam materials to other people.</li>
+                        <li>To post any contributions which contain material which is defamatory, obscene, offensive, hateful, inflammatory, deceptive, is likely to harass, upset, embarrass or impersonate any person or which is sexually explicit, promotes violence or any form of discrimination on the basis of race, gender, religion, nationality, disability, sexual orientation, or age, or which infringes any third party intellectual property rights or other rights.</li>
+                        <li>To knowingly introduce or transmit viruses, trojans, worms, logic bombs or other material which is malicious or technologically harmful.</li>
+                    </ul>
                     
-                        <h4 class="mdc-typography--headline4">Additionally</h4>
-                        <p class="mdc-typography--body1">You must not gain, or attempt to gain, unauthorised access to the Site, the server on which the Site is stored or any server, computer or database connected to the Site.</p>
-                        <p class="mdc-typography--body1">You must not attack the Site via a denial-of-service attack or a distributed denial-of service attack or do anything that could disable or impair the Site.</p>
-                        <p class="mdc-typography--body1">If you breach any provisions of the Computer Misuse Act 1990 as amended from time to time, you may be committing a criminal offence. We will report any such breach to the relevant law enforcement authorities and we will co-operate with those authorities by disclosing your identity to them.</p>
-                        <p class="mdc-typography--body1">If you breach these terms contained in this Acceptable Use Policy, your right to use the Site will cease immediately.</p>
-                    </div>
+                    <h4 class="mdc-typography--headline4">Additionally</h4>
+                    <p class="mdc-typography--body1">You must not gain, or attempt to gain, unauthorised access to the Site, the server on which the Site is stored or any server, computer or database connected to the Site.</p>
+                    <p class="mdc-typography--body1">You must not attack the Site via a denial-of-service attack or a distributed denial-of service attack or do anything that could disable or impair the Site.</p>
+                    <p class="mdc-typography--body1">If you breach any provisions of the Computer Misuse Act 1990 as amended from time to time, you may be committing a criminal offence. We will report any such breach to the relevant law enforcement authorities and we will co-operate with those authorities by disclosing your identity to them.</p>
+                    <p class="mdc-typography--body1">If you breach these terms contained in this Acceptable Use Policy, your right to use the Site will cease immediately.</p>
                 </div>
             </div>
         </div>
     </div>
-</GeneralPageLayout>
+</div>

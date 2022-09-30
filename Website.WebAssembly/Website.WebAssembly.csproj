@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+		<Configurations>Debug_Server;Debug_WebAssembly;Release_Server;Release_WebAssembly;Re3lease_WebAssembly</Configurations>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Server|AnyCPU'">
+		<DefineConstants>Debug;BLAZOR_SERVER</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_WebAssembly|AnyCPU'">
+		<DefineConstants>Debug;BLAZOR_WEBASSEMBLY</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Server|AnyCPU'">
+		<DefineConstants>Release;BLAZOR_SERVER</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_WebAssembly|AnyCPU'">
+		<DefineConstants>Release;BLAZOR_WEBASSEMBLY</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.0-rc.1.22427.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.0-rc.1.22427.2" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.AspNetCore.CookiePolicy" Version="2.2.8" />
+		<PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0" />
+		<PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+		<PackageReference Include="Serilog.Sinks.BrowserConsole" Version="1.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Website.Lib\Website.Lib.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+	</ItemGroup>
+
+	<Target Name="CustomGZipAndBrotliCompression" AfterTargets="Publish">
+		<ItemGroup>
+			<StaticFiles Include="$(PublishDir)\\wwwroot\\**\\*.*" />
+			<StaticFiles Remove="$(PublishDir)\\wwwroot\\_framework\\**\\*.*" />
+			<StaticFiles Remove="$(PublishDir)\\wwwroot\\**\\*.br" />
+			<StaticFiles Remove="$(PublishDir)\\wwwroot\\**\\*.gz" />
+		</ItemGroup>
+
+		<GZipCompress FilesToCompress="@(StaticFiles)" OutputDirectory="$(_BlazorBuildGZipCompressDirectory)">
+
+			<Output TaskParameter="CompressedFiles" ItemName="CompressedFiles" />
+		</GZipCompress>
+
+		<BrotliCompress OutputDirectory="$(_BlazorBuildGZipCompressDirectory)" FilesToCompress="@(StaticFiles)" ToolAssembly="$(_BlazorWebAssemblySdkToolAssembly)" ToolExe="$(_RazorSdkDotNetHostFileName)" ToolPath="$(_RazorSdkDotNetHostDirectory)">
+
+			<Output TaskParameter="CompressedFiles" ItemName="CompressedFiles" />
+		</BrotliCompress>
+
+		<Message Importance="High" Text="======= Brotli/GZip Compression For @(CompressedFiles-&gt;Count()) Static Files =======" />
+		<Message Importance="High" Text=" Compressing: %(CompressedFiles.OriginalItemSpec)%(CompressedFiles.Extension)" />
+		<Move SourceFiles="%(CompressedFiles.FullPath)" DestinationFiles="%(CompressedFiles.OriginalItemSpec)%(CompressedFiles.Extension)" />
+	</Target>
+	
+</Project>

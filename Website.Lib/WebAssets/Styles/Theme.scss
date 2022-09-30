@@ -48,6 +48,14 @@ $blue-on-secondary: $color-dark;
 :root {
     background-color: white;
     color: $color-dark;
+    --mb-toast-color-info: white !important;
+    --mb-toast-color-success: white !important;
+    --mb-toast-color-warning: white !important;
+    --mb-toast-color-error: white !important;
+    --mb-toast-background-color-info: var(--mb-color-blue-700) !important;
+    --mb-toast-background-color-success: var(--mb-color-green-700) !important;
+    --mb-toast-background-color-warning: var(--mb-color-amber-700) !important;
+    --mb-toast-background-color-error: var(--mb-color-red-700) !important;
     --mdc-theme-surface: white;
     --mdc-theme-on-surface: #{$color-dark};
     --dw-obscured-color: var(--mb-color-grey-600);

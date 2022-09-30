@@ -16,45 +16,48 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.github\workflows\GithubActionsWIP.yml = .github\workflows\GithubActionsWIP.yml
 		global.json = global.json
 		README.md = README.md
+		LICENSE.md = LICENSE.md
 		SuperClean.cmd = SuperClean.cmd
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.Lib", "Website.Lib\Website.Lib.csproj", "{8A95DD2F-E743-438F-8189-66449B8513A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.Server", "Website.Server\Website.Server.csproj", "{99DEA7C6-D78A-4668-A089-1391DEF83351}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.BlazorServer", "Website.BlazorServer\Website.BlazorServer.csproj", "{99DEA7C6-D78A-4668-A089-1391DEF83351}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.WebAssembly", "Website.WebAssembly\Website.WebAssembly.csproj", "{2118600B-6152-41BE-BD5C-A617713984C5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.BlazorWebAssembly.Server", "Website.BlazorWebAssembly\Server\Website.BlazorWebAssembly.Server.csproj", "{99B45E6A-AE65-4954-9FBA-13C16BE16992}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.BlazorWebAssembly.Client", "Website.BlazorWebAssembly\Client\Website.BlazorWebAssembly.Client.csproj", "{2118600B-6152-41BE-BD5C-A617713984C5}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.ServerLib", "Website.ServerLib\Website.ServerLib.csproj", "{0F15257E-04C4-44D7-BB49-6358F7F2E6CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Website.Lib", "Website.Lib\Website.Lib.csproj", "{71A1BDB3-3029-4080-968A-6544C6D4F08E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug_Server|Any CPU = Debug_Server|Any CPU
+		Debug_WebAssembly|Any CPU = Debug_WebAssembly|Any CPU
+		Release_Server|Any CPU = Release_Server|Any CPU
+		Release_WebAssembly|Any CPU = Release_WebAssembly|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8A95DD2F-E743-438F-8189-66449B8513A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A95DD2F-E743-438F-8189-66449B8513A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A95DD2F-E743-438F-8189-66449B8513A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A95DD2F-E743-438F-8189-66449B8513A4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{99DEA7C6-D78A-4668-A089-1391DEF83351}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{99DEA7C6-D78A-4668-A089-1391DEF83351}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{99DEA7C6-D78A-4668-A089-1391DEF83351}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{99DEA7C6-D78A-4668-A089-1391DEF83351}.Release|Any CPU.Build.0 = Release|Any CPU
-		{99B45E6A-AE65-4954-9FBA-13C16BE16992}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{99B45E6A-AE65-4954-9FBA-13C16BE16992}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{99B45E6A-AE65-4954-9FBA-13C16BE16992}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{99B45E6A-AE65-4954-9FBA-13C16BE16992}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2118600B-6152-41BE-BD5C-A617713984C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2118600B-6152-41BE-BD5C-A617713984C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2118600B-6152-41BE-BD5C-A617713984C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2118600B-6152-41BE-BD5C-A617713984C5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0F15257E-04C4-44D7-BB49-6358F7F2E6CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0F15257E-04C4-44D7-BB49-6358F7F2E6CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0F15257E-04C4-44D7-BB49-6358F7F2E6CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0F15257E-04C4-44D7-BB49-6358F7F2E6CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99DEA7C6-D78A-4668-A089-1391DEF83351}.Debug_Server|Any CPU.ActiveCfg = Debug_Server|Any CPU
+		{99DEA7C6-D78A-4668-A089-1391DEF83351}.Debug_Server|Any CPU.Build.0 = Debug_Server|Any CPU
+		{99DEA7C6-D78A-4668-A089-1391DEF83351}.Debug_WebAssembly|Any CPU.ActiveCfg = Debug_WebAssembly|Any CPU
+		{99DEA7C6-D78A-4668-A089-1391DEF83351}.Debug_WebAssembly|Any CPU.Build.0 = Debug_WebAssembly|Any CPU
+		{99DEA7C6-D78A-4668-A089-1391DEF83351}.Release_Server|Any CPU.ActiveCfg = Release_Server|Any CPU
+		{99DEA7C6-D78A-4668-A089-1391DEF83351}.Release_Server|Any CPU.Build.0 = Release_Server|Any CPU
+		{99DEA7C6-D78A-4668-A089-1391DEF83351}.Release_WebAssembly|Any CPU.ActiveCfg = Release_WebAssembly|Any CPU
+		{99DEA7C6-D78A-4668-A089-1391DEF83351}.Release_WebAssembly|Any CPU.Build.0 = Release_WebAssembly|Any CPU
+		{2118600B-6152-41BE-BD5C-A617713984C5}.Debug_Server|Any CPU.ActiveCfg = Debug_Server|Any CPU
+		{2118600B-6152-41BE-BD5C-A617713984C5}.Debug_Server|Any CPU.Build.0 = Debug_Server|Any CPU
+		{2118600B-6152-41BE-BD5C-A617713984C5}.Debug_WebAssembly|Any CPU.ActiveCfg = Debug_WebAssembly|Any CPU
+		{2118600B-6152-41BE-BD5C-A617713984C5}.Debug_WebAssembly|Any CPU.Build.0 = Debug_WebAssembly|Any CPU
+		{2118600B-6152-41BE-BD5C-A617713984C5}.Release_Server|Any CPU.ActiveCfg = Release_Server|Any CPU
+		{2118600B-6152-41BE-BD5C-A617713984C5}.Release_Server|Any CPU.Build.0 = Release_Server|Any CPU
+		{2118600B-6152-41BE-BD5C-A617713984C5}.Release_WebAssembly|Any CPU.ActiveCfg = Release_WebAssembly|Any CPU
+		{2118600B-6152-41BE-BD5C-A617713984C5}.Release_WebAssembly|Any CPU.Build.0 = Release_WebAssembly|Any CPU
+		{71A1BDB3-3029-4080-968A-6544C6D4F08E}.Debug_Server|Any CPU.ActiveCfg = Debug_Server|Any CPU
+		{71A1BDB3-3029-4080-968A-6544C6D4F08E}.Debug_Server|Any CPU.Build.0 = Debug_Server|Any CPU
+		{71A1BDB3-3029-4080-968A-6544C6D4F08E}.Debug_WebAssembly|Any CPU.ActiveCfg = Debug_WebAssembly|Any CPU
+		{71A1BDB3-3029-4080-968A-6544C6D4F08E}.Debug_WebAssembly|Any CPU.Build.0 = Debug_WebAssembly|Any CPU
+		{71A1BDB3-3029-4080-968A-6544C6D4F08E}.Release_Server|Any CPU.ActiveCfg = Release_Server|Any CPU
+		{71A1BDB3-3029-4080-968A-6544C6D4F08E}.Release_Server|Any CPU.Build.0 = Release_Server|Any CPU
+		{71A1BDB3-3029-4080-968A-6544C6D4F08E}.Release_WebAssembly|Any CPU.ActiveCfg = Release_WebAssembly|Any CPU
+		{71A1BDB3-3029-4080-968A-6544C6D4F08E}.Release_WebAssembly|Any CPU.Build.0 = Release_WebAssembly|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

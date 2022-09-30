@@ -3,6 +3,12 @@ import { MDCDialog } from '@material/dialog';
 
 navigator.serviceWorker.register('service-worker.js');
 
+document.getElementById('reload-button')!.addEventListener("click", function () {
+    (function () {
+        location.reload();
+    }).call(document.getElementById('reload-button'));
+});
+
 export function setTheme(sheetName): void {
     let elem = document.getElementById("app-theme");
 

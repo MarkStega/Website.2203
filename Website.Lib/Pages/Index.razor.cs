@@ -1,12 +1,17 @@
 ﻿using Material.Blazor;
 using Microsoft.AspNetCore.Components;
-using Website.Lib.Shared;
 
+namespace Website.Lib;
 
-namespace Website.Lib.Pages;
+/// <summary>
+/// The website's index page
+/// </summary>
 [Sitemap(SitemapAttribute.ChangeFreqType.Weekly, 0.8)]
 public partial class Index : ComponentBase
 {
+    [CascadingParameter] private MainLayout MainLayout { get; set; } = default!;
+
+
     private class ImageData
     {
         public string Uri { get; set; } = "";
@@ -18,16 +23,13 @@ public partial class Index : ComponentBase
     }
 
 
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-    [Inject] private NavigationManager NavigationManager { get; set; }
-    [Inject] private INotificationService TeamsNotificationService { get; set; }
+    [Inject] private NavigationManager NavigationManager { get; set; } = default!;
+    [Inject] private INotification Notifier { get; set; } = default!;
 
 
 
-    private GeneralPageLayout GeneralPageLayout { get; set; }
-    private MBDialog Dialog { get; set; }
+    private MBDialog Dialog { get; set; } = default!;
     private RealEstateInvestorEnquiry RealEstateInvestorEnquiry { get; set; } = new();
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 
 
@@ -44,12 +46,14 @@ public partial class Index : ComponentBase
         new() { Uri = "_content/Website.Lib/images/09-march-edit-budget-schedule.webp", Caption = "Editting cost budget schedules" },
     };
 
+
     private static readonly ImageData[] SkylineImages = new ImageData[]
     {
         new() { Uri = "_content/Website.Lib/images/new-york-640.webp", Caption = "New York skyline", Width = "640px", Height = "420px" },
         new() { Uri = "_content/Website.Lib/images/new-york-420.webp", Caption = "New York skyline", Width = "420px", Height = "420px" },
         new() { Uri = "_content/Website.Lib/images/new-york-320.webp", Caption = "New York skyline", Width = "320px", Height = "420px" },
     };
+
 
     private static readonly ImageData[] ProgrammerImages = new ImageData[]
     {
@@ -63,7 +67,7 @@ public partial class Index : ComponentBase
     {
         if (firstRender)
         {
-            GeneralPageLayout.ShowHomeButton(false);
+            MainLayout.ShowHomeButton(false);
         }
     }
 
@@ -91,7 +95,7 @@ public partial class Index : ComponentBase
     private async Task DialogSubmittedAsync()
     {
         await Dialog.HideAsync();
-        await TeamsNotificationService.SendNotification(RealEstateInvestorEnquiry);
+        await Notifier.Send(RealEstateInvestorEnquiry);
     }
 }
 

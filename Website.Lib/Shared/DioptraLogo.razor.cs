@@ -1,9 +1,6 @@
-﻿namespace Website.Lib;
+﻿using Microsoft.AspNetCore.Components;
 
-
-using Microsoft.AspNetCore.Components;
-using System;
-
+namespace Website.Lib;
 
 /// <summary>
 /// Displays an SVG Dioptra logo

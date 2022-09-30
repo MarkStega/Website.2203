@@ -13,6 +13,23 @@
 		<NeutralLanguage>en</NeutralLanguage>
 		<Copyright>© Dioptra Limited. All rights reserved.</Copyright>
 		<Product>Dioptra Website</Product>
+		<Configurations>Debug_Server;Debug_WebAssembly;Release_Server;Release_WebAssembly;Re3lease_WebAssembly</Configurations>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Server|AnyCPU'">
+		<DefineConstants>Debug;BLAZOR_SERVER</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_WebAssembly|AnyCPU'">
+		<DefineConstants>Debug;BLAZOR_WEBASSEMBLY</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Server|AnyCPU'">
+		<DefineConstants>Release;BLAZOR_SERVER</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_WebAssembly|AnyCPU'">
+		<DefineConstants>Release;BLAZOR_WEBASSEMBLY</DefineConstants>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -28,7 +45,7 @@
 	<ItemGroup>
 		<PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
 		<PackageReference Include="GoogleAnalytics.Blazor" Version="1.0.2" />
-		<PackageReference Include="libphonenumber-csharp" Version="8.12.55" />
+		<PackageReference Include="libphonenumber-csharp" Version="8.12.56" />
 		<PackageReference Include="Material.Blazor" Version="3.0.1" />
 		<PackageReference Include="Microsoft.Build" Version="17.3.1" />
 	</ItemGroup>

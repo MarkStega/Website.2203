@@ -1,24 +1,27 @@
 ﻿using GoogleAnalytics.Blazor;
 using Material.Blazor;
 using Microsoft.AspNetCore.Components;
-using Website.Lib.Shared;
 
-namespace Website.Lib.Pages;
+namespace Website.Lib;
+
+/// <summary>
+/// The "Work for us" website page.
+/// </summary>
 [Sitemap(SitemapAttribute.ChangeFreqType.Weekly, 0.8)]
 public partial class WorkForUs : ComponentBase
 {
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-    [Inject] private INotificationService TeamsNotificationService { get; set; }
-    [Inject] private IGBAnalyticsManager AnalyticsManager { get; set; }
+    [CascadingParameter] private MainLayout MainLayout { get; set; } = default!;
 
 
-    private GeneralPageLayout GeneralPageLayout { get; set; }
+    [Inject] private INotification Notifier { get; set; } = default!;
+    [Inject] private IGBAnalyticsManager AnalyticsManager { get; set; } = default!;
+
+
     private MBDialog RecruitmentEnquiryDialog { get; set; } = new();
     private RecruitmentEnquiry RecruitmentEnquiry { get; set; } = new();
-    private List<MBSelectElement<RecruitmentEnquiry.RoleType>> SelectElements { get; set; }
+    private List<MBSelectElement<RecruitmentEnquiry.RoleType>> SelectElements { get; set; } = default!;
     private string HiringDialogTitle { get; set; } = "";
     private bool ShowProspectiveRole { get; set; } = false;
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 
     protected override void OnInitialized()
@@ -33,7 +36,7 @@ public partial class WorkForUs : ComponentBase
     {
         if (firstRender)
         {
-            GeneralPageLayout.ShowHomeButton(true);
+            MainLayout.ShowHomeButton(true);
         }
     }
 
@@ -76,7 +79,7 @@ public partial class WorkForUs : ComponentBase
     private async Task DialogSubmittedAsync()
     {
         await ClosegDialogAsync();
-        await TeamsNotificationService.SendNotification(RecruitmentEnquiry);
+        await Notifier.Send(RecruitmentEnquiry);
     }
 
 }
