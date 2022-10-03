@@ -41,61 +41,7 @@ builder.Services.Configure<GzipCompressionProviderOptions>(options =>
 });
 #endregion
 
-builder.Services.AddHttpsSecurityHeaders(options =>
-{
-    options
-
-    // Content Security Policies
-    .AddBaseUriCSP(o => o.AddSelf())
-    .AddBlockAllMixedContentCSP()
-    .AddChildSrcCSP(o => o.AddSelf())
-    .AddConnectSrcCSP(o => o.AddSelf().AddUri((baseUri, baseDomain) => $"wss://{baseDomain}:*").AddUri("https://www.googletagmanager.com").AddUri("https://www.google-analytics.com").AddUri("https://region1.google-analytics.com").AddUri("https://p.typekit.net").AddUri("https://use.typekit.net").AddUri("https://fonts.googleapis.com").AddUri("https://fonts.gstatic.com"))
-    .AddDefaultSrcCSP(o => o.AddSelf())
-    .AddFontSrcCSP(o => o.AddUri("https://use.typekit.net").AddUri("https://fonts.googleapis.com").AddUri("https://fonts.gstatic.com"))
-    .AddFrameAncestorsCSP(o => o.AddNone())
-    .AddFrameSrcCSP(o => o.AddSelf())
-    .AddFormActionCSP(o => o.AddNone())
-    .AddImgSrcCSP(o => o.AddSelf().AddUri("https://www.google-analytics.com").AddUri("https://*.openstreetmap.org").AddSchemeSource(SchemeSource.Data, "w3.org/svg/2000"))
-    .AddManifestSrcCSP(o => o.AddSelf())
-    .AddMediaSrcCSP(o => o.AddSelf())
-    .AddPrefetchSrcCSP(o => o.AddSelf())
-    .AddObjectSrcCSP(o => o.AddNone())
-    .AddReportUriCSP(o => o.AddUri((baseUri, baseDomain) => $"https://{baseUri}/api/CspReporting/UriReport"))
-    // The sha-256 hash relates to an inline script added by blazor's javascript
-    .AddScriptSrcCSP(o => 
-            o.AddHashValue(HashAlgorithm.SHA256, "v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=")
-            .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/aspnetcore-browser-refresh.js", () => builder.Environment.IsDevelopment())
-            .AddSelfIf(() => builder.Environment.IsDevelopment() || PlatformDetermination.IsBlazorWebAssembly)
-            //.AddStrictDynamicIf(() => !builder.Environment.IsDevelopment() && PlatformDetermination.IsBlazorWebAssembly) // this works on Chromium browswers but fails for both Firefox and Safari
-            .AddUnsafeInlineIf(() => PlatformDetermination.IsBlazorWebAssembly)
-            .AddReportSample()
-            .AddUnsafeEvalIf(() => PlatformDetermination.IsBlazorWebAssembly)
-            .AddUri("https://www.googletagmanager.com/gtag/js")
-            .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js") // Required to work on Safari
-            .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/Material.Blazor/material.blazor.min.js") // Required to work on Safari
-            .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/Website.Lib/js/dioptra.min.js") // Required to work on Safari
-            .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/blazor.server.js", () => PlatformDetermination.IsBlazorServer) // Required to work on Safari
-            .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/blazor.webassembly.js", () => PlatformDetermination.IsBlazorWebAssembly) // Required to work on Safari
-            .AddGeneratedHashValues(StaticFileExtension.JS))
-    .AddStyleSrcCSP(o => o.AddSelf().AddUnsafeInline().AddReportSample().AddUri("https://p.typekit.net").AddUri("https://use.typekit.net").AddUri("https://fonts.googleapis.com").AddUri("https://fonts.gstatic.com"))
-    .AddUpgradeInsecureRequestsCSP()
-    .AddWorkerSrcCSP(o => o.AddSelf())
-
-    // Other headers
-    .AddAccessControlAllowOriginAll()
-    // ref: <a href="http://stackoverflow.com/questions/49547/making-sure-a-web-page-is-not-cached-across-all-browsers">http://stackoverflow.com/questions/49547/making-sure-a-web-page-is-not-cached-across-all-browsers</a>
-    .AddCacheControl("no-cache, public, max-age=86400")
-    .AddExpires("0")
-    .AddReferrerPolicy(ReferrerPolicyDirective.NoReferrer)
-    .AddPermissionsPolicy("accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()")
-    .AddStrictTransportSecurity(31536000, true)
-    .AddXClientId("Dioptra")
-    .AddXContentTypeOptionsNoSniff()
-    .AddXFrameOptionsDirective(XFrameOptionsDirective.Deny)
-    .AddXXssProtectionDirective(XXssProtectionDirective.OneModeBlock)
-    .AddXPermittedCrossDomainPoliciesDirective(XPermittedCrossDomainPoliciesDirective.None);
-});
-
+builder.Services.AddHttpsSecurityHeaders(options => OptionsBuilder.BuildGeneralHeaderOptions(builder, options), onStartupOptions => OptionsBuilder.BuildOnStartupHeaderOptions(builder, onStartupOptions));
 
 builder.Services.AddResponseCaching();
 
