@@ -65,7 +65,7 @@ jobs:
 # Build blazor server on forks
 ############################################################################################################
   build-blazor-server-fork:
-    name: Build BlazorServer for forks
+    name: Build BlazorServer for forks/dependabot
     needs: [skip-deployment]
     runs-on: ubuntu-latest
 
@@ -87,7 +87,7 @@ jobs:
 # Build blazor webassembly on forks
 ############################################################################################################
   build-blazor-webassembly-fork:
-    name: Build BlazorWASM for forks
+    name: Build BlazorWASM for forks/dependabot
     needs: [skip-deployment]
     runs-on: ubuntu-latest
 
@@ -102,7 +102,7 @@ jobs:
 
     - name: 'Build CSB'
       run: |
-        dotnet  ${{env.project}} --configuration Release_WebAssembly
+        dotnet build ${{env.project}} --configuration Release_WebAssembly
         
 
 ############################################################################################################
