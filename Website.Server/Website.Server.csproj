@@ -55,7 +55,8 @@
 	  <ProjectReference Include="..\Website.WebAssembly\Website.WebAssembly.csproj" />
 	</ItemGroup>
 
-	<Target Name="BuildHashes" AfterTargets="Publish">
+	<!--Obsolete since the introduction of HttpSecurity.AspNet-->
+	<!--<Target Name="BuildHashes" AfterTargets="Publish">
 		<ItemGroup>
 			<FilesToHash Include="$(PublishDir)wwwroot\**\*.js;$(PublishDir)wwwroot\**\*.css;$(PublishDir)wwwroot\**\*.json" />
 			<HashFileOutput Include="$(PublishDir)hashes.csv" />
@@ -68,7 +69,7 @@
 		<Message Importance="High" Text="@(FilesWithHashes->'%(Identity): %(FileHash)')" />
 
 		<WriteLinesToFile File="@(HashFileOutput)" Lines="@(FilesWithHashes->'%(Identity),%(FileHash)')" Overwrite="true" Encoding="Unicode" />
-	</Target>
+	</Target>-->
 
 	<PropertyGroup>
 		<!--Paths to tools, tasks, and extensions are calculated relative to the BlazorWebAssemblySdkDirectoryRoot.
