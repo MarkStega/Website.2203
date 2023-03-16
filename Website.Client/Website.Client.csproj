@@ -1,0 +1,156 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<Company>Dioptra Limited</Company>
+		<Version>2022-01-01--13-00-00--WIP</Version>
+		<RepositoryUrl>https://github.com/Dioptra/Website.2203</RepositoryUrl>
+		<PackageLicenseExpression>Commercial</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageReleaseNotes></PackageReleaseNotes>
+		<NeutralLanguage>en</NeutralLanguage>
+		<Copyright>© Dioptra Limited. All rights reserved.</Copyright>
+		<Product>Dioptra Website</Product>
+		<Configurations>Debug_Server;Debug_WebAssembly;Release_Server;Release_WebAssembly;Re3lease_WebAssembly</Configurations>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Server|AnyCPU'">
+		<DefineConstants>Debug;BLAZOR_SERVER</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_WebAssembly|AnyCPU'">
+		<DefineConstants>Debug;BLAZOR_WEBASSEMBLY</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Server|AnyCPU'">
+		<DefineConstants>Release;BLAZOR_SERVER</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_WebAssembly|AnyCPU'">
+		<DefineConstants>Release;BLAZOR_WEBASSEMBLY</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include="Website.Client.BuildDateAttribute">
+			<_Parameter1>$([System.DateTime]::UtcNow.ToString("yyyy-MM-dd"))</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Blazored.LocalStorage" Version="4.3.0" />
+		<PackageReference Include="GoogleAnalytics.Blazor" Version="1.0.3" />
+		<PackageReference Include="libphonenumber-csharp" Version="8.13.7" />
+		<PackageReference Include="Material.Blazor" Version="4.0.0-preview.16" />
+		<PackageReference Include="Microsoft.Build" Version="17.5.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<InputImageFiles Include="$(ProjectDir)WebAssets\Images\*.*" />
+		<InputPWAFiles Include="$(ProjectDir)WebAssets\PWA\*.*" />
+		<InputAndroidInputImageFiles Include="$(ProjectDir)WebAssets\android-images\*.*" />
+		<InputIOSInputImageFiles Include="$(ProjectDir)WebAssets\ios-images\*.*" />
+		<InputWindows11InputImageFiles Include="$(ProjectDir)WebAssets\windows11-images\*.*" />
+
+		<InputStaticAssetsScripts Include="$(ProjectDir)WebAssets\**\*.ts" />
+		<OutputStaticAssetsScripts Include="$(ProjectDir)wwwroot\js\dioptra.js;wwwroot\js\dioptra.min.js" />
+
+		<InputStaticAssetsStyles Include="$(ProjectDir)WebAssets\**\*.scss;" />
+		<OutputStaticAssetsStyles Include="$(ProjectDir)wwwroot\css\dioptra.css;wwwroot\css\dioptra.min.css" />
+		
+		<!-- Temporary fixes until .net7 when dynamically copied content automatically copies to output -->
+		<OutputImages Include="$(ProjectDir)wwwroot\**\*.*" />
+		<Content Remove="@(OutputImages)" />
+		<Content Include="@(OutputImages)" />
+		<Content Remove="@(OutputStaticAssetsScripts)" />
+		<Content Include="@(OutputStaticAssetsScripts)" />
+		<Content Remove="@(OutputStaticAssetsStyles)" />
+		<Content Include="@(OutputStaticAssetsStyles)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<UpToDateCheckInput Include="@(InputStaticAssetsScripts)" Set="Scripts" />
+		<UpToDateCheckOutput Include="@(OutputStaticAssetsScripts)" Set="Scripts" />
+		<UpToDateCheckInput Include="@(InputStaticAssetsStyles)" Set="Styles" />
+		<UpToDateCheckOutput Include="@(OutputStaticAssetsStyles)" Set="Styles" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="tsconfig.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\js\" />
+	</ItemGroup>
+
+	<!-- Remove comments once migrated to .net7 and dynamically copied content automatically copies to output -->
+	<Target Name="WWWRootFileCopy" BeforeTargets="PreBuildEvent">
+		<!--<Copy SourceFiles="@(InputImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/images" />
+		<Copy SourceFiles="@(InputPWAFiles)" DestinationFolder="$(ProjectDir)wwwroot/pwa" />
+		<Copy SourceFiles="@(InputAndroidInputImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/android-images" />
+		<Copy SourceFiles="@(InputIOSInputImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/ios-images" />
+		<Copy SourceFiles="@(InputWindows11InputImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/windows11-images" />-->
+	</Target>
+
+	<Target Name="CheckIfNpmExists" Inputs="@(InputStaticAssetsScripts);@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsScripts);@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent" AfterTargets="WWWRootFileCopy">
+	<!--<Target Name="CheckIfNpmExists" BeforeTargets="PreBuildEvent" AfterTargets="WWWRootFileCopy">-->
+		<Message Text="***** npm install" />
+		<Exec Command="npm install" ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low" LogStandardErrorAsError="false" IgnoreExitCode="true">
+			<Output TaskParameter="ExitCode" PropertyName="NpmReturnCode" />
+		</Exec>
+		<Message Text="***** 'npm install' return code was $(NpmReturnCode) (0 indicates npm is available)" />
+	</Target>
+
+	<Target Name="ErrorOutput" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' != '0' ">
+		<Message Text="**********************************************************************************" />
+		<Message Text="**********************************************************************************" />
+		<Message Text="**********************************************************************************" />
+		<Message Text=" CSS and JS not built due to the lack of a proper development environment" />
+		<Message Text=" See https://material-blazor.com/docs/articles/DevelopmentEnvironment.html" />
+		<Message Text="**********************************************************************************" />
+		<Message Text="**********************************************************************************" />
+		<Message Text="**********************************************************************************" />
+	</Target>
+
+	<Target Name="BuildScripts" Inputs="@(InputStaticAssetsScripts)" Outputs="@(OutputStaticAssetsScripts)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">
+	<!--<Target Name="BuildScripts" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">-->
+		<RemoveDir Directories="$(ProjectDir)wwwroot/js" />
+
+		<Message Importance="high" Text="***** npm install" />
+		<Exec Command="npm install" />
+
+		<Message Importance="high" Text="***** npm run build-scripts" />
+		<Exec Command="npm run build-scripts" />
+
+		<Message Importance="high" Text="***** npm run build-js" />
+		<Exec Command="npm run build-js" />
+
+		<Message Importance="high" Text="***** npm run build-min-js" />
+		<Exec Command="npm run build-min-js" />
+
+		<Message Importance="high" Text="***** delete *temp.js" />
+		<ItemGroup>
+			<FilesToDelete Include="wwwroot/js/*temp.js" />
+		</ItemGroup>
+		<Delete Files="@(FilesToDelete)" />
+	</Target>
+
+	<Target Name="BuildStyles" Inputs="@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">
+		<RemoveDir Directories="$(ProjectDir)wwwroot/css" />
+
+		<Message Importance="high" Text="***** npm install" />
+		<Exec Command="npm install" />
+
+		<Message Importance="high" Text="***** npm run build-theme" />
+		<Exec Command="npm run build-theme" />
+
+		<Message Importance="high" Text="***** npm run build-min-theme" />
+		<Exec Command="npm run build-min-theme" />
+	</Target>
+
+</Project>

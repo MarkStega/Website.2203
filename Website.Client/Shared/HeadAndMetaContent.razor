@@ -1,0 +1,15 @@
+﻿@namespace Website.Client
+
+@inherits ComponentBase
+
+
+<PageTitle>@PageTitle</PageTitle>
+
+<HeadContent>
+    @Tags
+
+    @if (ChildContent != null)
+    {
+        @ChildContent
+    }
+</HeadContent>

@@ -11,7 +11,7 @@ using Serilog;
 using Serilog.Events;
 using Serilog.Extensions.Logging;
 
-using Website.Lib;
+using Website.Client;
 using Website.WebAssembly;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);

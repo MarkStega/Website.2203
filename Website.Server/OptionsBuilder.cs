@@ -47,7 +47,7 @@ public static class OptionsBuilder
                     .AddUri("https://www.googletagmanager.com/gtag/js")
                     .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js") // Required to work on Safari
                     .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/Material.Blazor/material.blazor.min.js") // Required to work on Safari
-                    .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/Website.Lib/js/dioptra.min.js") // Required to work on Safari
+                    .AddUri((baseUri, baseDomain) => $"https://{baseUri}/_content/Website.Client/js/dioptra.min.js") // Required to work on Safari
                     .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/blazor.server.js", () => PlatformDetermination.IsBlazorServer) // Required to work on Safari
                     .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/blazor.webassembly.js", () => PlatformDetermination.IsBlazorWebAssembly) // Required to work on Safari
                     .AddGeneratedHashValues(StaticFileExtension.JS))
@@ -55,7 +55,6 @@ public static class OptionsBuilder
             .AddUpgradeInsecureRequests()
             .AddWorkerSrc(o => o.AddSelf());
         })
-        .AddAccessControlAllowOriginAll()
         // ref: <a href="http://stackoverflow.com/questions/49547/making-sure-a-web-page-is-not-cached-across-all-browsers">http://stackoverflow.com/questions/49547/making-sure-a-web-page-is-not-cached-across-all-browsers</a>
         .AddReferrerPolicy(ReferrerPolicyDirective.NoReferrer)
         .AddPermissionsPolicy("accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()")

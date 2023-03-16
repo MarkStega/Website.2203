@@ -44,22 +44,19 @@ jobs:
 
 
 ############################################################################################################
-# Store the version information
+# Set unified suffix for the two deployed applications
 ############################################################################################################
-  version:
-    name: Set version suffix
+  set-suffix:
+    name: Create the date based suffix
+    needs: [perform-deployment]
     runs-on: ubuntu-latest
+    outputs:
+      outputSuffix: ${{ steps.setSuffix.outputs.GlobalSuffix }}
 
     steps:
-    - id: get
-      run: |
-        echo "::set-output name=suffix::$(date +'%Y-%m-%d--%H-%M-%S')--WIP"
-    - id: show
-      run: |
-        echo "Suffix:     ${{ steps.get.outputs.suffix }}"
-    outputs:
-      suffix: ${{ steps.get.outputs.suffix }}
-      
+    - id: setSuffix
+      run: echo "GlobalSuffix=$(date +'%Y-%m-%d--%H-%M-%S')--WIP" >> $GITHUB_OUTPUT
+      shell: bash
 
 ############################################################################################################
 # Build blazor server on forks
@@ -75,8 +72,11 @@ jobs:
       with:
         persist-credentials: false
 
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v2
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.x'
+        include-prerelease: true
 
     - name: 'Build SSB'
       run: |
@@ -97,8 +97,11 @@ jobs:
       with:
         persist-credentials: false
 
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v2
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.x'
+        include-prerelease: true
 
     - name: 'Build CSB'
       run: |
@@ -110,17 +113,24 @@ jobs:
 ############################################################################################################
   build-blazor-server:
     name: Build BlazorServer
-    needs: [version, perform-deployment]
+    needs: [set-suffix]
     runs-on: ubuntu-latest
 
     steps:
+    - name: Retrieve the global suffix
+      run: echo "suffix=${{needs.set-suffix.outputs.outputSuffix}}" >> $GITHUB_ENV
+      shell: bash
+
     - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
       uses: actions/checkout@v3
       with:
         persist-credentials: false
 
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v2
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.x'
+        include-prerelease: true
 
     - name: 'Build and push docker container'
       uses: azure/docker-login@v1
@@ -131,13 +141,13 @@ jobs:
 
     #- run: |
     #    dotnet workload install wasm-tools
-    #    dotnet publish ${{env.project}} --os linux --arch x64 --configuration Release_Server -p:PublishProfile=DefaultContainer -p:Version=${{ needs.version.outputs.suffix }} -p:ContainerImageName=${{env.blazorServerAppName}}
-    #    docker tag ${{env.blazorServerAppName}}:${{ needs.version.outputs.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.blazorServerAppName}}:${{ needs.version.outputs.suffix }}
-    #    docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.blazorServerAppName}}:${{ needs.version.outputs.suffix }}
+    #    dotnet publish ${{env.project}} --os linux --arch x64 --configuration Release_Server -p:PublishProfile=DefaultContainer -p:Version=${{ env.suffix }} -p:ContainerImageName=${{env.blazorServerAppName}}
+    #    docker tag ${{env.blazorServerAppName}}:${{ env.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.blazorServerAppName}}:${{ env.suffix }}
+    #    docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.blazorServerAppName}}:${{ env.suffix }}
         
     - run: |
-        docker build . --file ${{ env.blazorServerDockerFile }} --tag ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.blazorServerAppName }}:${{ needs.version.outputs.suffix }} --build-arg version=${{ needs.version.outputs.suffix }}
-        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.blazorServerAppName }}:${{ needs.version.outputs.suffix }}
+        docker build . --file ${{ env.blazorServerDockerFile }} --tag ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.blazorServerAppName }}:${{ env.suffix }} --build-arg version=${{ env.suffix }}
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.blazorServerAppName }}:${{ env.suffix }}
 
 
 ############################################################################################################
@@ -145,17 +155,24 @@ jobs:
 ############################################################################################################
   build-blazor-webassembly:
     name: Build BlazorWASM
-    needs: [version, perform-deployment]
+    needs: [set-suffix]
     runs-on: ubuntu-latest
 
     steps:
+    - name: Retrieve the global suffix
+      run: echo "suffix=${{needs.set-suffix.outputs.outputSuffix}}" >> $GITHUB_ENV
+      shell: bash
+
     - name: Checkout repository under $GITHUB_WORKSPACE so the job can access it 🛎️
       uses: actions/checkout@v3
       with:
         persist-credentials: false
 
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v2
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.x'
+        include-prerelease: true
 
     - name: 'Build and push docker container'
       uses: azure/docker-login@v1
@@ -166,11 +183,11 @@ jobs:
 
     #- run: |
     #    dotnet workload install wasm-tools
-    #    dotnet publish ${{env.project}} --os linux --arch x64 --configuration Release_WebAssembly -p:PublishProfile=DefaultContainer -p:Version=${{ needs.version.outputs.suffix }} -p:ContainerImageName=${{env.blazorServerAppName}}
-    #    docker tag ${{env.blazorServerAppName}}:${{ needs.version.outputs.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.blazorServerAppName}}:${{ needs.version.outputs.suffix }}
-    #    docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.blazorServerAppName}}:${{ needs.version.outputs.suffix }}
+    #    dotnet publish ${{env.project}} --os linux --arch x64 --configuration Release_WebAssembly -p:PublishProfile=DefaultContainer -p:Version=${{ env.suffix }} -p:ContainerImageName=${{env.blazorServerAppName}}
+    #    docker tag ${{env.blazorServerAppName}}:${{ env.suffix }} ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.blazorServerAppName}}:${{ env.suffix }}
+    #    docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{env.blazorServerAppName}}:${{ env.suffix }}
 
     - run: |
-        docker build . --file ${{ env.blazorWebAssemblyDockerFile }} --tag ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.blazorWebAssemblyAppName }}:${{ needs.version.outputs.suffix }} --build-arg version=${{ needs.version.outputs.suffix }}
-        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.blazorWebAssemblyAppName }}:${{ needs.version.outputs.suffix }}
+        docker build . --file ${{ env.blazorWebAssemblyDockerFile }} --tag ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.blazorWebAssemblyAppName }}:${{ env.suffix }} --build-arg version=${{ env.suffix }}
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.blazorWebAssemblyAppName }}:${{ env.suffix }}
 

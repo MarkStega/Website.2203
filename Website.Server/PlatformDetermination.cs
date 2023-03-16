@@ -7,25 +7,15 @@ public static class PlatformDetermination
 {
 #if BLAZOR_SERVER
     /// <summary>
-    /// We are running Blazor Server if true.
+    /// We are running Blazor Server.
     /// </summary>
     public const bool IsBlazorServer = true;
-
-
-    /// <summary>
-    /// We are running Blazor WebAssembly if true.
-    /// </summary>
     public const bool IsBlazorWebAssembly = false;
 #else
     /// <summary>
-    /// We are running Blazor Server if true.
+    /// We are running Blazor WebAssembly.
     /// </summary>
     public const bool IsBlazorServer = false;
-
-
-    /// <summary>
-    /// We are running Blazor WebAssembly if true.
-    /// </summary>
     public const bool IsBlazorWebAssembly = true;
 #endif
 }

@@ -1,13 +1,13 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-preview AS base
 RUN dotnet --info
 
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0-preview AS build
 RUN dotnet --info
 
 ARG version=2022-01-01--13-00-00--WIP
@@ -19,11 +19,24 @@ RUN apt-get install --no-install-recommends --yes apt-utils python3 npm
 RUN dotnet --info
 RUN dotnet workload install wasm-tools
 
+RUN node --version
+RUN npm --version
+ENV NODE_VERSION=19.0.1
+RUN apt install -y curl
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+ENV NVM_DIR=/root/.nvm
+RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
+ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
+RUN node --version
+RUN npm --version
+
 WORKDIR /src
 COPY ["Website.Server/Website.Server.csproj", "Website.Server/"]
 COPY ["Website.Server/NuGet.Config", "Website.Server/"]
 
-COPY ["Website.Lib/Website.Lib.csproj", "Website.Lib/"]
+COPY ["Website.Client/Website.Client.csproj", "Website.Client/"]
 COPY ["Website.WebAssembly/Website.WebAssembly.csproj", "Website.WASM/"]
 
 RUN dotnet restore --disable-parallel "Website.Server/Website.Server.csproj"

@@ -1,7 +1,7 @@
 ﻿@page "/Host"
 @using Microsoft.AspNetCore.Components.Web
 @using HttpSecurity.AspNet
-@using Website.Lib
+@using Website.Client
 @namespace Website.Server.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @inject IHttpSecurityService HttpSecurityService
@@ -24,21 +24,24 @@
     <link rel="stylesheet" href="https://use.typekit.net/zjb3qsk.css">
 
     <link rel="stylesheet" type="text/css" href="_content/Material.Blazor/material.blazor.min.css" integrity="@HttpSecurityService.GetFileHashString("material.blazor.min.css")" />
-    <link rel="stylesheet" type="text/css" id="app-theme" href="_content/Website.Lib/css/dioptra.min.css" integrity="@HttpSecurityService.GetFileHashString("dioptra.min.css")" />
+    <link rel="stylesheet" type="text/css" id="app-theme" href="_content/Website.Client/css/dioptra.min.css" integrity="@HttpSecurityService.GetFileHashString("dioptra.min.css")" />
 
-    <link rel="icon" type="image/png" href="_content/Website.Lib/pwa/favicon-16x16.png" sizes="16x16">
-    <link rel="icon" type="image/png" href="_content/Website.Lib/pwa/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="_content/Website.Lib/pwa/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="_content/Website.Client/pwa/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="_content/Website.Client/pwa/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="_content/Website.Client/pwa/favicon-96x96.png" sizes="96x96">
 
-    <link rel="apple-touch-icon" sizes="512x512" href="_content/Website.Lib/ios-images/512.png" />
-    <link rel="apple-touch-icon" sizes="192x192" href="_content/Website.Lib/ios-images/192.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="_content/Website.Client/ios-images/512.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="_content/Website.Client/ios-images/192.png" />
 
 @if (PlatformDetermination.IsBlazorServer)
+{
+    <component type="typeof(HeadOutlet)" render-mode="@RenderMode" />
+}
+else
 {
     <link rel="manifest" href="manifest.json" />
 }
 
-    <component type="typeof(HeadOutlet)" render-mode="@RenderMode" />
 </head>
 <body class="mdc-typography">
     <component type="typeof(App)" render-mode="@RenderMode" />
@@ -76,7 +79,7 @@
 
     <script src="_content/GoogleAnalytics.Blazor/googleanalytics.blazor.js" integrity="@HttpSecurityService.GetFileHashString("googleanalytics.blazor.js")"></script>
     <script src="_content/Material.Blazor/material.blazor.min.js" integrity="@HttpSecurityService.GetFileHashString("material.blazor.min.js")"></script>
-    <script src="_content/Website.Lib/js/dioptra.min.js" integrity="@HttpSecurityService.GetFileHashString("dioptra.min.js")"></script>
+    <script src="_content/Website.Client/js/dioptra.min.js" integrity="@HttpSecurityService.GetFileHashString("dioptra.min.js")"></script>
 
     @if (PlatformDetermination.IsBlazorServer)
     {

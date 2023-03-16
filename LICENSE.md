@@ -5,8 +5,8 @@ Copyright (c) 2022 Dioptra Limited
 ## Proprietary Information
 This project is proprietary to Dioptra Limited (the "Owner"). The Owner does not
 consent to the reproduction of any of the written or visual content contained in the
-`Website.Lib/Pages`, `Website.Lib/WebAssets/android-images`, `Website.Lib/WebAssets/Images`,
-`Website.Lib/WebAssets/ios-images` directories or the `Website.Lib/Shared/DioptraLogo.razor[.cs]`
+`Website.Client/Pages`, `Website.Client/WebAssets/android-images`, `Website.Client/WebAssets/Images`,
+`Website.Client/WebAssets/ios-images` directories or the `Website.Client/Shared/DioptraLogo.razor[.cs]`
 files in this project. All other software and files in this
 project are supplied on an equivalent basis to the MIT License.
 

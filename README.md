@@ -5,8 +5,8 @@
 [![GitHub stars](https://img.shields.io/github/stars/Dioptra/Website.2203?logo=github&style=flat-square)](https://github.com/Dioptra/Website.2203/stargazers)
 [![GitHub stars](https://img.shields.io/github/watchers/Dioptra/Website.2203?logo=github&style=flat-square)](https://github.com/Dioptra/Website.2203/watchers)
 
-[![GithubActionsMainPublish](https://img.shields.io/github/workflow/status/Dioptra/Website.2203/GithubActionsRelease?label=actions%20release&logo=github&style=flat-square)](https://github.com/Dioptra/Website.2203/actions?query=workflow%3AGithubActionsRelease)
-[![GithubActionsDevelop](https://img.shields.io/github/workflow/status/Dioptra/Website.2203/GithubActionsWIP?label=actions%20wip&logo=github&style=flat-square)](https://github.com/Dioptra/Website.2203/actions?query=workflow%3AGithubActionsWIP)
+[![GithubActionsRelease](https://img.shields.io/github/actions/workflow/status/Dioptra/Website.2203/GithubActionsRelease.yml?label=actions%20release&logo=github&style=flat-square)](https://github.com/Material-Blazor/HttpSecurity.AspNet/actions/workflows/GithubActionsRelease.yml)
+[![GithubActionsWIP](https://img.shields.io/github/actions/workflow/status/Dioptra/Website.2203/GithubActionsWIP.yml?label=actions%20wip&logo=github&style=flat-square)](https://github.com/Material-Blazor/HttpSecurity.AspNet/actions/workflows/GithubActionsWIP.yml)
 
 Supplied with a [modified MIT license](https://github.com/Dioptra/Website.2203/blob/main/LICENSE.md). You are restricted from copying website written and visual content
 as defined in the license file, however all other software is on an MIT equivalent basis.

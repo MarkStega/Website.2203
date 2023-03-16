@@ -1,6 +1,6 @@
 ﻿using Material.Blazor;
 using System.Net.Http.Json;
-using Website.Lib;
+using Website.Client;
 
 namespace Website.WebAssembly;
 

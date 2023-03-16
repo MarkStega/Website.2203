@@ -1,15 +1,23 @@
-﻿using Blazored.LocalStorage;
-using CompressedStaticFiles;
+﻿using System.IO.Compression;
+using System.Threading.RateLimiting;
+
+using Blazored.LocalStorage;
+
+using CompressedStaticFiles.AspNet;
+
 using GoogleAnalytics.Blazor;
+
 using HttpSecurity.AspNet;
+
 using Material.Blazor;
+
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.ResponseCompression;
+
 using Serilog;
 using Serilog.Events;
-using System.IO.Compression;
-using System.Threading.RateLimiting;
-using Website.Lib;
+
+using Website.Client;
 using Website.Server;
 
 const string _customTemplate = "{Timestamp: HH:mm:ss.fff}\t[{Level:u3}]\t{Message}{NewLine}{Exception}";
@@ -124,11 +132,19 @@ Log.Logger = new LoggerConfiguration()
 
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
+{
+#if BLAZOR_SERVER
+        app.UseDeveloperExceptionPage();
+#else
+    app.UseWebAssemblyDebugging();
+#endif
+}
+else
 {
     app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+//    app.UseHsts();
 }
 
 // Potentially omit to avoid CRIME and BREACH attacks - https://docs.microsoft.com/en-us/aspnet/core/performance/response-compression?view=aspnetcore-6.0#compression-with-https
@@ -138,7 +154,7 @@ app.UseCookiePolicy();
 
 app.UseSerilogRequestLogging();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseHttpSecurityHeaders();
 
@@ -151,10 +167,12 @@ app.UseRateLimiter(new()
 {
     GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
     {
-        if (!context.Request.Path.StartsWithSegments("/api"))
-        {
-            return RateLimitPartition.GetNoLimiter("NoLimit");
-        }
+        // I thnik this is a mistake - The API should be rate limited - ms
+        //
+        //if (!context.Request.Path.StartsWithSegments("/api"))
+        //{
+        //    return RateLimitPartition.GetNoLimiter("NoLimit");
+        //}
 
         return RateLimitPartition.GetFixedWindowLimiter("GeneralLimit",
             _ => new FixedWindowRateLimiterOptions()
@@ -183,4 +201,4 @@ app.MapGet("/sitemap.xml", async context =>
     await Sitemap.Generate(context);
 });
 
-app.Run();
+await app.RunAsync();

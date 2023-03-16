@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Website.Lib;
+using Website.Client;
 
 namespace Website.Server;
 

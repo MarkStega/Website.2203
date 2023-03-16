@@ -31,11 +31,15 @@ bld/
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 
-# Uncomment if you have tasks that create the project's static files in wwwroot
-/Website.Lib/wwwroot/css/*
-/Website.Lib/wwwroot/js/*
-**hashes.csv
-#!**/wwwroot/robots.txt
+Website.Lib/wwwroot/css/*.css
+Website.Lib/wwwroot/css/*.br
+Website.Lib/wwwroot/css/*.gz
+Website.Lib/wwwroot/js/*.js
+Website.Lib/wwwroot/js/*.br
+Website.Lib/wwwroot/js/*.gz
+Website.Lib/wwwroot/pwa/*.js
+Website.Lib/wwwroot/pwa/*.br
+Website.Lib/wwwroot/pwa/*.gz
 
 # Visual Studio 2017 auto generated files
 Generated\ Files/
