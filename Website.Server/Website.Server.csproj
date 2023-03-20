@@ -54,20 +54,4 @@
 	  <ProjectReference Include="..\Website.WebAssembly\Website.WebAssembly.csproj" />
 	</ItemGroup>
 
-	<!--Obsolete since the introduction of HttpSecurity.AspNet-->
-	<!--<Target Name="BuildHashes" AfterTargets="Publish">
-		<ItemGroup>
-			<FilesToHash Include="$(PublishDir)wwwroot\**\*.js;$(PublishDir)wwwroot\**\*.css;$(PublishDir)wwwroot\**\*.json" />
-			<HashFileOutput Include="$(PublishDir)hashes.csv" />
-		</ItemGroup>
-
-		<GetFileHash Files="@(FilesToHash)" Algorithm="SHA256" HashEncoding="base64">
-			<Output TaskParameter="Items" ItemName="FilesWithHashes" />
-		</GetFileHash>
-
-		<Message Importance="High" Text="@(FilesWithHashes->'%(Identity): %(FileHash)')" />
-
-		<WriteLinesToFile File="@(HashFileOutput)" Lines="@(FilesWithHashes->'%(Identity),%(FileHash)')" Overwrite="true" Encoding="Unicode" />
-	</Target>-->
-
 </Project>
