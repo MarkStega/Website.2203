@@ -45,8 +45,8 @@
 	<ItemGroup>
 		<PackageReference Include="Blazored.LocalStorage" Version="4.3.0" />
 		<PackageReference Include="GoogleAnalytics.Blazor" Version="1.0.3" />
-		<PackageReference Include="libphonenumber-csharp" Version="8.13.7" />
-		<PackageReference Include="Material.Blazor" Version="4.0.0-preview.16" />
+		<PackageReference Include="libphonenumber-csharp" Version="8.13.9" />
+		<PackageReference Include="Material.Blazor" Version="4.0.0-preview.17" />
 		<PackageReference Include="Microsoft.Build" Version="17.5.0" />
 	</ItemGroup>
 
