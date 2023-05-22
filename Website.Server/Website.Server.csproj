@@ -1,30 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-		<Nullable>enable</Nullable>
-		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>e8d481c6-1573-488e-869a-9f45e93cacac</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerComposeProjectPath>..\docker-compose-blazor-server.dcproj</DockerComposeProjectPath>
 		<DockerfileTag>website-2203-blazor-server</DockerfileTag>
-		<Configurations>Debug_Server;Debug_WebAssembly;Release_Server;Release_WebAssembly;Re3lease_WebAssembly</Configurations>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Server|AnyCPU'">
-		<DefineConstants>Debug;BLAZOR_SERVER</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_WebAssembly|AnyCPU'">
-		<DefineConstants>Debug;BLAZOR_WEBASSEMBLY</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Server|AnyCPU'">
-		<DefineConstants>Release;BLAZOR_SERVER</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_WebAssembly|AnyCPU'">
-		<DefineConstants>Release;BLAZOR_WEBASSEMBLY</DefineConstants>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'BlazorServer' " />
@@ -32,16 +12,14 @@
 	<ItemGroup>
 		<PackageReference Include="CompressedStaticFiles.AspNet" Version="1.0.0" />
 		<PackageReference Include="HttpSecurity.AspNet" Version="1.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components" Version="8.0.0-preview.3.23177.8" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0-preview.3.23177.8" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-preview.3.23177.8" />
-		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-		<PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0-preview.3.23174.8" />
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0-preview.3.23174.8" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0-preview.3.23174.8" />
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="8.0.0-preview.4.23260.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0-preview.4.23260.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-preview.4.23260.4" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0-preview.4.23259.5" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0-preview.4.23259.5" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0-preview.4.23259.5" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
-		<PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
+		<PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
 		<PackageReference Include="Serilog.Formatting.Compact" Version="1.1.1-dev-00944" />
 		<PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
 		<PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />

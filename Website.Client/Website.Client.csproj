@@ -1,35 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
 		<Company>Dioptra Limited</Company>
 		<Version>2022-01-01--13-00-00--WIP</Version>
 		<RepositoryUrl>https://github.com/Dioptra/Website.2203</RepositoryUrl>
 		<PackageLicenseExpression>Commercial</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageReleaseNotes></PackageReleaseNotes>
-		<NeutralLanguage>en</NeutralLanguage>
 		<Copyright>© Dioptra Limited. All rights reserved.</Copyright>
 		<Product>Dioptra Website</Product>
-		<Configurations>Debug_Server;Debug_WebAssembly;Release_Server;Release_WebAssembly;Re3lease_WebAssembly</Configurations>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Server|AnyCPU'">
-		<DefineConstants>Debug;BLAZOR_SERVER</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_WebAssembly|AnyCPU'">
-		<DefineConstants>Debug;BLAZOR_WEBASSEMBLY</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Server|AnyCPU'">
-		<DefineConstants>Release;BLAZOR_SERVER</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_WebAssembly|AnyCPU'">
-		<DefineConstants>Release;BLAZOR_WEBASSEMBLY</DefineConstants>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -39,36 +18,51 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<SupportedPlatform Include="browser" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Blazored.LocalStorage" Version="4.3.0" />
 		<PackageReference Include="GoogleAnalytics.Blazor" Version="1.0.3" />
-		<PackageReference Include="libphonenumber-csharp" Version="8.13.9" />
-		<PackageReference Include="Material.Blazor" Version="4.0.0-preview.17" />
-		<PackageReference Include="Microsoft.Build" Version="17.5.0" />
+		<PackageReference Include="libphonenumber-csharp" Version="8.13.11" />
+		<PackageReference Include="Material.Blazor" Version="4.0.0-preview.18" />
+		<PackageReference Include="Microsoft.Build" Version="17.6.3" />
 	</ItemGroup>
 
-	<ItemGroup>
+	<!--<ItemGroup>
+		 Temporary fixes until .net7 when dynamically copied content automatically copies to output 
+
 		<InputImageFiles Include="$(ProjectDir)WebAssets\Images\*.*" />
 		<InputPWAFiles Include="$(ProjectDir)WebAssets\PWA\*.*" />
 		<InputAndroidInputImageFiles Include="$(ProjectDir)WebAssets\android-images\*.*" />
 		<InputIOSInputImageFiles Include="$(ProjectDir)WebAssets\ios-images\*.*" />
 		<InputWindows11InputImageFiles Include="$(ProjectDir)WebAssets\windows11-images\*.*" />
 
+		<OutputImagesAndroid Include="$(ProjectDir)wwwroot\android-images\*.*" />
+		<Content Remove="@(OutputImagesAndroid)" />
+		<Content Include="@(OutputImagesAndroid)" />
+
+		<OutputImages Include="$(ProjectDir)wwwroot\images\*.*" />
+		<Content Remove="@(OutputImages)" />
+		<Content Include="@(OutputImages)" />
+
+		<OutputImagesIos Include="$(ProjectDir)wwwroot\ios-images\*.*" />
+		<Content Remove="@(OutputImagesIos)" />
+		<Content Include="@(OutputImagesIos)" />
+
+		<OutputImagesWindows11 Include="$(ProjectDir)wwwroot\windows11-images\*.*" />
+		<Content Remove="@(OutputImagesWindows11)" />
+		<Content Include="@(OutputImagesWindows11)" />
+	</ItemGroup>-->
+
+	<ItemGroup>
 		<InputStaticAssetsScripts Include="$(ProjectDir)WebAssets\**\*.ts" />
 		<OutputStaticAssetsScripts Include="$(ProjectDir)wwwroot\js\dioptra.js;wwwroot\js\dioptra.min.js" />
 
-		<InputStaticAssetsStyles Include="$(ProjectDir)WebAssets\**\*.scss;" />
-		<OutputStaticAssetsStyles Include="$(ProjectDir)wwwroot\css\dioptra.css;wwwroot\css\dioptra.min.css" />
-		
-		<!-- Temporary fixes until .net7 when dynamically copied content automatically copies to output -->
-		<OutputImages Include="$(ProjectDir)wwwroot\**\*.*" />
-		<Content Remove="@(OutputImages)" />
-		<Content Include="@(OutputImages)" />
 		<Content Remove="@(OutputStaticAssetsScripts)" />
 		<Content Include="@(OutputStaticAssetsScripts)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<InputStaticAssetsStyles Include="$(ProjectDir)WebAssets\**\*.scss;" />
+		<OutputStaticAssetsStyles Include="$(ProjectDir)wwwroot\css\dioptra.css;wwwroot\css\dioptra.min.css" />
+
 		<Content Remove="@(OutputStaticAssetsStyles)" />
 		<Content Include="@(OutputStaticAssetsStyles)" />
 	</ItemGroup>
@@ -85,11 +79,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="wwwroot\js\" />
+		<Folder Include="wwwroot\css\" />
+		<Folder Include="wwwroot\js\" />
 	</ItemGroup>
 
 	<!-- Remove comments once migrated to .net7 and dynamically copied content automatically copies to output -->
 	<Target Name="WWWRootFileCopy" BeforeTargets="PreBuildEvent">
+		<Message Text="***** WWWRootFileCopy" />
 		<!--<Copy SourceFiles="@(InputImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/images" />
 		<Copy SourceFiles="@(InputPWAFiles)" DestinationFolder="$(ProjectDir)wwwroot/pwa" />
 		<Copy SourceFiles="@(InputAndroidInputImageFiles)" DestinationFolder="$(ProjectDir)wwwroot/android-images" />
@@ -98,8 +94,7 @@
 	</Target>
 
 	<Target Name="CheckIfNpmExists" Inputs="@(InputStaticAssetsScripts);@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsScripts);@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent" AfterTargets="WWWRootFileCopy">
-	<!--<Target Name="CheckIfNpmExists" BeforeTargets="PreBuildEvent" AfterTargets="WWWRootFileCopy">-->
-		<Message Text="***** npm install" />
+		<Message Text="***** npm install (check)" />
 		<Exec Command="npm install" ContinueOnError="true" StandardOutputImportance="low" StandardErrorImportance="low" LogStandardErrorAsError="false" IgnoreExitCode="true">
 			<Output TaskParameter="ExitCode" PropertyName="NpmReturnCode" />
 		</Exec>
@@ -118,10 +113,9 @@
 	</Target>
 
 	<Target Name="BuildScripts" Inputs="@(InputStaticAssetsScripts)" Outputs="@(OutputStaticAssetsScripts)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">
-	<!--<Target Name="BuildScripts" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">-->
 		<RemoveDir Directories="$(ProjectDir)wwwroot/js" />
 
-		<Message Importance="high" Text="***** npm install" />
+		<Message Importance="high" Text="***** npm install (scripts)" />
 		<Exec Command="npm install" />
 
 		<Message Importance="high" Text="***** npm run build-scripts" />
@@ -143,7 +137,7 @@
 	<Target Name="BuildStyles" Inputs="@(InputStaticAssetsStyles)" Outputs="@(OutputStaticAssetsStyles)" BeforeTargets="PreBuildEvent" AfterTargets="CheckIfNpmExists" Condition=" '$(NpmReturnCode)' == '0' ">
 		<RemoveDir Directories="$(ProjectDir)wwwroot/css" />
 
-		<Message Importance="high" Text="***** npm install" />
+		<Message Importance="high" Text="***** npm install (styles)" />
 		<Exec Command="npm install" />
 
 		<Message Importance="high" Text="***** npm run build-theme" />
@@ -153,69 +147,11 @@
 		<Exec Command="npm run build-min-theme" />
 	</Target>
 
-	<!--All subsequent code contributed by https://github.com/SQL-MisterMagoo-->
-
-	<PropertyGroup Condition="'$(_BlazorWebAssemblySdkToolAssembly)'==''">
-		<!-- First, we strip the property value back to the root SDKs level and then down into the WebAssembly SDK -->
-		<_SDKRoot>$(NetCoreRoot)sdk\$(NETCoreSDKVersion)\Sdks</_SDKRoot>
-		<BlazorWebAssemblySdkDirectoryRoot>$(_SDKRoot)\Microsoft.NET.Sdk.BlazorWebAssembly\</BlazorWebAssemblySdkDirectoryRoot>
-
-		<!-- The next two lines are derived from examples posted by the .NET Foundation. -->
-		<_BlazorWebAssemblySdkTasksAssembly Condition="'$(_BlazorWebAssemblySdkTasksAssembly)'==''">$(BlazorWebAssemblySdkDirectoryRoot)tools\net472\Microsoft.NET.Sdk.BlazorWebAssembly.Tasks.dll</_BlazorWebAssemblySdkTasksAssembly>
-		<_BlazorWebAssemblySdkToolAssembly Condition="'$(_BlazorWebAssemblySdkToolAssembly)'==''">$(BlazorWebAssemblySdkDirectoryRoot)tools\$(TargetFramework)\Microsoft.NET.Sdk.BlazorWebAssembly.Tool.dll</_BlazorWebAssemblySdkToolAssembly>
+	<!--Compression directives (Note that the patterns are relative to wwwroot)-->
+	<PropertyGroup>
+		<CompressionIncludePatterns>$(CompressionIncludePatterns);**/*.css;**/*.js</CompressionIncludePatterns>
+		<BuildCompressionFormats>gzip</BuildCompressionFormats>
+		<PublishCompressionFormats>gzip;brotli</PublishCompressionFormats>
 	</PropertyGroup>
-
-	<!-- The next two lines are Copyright (c) .NET Foundation. All rights reserved. -->
-	<UsingTask TaskName="Microsoft.NET.Sdk.BlazorWebAssembly.BrotliCompress" AssemblyFile="$(_BlazorWebAssemblySdkTasksAssembly)" />
-	<UsingTask TaskName="Microsoft.NET.Sdk.BlazorWebAssembly.GzipCompress" AssemblyFile="$(_BlazorWebAssemblySdkTasksAssembly)" />
-
-	<Target Name="CustomGZipAndBrotliCompression" AfterTargets="Build">
-
-		<Message Importance="High" Text="======= Gzip/Brotli task assembly details=$(_BlazorWebAssemblySdkTasksAssembly)" />
-		<Message Importance="High" Text="======= Brotli tool assembly details=$(_BlazorWebAssemblySdkToolAssembly)" />
-		<Message Importance="High" Text="======= Brotli tool executable details=$(_RazorSdkDotNetHostFileName)" />
-		<Message Importance="High" Text="======= Brotli tool path details=$(_RazorSdkDotNetHostDirectory)" />
-
-		<!--************* THIS IS WHERE YOU CHOOSE WHAT TO COMPRESS *****************
-			you probably don't want to change anything else - just this ItemGroup-->
-
-		<ItemGroup>
-			<MyStaticFiles Include="$(ProjectDir)/wwwroot/**/*.css" />
-			<MyStaticFiles Include="$(ProjectDir)/wwwroot/**/*.js" />
-		</ItemGroup>
-
-		<!--Call the BlazorWebAssembly Task GZipCompress and store the results in MyCompressedFiles-->
-		<GZipCompress FilesToCompress="@(MyStaticFiles)" OutputDirectory="$(IntermediateOutputPath)compress\">
-			<Output TaskParameter="CompressedFiles" ItemName="MyCompressedFiles" />
-		</GZipCompress>
-
-		<!--Call the BlazorWebAssembly Task BrotliCompress and store the results in MyCompressedFiles-->
-		<BrotliCompress OutputDirectory="$(IntermediateOutputPath)compress\" FilesToCompress="@(MyStaticFiles)" ToolAssembly="$(_BlazorWebAssemblySdkToolAssembly)" ToolExe="$(_RazorSdkDotNetHostFileName)" ToolPath="$(_RazorSdkDotNetHostDirectory)">
-			<Output TaskParameter="CompressedFiles" ItemName="MyCompressedFiles" />
-		</BrotliCompress>
-
-		<!--Log out what we have done-->
-		<Message Importance="High" Text="======= Brotli/GZip Compression For @(MyCompressedFiles-&gt;Count()) Static Files =======" />
-		<Message Importance="High" Text=" Compressed: %(MyCompressedFiles.OriginalItemSpec)%(MyCompressedFiles.Extension)" />
-
-		<!--Rename/move the compressed files back to to the correct place/names as they have "hashed" names at this stage.-->
-		<Move SourceFiles="%(MyCompressedFiles.FullPath)" DestinationFiles="%(MyCompressedFiles.OriginalItemSpec)%(MyCompressedFiles.Extension)" />
-
-	</Target>
-
-	<!-- Remove comments to list wwwroot contents to diagnose content inclusion in GitHub Actions -->
-	<!--<Target Name="Tests" AfterTargets="CustomGZipAndBrotliCompression">
-
-		<Message Importance="High" Text="===========================================================================" />
-		<Message Importance="High" Text="===========================================================================" />
-		<Message Importance="High" Text="===========================================================================" />
-		<Message Importance="High" Text="====== List contents of wwwroot ===========================================" />
-		<Message Importance="High" Text="" />
-		<Exec Command="ls -altR $(ProjectDir)wwwroot" ContinueOnError="true" StandardOutputImportance="high" StandardErrorImportance="high" LogStandardErrorAsError="false" IgnoreExitCode="true" />
-		<Message Importance="High" Text="===========================================================================" />
-		<Message Importance="High" Text="===========================================================================" />
-		<Message Importance="High" Text="===========================================================================" />
-
-	</Target>-->
 
 </Project>

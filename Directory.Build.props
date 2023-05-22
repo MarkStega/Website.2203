@@ -1,6 +1,29 @@
 <Project>
-  <!-- See https://aka.ms/dotnet/msbuild/customize for more details on customizing your build -->
-  <PropertyGroup>
-	  <UseArtifactsOutput>true</UseArtifactsOutput>
-  </PropertyGroup>
+	<PropertyGroup>
+		<ArtifactsPath>$(MSBuildThisFileDirectory).artifacts</ArtifactsPath>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<Configurations>Debug_Server;Debug_WebAssembly;Release_Server;Release_WebAssembly</Configurations>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='Debug_Server'">
+		<DefineConstants>Debug;BLAZOR_SERVER</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='Debug_WebAssembly'">
+		<DefineConstants>Debug;BLAZOR_WEBASSEMBLY</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='Release_Server'">
+		<DefineConstants>Release;BLAZOR_SERVER</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='Release_WebAssembly'">
+		<DefineConstants>Release;BLAZOR_WEBASSEMBLY</DefineConstants>
+	</PropertyGroup>
+
 </Project>

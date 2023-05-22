@@ -135,7 +135,7 @@ Log.Logger = new LoggerConfiguration()
 if (app.Environment.IsDevelopment())
 {
 #if BLAZOR_SERVER
-        app.UseDeveloperExceptionPage();
+    app.UseDeveloperExceptionPage();
 #else
     app.UseWebAssemblyDebugging();
 #endif
@@ -144,7 +144,7 @@ else
 {
     app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-//    app.UseHsts();
+    //    app.UseHsts();
 }
 
 // Potentially omit to avoid CRIME and BREACH attacks - https://docs.microsoft.com/en-us/aspnet/core/performance/response-compression?view=aspnetcore-6.0#compression-with-https
