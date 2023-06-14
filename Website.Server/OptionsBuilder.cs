@@ -32,7 +32,6 @@ public static class OptionsBuilder
             .AddImgSrc(o => o.AddSelf().AddUri("https://www.google-analytics.com").AddUri("https://*.openstreetmap.org").AddSchemeSource(SchemeSource.Data, "w3.org/svg/2000"))
             .AddManifestSrc(o => o.AddSelf())
             .AddMediaSrc(o => o.AddSelf())
-            .AddPrefetchSrc(o => o.AddSelf())
             .AddObjectSrc(o => o.AddNone())
             .AddReportUri(o => o.AddUri((baseUri, baseDomain) => $"https://{baseUri}/api/CspReporting/UriReport"))
             // The sha-256 hash relates to an inline script added by blazor's javascript

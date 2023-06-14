@@ -1,5 +1,4 @@
 ﻿@page "/Host"
-@using Microsoft.AspNetCore.Components.Web
 @using HttpSecurity.AspNet
 @using Website.Client
 @namespace Website.Server.Pages
@@ -7,7 +6,7 @@
 @inject IHttpSecurityService HttpSecurityService
 
 @{
-    RenderMode RenderMode = PlatformDetermination.IsBlazorServer ? RenderMode.ServerPrerendered : RenderMode.WebAssemblyPrerendered;
+    RenderMode renderMode = PlatformDetermination.IsBlazorServer ? RenderMode.ServerPrerendered : RenderMode.WebAssemblyPrerendered;
 }
 
 <!DOCTYPE html>
@@ -35,7 +34,7 @@
 
 @if (PlatformDetermination.IsBlazorServer)
 {
-    <component type="typeof(HeadOutlet)" render-mode="@RenderMode" />
+        <component type="typeof(Microsoft.AspNetCore.Components.Web.HeadOutlet)" render-mode="@renderMode" />
 }
 else
 {
@@ -44,7 +43,7 @@ else
 
 </head>
 <body class="mdc-typography">
-    <component type="typeof(App)" render-mode="@RenderMode" />
+    <component type="typeof(App)" render-mode="@renderMode" />
 
     <div id="blazor-error-ui">
         <div id="reload-dialog" class="mdc-dialog">

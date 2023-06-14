@@ -1,7 +1,4 @@
-﻿using System.IO.Compression;
-using System.Threading.RateLimiting;
-
-using Blazored.LocalStorage;
+﻿using Blazored.LocalStorage;
 
 using CompressedStaticFiles.AspNet;
 
@@ -11,11 +8,16 @@ using HttpSecurity.AspNet;
 
 using Material.Blazor;
 
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.AspNetCore.ResponseCompression;
 
 using Serilog;
 using Serilog.Events;
+
+using System.IO.Compression;
+using System.Threading.RateLimiting;
 
 using Website.Client;
 using Website.Server;
@@ -112,6 +114,22 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
 
 builder.Services.AddCompressedStaticFiles();
 
+builder.Services.AddRateLimiter(_ => _
+    // I think this is a mistake - The API should be rate limited - ms
+    //
+    //if (!context.Request.Path.StartsWithSegments("/api"))
+    //{
+    //    return RateLimitPartition.GetNoLimiter("NoLimit");
+    //}
+    .AddFixedWindowLimiter(policyName: "fixed", options =>
+    {
+        options.PermitLimit = 1;
+        options.Window = TimeSpan.FromSeconds(1);
+        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+        options.QueueLimit = 10;
+    }
+    ));
+
 var app = builder.Build();
 
 Log.Logger = new LoggerConfiguration()
@@ -163,28 +181,7 @@ app.UseCompressedStaticFiles();
 app.UseRouting();
 
 // Limit api calls to 10 in a second to prevent external denial of service.
-app.UseRateLimiter(new()
-{
-    GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
-    {
-        // I thnik this is a mistake - The API should be rate limited - ms
-        //
-        //if (!context.Request.Path.StartsWithSegments("/api"))
-        //{
-        //    return RateLimitPartition.GetNoLimiter("NoLimit");
-        //}
-
-        return RateLimitPartition.GetFixedWindowLimiter("GeneralLimit",
-            _ => new FixedWindowRateLimiterOptions()
-            {
-                Window = TimeSpan.FromSeconds(1),
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 10,
-            });
-    }),
-    RejectionStatusCode = 429,
-});
+app.UseRateLimiter();
 
 app.MapControllers();
 

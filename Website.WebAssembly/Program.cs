@@ -1,11 +1,10 @@
 using Blazored.LocalStorage;
 
 using GoogleAnalytics.Blazor;
+
 using Material.Blazor;
-using Microsoft.AspNetCore.Builder;
+
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.AspNetCore.CookiePolicy;
-using Microsoft.AspNetCore.Http;
 
 using Serilog;
 using Serilog.Events;
@@ -22,20 +21,11 @@ builder.Services.AddSingleton<INotification, WebAssemblyNotificationService>();
 
 builder.Services.AddMBServices();
 
-builder.Services.Configure<CookiePolicyOptions>(options =>
-{
-    // Has Pentest fixes
-    options.CheckConsentNeeded = context => true;
-    options.HttpOnly = HttpOnlyPolicy.Always;
-    options.MinimumSameSitePolicy = SameSiteMode.Strict;
-    options.Secure = CookieSecurePolicy.Always;
-});
-
 builder.Services.AddBlazoredLocalStorage();
 
 Log.Logger = new LoggerConfiguration()
 #if DEBUG
-.MinimumLevel.Debug()
+    .MinimumLevel.Debug()
 #else
     .MinimumLevel.Information()
 #endif

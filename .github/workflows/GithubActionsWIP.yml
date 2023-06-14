@@ -42,6 +42,13 @@ jobs:
     - name: Nothing to see here
       run: echo ""
 
+  build-allowed:
+    name: Build allowed
+    runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]'
+    steps:
+    - name: Nothing to see here
+      run: echo ""
 
 ############################################################################################################
 # Set unified suffix for the two deployed applications
@@ -63,7 +70,7 @@ jobs:
 ############################################################################################################
   build-blazor-server-fork:
     name: Build BlazorServer for forks/dependabot
-    needs: [skip-deployment]
+    needs: [skip-deployment, build-allowed]
     runs-on: ubuntu-latest
 
     steps:
@@ -76,7 +83,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.x'
-        include-prerelease: true
+        dotnet-quality: 'preview'
 
     - name: 'Build SSB'
       run: |
@@ -88,7 +95,7 @@ jobs:
 ############################################################################################################
   build-blazor-webassembly-fork:
     name: Build BlazorWASM for forks/dependabot
-    needs: [skip-deployment]
+    needs: [skip-deployment, build-allowed]
     runs-on: ubuntu-latest
 
     steps:
@@ -101,7 +108,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.x'
-        include-prerelease: true
+        dotnet-quality: 'preview'
 
     - name: 'Build CSB'
       run: |
@@ -113,7 +120,7 @@ jobs:
 ############################################################################################################
   build-blazor-server:
     name: Build BlazorServer
-    needs: [set-suffix]
+    needs: [set-suffix, build-allowed]
     runs-on: ubuntu-latest
 
     steps:
@@ -130,7 +137,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.x'
-        include-prerelease: true
+        dotnet-quality: 'preview'
 
     - name: 'Build and push docker container'
       uses: azure/docker-login@v1
@@ -155,7 +162,7 @@ jobs:
 ############################################################################################################
   build-blazor-webassembly:
     name: Build BlazorWASM
-    needs: [set-suffix]
+    needs: [set-suffix, build-allowed]
     runs-on: ubuntu-latest
 
     steps:
@@ -172,7 +179,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.x'
-        include-prerelease: true
+        dotnet-quality: 'preview'
 
     - name: 'Build and push docker container'
       uses: azure/docker-login@v1

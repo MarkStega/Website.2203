@@ -69,7 +69,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.x'
-        include-prerelease: true
+        dotnet-quality: 'preview'
 
     - name: 'Build and push docker container'
       uses: azure/docker-login@v1
@@ -111,7 +111,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.x'
-        include-prerelease: true
+        dotnet-quality: 'preview'
 
     - name: 'Build and push docker container'
       uses: azure/docker-login@v1
