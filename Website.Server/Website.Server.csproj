@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<UserSecretsId>e8d481c6-1573-488e-869a-9f45e93cacac</UserSecretsId>
@@ -12,12 +12,12 @@
 	<ItemGroup>
 		<PackageReference Include="CompressedStaticFiles.AspNet" Version="1.0.0" />
 		<PackageReference Include="HttpSecurity.AspNet" Version="1.1.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components" Version="8.0.0-preview.7.23375.9" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0-preview.7.23375.9" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-preview.7.23375.9" />
-		<PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0-preview.7.23375.6" />
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0-preview.7.23375.6" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0-preview.7.23375.6" />
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="8.0.0-rc.1.23421.29" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0-rc.1.23421.29" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-rc.1.23421.29" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0-rc.1.23419.4" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0-rc.1.23419.4" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0-rc.1.23419.4" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
 		<PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
 		<PackageReference Include="Serilog.Formatting.Compact" Version="1.1.1-dev-00944" />
