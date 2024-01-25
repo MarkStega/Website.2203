@@ -82,7 +82,7 @@ else
 
     @if (PlatformDetermination.IsBlazorServer)
     {
-        <script src="_framework/blazor.server.js" nonce="@HttpSecurityService.GetNonce()"></script>
+        <script src="_framework/blazor.server.js" integrity="@HttpSecurityService.GetFileHashString("blazor.server.js")"></script>
     }
     else
     {

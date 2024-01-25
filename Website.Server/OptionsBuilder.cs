@@ -35,11 +35,12 @@ public static class OptionsBuilder
             .AddObjectSrc(o => o.AddNone())
             .AddReportUri(o => o.AddUri((baseUri, baseDomain) => $"https://{baseUri}/api/CspReporting/UriReport"))
             // The sha-256 hash relates to an inline script added by blazor's javascript
-            .AddScriptSrc(o =>
-                    o.AddHashValue(HashAlgorithm.SHA256, "v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=")
+            .AddScriptSrc(o => o
+                    .AddHashValue(HashAlgorithm.SHA256, "v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=")
                     .AddUriIf((baseUri, baseDomain) => $"https://{baseUri}/_framework/aspnetcore-browser-refresh.js", () => builder.Environment.IsDevelopment())
                     .AddSelfIf(() => builder.Environment.IsDevelopment() || PlatformDetermination.IsBlazorWebAssembly)
-                    //.AddStrictDynamicIf(() => !builder.Environment.IsDevelopment() && PlatformDetermination.IsBlazorWebAssembly) // this works on Chromium browswers but fails for both Firefox and Safari
+                    // StrictDynamic works on Chromium browsers but fails for both Firefox and Safari
+                    //.AddStrictDynamicIf(() => !builder.Environment.IsDevelopment() && PlatformDetermination.IsBlazorWebAssembly)
                     .AddUnsafeInlineIf(() => PlatformDetermination.IsBlazorWebAssembly)
                     .AddReportSample()
                     .AddUnsafeEvalIf(() => PlatformDetermination.IsBlazorWebAssembly)
