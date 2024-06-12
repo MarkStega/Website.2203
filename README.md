@@ -43,7 +43,7 @@ The `Website.Server` project can be deployed as either a Server Hosted Blazor We
 
 ### Security
 
-We aim to deploy this website with reasonably strong security, making use of HTTP headers, Content Security Policies and either integrity hashes or nonces for all linked
+We aim to deploy this website with reasonably strong security, making use of HTTP headers, Content Security Policies and either integrity hashes for all linked
 styles and scripts. This stance is informed by recent penetration testing performed on Dioptra's commercial web app, Vectis.
 
 ### Proprietary Information

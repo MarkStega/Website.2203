@@ -18,11 +18,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
+		<PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
 		<PackageReference Include="GoogleAnalytics.Blazor" Version="1.0.3" />
-		<PackageReference Include="libphonenumber-csharp" Version="8.13.27" />
-		<PackageReference Include="Material.Blazor" Version="5.0.2" />
-		<PackageReference Include="Microsoft.Build" Version="17.8.3" />
+		<PackageReference Include="libphonenumber-csharp" Version="8.13.38" />
+		<PackageReference Include="Material.Blazor" Version="5.3.6" />
+		<PackageReference Include="Microsoft.Build" Version="17.10.4" />
 	</ItemGroup>
 
 	<!--<ItemGroup>
